@@ -5,7 +5,7 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 import org.xml.sax.Attributes;
 
-public class RegistrySAXParse {
+public class RegistrySAXParser {
 	public static void main(String argv[]) {
 		 
 	    try {
