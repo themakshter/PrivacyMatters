@@ -1,0 +1,7 @@
+.classpath
+.project
+.settings/org.eclipse.jdt.core.prefs
+bin/RegistrySAXParse$1.class
+bin/RegistrySAXParse.class
+bin/x.class
+bin/XMLParser.class
