@@ -21,20 +21,21 @@ public class RegistrySAXParser {
 		private static final int SALARY = -4;
 		private static final int REGISTRATION_NUMBER = 1;
 		private static final int ORGANISATION_NAME = 2;
-		private static final int ADDRESS_1 = 3;
-		private static final int ADDRESS_2 = 4;
-		private static final int ADDRESS_3 = 5;
-		private static final int ADDRESS_4 = 6;
-		private static final int ADDRESS_5 = 7;
-		private static final int POSTCODE = 8;
-		private static final int COUNTRY = 9;
-		private static final int FOI = 10;
-		private static final int START_DATE = 11;
-		private static final int END_DATE = 12;
-		private static final int EXEMPT_FLAG = 13;
-		private static final int UK_CONTACT = 14;
-		private static final int SUBJECT_ACCESS_CONTACT = 15;
-		private static final int NATURE_OF_WORK = 16;
+		private static final int COMPANIES_HOUSE_NUMBER = 3;
+		private static final int ADDRESS_1 = 4;
+		private static final int ADDRESS_2 = 5;
+		private static final int ADDRESS_3 = 6;
+		private static final int ADDRESS_4 = 7;
+		private static final int ADDRESS_5 = 8;
+		private static final int POSTCODE = 9;
+		private static final int COUNTRY = 10;
+		private static final int FOI = 11;
+		private static final int START_DATE = 12;
+		private static final int END_DATE = 13;
+		private static final int EXEMPT_FLAG = 14;
+		private static final int UK_CONTACT = 15;
+		private static final int SUBJECT_ACCESS_CONTACT = 16;
+		private static final int NATURE_OF_WORK = 17;
 		private String address = "\tAddress : ";
 		
 		public void startElement(String uri, String localName,String qName,Attributes attributes) throws SAXException {
@@ -59,6 +60,9 @@ public class RegistrySAXParser {
 					break;
 				case "ORGANISATION_NAME":
 					type = ORGANISATION_NAME;
+					break;
+				case "COMPANIES_HOUSE_NUMBER":
+					type = COMPANIES_HOUSE_NUMBER;
 					break;
 				case "ORGANISATION_ADDRESS_LINE_1":
 					type = ADDRESS_1;
@@ -139,6 +143,10 @@ public class RegistrySAXParser {
 				System.out.println("\tName : " + new String(ch, start, length));
 				type = 0;
 				break;
+			case COMPANIES_HOUSE_NUMBER:
+				System.out.println("\tCompanies House Number : " + new String(ch,start,length));
+				type = 0;
+				break;
 			case ADDRESS_1:
 				address += new String(ch, start, length);
 				type = 0;
@@ -157,11 +165,11 @@ public class RegistrySAXParser {
 				break;
 			case ADDRESS_5:
 				address += ", " + new String(ch, start, length);
-				System.out.println(address);
-				address = "\tAddress : ";
 				type = 0;
 				break;
 			case POSTCODE:
+				System.out.println(address);
+				address = "\tAddress : ";
 				System.out.println("\tPostcode : " + new String(ch, start, length));
 				type = 0;
 				break;
