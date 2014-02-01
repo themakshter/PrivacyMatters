@@ -8,12 +8,16 @@ import org.jsoup.select.Elements;
 
 public class x {
 	public static void main(String[] args) throws IOException {
-		File input = new File("nature_of_work_description.html");
+		File input = new File("nature_of_work_description_1.html");
 		Document doc = Jsoup.parse(input,"UTF-8","http://example.com./");
-		Elements x = doc.getElementsContainingOwnText("Nature");		
+		Elements x = doc.getElementsContainingOwnText("We process");		
 		Element body = doc.body();
-		//System.out.println(x.text());
-		Elements y = doc.getElementsByIndexEquals(1);
-		System.out.println(y.text());
+		Elements y = doc.getElementsByTag("p");
+		Elements z = doc.getElementsByTag("ul");
+		Document doc2 = Jsoup.parse(z.get(0).html());
+		Elements za = doc2.getElementsByTag("li");
+		//System.out.println(y.get(11).text());
+		System.out.println(z.get(0));
+		System.out.println(za.size());
 	}
 }

@@ -265,7 +265,7 @@ public class RegistrySAXParser {
 				}
 			};
 
-			saxParser.parse("register08.2013.xml", handler);
+			saxParser.parse("registry_example_1.xml", handler);
 
 		} catch (Exception e) {
 			e.printStackTrace();
