@@ -137,8 +137,8 @@ public class RegistrySAXParser {
 						String qName) throws SAXException {
 					switch(qName.toUpperCase()){
 						case "REGISTRATION":
-							System.out.println("Records : " + recordCount);
-							System.out.println("Nature of Works : " + natureOfWorkCount);
+							//System.out.println("Records : " + recordCount);
+							//System.out.println("Nature of Works : " + natureOfWorkCount);
 					}
 				}
 
@@ -146,109 +146,109 @@ public class RegistrySAXParser {
 						throws SAXException {
 					switch (type) {
 					case FIRST_NAME:
-//						System.out.println("Employee\n\tFirst Name : "
-//								+ new String(ch, start, length));
+						System.out.println("Employee\n\tFirst Name : "
+								+ new String(ch, start, length));
 						type = 0;
 						break;
 					case LAST_NAME:
-//						System.out.println("\tLast Name : "
-//								+ new String(ch, start, length));
+						System.out.println("\tLast Name : "
+								+ new String(ch, start, length));
 						type = 0;
 						break;
 					case NICKNAME:
-//						System.out.println("\tNick Name : "
-//								+ new String(ch, start, length));
+						System.out.println("\tNick Name : "
+								+ new String(ch, start, length));
 						type = 0;
 						break;
 					case SALARY:
-//						System.out.println("\tSalary : "
-//								+ new String(ch, start, length));
+						System.out.println("\tSalary : "
+								+ new String(ch, start, length));
 						type = 0;
 						break;
 					case REGISTRATION_NUMBER:
-//						System.out
-//								.println("Organisation\n\tRegistration Number : "
-//										+ new String(ch, start, length));
+						System.out
+								.println("Organisation\n\tRegistration Number : "
+										+ new String(ch, start, length));
 						type = 0;
 						break;
 					case ORGANISATION_NAME:
-//						System.out.println("\tName : "
-//								+ new String(ch, start, length));
+						System.out.println("\tName : "
+								+ new String(ch, start, length));
 						type = 0;
 						break;
 					case COMPANIES_HOUSE_NUMBER:
-//						System.out.println("\tCompanies House Number : "
-//								+ new String(ch, start, length));
+						System.out.println("\tCompanies House Number : "
+								+ new String(ch, start, length));
 						type = 0;
 						break;
 					case ADDRESS_1:
-//						address += new String(ch, start, length);
+						address += new String(ch, start, length);
 						type = 0;
 						break;
 					case ADDRESS_2:
-//						address += ", " + new String(ch, start, length);
+						address += ", " + new String(ch, start, length);
 						type = 0;
 						break;
 					case ADDRESS_3:
-//						address += ", " + new String(ch, start, length);
+						address += ", " + new String(ch, start, length);
 						type = 0;
 						break;
 					case ADDRESS_4:
-//						address += ", " + new String(ch, start, length);
+						address += ", " + new String(ch, start, length);
 						type = 0;
 						break;
 					case ADDRESS_5:
-//						address += ", " + new String(ch, start, length);
+						address += ", " + new String(ch, start, length);
 						type = 0;
 						break;
 					case POSTCODE:
-//						System.out.println(address);
-//						address = "\tAddress : ";
-//						System.out.println("\tPostcode : "
-//								+ new String(ch, start, length));
+						System.out.println(address);
+						address = "\tAddress : ";
+						System.out.println("\tPostcode : "
+								+ new String(ch, start, length));
 						type = 0;
 						break;
 					case COUNTRY:
-//						System.out.println("\tCountry : "
-//								+ new String(ch, start, length));
+						System.out.println("\tCountry : "
+								+ new String(ch, start, length));
 						type = 0;
 						break;
 					case FOI:
-//						System.out.println("\tFreedom of Information : "
-//								+ new String(ch, start, length));
+						System.out.println("\tFreedom of Information : "
+								+ new String(ch, start, length));
 						type = 0;
 						break;
 					case START_DATE:
-//						System.out.println("\tStart of Registration : "
-//								+ new String(ch, start, length));
+						System.out.println("\tStart of Registration : "
+								+ new String(ch, start, length));
 						type = 0;
 						break;
 					case END_DATE:
-//						System.out.println("\tEnd of Registration : "
-//								+ new String(ch, start, length));
+						System.out.println("\tEnd of Registration : "
+								+ new String(ch, start, length));
 						type = 0;
 						break;
 					case EXEMPT_FLAG:
-//						System.out.println("\tExempt from Processing : "
-//								+ new String(ch, start, length));
+						System.out.println("\tExempt from Processing : "
+								+ new String(ch, start, length));
 						type = 0;
 						break;
 					case TRADING_NAME:
-//						System.out.println("\tTrading names : " + new String(ch, start, length));
-//						type = 0;
+						System.out.println("\tTrading names : " + new String(ch, start, length));
+						type = 0;
 						break;
 					case UK_CONTACT:
-//						System.out.println("\tContact in UK: "
-//								+ new String(ch, start, length));
+						System.out.println("\tContact in UK: "
+								+ new String(ch, start, length));
 						type = 0;
 						break;
 					case SUBJECT_ACCESS_CONTACT:
-//						System.out.println("\tSubject Access Contact : "
-//								+ new String(ch, start, length));
+						System.out.println("\tSubject Access Contact : "
+								+ new String(ch, start, length));
 						type = 0;
 						break;
 					case NATURE_OF_WORK:
-//						doStuff(new String(ch, start, length));
+						doStuff(new String(ch, start, length));
 						type = 0;
 						break;
 					default:
@@ -261,7 +261,7 @@ public class RegistrySAXParser {
 					Element body = doc.body();
 					String words = body.text();
 					//System.out.println(words);
-					System.out.println(html);
+					//System.out.println(html);
 				}
 			};
 
