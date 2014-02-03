@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -8,26 +9,28 @@ import org.jsoup.select.Elements;
 
 public class x {
 	public static void main(String[] args) throws IOException {
-		File input = new File("nature_of_work_description_1.html");	
+		File input = new File("nature_of_work_description_1.html");
 		Document doc = Jsoup.parse(input, "UTF-8", "http://example.com./");
-		firstAttempt(doc);
+		secondAttempt(doc);
 	}
-	
-	public static void firstAttempt(Document doc){
+
+	public static void firstAttempt(Document doc) {
 		Elements paras = doc.getElementsByTag("p");
 		Elements lists = doc.getElementsByTag("ul");
 		Elements headings = doc.getElementsByTag("b");
 		Document doc2;
 		if (headings.get(0).text().substring(0, 6).equals("Nature")) {
 			String[] nature_of_work = paras.get(0).text().split("-");
-			System.out.println("\t" +nature_of_work[0] + " : " + nature_of_work[1]);
+			System.out.println("\t" + nature_of_work[0] + " : "
+					+ nature_of_work[1]);
 			String[] reasons = paras.get(4).text().split(" ");
-			String reasons_for_processing = "\t" + headings.get(2).text() + " :";
+			String reasons_for_processing = "\t" + headings.get(2).text()
+					+ " :";
 			for (int i = 4; i < reasons.length; i++) {
 				reasons_for_processing += " " + reasons[i];
 			}
 			System.out.println(reasons_for_processing);
-			String processed = "\t" + headings.get(3).text() +  " :";
+			String processed = "\t" + headings.get(3).text() + " :";
 			doc2 = Jsoup.parse(lists.get(0).html());
 			Elements info_collected = doc2.getElementsByTag("li");
 			for (int i = 0; i < info_collected.size(); i++) {
@@ -53,12 +56,38 @@ public class x {
 					+ paras.get(11).text());
 		}
 	}
-	
-	public static void secondAttempt(Document doc){
+
+	public static void secondAttempt(Document doc) {
 		Elements paragraphs = doc.getElementsByTag("p");
 		Elements headings = doc.getElementsByTag("b");
 		Elements lists = doc.getElementsByTag("ul");
-		
+		ArrayList<String> parags = new ArrayList<String>();
+		ArrayList<String> heads = new ArrayList<String>();
+		System.out.println(paragraphs.size());
+		System.out.println(headings.size());
+		int max = 0;
+		for (Element e : headings) {
+			int len = e.text().length();
+			if (len > 1) {
+				heads.add(e.text());
+				if (len > max) {
+					max = len;
+				}
+			}
+		}
+		for (Element e : paragraphs) {
+			if (e.text().length() > max) {
+				parags.add(e.text());
+			}
+		}
+		System.out.println(parags.size());
+		System.out.println(heads.size());
+		for (int i = 0; i < parags.size(); i++) {
+			System.out.println(i + " : " + parags.get(i) + " length : "
+					+ parags.get(i).length());
+		}
+		System.out.println();
+
 	}
-	
+
 }
