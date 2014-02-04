@@ -63,8 +63,6 @@ public class x {
 		Elements lists = doc.getElementsByTag("ul");
 		ArrayList<String> parags = new ArrayList<String>();
 		ArrayList<String> heads = new ArrayList<String>();
-		System.out.println(paragraphs.size());
-		System.out.println(headings.size());
 		int max = 0;
 		for (Element e : headings) {
 			int len = e.text().length();
@@ -80,13 +78,14 @@ public class x {
 				parags.add(e.text());
 			}
 		}
-		System.out.println(parags.size());
-		System.out.println(heads.size());
-		for (int i = 0; i < parags.size(); i++) {
-			System.out.println(i + " : " + parags.get(i) + " length : "
-					+ parags.get(i).length());
+//		for (int i = 0; i < parags.size(); i++) {
+//			System.out.println(i + " : " + parags.get(i) + " length : "
+//					+ parags.get(i).length());
+//		}
+		
+		for(String s : parags){
+			
 		}
-		System.out.println();
 
 	}
 
