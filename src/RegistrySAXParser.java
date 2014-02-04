@@ -3,11 +3,10 @@ import javax.xml.parsers.SAXParserFactory;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
-import org.xml.sax.Attributes;
 
 public class RegistrySAXParser {
 	public static void main(String argv[]) {
@@ -18,7 +17,12 @@ public class RegistrySAXParser {
 			SAXParser saxParser = factory.newSAXParser();
 
 			DefaultHandler handler = new DefaultHandler() {
-				private int recordCount,regNumCount,orgNameCount,companiesHouseCount,postcodeCount,countryCount,foiCount,startDateCount,endDateCount,exemptFlagCount,tradingNameCount,ukContactCount,subjectAccessCount,natureOfWorkCount,newBlobCount,oldBlobCount = 0;
+				private int recordCount, regNumCount, orgNameCount,
+						companiesHouseCount, postcodeCount, countryCount,
+						foiCount, startDateCount, endDateCount,
+						exemptFlagCount, tradingNameCount, ukContactCount,
+						subjectAccessCount, natureOfWorkCount, newBlobCount,
+						oldBlobCount = 0;
 				private int type = 0;
 				private static final int REGISTRATION_NUMBER = 1;
 				private static final int ORGANISATION_NAME = 2;
@@ -128,24 +132,23 @@ public class RegistrySAXParser {
 
 				public void endElement(String uri, String localName,
 						String qName) throws SAXException {
-					switch(qName.toUpperCase()){
-						case "REGISTRATION":
-							System.out.println(
-									  "Records : " + recordCount
-									+ "\nRegistration Numbers : " + regNumCount 
-									+ "\nOrganisation Names : " + orgNameCount
-									+ "\nCompanies House Numbers : " + companiesHouseCount
-									+ "\nPostcodes : " + postcodeCount
-									+ "\nCountries : " + countryCount
-									+ "\nFOI Flags : " + foiCount
-									+ "\nStart Dates : " + startDateCount
-									+ "\nEnd Dates : " + endDateCount
-									+ "\nExempt Flags : " + exemptFlagCount
-									+ "\nTrading Names : " + tradingNameCount
-									+ "\nUK Contact Flags : " + subjectAccessCount
-									+ "\nNature of Works : " + natureOfWorkCount
-									+ "\nOld Data Formats : " + oldBlobCount
-									+ "\nNew Data Formats : " + newBlobCount);
+					switch (qName.toUpperCase()) {
+					case "REGISTRATION":
+						System.out.println("Records : " + recordCount
+								+ "\nRegistration Numbers : " + regNumCount
+								+ "\nOrganisation Names : " + orgNameCount
+								+ "\nCompanies House Numbers : "
+								+ companiesHouseCount + "\nPostcodes : "
+								+ postcodeCount + "\nCountries : "
+								+ countryCount + "\nFOI Flags : " + foiCount
+								+ "\nStart Dates : " + startDateCount
+								+ "\nEnd Dates : " + endDateCount
+								+ "\nExempt Flags : " + exemptFlagCount
+								+ "\nTrading Names : " + tradingNameCount
+								+ "\nUK Contact Flags : " + subjectAccessCount
+								+ "\nNature of Works : " + natureOfWorkCount
+								+ "\nOld Data Formats : " + oldBlobCount
+								+ "\nNew Data Formats : " + newBlobCount);
 					}
 				}
 
@@ -164,11 +167,16 @@ public class RegistrySAXParser {
 				public void doStuff(String html) {
 					Document doc = Jsoup.parse(html);
 					Elements paras = doc.getElementsByTag("p");
-					String heading = paras.get(0).text().split(" ")[0];
-					if(heading.equals("Nature")){
-						newBlobCount++;
-					}else if(heading.equals("Purpose")){
-						oldBlobCount++;
+					try{
+						String heading = paras.get(0).text().split(" ")[0];
+						if (heading.equals("Nature")) {
+							newBlobCount++;
+						} else if (heading.equals("Purpose")) {
+							oldBlobCount++;
+						}
+	
+					}catch(IndexOutOfBoundsException e){
+						System.err.println("Faulty nature of work description : " + html);
 					}
 				}
 			};

@@ -1,0 +1,15 @@
+Records : 374692
+Registration Numbers : 374692
+Organisation Names : 374692
+Companies House Numbers : 156582
+Postcodes : 374172
+Countries : 374136
+FOI Flags : 374692
+Start Dates : 374692
+End Dates : 374692
+Exempt Flags : 374692
+Trading Names : 85819
+UK Contact Flags : 374692
+Nature of Works : 374688
+Old Data Formats : 287300
+New Data Formats : 87317
