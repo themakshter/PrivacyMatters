@@ -146,9 +146,9 @@ public class RegistrySAXParser {
 								+ "\nExempt Flags : " + exemptFlagCount
 								+ "\nTrading Names : " + tradingNameCount
 								+ "\nUK Contact Flags : " + subjectAccessCount
-								+ "\nNature of Works : " + natureOfWorkCount
-								+ "\nOld Data Formats : " + oldBlobCount
-								+ "\nNew Data Formats : " + newBlobCount);
+								+ "\nNature of Work Descriptions : " + natureOfWorkCount
+								+ "\nOld Data Formats (Purpose 1...) : " + oldBlobCount
+								+ "\nNew Data Formats (Nature of work...) : " + newBlobCount);
 					}
 				}
 

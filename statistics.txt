@@ -12,6 +12,6 @@ End Dates : 374692
 Exempt Flags : 374692
 Trading Names : 85819
 UK Contact Flags : 374692
-Nature of Works : 374688
-Old Data Formats : 287300
-New Data Formats : 87317
+Nature of Work Descriptions : 374688
+Old Data Formats (Purpose 1...) : 287300
+New Data Formats (Nature of work...): 87317
