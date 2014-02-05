@@ -1,4 +1,4 @@
-Register file of 08/2013
+Register statistics for 08/2013
 
 Records : 374692
 Registration Numbers : 374692
@@ -12,6 +12,7 @@ End Dates : 374692
 Exempt Flags : 374692
 Trading Names : 85819
 UK Contact Flags : 374692
+Subject Access Flags : 374692
 Nature of Work Descriptions : 374688
-Old Data Formats (Purpose 1...) : 287300
-New Data Formats (Nature of work...): 87317
+Old Data Formats (Purpose 1...) : 287304
+New Data Formats (Nature of work...) : 87345
