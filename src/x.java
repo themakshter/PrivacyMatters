@@ -1,4 +1,6 @@
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -7,11 +9,13 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+
 public class x {
 	public static void main(String[] args) throws IOException {
 		File input = new File("nature_of_work_description_1.html");
 		Document doc = Jsoup.parse(input, "UTF-8", "http://example.com./");
 		secondAttempt(doc);
+		//thirdAttempt(doc);
 	}
 
 	public static void firstAttempt(Document doc) {
@@ -60,7 +64,8 @@ public class x {
 	public static void secondAttempt(Document doc) {
 		Elements paragraphs = doc.getElementsByTag("p");
 		Elements headings = doc.getElementsByTag("b");
-		Elements lists = doc.getElementsByTag("ul");
+		Elements headingsv2 = doc.getElementsByTag("strong");
+		
 		ArrayList<String> parags = new ArrayList<String>();
 		ArrayList<String> heads = new ArrayList<String>();
 		int max = 0;
@@ -87,6 +92,13 @@ public class x {
 			
 		}
 
+	}
+	
+	public static void thirdAttempt(Document doc){
+		String[] stuff = doc.getElementsByTag("body").html().split("");
+		for(int i = 0; i < stuff.length;i++){
+			System.out.println(i + " : " + stuff[i]);
+		}
 	}
 
 }

@@ -30,7 +30,8 @@ public class RegistrySAXParser {
 						foiCount, startDateCount, endDateCount,
 						exemptFlagCount, tradingNameCount, ukContactCount,
 						subjectAccessCount, natureOfWorkCount, newBlobCount,
-						oldBlobCount = 0;
+						oldBlobCount,neitherBlobCount = 0;
+				private int[] listNums = {0,0,0,0,0,0};
 				private int type = 0;
 				private static final int REGISTRATION_NUMBER = 1;
 				private static final int ORGANISATION_NAME = 2;
@@ -158,7 +159,14 @@ public class RegistrySAXParser {
 								+ "\nSubject Access Flags : " + subjectAccessCount
 								+ "\nNature of Work Descriptions : " + natureOfWorkCount
 								+ "\nOld Data Formats (Purpose 1...) : "	+ oldBlobCount
-								+ "\nNew Data Formats (Nature of work...) : "	+ newBlobCount);
+								+ "\nNew Data Formats (Nature of work...) : "	+ newBlobCount
+								+ "\nNeither Format : " + neitherBlobCount);
+						int sum = 0;
+						for(int i = 0; i < listNums.length;i++){
+							out.println(i + " num of items : " + listNums[i]);
+							sum+=listNums[i];
+						}
+						System.out.println("Sum : " + sum);
 						out.close();
 						System.out.println("done!");
 						break;
@@ -266,26 +274,54 @@ public class RegistrySAXParser {
 				public void doStuff(String html) {
 					Document doc = Jsoup.parse(html);
 					Elements paras = doc.getElementsByTag("p");
-					ArrayList<String> paragraphs = new ArrayList<String>();
-					for(Element e: paras){
-						if(e.text().length() > 1){
-							paragraphs.add(e.text());
+					Elements heads = doc.getElementsByTag("b");
+					Elements str = doc.getElementsByTag("strong");
+					String p = "";
+					String b = "";
+					String s = "";
+					for (Element e : paras) {
+						if (e.text().length() > 1) {
+							// paragraphs.add(e.text());
+							p = e.text();
+							break;
+						}
+					}
+					for (Element e : heads) {
+						if (e.text().length() > 1) {
+							// headings.add(e.text());
+							b = e.text();
+							break;
+						}
+					}
+					
+					for (Element e : str) {
+						if (e.text().length() > 1) {
+							// headings.add(e.text());
+							s = e.text();
 							break;
 						}
 					}
 					try {
-						String heading = paragraphs.get(0).split(" ")[0];
-						if (heading.equals("Nature")) {
+						String heading = p.split(" ")[0];
+						String h2 = b.split(" ")[0];
+						String h3 = s.split(" ")[0];
+						if (heading.contains("Nature") || h2.contains("Nature") || h3.contains("Nature")) {
 							newBlobCount++;
-						} else if (heading.equals("Purpose")) {
+							Elements lists = doc.getElementsByTag("ul");
+							listNums[lists.size()]+=1;
+						} else if (h3.equals("Purpose")) {
 							oldBlobCount++;
-						}else{
-							out.println("Neither purpose nor nature of work : " + heading + "\nHTML : " + html);
+						} else {
+							out.println("Neither purpose nor nature of work : "
+									+ heading + " size : "+ heading.length() + "\nHTML : " + html);
+							neitherBlobCount++;
+
 						}
 
 					} catch (IndexOutOfBoundsException e) {
 						out.println("Faulty nature of work description : "
-										+ html);
+								+ html);
+						neitherBlobCount++;
 					}
 				}
 			};
