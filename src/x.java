@@ -12,10 +12,10 @@ import org.jsoup.select.Elements;
 
 public class x {
 	public static void main(String[] args) throws IOException {
-		File input = new File("nature_of_work_description_1.html");
+		File input = new File("nature_of_work_description_2.html");
 		Document doc = Jsoup.parse(input, "UTF-8", "http://example.com./");
-		secondAttempt(doc);
-		//thirdAttempt(doc);
+		//secondAttempt(doc);
+		thirdAttempt(doc);
 	}
 
 	public static void firstAttempt(Document doc) {
@@ -95,9 +95,27 @@ public class x {
 	}
 	
 	public static void thirdAttempt(Document doc){
-		String[] stuff = doc.getElementsByTag("body").html().split("");
-		for(int i = 0; i < stuff.length;i++){
-			System.out.println(i + " : " + stuff[i]);
+		if(doc.text().contains("Purpose")){
+			Elements paragraphs = doc.getElementsByTag("p");
+			int index = 0;
+			while(index < paragraphs.size()){
+				String text = paragraphs.get(index).text();
+				if(text.contains("Purpose") && !(text.equals("Purpose Description"))){
+					index+=1;
+					System.out.println("Purpose : " + paragraphs.get(index).text());
+					index +=2;
+					System.out.println("Description : " + paragraphs.get(index).text());
+					index+=2;
+					System.out.println("Data subjects : " + paragraphs.get(index).text());
+					index+=2;
+					System.out.println("Data classes : " + paragraphs.get(index).text());
+					index += 2;
+					System.out.println("Disclosees : " + paragraphs.get(index).text());
+					index +=2 ;
+					System.out.println("Transfer : " + paragraphs.get(index).text());
+				}
+				index+=1;
+			}
 		}
 	}
 

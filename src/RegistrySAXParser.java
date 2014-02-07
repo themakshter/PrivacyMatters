@@ -30,7 +30,7 @@ public class RegistrySAXParser {
 						foiCount, startDateCount, endDateCount,
 						exemptFlagCount, tradingNameCount, ukContactCount,
 						subjectAccessCount, natureOfWorkCount, newBlobCount,
-						oldBlobCount,neitherBlobCount = 0;
+						oldBlobCount,neitherBlobCount,listCount = 0;
 				private int[] listNums = {0,0,0,0,0,0};
 				private int type = 0;
 				private static final int REGISTRATION_NUMBER = 1;
@@ -166,7 +166,8 @@ public class RegistrySAXParser {
 							out.println(i + " num of items : " + listNums[i]);
 							sum+=listNums[i];
 						}
-						System.out.println("Sum : " + sum);
+						out.println("Sum : " + sum);
+						out.println("lists in old format : " + listCount);
 						out.close();
 						System.out.println("done!");
 						break;
@@ -311,6 +312,10 @@ public class RegistrySAXParser {
 							listNums[lists.size()]+=1;
 						} else if (h3.equals("Purpose")) {
 							oldBlobCount++;
+							Elements lists = doc.getElementsByTag("ul");
+							if(lists.size()>0){
+								listCount++;
+							}
 						} else {
 							out.println("Neither purpose nor nature of work : "
 									+ heading + " size : "+ heading.length() + "\nHTML : " + html);
