@@ -104,15 +104,42 @@ public class x {
 					index+=1;
 					System.out.println("Purpose : " + paragraphs.get(index).text());
 					index +=2;
-					System.out.println("Description : " + paragraphs.get(index).text());
-					index+=2;
-					System.out.println("Data subjects : " + paragraphs.get(index).text());
-					index+=2;
-					System.out.println("Data classes : " + paragraphs.get(index).text());
-					index += 2;
-					System.out.println("Disclosees : " + paragraphs.get(index).text());
+					System.out.println("\tDescription : " + paragraphs.get(index).text());
+					index +=1;
+					text = paragraphs.get(index).text();
+					if(text.toLowerCase().contains("further description")){
+						index+=1;
+						System.out.println("\tFurther description : " + paragraphs.get(index).text().toLowerCase());
+						index+=2;
+					}else{
+						index+=1;
+					}
+					System.out.println("\tData subjects : " + paragraphs.get(index).text());
+					index+=1;
+					text = paragraphs.get(index).text();
+					if(text.equals("Data Classes are:")){
+						index+=1;
+						}else{
+						System.out.println("\tFurther subjects : " + paragraphs.get(index).text().toLowerCase());
+						index+=2;
+					}
+					System.out.println("\tData classes : " + paragraphs.get(index).text());
+					index+=1;
+					text = paragraphs.get(index).text();
+					if(text.contains("Disclosures")){
+						index+=1;
+						}else{
+						System.out.println("\tFurther classes : " + paragraphs.get(index).text().toLowerCase());
+						index+=2;
+					}
+					text = paragraphs.get(index + 1).text();
+					if(!text.equals("Transfers:")){
+						System.out.println("\tFurther disclosees : " + paragraphs.get(index).text().toLowerCase());
+						index+=1;
+					}
+					System.out.println("\tDisclosees : " + paragraphs.get(index).text());
 					index +=2 ;
-					System.out.println("Transfer : " + paragraphs.get(index).text());
+					System.out.println("\tTransfers : " + paragraphs.get(index).text());
 				}
 				index+=1;
 			}
