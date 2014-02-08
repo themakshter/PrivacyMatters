@@ -96,50 +96,51 @@ public class x {
 	
 	public static void thirdAttempt(Document doc){
 		if(doc.text().contains("Purpose")){
+			System.out.println("Purposes");
 			Elements paragraphs = doc.getElementsByTag("p");
 			int index = 0;
 			while(index < paragraphs.size()){
 				String text = paragraphs.get(index).text();
 				if(text.contains("Purpose") && !(text.equals("Purpose Description"))){
 					index+=1;
-					System.out.println("Purpose : " + paragraphs.get(index).text());
+					System.out.println("\tPurpose : " + paragraphs.get(index).text());
 					index +=2;
-					System.out.println("\tDescription : " + paragraphs.get(index).text());
+					System.out.println("\t\tDescription : " + paragraphs.get(index).text());
 					index +=1;
 					text = paragraphs.get(index).text();
 					if(text.toLowerCase().contains("further description")){
 						index+=1;
-						System.out.println("\tFurther description : " + paragraphs.get(index).text().toLowerCase());
+						System.out.println("\t\tFurther description : " + paragraphs.get(index).text().toLowerCase());
 						index+=2;
 					}else{
 						index+=1;
 					}
-					System.out.println("\tData subjects : " + paragraphs.get(index).text());
+					System.out.println("\t\tData subjects : " + paragraphs.get(index).text());
 					index+=1;
 					text = paragraphs.get(index).text();
 					if(text.equals("Data Classes are:")){
 						index+=1;
 						}else{
-						System.out.println("\tFurther subjects : " + paragraphs.get(index).text().toLowerCase());
+						System.out.println("\t\tFurther subjects : " + paragraphs.get(index).text().toLowerCase());
 						index+=2;
 					}
-					System.out.println("\tData classes : " + paragraphs.get(index).text());
+					System.out.println("\t\tData classes : " + paragraphs.get(index).text());
 					index+=1;
 					text = paragraphs.get(index).text();
 					if(text.contains("Disclosures")){
 						index+=1;
 						}else{
-						System.out.println("\tFurther classes : " + paragraphs.get(index).text().toLowerCase());
+						System.out.println("\t\tFurther classes : " + paragraphs.get(index).text().toLowerCase());
 						index+=2;
 					}
 					text = paragraphs.get(index + 1).text();
 					if(!text.equals("Transfers:")){
-						System.out.println("\tFurther disclosees : " + paragraphs.get(index).text().toLowerCase());
+						System.out.println("\t\tFurther disclosees : " + paragraphs.get(index).text().toLowerCase());
 						index+=1;
 					}
-					System.out.println("\tDisclosees : " + paragraphs.get(index).text());
+					System.out.println("\t\tDisclosees : " + paragraphs.get(index).text());
 					index +=2 ;
-					System.out.println("\tTransfers : " + paragraphs.get(index).text());
+					System.out.println("\t\tTransfers : " + paragraphs.get(index).text());
 				}
 				index+=1;
 			}
