@@ -15,4 +15,13 @@ UK Contact Flags : 374692
 Subject Access Flags : 374692
 Nature of Work Descriptions : 374688
 Old Data Formats (Purpose 1...) : 287304
-New Data Formats (Nature of work...) : 87345
+New Data Formats (Nature of work...) : 87373
+Neither Format : 11
+0 num of items : 488
+1 num of items : 1206
+2 num of items : 5384
+3 num of items : 23341
+4 num of items : 55076
+5 num of items : 1878
+Sum : 87373
+lists in old format : 0
