@@ -15,7 +15,10 @@ public class x {
 		File input = new File("nature_of_work_description_2.html");
 		Document doc = Jsoup.parse(input, "UTF-8", "http://example.com./");
 		//secondAttempt(doc);
-		thirdAttempt(doc);
+		//thirdAttempt(doc);
+		//fourthAttempt();
+		String text = readFile(input.toString());
+		fourthAttempt(text);
 	}
 
 	public static void firstAttempt(Document doc) {
@@ -95,6 +98,7 @@ public class x {
 	}
 	
 	public static void thirdAttempt(Document doc){
+		System.out.println(doc.select("p").html());
 		if(doc.text().contains("Purpose")){
 			System.out.println("Purposes");
 			Elements paragraphs = doc.getElementsByTag("p");
@@ -146,5 +150,46 @@ public class x {
 			}
 		}
 	}
+	
+	public static void fourthAttempt(String text){
+		boolean blob = false;
+		StringBuilder sb= new StringBuilder();
+		ArrayList<String> listOfStrings = new ArrayList<String>();
+		for(int i = 0; i < text.length();i++){
+			if(text.charAt(i) == '<'){
+				blob = true;
+				if(sb.length() > 1  && !(sb.toString().equals("&nbsp;"))){
+					listOfStrings.add(sb.toString().trim());
+				}
+				sb = new StringBuilder();
+			}else if(text.charAt(i) == '>'){
+				blob = false;
+			}else{
+				if(!blob){
+					sb.append(text.charAt(i));
+				}
+			}
+		}
+		
+		for(int i = 0; i < listOfStrings.size();i++){
+			System.out.println(i + "\t: " + listOfStrings.get(i));
+		}
+	}
 
+	public static String readFile(String fileName) throws IOException {
+	    BufferedReader br = new BufferedReader(new FileReader(fileName));
+	    try {
+	        StringBuilder sb = new StringBuilder();
+	        String line = br.readLine();
+
+	        while (line != null) {
+	            sb.append(line);
+	            sb.append("\n");
+	            line = br.readLine();
+	        }
+	        return sb.toString();
+	    } finally {
+	        br.close();
+	    }
+	}
 }
