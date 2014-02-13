@@ -1,18 +1,18 @@
 Register statistics for 08/2013
-Records : 4
-Registration Numbers : 4
-Organisation Names : 4
-Companies House Numbers : 3
-Postcodes : 4
-Countries : 4
-FOI Flags : 4
-Start Dates : 4
-End Dates : 4
-Exempt Flags : 4
+Records : 15
+Registration Numbers : 15
+Organisation Names : 15
+Companies House Numbers : 5
+Postcodes : 15
+Countries : 15
+FOI Flags : 15
+Start Dates : 15
+End Dates : 15
+Exempt Flags : 15
 Trading Names : 1
-UK Contact Flags : 4
-Subject Access Flags : 4
-Nature of Work Descriptions : 4
+UK Contact Flags : 15
+Subject Access Flags : 15
+Nature of Work Descriptions : 15
 Old Data Formats (Purpose 1...) : 0
 New Data Formats (Nature of work...) : 0
 Neither Format : 0
