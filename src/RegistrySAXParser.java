@@ -272,66 +272,140 @@ public class RegistrySAXParser {
 					}
 				}
 
-				public void doStuff(String html) {
-					Document doc = Jsoup.parse(html);
-					Elements paras = doc.getElementsByTag("p");
-					Elements heads = doc.getElementsByTag("b");
-					Elements str = doc.getElementsByTag("strong");
-					String p = "";
-					String b = "";
-					String s = "";
-					for (Element e : paras) {
-						if (e.text().length() > 1) {
-							// paragraphs.add(e.text());
-							p = e.text();
-							break;
-						}
-					}
-					for (Element e : heads) {
-						if (e.text().length() > 1) {
-							// headings.add(e.text());
-							b = e.text();
-							break;
-						}
-					}
-					
-					for (Element e : str) {
-						if (e.text().length() > 1) {
-							// headings.add(e.text());
-							s = e.text();
-							break;
-						}
-					}
-					try {
-						String heading = p.split(" ")[0];
-						String h2 = b.split(" ")[0];
-						String h3 = s.split(" ")[0];
-						if (heading.contains("Nature") || h2.contains("Nature") || h3.contains("Nature")) {
-							newBlobCount++;
-							Elements lists = doc.getElementsByTag("ul");
-							listNums[lists.size()]+=1;
-						} else if (h3.equals("Purpose")) {
-							oldBlobCount++;
-							Elements lists = doc.getElementsByTag("ul");
-							if(lists.size()>0){
-								listCount++;
+				public void doStuff(String html) {		
+					ArrayList<String> list = stripTags(html);
+					int index = 0;
+					if (list.get(index).contains("Nature")) {
+						System.out.println(list.get(index));
+						index++;
+						while (index < list.size()) {				
+							String purposes, classes, subjects, disclosees,space;
+							
+							// Reasons/purpose for processing
+							if (list.get(index).toLowerCase().contains("reasons/purposes for processing")) {
+								purposes = "Purpose : ";
+								index += 1;
+								if (list.get(index + 1).toLowerCase().contains("type/classes of information")) {
+									purposes += list.get(index);
+								} else {
+									index+=1;
+									space = ", ";
+									while (!list.get(index).toLowerCase().contains("type/classes of information")) {
+										purposes += list.get(index) + space;
+										index++;
+									}
+								}
+								purposes = purposes.trim();
+								System.out.println(purposes);
 							}
-						} else {
-							out.println("Neither purpose nor nature of work : "
-									+ heading + " size : "+ heading.length() + "\nHTML : " + html);
-							neitherBlobCount++;
+							// Type/classes of information processed
+							if (list.get(index).toLowerCase().contains("type/classes of information")) {
+								classes = "Data classes : ";
+								index += 1;
+								if (list.get(index + 1).contains("information is processed about")) { // only one line
+									classes += list.get(index);
+								} else {
+									index += 1;
+									space = ", ";
+									boolean sensitive = false;
+									while (!list.get(index).toLowerCase()
+											.contains("information is processed about")) {
+										if (list.get(index).contains("sensitive classes")) {
+											sensitive = true;
+											space = "[SENSITIVE], ";
+										} else {
+											classes += list.get(index) + space;
+										}
+										index++;
+									}
 
+								}
+								classes = classes.trim();
+								System.out.println(classes);
+							}
+							// Who the information is processed about
+							if (list.get(index).contains("information is processed about")) {
+								subjects = "Data Subjects : ";
+								index += 1;
+								if (list.get(index + 1).contains("information may be shared with")) { // only one line
+									subjects += list.get(index);
+								} else {
+									space = ", ";
+									index += 1;
+									while (!list.get(index).toLowerCase().contains("information may be shared with")) {
+										subjects += list.get(index) + space;
+										index++;
+									}
+								}
+								subjects = subjects.trim();
+								System.out.println(subjects);
+							}
+
+							// Who the information may be shared with
+							if (list.get(index).contains("information may be shared with")) {
+								disclosees = "Data Disclosees : ";
+								index += 1;
+								if (list.get(index + 1).contains("Transfers")) {
+									disclosees += list.get(index);
+								} else {
+									index+=1;
+									if(list.get(index).contains("necessary or required")){
+										index+=1;
+									}
+									space = ", ";
+									while (!list.get(index).contains("Transfers")) {
+										disclosees += list.get(index) + space;
+										index++;
+									}
+								}
+								disclosees = disclosees.trim();
+								System.out.println(disclosees);
+							}
+
+							// Transfer
+							if (list.get(index).contains("Transfers")) {
+								String transfers = "Transfers : ";
+								index += 1;
+								transfers += list.get(index);
+								System.out.println(transfers);
+							}
+
+							index++;
 						}
+						System.out.println();
+					} else if (list.get(index).contains("Purpose")) {
 
-					} catch (IndexOutOfBoundsException e) {
-						out.println("Faulty nature of work description : "
-								+ html);
-						neitherBlobCount++;
 					}
 				}
+			
+			
+			public ArrayList<String> stripTags(String text){
+				boolean blob = false;
+				StringBuilder sb= new StringBuilder();
+				ArrayList<String> listOfStrings = new ArrayList<String>();
+				for(int i = 0; i < text.length();i++){
+					if(text.charAt(i) == '<'){
+						blob = true;
+						if(sb.length() > 1  && !(sb.toString().equals("&nbsp;"))){
+							listOfStrings.add(sb.toString().trim());
+						}
+						sb = new StringBuilder();
+					}else if(text.charAt(i) == '>'){
+						blob = false;
+					}else{
+						if(!blob){
+							sb.append(text.charAt(i));
+						}
+					}
+				}		
+//				for(int i = 0; i < listOfStrings.size();i++){
+//					System.out.println(i + "\t: " + listOfStrings.get(i));
+//				}
+				return listOfStrings;
+			}
 			};
 
-			saxParser.parse("register08.2013.xml", handler);
+			saxParser.parse("registry_example_2.xml", handler);
 
 		} catch (Exception e) {
 			e.printStackTrace();
