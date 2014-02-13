@@ -16,16 +16,6 @@ public class x {
 		parseNatureOfWork(html);
 	}
 	
-	public static void parseNatureOfWork(String html) {
-		ArrayList<String> list = stripTags(html);
-		String heading = list.get(0);
-		if (heading.contains("Nature")) {
-			newFormat(list);
-		} else if (heading.contains("Purpose")) {
-			oldFormat3(list);
-		}
-	}
-
 	public static void oldFormat(Document doc) {
 		System.out.println("Purposes");
 		Elements paragraphs = doc.getElementsByTag("p");
@@ -131,8 +121,100 @@ public class x {
 		}
 	}
 	
+	public static void parseNatureOfWork(String html) {
+		ArrayList<String> list = stripTags(html);
+		String heading = list.get(0);
+		if (heading.contains("Nature")) {
+			newFormat(list);
+		} else if (heading.contains("Purpose")) {
+			oldFormat3(list);
+		}
+	}
+
+	
+	
 	public static void oldFormat3(ArrayList<String> list){
-		
+		System.out.println("Purposes");
+		String tab = "\t";
+		String purpose,description,furtherDescription,subjects,classes,disclosees,transfers;
+		int index = 0;
+		while(index < list.size()){
+			String text = list.get(index);
+			String[] s = text.split(" ");
+			
+			//Purpose
+			if(s[0].equals("Purpose") && !s[1].equals("Description:")){
+				index+=1;
+				purpose = tab + "Purpose : ";
+				purpose += list.get(index);
+				System.out.println(purpose);
+			}
+			
+			//Description
+			if(text.equals("Purpose Description:")){
+				index+=1;
+				description = tab + tab + "Description : ";
+				description += list.get(index);
+				System.out.println(description);
+			}
+				
+			//Further description
+			if(text.toLowerCase().contains("further description")){
+				index+=1;
+				furtherDescription = tab + tab + "Further description : ";
+				while(!list.get(index+1).toLowerCase().contains("data subjects are")){
+					furtherDescription += list.get(index).toLowerCase() + " ";
+					index++;
+				}
+				System.out.println(furtherDescription);
+			}
+				
+			//Data Subjects
+			if(text.toLowerCase().contains("data subjects are")){
+				subjects =  tab + tab + "Subjects : ";
+				index+=1;
+				while(!list.get(index+1).toLowerCase().contains("data classes are")){
+					subjects += list.get(index).toLowerCase() + ", ";
+					index++;
+				}
+				System.out.println(subjects);
+			}
+			//Data Classes
+			if(text.toLowerCase().contains("data classes are")){
+				classes =  tab + tab + "Classes : ";
+				index+=1;
+				while(!list.get(index+1).toLowerCase().contains("disclosures")){
+					classes += list.get(index).toLowerCase() + ", ";
+					index++;
+				}
+				System.out.println(classes);
+			}
+						
+			//Disclosees
+			if(text.toLowerCase().contains("disclosures")){
+				disclosees =  tab + tab + "Disclosees : ";
+				index+=1;
+				while(!list.get(index+1).toLowerCase().contains("transfer")){
+					disclosees += list.get(index).toLowerCase() + ", ";
+					index++;
+				}
+				System.out.println(disclosees);
+			}
+			
+			//Transfers
+			if(text.contains("Transfers")){
+				index+=1;
+				transfers =  tab + tab + "Transfers : " + list.get(index).toLowerCase();
+				if(index +1 < list.size()){
+					while(!list.get(index+1).toLowerCase().contains("purpose")){
+						transfers += " " + list.get(index).toLowerCase();
+						index++;
+					}
+				}
+				System.out.println(transfers);
+			}
+			index++;
+		}
 	}
 
 	public static void newFormat(ArrayList<String> list) {
@@ -173,11 +255,8 @@ public class x {
 				} else {
 					index += 1;
 					space = ", ";
-					boolean sensitive = false;
-					while (!list.get(index).toLowerCase()
-							.contains("information is processed about")) {
+					while (!list.get(index).toLowerCase().contains("information is processed about")) {
 						if (list.get(index).contains("sensitive classes")) {
-							sensitive = true;
 							space = "[SENSITIVE], ";
 						} else {
 							classes += list.get(index) + space;

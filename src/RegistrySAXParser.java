@@ -278,71 +278,93 @@ public class RegistrySAXParser {
 					if (heading.contains("Nature")) {
 						newFormat(list);
 					} else if (heading.contains("Purpose")) {
-						oldFormat(Jsoup.parseBodyFragment(html));
+						oldFormat(list);
 					}
 				}
 
-				public void oldFormat(Document doc) {
+				
+				public void oldFormat(ArrayList<String> list){
 					System.out.println("Purposes");
-					Elements paragraphs = doc.getElementsByTag("p");
+					String tab = "\t";
+					String purpose,description,furtherDescription,subjects,classes,disclosees,transfers;
 					int index = 0;
-					while (index < paragraphs.size()) {
-						String text = paragraphs.get(index).text();
-						if (text.contains("Purpose")
-								&& !(text.equals("Purpose Description"))) {
-							index += 1;
-							System.out.println("\tPurpose : "
-									+ paragraphs.get(index).text());
-							index += 2;
-							System.out.println("\t\tDescription : "
-									+ paragraphs.get(index).text());
-							index += 1;
-							text = paragraphs.get(index).text();
-							if (text.toLowerCase().contains("further description")) {
-								index += 1;
-								System.out.println("\t\tFurther description : "
-										+ paragraphs.get(index).text().toLowerCase());
-								index += 2;
-							} else {
-								index += 1;
-							}
-							System.out.println("\t\tData subjects : "
-									+ paragraphs.get(index).text());
-							index += 1;
-							text = paragraphs.get(index).text();
-							if (text.equals("Data Classes are:")) {
-								index += 1;
-							} else {
-								System.out.println("\t\tFurther subjects : "
-										+ paragraphs.get(index).text().toLowerCase());
-								index += 2;
-							}
-							System.out.println("\t\tData classes : "
-									+ paragraphs.get(index).text());
-							index += 1;
-							text = paragraphs.get(index).text();
-							if (text.contains("Disclosures")) {
-								index += 1;
-							} else {
-								System.out.println("\t\tFurther classes : "
-										+ paragraphs.get(index).text().toLowerCase());
-								index += 2;
-							}
-							text = paragraphs.get(index + 1).text();
-							if (!text.equals("Transfers:")) {
-								System.out.println("\t\tFurther disclosees : "
-										+ paragraphs.get(index).text().toLowerCase());
-								index += 1;
-							}
-							System.out.println("\t\tDisclosees : "
-									+ paragraphs.get(index).text());
-							index += 2;
-							System.out.println("\t\tTransfers : "
-									+ paragraphs.get(index).text());
+					while(index < list.size()){
+						String text = list.get(index);
+						String[] s = text.split(" ");
+						
+						//Purpose
+						if(s[0].equals("Purpose") && !s[1].equals("Description:")){
+							index+=1;
+							purpose = tab + "Purpose : ";
+							purpose += list.get(index);
+							System.out.println(purpose);
 						}
-						index += 1;
+						
+						//Description
+						if(text.equals("Purpose Description:")){
+							index+=1;
+							description = tab + tab + "Description : ";
+							description += list.get(index);
+							System.out.println(description);
+						}
+							
+						//Further description
+						if(text.toLowerCase().contains("further description")){
+							index+=1;
+							furtherDescription = tab + tab + "Further description : ";
+							while(!list.get(index+1).toLowerCase().contains("data subjects are")){
+								furtherDescription += list.get(index).toLowerCase() + " ";
+								index++;
+							}
+							System.out.println(furtherDescription);
+						}
+							
+						//Data Subjects
+						if(text.toLowerCase().contains("data subjects are")){
+							subjects =  tab + tab + "Subjects : ";
+							index+=1;
+							while(!list.get(index+1).toLowerCase().contains("data classes are")){
+								subjects += list.get(index).toLowerCase() + ", ";
+								index++;
+							}
+							System.out.println(subjects);
+						}
+						//Data Classes
+						if(text.toLowerCase().contains("data classes are")){
+							classes =  tab + tab + "Classes : ";
+							index+=1;
+							while(!list.get(index+1).toLowerCase().contains("disclosures")){
+								classes += list.get(index).toLowerCase() + ", ";
+								index++;
+							}
+							System.out.println(classes);
+						}
+									
+						//Disclosees
+						if(text.toLowerCase().contains("disclosures")){
+							disclosees =  tab + tab + "Disclosees : ";
+							index+=1;
+							while(!list.get(index+1).toLowerCase().contains("transfer")){
+								disclosees += list.get(index).toLowerCase() + ", ";
+								index++;
+							}
+							System.out.println(disclosees);
+						}
+						
+						//Transfers
+						if(text.contains("Transfers")){
+							index+=1;
+							transfers =  tab + tab + "Transfers : " + list.get(index).toLowerCase();
+							if(index +1 < list.size()){
+								while(!list.get(index+1).toLowerCase().contains("purpose")){
+									transfers += " " + list.get(index).toLowerCase();
+									index++;
+								}
+							}
+							System.out.println(transfers);
+						}
+						index++;
 					}
-
 				}
 
 				public void newFormat(ArrayList<String> list) {
@@ -444,7 +466,7 @@ public class RegistrySAXParser {
 						if (list.get(index).contains("Transfers")) {
 							String transfers = "Transfers : ";
 							index += 1;
-							transfers += list.get(index);
+							transfers += list.get(index).toLowerCase();
 							System.out.println(transfers);
 						}
 
@@ -453,7 +475,7 @@ public class RegistrySAXParser {
 					System.out.println();
 				}
 
-				public  ArrayList<String> stripTags(String text) {
+				public ArrayList<String> stripTags(String text) {
 					boolean blob = false;
 					StringBuilder sb = new StringBuilder();
 					ArrayList<String> listOfStrings = new ArrayList<String>();
@@ -477,9 +499,10 @@ public class RegistrySAXParser {
 //					}
 					return listOfStrings;
 				}
+
 			};
 
-			saxParser.parse("registry_example_5.xml", handler);
+			saxParser.parse("registry_example_3.xml", handler);
 
 		} catch (Exception e) {
 			e.printStackTrace();
