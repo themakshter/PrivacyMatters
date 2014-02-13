@@ -22,7 +22,7 @@ public class x {
 		if (heading.contains("Nature")) {
 			newFormat(list);
 		} else if (heading.contains("Purpose")) {
-			oldFormat(Jsoup.parseBodyFragment(html));
+			oldFormat3(list);
 		}
 	}
 
@@ -86,7 +86,53 @@ public class x {
 			}
 			index += 1;
 		}
+	}
+	
+	public static void oldFormat2(Document doc){
+		System.out.println("Purposes");
+		String tab = "\t";
+		Elements paragraphs = doc.getElementsByTag("p");
+		int index = 0;
+		while(index < paragraphs.size()){
+			String text,purpose,description,furtherDescription,subjects,classes,disclosees,transfers;
+			//Purpose name
+			text = paragraphs.get(index).text();
+			String[] s = text.split(" ");
+			if(s[0].equals("Purpose") && !s[1].equals("Description:") ){
+				purpose =tab + "Purpose : ";
+				index+=1;
+				purpose += paragraphs.get(index).text();
+				System.out.println(purpose);
+			}
 
+			//Purpose Description
+			if(paragraphs.get(index).text().contains("Purpose Description")){
+				index+=1;
+				description = tab + "Description : ";
+				description += paragraphs.get(index).text();
+				System.out.println(description);
+			}
+			
+			//Further Description
+			if(paragraphs.get(index).text().toLowerCase().contains("further description")){
+				index+=1;
+				
+			}
+			//Data subjects
+			
+			//Data classes
+			
+			//Disclosees
+			
+			//Transfers
+			
+			
+			index++;
+		}
+	}
+	
+	public static void oldFormat3(ArrayList<String> list){
+		
 	}
 
 	public static void newFormat(ArrayList<String> list) {
