@@ -11,7 +11,7 @@ import org.jsoup.select.Elements;
 
 public class x {
 	public static void main(String[] args) throws IOException {
-		File input = new File("nature_of_work_description_2.html");
+		File input = new File("nature_of_work_description_1.html");
 		String html = readFile(input.toString());
 		parseNatureOfWork(html);
 	}
