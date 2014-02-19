@@ -321,7 +321,117 @@ public class x {
 		}
 		System.out.println();
 	}
+	
+	public static void newFormat2(ArrayList<String> list){
+		int index = 0;
+		String[] headings = {"reasons/purposes for processing","type/classes of information","information is processed about","information may be shared with","transfers"};
+		System.out.println(list.get(index));
+		index++;
+		while (index < list.size()) {
+			String purposes, classes, subjects, disclosees, space;
 
+			// Reasons/purpose for processing
+			if (list.get(index).toLowerCase()
+					.contains("reasons/purposes for processing")) {
+				purposes = "Purpose : ";
+				index += 1;
+				if (list.get(index + 1).toLowerCase()
+						.contains("type/classes of information")) {
+					purposes += list.get(index);
+				} else {
+					index += 1;
+					space = ", ";
+					while (!list.get(index).toLowerCase()
+							.contains("type/classes of information")) {
+						purposes += list.get(index) + space;
+						index++;
+					}
+				}
+				purposes = purposes.trim();
+				System.out.println(purposes);
+			}
+			// Type/classes of information processed
+			if (list.get(index).toLowerCase()
+					.contains("type/classes of information")) {
+				classes = "Data classes : ";
+				index += 1;
+				if (list.get(index + 1).contains(
+						"information is processed about")) { // only one line
+					classes += list.get(index);
+				} else {
+					index += 1;
+					space = ", ";
+					while (!list.get(index).toLowerCase().contains("information is processed about")) {
+						if (list.get(index).contains("sensitive classes")) {
+							space = "[SENSITIVE], ";
+						} else {
+							classes += list.get(index) + space;
+						}
+						index++;
+					}
+
+				}
+				classes = classes.trim();
+				System.out.println(classes);
+			}
+			// Who the information is processed about
+			if (list.get(index).contains("information is processed about")) {
+				subjects = "Data Subjects : ";
+				index += 1;
+				if (list.get(index + 1).contains(
+						"information may be shared with")) { // only one line
+					subjects += list.get(index);
+				} else {
+					space = ", ";
+					index += 1;
+					while (!list.get(index).toLowerCase()
+							.contains("information may be shared with")) {
+						subjects += list.get(index) + space;
+						index++;
+					}
+				}
+				subjects = subjects.trim();
+				System.out.println(subjects);
+			}
+
+			// Who the information may be shared with
+			if (list.get(index).contains("information may be shared with")) {
+				disclosees = "Data Disclosees : ";
+				index += 1;
+				if (list.get(index + 1).contains("Transfers")) {
+					disclosees += list.get(index);
+				} else {
+					index += 1;
+					if (list.get(index).contains("necessary or required")) {
+						index += 1;
+					}
+					space = ", ";
+					while (!list.get(index).contains("Transfers")) {
+						disclosees += list.get(index) + space;
+						index++;
+					}
+				}
+				disclosees = disclosees.trim();
+				System.out.println(disclosees);
+			}
+
+			// Transfer
+			if (list.get(index).contains("Transfers")) {
+				String transfers = "Transfers : ";
+				index += 1;
+				transfers += list.get(index);
+				System.out.println(transfers);
+			}
+
+			index++;
+		}
+		System.out.println();
+	}
+
+	public static void checkHeading(){
+		
+	}
+	
 	public static ArrayList<String> stripTags(String text) {
 		boolean blob = false;
 		StringBuilder sb = new StringBuilder();
