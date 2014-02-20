@@ -54,7 +54,7 @@ public class RegistrySAXParser {
 				private static final int REGISTRATION = 20;
 				private static final int RECORD = 21;
 				private String address = "\tAddress : ";
-
+				private Record dataController;
 				public void startElement(String uri, String localName,
 						String qName, Attributes attributes)
 						throws SAXException {
@@ -64,6 +64,7 @@ public class RegistrySAXParser {
 						break;
 					case "RECORD":
 						type = RECORD;
+						dataController = new Record();
 						recordCount++;
 						break;
 					case "REGISTRATION_NUMBER":
@@ -180,89 +181,74 @@ public class RegistrySAXParser {
 				public void characters(char ch[], int start, int length)
 						throws SAXException {
 					switch (type) {
-//					case REGISTRATION_NUMBER:
-//						System.out
-//								.println("Organisation\n\tRegistration Number : "
-//										+ new String(ch, start, length));
-//						type = 0;
-//						break;
-//					case ORGANISATION_NAME:
-//						System.out.println("\tName : "
-//								+ new String(ch, start, length));
-//						type = 0;
-//						break;
-//					case COMPANIES_HOUSE_NUMBER:
-//						System.out.println("\tCompanies House Number : "
-//								+ new String(ch, start, length));
-//						type = 0;
-//						break;
-//					case ADDRESS_1:
-//						address += new String(ch, start, length);
-//						type = 0;
-//						break;
-//					case ADDRESS_2:
-//						address += ", " + new String(ch, start, length);
-//						type = 0;
-//						break;
-//					case ADDRESS_3:
-//						address += ", " + new String(ch, start, length);
-//						type = 0;
-//						break;
-//					case ADDRESS_4:
-//						address += ", " + new String(ch, start, length);
-//						type = 0;
-//						break;
-//					case ADDRESS_5:
-//						address += ", " + new String(ch, start, length);
-//						type = 0;
-//						break;
-//					case POSTCODE:
-//						System.out.println(address);
-//						address = "\tAddress : ";
-//						System.out.println("\tPostcode : "
-//								+ new String(ch, start, length));
-//						type = 0;
-//						break;
-//					case COUNTRY:
-//						System.out.println("\tCountry : "
-//								+ new String(ch, start, length));
-//						type = 0;
-//						break;
-//					case FOI:
-//						System.out.println("\tFreedom of Information : "
-//								+ new String(ch, start, length));
-//						type = 0;
-//						break;
-//					case START_DATE:
-//						System.out.println("\tStart of Registration : "
-//								+ new String(ch, start, length));
-//						type = 0;
-//						break;
-//					case END_DATE:
-//						System.out.println("\tEnd of Registration : "
-//								+ new String(ch, start, length));
-//						type = 0;
-//						break;
-//					case EXEMPT_FLAG:
-//						System.out.println("\tExempt from Processing : "
-//								+ new String(ch, start, length));
-//						type = 0;
-//						break;
-//					case TRADING_NAME:
-//						System.out.println("\tTrading names : "
-//								+ new String(ch, start, length));
-//						type = 0;
-//						break;
-//					case UK_CONTACT:
-//						System.out.println("\tContact in UK: "
-//								+ new String(ch, start, length));
-//						type = 0;
-//						break;
-//					case SUBJECT_ACCESS_CONTACT:
-//						System.out.println("\tSubject Access Contact : "
-//								+ new String(ch, start, length));
-//						type = 0;
-//						break;
+					case REGISTRATION_NUMBER:
+						dataController.setRegistration(new String(ch, start, length));
+						type = 0;
+						break;
+					case ORGANISATION_NAME:
+						dataController.setOrganisation(new String(ch, start, length));
+						type = 0;
+						break;
+					case COMPANIES_HOUSE_NUMBER:
+						dataController.setCompaniesHouse(new String(ch,start,length));
+						type = 0;
+						break;
+					case ADDRESS_1:
+						address += new String(ch, start, length);
+						type = 0;
+						break;
+					case ADDRESS_2:
+						address += ", " + new String(ch, start, length);
+						type = 0;
+						break;
+					case ADDRESS_3:
+						address += ", " + new String(ch, start, length);
+						type = 0;
+						break;
+					case ADDRESS_4:
+						address += ", " + new String(ch, start, length);
+						type = 0;
+						break;
+					case ADDRESS_5:
+						address += ", " + new String(ch, start, length);
+						type = 0;
+						break;
+					case POSTCODE:
+						dataController.setAddress(address);
+						type = 0;
+						break;
+					case COUNTRY:
+						dataController.setCountry(new String(ch,start,length));
+						type = 0;
+						break;
+					case FOI:
+						dataController.setFoiFlag(new String(ch,start,length));
+						type = 0;
+						break;
+					case START_DATE:
+						dataController.setStartDate(new String(ch,start,length));
+						type = 0;
+						break;
+					case END_DATE:
+						dataController.setEndDate(new String(ch,start,length));
+						type = 0;
+						break;
+					case EXEMPT_FLAG:
+						dataController.setExempt(new String(ch,start,length));
+						type = 0;
+						break;
+					case TRADING_NAME:
+						dataController.setTradingName(new String(ch,start,length));
+						type = 0;
+						break;
+					case UK_CONTACT:
+						dataController.setUKContact(new String(ch,start,length));
+						type = 0;
+						break;
+					case SUBJECT_ACCESS_CONTACT:
+						dataController.setSubjectAccess(new String(ch,start,length));
+						type = 0;
+						break;
 					case NATURE_OF_WORK:
 						doStuff(new String(ch, start, length));
 						type = 0;
@@ -276,8 +262,10 @@ public class RegistrySAXParser {
 					ArrayList<String> list = stripTags(html);
 					String heading = list.get(0);
 					if (heading.contains("Nature")) {
+						dataController.setType(2);
 						newFormat(list);
 					} else if (heading.contains("Purpose")) {
+						dataController.setType(1);
 						oldFormat(list);
 					}
 				}

@@ -7,7 +7,8 @@ public class Record {
 	private int descriptionType;
 	private final static int OLD_FORMAT = 1;
 	private final static int NEW_FORMAT = 2;
-
+	private final static int NEITHER_FORMAT = 3;
+	
 	// new format
 	NatureOfWork newFormat;
 	// old format
@@ -18,13 +19,13 @@ public class Record {
 		organisationName = "";
 		companiesHouseNumber = "(not given)";
 		address = "";
-		postcode = "";
-		country = "";
+		postcode = "(not given)";
+		country = "(not given)";
 		foiFlag = "";
 		startDate = "";
 		endDate = "";
 		exemptFlag = "";
-		tradingName = "";
+		tradingName = "(not given)";
 		ukContactFlag = "";
 		subjectAccessFlag = "";
 		descriptionType = 0;
@@ -34,9 +35,15 @@ public class Record {
 		descriptionType = type;
 		switch (descriptionType) {
 		case OLD_FORMAT:
-			purposesOld = new ArrayList<Purpose>();
+			oldFormat = new ArrayList<Purpose>();
+			break;
 		case NEW_FORMAT:
 			newFormat = new NatureOfWork();
+			break;
+		case NEITHER_FORMAT:
+			break;
+		default:
+			break;
 		}
 	}
 	
@@ -99,6 +106,5 @@ public class Record {
 	public void setOldFormat(ArrayList<Purpose> oldForm){
 		oldFormat = oldForm;
 	}
-
 	
 }
