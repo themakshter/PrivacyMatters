@@ -40,10 +40,11 @@ public class RegistryHandler extends DefaultHandler {
 	private String address = "\tAddress : ";
 	private Record dataController;
 
-	public RegistryHandler() throws IOException{
+	public RegistryHandler() throws IOException {
 		out = new PrintWriter(new BufferedWriter(new FileWriter("stats.txt")));
-		
+
 	}
+
 	public void startElement(String uri, String localName, String qName,
 			Attributes attributes) throws SAXException {
 		switch (qName.toUpperCase()) {

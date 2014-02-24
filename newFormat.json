@@ -1,0 +1,36 @@
+{
+	"registrationNumber": "ZA013235",
+	"organisationName": "Eresby Special School",
+	"address": "Eresby Avenue, Spilsby, Lincolnshire",
+	"postcode": "PE23 5HU",
+	"country": "United Kingdom",
+	"FOIFlag": "Y",
+	"startDate": "2013-06-14",
+	"endDate": "2014-06-13",
+	"exemptFlag": "N",
+	"ukContact": "None",
+	"subjectAccessContact": "None",
+	"format": "new",
+	"natureOfWork": "Academy",
+	"purposes": [{
+		"purpose": "We process personal information to enable us to provide education, training, welfare and educational support services, to administer school property; maintaining our own accounts and records, undertake fundraising; support and manage our employees. We also use CCTV for security and the prevention and detection of crime."
+	}],
+	"classes": [{
+		"class": "personal details"
+	}, {
+		"class": "family details"
+	}, {
+		"class": "sexual life [SENSITIVE]"
+	}],
+	"subjects": [{
+		"subject": "employees"
+	}, {
+		"subject": "students and pupils"
+	}],
+	"disclosees": [{
+		"disclosee": "educators and examining bodies "
+	}, {
+		"disclosee": "academy trusts"
+	}],
+	"transfers": "It may sometimes be necessary to transfer personal information overseas. When this is needed information is only shared within the European Economic Area (EEA). Any transfers made will be in full compliance with all aspects of the data protection act."
+}

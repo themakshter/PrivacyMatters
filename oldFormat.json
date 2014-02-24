@@ -1,0 +1,52 @@
+{
+	"registrationNumber": "W3536446",
+	"organisationName": "Joan Butterfield",
+	"address": "Denbighshire County Council, County Hall, Wynnstay Road, Ruthin, Debighshire",
+	"postcode": "LL15 1YN",
+	"country": "United Kingdom",
+	"FOIFlag": "N",
+	"startDate": "2012-10-24",
+	"endDate": "2013-10-23",
+	"exemptFlag": "N",
+	"ukContact": "None",
+	"subjectAccessContact": "None",
+	"format": "old",
+	"purposes": [{
+		"purpose": "Education",
+		"description": "The provision of education or training as a primary function or as a business activity.",
+		"furtherDescription": "Administration of education and training (e.g. registration, monitoring, and reporting, calculation and publication of exam results, provision of references, provision of references) Provision of education and training (e.g. planning and control of curricula and exams, comissioning, validation and producing educational materials, arrangement of work experience placements) preparation of dfes returns",
+		"subjects": [{
+			"subject": "Suppliers"
+		}, {
+			"subject": "Complainants, correspondents and enquirers"
+		}],
+		"classes": [{
+			"class": "Education and Training Details"
+		}, {
+			"class": "Employment Details"
+		}],
+		"disclosees": [{
+			"disclosee": "Data subjects themselves"
+		}, {
+			"disclosee": "The media"
+		}],
+		"transfer": "None outside the European Economic Area"
+	}, {
+		"purpose": "Crime Prevention and Prosecution of Offenders",
+		"description": "Crime prevention and detection and the apprehension and prosecution of offenders.",
+		"subjects": [{
+			"subject": "Customers and Clients"
+		}, {
+			"subject": "Offenders and suspected offenders"
+		}],
+		"classes": [{
+			"class": "Personal Details",
+			"class": "Goods or Services Provided"
+		}],
+		"disclosees": [{
+			"disclosee": "Data subjects themselves"
+		}, {
+			"Employees and agents of the data controller"
+		}]
+	}]
+}
