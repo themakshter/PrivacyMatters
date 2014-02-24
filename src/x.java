@@ -11,9 +11,13 @@ import org.jsoup.select.Elements;
 
 public class x {
 	public static void main(String[] args) throws IOException {
+		long start = System.currentTimeMillis();
 		File input = new File("nature_of_work_description_1.html");
 		String html = readFile(input.toString());
 		parseNatureOfWork(html);
+		long end = System.currentTimeMillis();
+		long timeTaken = (end - start)/1000;
+		System.out.println("Time taken : " + (timeTaken) + "seconds");
 	}
 	
 	public static void oldFormat(Document doc) {

@@ -8,11 +8,11 @@ public class Record {
 	private final static int OLD_FORMAT = 1;
 	private final static int NEW_FORMAT = 2;
 	private final static int NEITHER_FORMAT = 3;
-	
+
 	// new format
-	NatureOfWork newFormat;
+	private NatureOfWork newFormat;
 	// old format
-	ArrayList<Purpose> oldFormat;
+	private ArrayList<Purpose> oldFormat;
 
 	public Record() {
 		registrationNumber = "";
@@ -46,65 +46,133 @@ public class Record {
 			break;
 		}
 	}
-	
-	public void setRegistration(String reg){
-		registrationNumber = reg;
+
+	public String getRegistrationNumber() {
+		return registrationNumber;
 	}
-	
-	public void setOrganisation(String org){
-		organisationName = org;
+
+	public void setRegistrationNumber(String registrationNumber) {
+		this.registrationNumber = registrationNumber;
 	}
-	
-	public void setCompaniesHouse(String compHouse){
-		companiesHouseNumber = compHouse;
+
+	public String getOrganisationName() {
+		return organisationName;
 	}
-	
-	public void setAddress(String address){
+
+	public void setOrganisationName(String organisationName) {
+		this.organisationName = organisationName;
+	}
+
+	public String getCompaniesHouseNumber() {
+		return companiesHouseNumber;
+	}
+
+	public void setCompaniesHouseNumber(String companiesHouseNumber) {
+		this.companiesHouseNumber = companiesHouseNumber;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
 		this.address = address;
 	}
-	
-	public void setPostcode(String postCode){
-		postcode = postCode;
+
+	public String getPostcode() {
+		return postcode;
 	}
-	
-	public void setCountry(String country){
+
+	public void setPostcode(String postcode) {
+		this.postcode = postcode;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
 		this.country = country;
 	}
-	
-	public void setFoiFlag(String foi){
-		foiFlag = foi;
+
+	public String getFoiFlag() {
+		return foiFlag;
 	}
-	
-	public void setStartDate(String date){
-		startDate = date;		
+
+	public void setFoiFlag(String foiFlag) {
+		this.foiFlag = foiFlag;
 	}
-	
-	public void setEndDate(String date){
-		endDate = date;
+
+	public String getStartDate() {
+		return startDate;
 	}
-	
-	public void setExempt(String flag){
-		exemptFlag = flag;
+
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
 	}
-	
-	public void setTradingName(String name){
-		tradingName = name;
+
+	public String getEndDate() {
+		return endDate;
 	}
-	
-	public void setUKContact(String flag){
-		ukContactFlag = flag;
+
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
 	}
-	
-	public void setSubjectAccess(String flag){
-		subjectAccessFlag = flag;
+
+	public String getExemptFlag() {
+		return exemptFlag;
 	}
-	
-	public void setNewFormat(NatureOfWork newForm){
-		newFormat = newForm;
+
+	public void setExemptFlag(String exemptFlag) {
+		this.exemptFlag = exemptFlag;
 	}
-	
-	public void setOldFormat(ArrayList<Purpose> oldForm){
-		oldFormat = oldForm;
+
+	public String getTradingName() {
+		return tradingName;
 	}
-	
+
+	public void setTradingName(String tradingName) {
+		this.tradingName = tradingName;
+	}
+
+	public String getUkContactFlag() {
+		return ukContactFlag;
+	}
+
+	public void setUkContactFlag(String ukContactFlag) {
+		this.ukContactFlag = ukContactFlag;
+	}
+
+	public String getSubjectAccessFlag() {
+		return subjectAccessFlag;
+	}
+
+	public void setSubjectAccessFlag(String subjectAccessFlag) {
+		this.subjectAccessFlag = subjectAccessFlag;
+	}
+
+	public int getDescriptionType() {
+		return descriptionType;
+	}
+
+	public void setDescriptionType(int descriptionType) {
+		this.descriptionType = descriptionType;
+	}
+
+	public NatureOfWork getNewFormat() {
+		return newFormat;
+	}
+
+	public void setNewFormat(NatureOfWork newFormat) {
+		this.newFormat = newFormat;
+	}
+
+	public ArrayList<Purpose> getOldFormat() {
+		return oldFormat;
+	}
+
+	public void setOldFormat(ArrayList<Purpose> oldFormat) {
+		this.oldFormat = oldFormat;
+	}
+
 }
