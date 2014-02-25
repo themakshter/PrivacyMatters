@@ -37,7 +37,7 @@ public class RegistryHandler extends DefaultHandler {
 	private static final int NATURE_OF_WORK = 19;
 	private static final int REGISTRATION = 20;
 	private static final int RECORD = 21;
-	private String address = "\tAddress : ";
+	private String address = "";
 	private Record dataController;
 
 	public RegistryHandler() throws IOException {
@@ -158,6 +158,8 @@ public class RegistryHandler extends DefaultHandler {
 			out.close();
 			System.out.println("done!");
 			break;
+		case "RECORD":
+			System.out.println(dataController.toJSON());
 		default:
 			break;
 
@@ -181,27 +183,28 @@ public class RegistryHandler extends DefaultHandler {
 			type = 0;
 			break;
 		case ADDRESS_1:
-			address += new String(ch, start, length);
+			address += new String(ch, start, length).trim();
 			type = 0;
 			break;
 		case ADDRESS_2:
-			address += ", " + new String(ch, start, length);
+			address += ", " + new String(ch, start, length).trim();
 			type = 0;
 			break;
 		case ADDRESS_3:
-			address += ", " + new String(ch, start, length);
+			address += ", " + new String(ch, start, length).trim();
 			type = 0;
 			break;
 		case ADDRESS_4:
-			address += ", " + new String(ch, start, length);
+			address += ", " + new String(ch, start, length).trim();
 			type = 0;
 			break;
 		case ADDRESS_5:
-			address += ", " + new String(ch, start, length);
+			address += ", " + new String(ch, start, length).trim();
 			type = 0;
 			break;
 		case POSTCODE:
 			dataController.setAddress(address);
+			dataController.setPostcode(new String(ch, start, length));
 			type = 0;
 			break;
 		case COUNTRY:
@@ -229,11 +232,11 @@ public class RegistryHandler extends DefaultHandler {
 			type = 0;
 			break;
 		case UK_CONTACT:
-			dataController.setUkContactFlag(new String(ch, start, length));
+			dataController.setUkContact(new String(ch, start, length));
 			type = 0;
 			break;
 		case SUBJECT_ACCESS_CONTACT:
-			dataController.setSubjectAccessFlag(new String(ch, start, length));
+			dataController.setSubjectAccess(new String(ch, start, length));
 			type = 0;
 			break;
 		case NATURE_OF_WORK:
@@ -253,14 +256,15 @@ public class RegistryHandler extends DefaultHandler {
 		}
 		if (heading.contains("Nature")) {
 			newBlobCount++;
-			dataController.setType(2);
+			dataController.setFormat("new");
 			newFormat(list);
 		} else if (heading.contains("Purpose")) {
 			oldBlobCount++;
-			dataController.setType(1);
+			dataController.setFormat("old");
 			oldFormat(list);
 		} else {
 			neitherBlobCount++;
+			dataController.setFormat("neither");
 		}
 	}
 
@@ -268,8 +272,6 @@ public class RegistryHandler extends DefaultHandler {
 		ArrayList<Purpose> oldFormat = new ArrayList<Purpose>();
 		ArrayList<String> listItems;
 		Purpose oldFormatPurpose = new Purpose();
-		System.out.println("Purposes");
-		String tab = "\t";
 		String purpose, description, furtherDescription, dataSubject, dataClass, dataDisclosee, transfer;
 		int index = 0;
 		while (index < list.size()) {
@@ -314,7 +316,7 @@ public class RegistryHandler extends DefaultHandler {
 					listItems.add(dataSubject);
 					index++;
 				}
-				oldFormatPurpose.setSubjects(listItems);
+				oldFormatPurpose.setDataSubjects(listItems);
 			}
 			// Data Classes
 			if (text.toLowerCase().contains("data classes are")) {
@@ -327,7 +329,7 @@ public class RegistryHandler extends DefaultHandler {
 					listItems.add(dataClass);
 					index++;
 				}
-				oldFormatPurpose.setClasses(listItems);
+				oldFormatPurpose.setDataClasses(listItems);
 			}
 
 			// Disclosees
@@ -340,7 +342,7 @@ public class RegistryHandler extends DefaultHandler {
 					listItems.add(dataDisclosee);
 					index++;
 				}
-				oldFormatPurpose.setDisclosees(listItems);
+				oldFormatPurpose.setDataDisclosees(listItems);
 			}
 
 			// Transfers
@@ -366,7 +368,7 @@ public class RegistryHandler extends DefaultHandler {
 		int index = 0;
 		NatureOfWork newFormat = new NatureOfWork();
 		ArrayList<String> listItems;
-		System.out.println(list.get(index));
+		newFormat.setNatureOfWork(list.get(index));
 		index++;
 		while (index < list.size()) {
 			String dataPurpose, dataClass, dataSubject, dataDisclosee, transfer, space;
@@ -424,7 +426,8 @@ public class RegistryHandler extends DefaultHandler {
 				index += 1;
 				if (list.get(index + 1).contains(
 						"information may be shared with")) { // only one line
-					dataSubject += list.get(index);
+					dataSubject = list.get(index);
+					listItems.add(dataSubject);
 				} else {
 					index += 1;
 					while (!list.get(index).toLowerCase()

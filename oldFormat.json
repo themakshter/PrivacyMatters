@@ -1,52 +1,110 @@
 {
-	"registrationNumber": "W3536446",
-	"organisationName": "Joan Butterfield",
-	"address": "Denbighshire County Council, County Hall, Wynnstay Road, Ruthin, Debighshire",
-	"postcode": "LL15 1YN",
-	"country": "United Kingdom",
-	"FOIFlag": "N",
-	"startDate": "2012-10-24",
-	"endDate": "2013-10-23",
+	"registrationNumber": "W1588379",
+	"organisationName": "RONDO MEDIA CYF",
+	"companiesHouseNumber": "6502186",
+	"address": "ERESBY AVENUE, SPILSBY, LINCOLNSHIRE4 WATERDEN ROAD, GUILDFORD, SURREY, UNITED KINGDOMC6 WORTH CORNER, TURNERS HILL ROAD POUND HILL, CRAWLEY, WEST SUSSEX105 LEIGH ROAD, LEIGH-ON-SEA, ESSEXDENBIGHSHIRE COUNTY COUNCIL, COUNTY HALL, WYNNSTAY ROAD, RUTHIN, DENBIGHSHIREDENBIGHSHIRE COUNTY COUNCIL, COUNTY HALL, WYNNSTAY ROAD, RUTHIN, DENBIGHSHIREDENBIGHSHIRE COUNTY COUNCIL, COUNTY HALL, WYNNSTAY ROAD, RUTHIN, DENBIGHSHIREDENBIGHSHIRE COUNTY COUNCIL, COUNTY HALL, WYNNSTAY ROAD, RUTHIN, DENBIGHSHIREDENBIGHSHIRE COUNTY COUNCIL, COUNTY HALL, WYNNSTAY ROAD, RUTHIN, DENBIGHSHIREDENBIGHSHIRE COUNTY COUNCIL, COUNTY HALL, WYNNSTAY ROAD, RUTHIN, DENBIGHSHIREDENBIGHSHIRE COUNTY COUNCIL, COUNTY HALL, WYNNSTAY ROAD, RUTHIN, DENBIGHSHIREVIRGIL STREET, GRANGETOWN, CARDIFF5 LLYS ONNEN, PARC MENAI, BANGOR, GWYNEDDBIWMARIS, YNYSMONLON CAE FFYNNON, CIBYN, CAERNARFON, GWYNEDD",
+	"postcode": "LL55 2BD",
+	"country": "UNITED KINGDOM",
+	"foiFlag": "N",
+	"startDate": "2009-01-19",
+	"endDate": "2014-01-18",
 	"exemptFlag": "N",
+	"tradingName": "(not given)",
 	"ukContact": "None",
-	"subjectAccessContact": "None",
+	"subjectAccess": "None",
 	"format": "old",
 	"purposes": [{
-		"purpose": "Education",
-		"description": "The provision of education or training as a primary function or as a business activity.",
-		"furtherDescription": "Administration of education and training (e.g. registration, monitoring, and reporting, calculation and publication of exam results, provision of references, provision of references) Provision of education and training (e.g. planning and control of curricula and exams, comissioning, validation and producing educational materials, arrangement of work experience placements) preparation of dfes returns",
-		"subjects": [{
-			"subject": "Suppliers"
-		}, {
-			"subject": "Complainants, correspondents and enquirers"
+		"purpose": "Staff Administration",
+		"description": "Appointments or removals, pay, discipline, superannuation, work management or other personnel matters in relation to the staff of the data controller.",
+		"furtherDescription": "(not given)",
+		"dataSubjects": [{
+			"dataSubject": "staff including volunteers, agents, temporary and casual workers"
 		}],
-		"classes": [{
-			"class": "Education and Training Details"
+		"dataClasses": [{
+			"dataClass": "personal details"
 		}, {
-			"class": "Employment Details"
-		}],
-		"disclosees": [{
-			"disclosee": "Data subjects themselves"
+			"dataClass": "family, lifestyle and social circumstances"
 		}, {
-			"disclosee": "The media"
+			"dataClass": "education and training details"
+		}, {
+			"dataClass": "employment details"
+		}, {
+			"dataClass": "financial details"
+		}, {
+			"dataClass": "racial or ethnic origin"
+		}, {
+			"dataClass": "religious or other beliefs of a similar nature"
+		}, {
+			"dataClass": "trade union membership"
 		}],
-		"transfer": "None outside the European Economic Area"
+		"dataDisclosees": [{
+			"dataDisclosee": "data subjects themselves"
+		}, {
+			"dataDisclosee": "relatives, guardians or other persons associated with the data subject"
+		}, {
+			"dataDisclosee": "current, past or prospective employers of the data subject"
+		}, {
+			"dataDisclosee": "education, training establishments and examining bodies"
+		}, {
+			"dataDisclosee": "business associates and other professional advisers"
+		}, {
+			"dataDisclosee": "other companies in the same group as the data controller"
+		}, {
+			"dataDisclosee": "suppliers, providers of goods or services"
+		}, {
+			"dataDisclosee": "financial organisations and advisers"
+		}, {
+			"dataDisclosee": "central government"
+		}],
+		"transfer": "worldwide"
 	}, {
-		"purpose": "Crime Prevention and Prosecution of Offenders",
-		"description": "Crime prevention and detection and the apprehension and prosecution of offenders.",
-		"subjects": [{
-			"subject": "Customers and Clients"
+		"purpose": "Advertising, Marketing & Public Relations",
+		"description": "Advertising or marketing the business of the data controller, activity, goods or services and promoting public relations in connection with that business or activity, or those goods or services.",
+		"furtherDescription": "(not given)",
+		"dataSubjects": [{
+			"dataSubject": "customers and clients"
 		}, {
-			"subject": "Offenders and suspected offenders"
+			"dataSubject": "complainants, correspondents and enquirers"
 		}],
-		"classes": [{
-			"class": "Personal Details",
-			"class": "Goods or Services Provided"
-		}],
-		"disclosees": [{
-			"disclosee": "Data subjects themselves"
+		"dataClasses": [{
+			"dataClass": "personal details"
 		}, {
-			"Employees and agents of the data controller"
-		}]
-	}]
-}
+			"dataClass": "family, lifestyle and social circumstances"
+		}],
+		"dataDisclosees": [{
+			"dataDisclosee": "data subjects themselves"
+		}, {
+			"dataDisclosee": "business associates and other professional advisers"
+		}],
+		"transfer": "none outside the european economic area"
+	}, {
+		"purpose": "Accounts & Records",
+		"description": "Keeping accounts related to any business or other activity carried on by the data controller, or deciding whether to accept any person as a customer or supplier, or keeping records of purchases, sales or other transactions for the purpose of ensuring that the requisite payments and deliveries are made or services provided by him or to him in respect of those transactions, or for the purpose of making financial or management forecasts to assist him in the conduct of any such business or activity",
+		"furtherDescription": "(not given)",
+		"dataSubjects": [{
+			"dataSubject": "customers and clients"
+		}, {
+			"dataSubject": "suppliers"
+		}],
+		"dataClasses": [{
+			"dataClass": "personal details"
+		}, {
+			"dataClass": "financial details"
+		}],
+		"dataDisclosees": [{
+			"dataDisclosee": "business associates and other professional advisers"
+		}, {
+			"dataDisclosee": "employees and agents of the data controller"
+		}, {
+			"dataDisclosee": "other companies in the same group as the data controller"
+		}, {
+			"dataDisclosee": "suppliers, providers of goods or services"
+		}, {
+			"dataDisclosee": "financial organisations and advisers"
+		}, {
+			"dataDisclosee": "credit reference agencies"
+		}, {
+			"dataDisclosee": "debt collection and tracing agencies"
+		}],
+		"transfer": "none outside the european economic area"
+	}],

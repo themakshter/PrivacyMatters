@@ -2,12 +2,14 @@ import java.util.ArrayList;
 
 public class Purpose {
 	private String purpose, description, furtherDescription, transfers;
-	private ArrayList<String> subjects, disclosees, classes;
+	private ArrayList<String> dataSubjects, dataDisclosees, dataClasses;
 
 	public Purpose() {
-		subjects = new ArrayList<String>();
-		classes = new ArrayList<String>();
-		disclosees = new ArrayList<String>();
+		dataSubjects = new ArrayList<String>();
+		dataClasses = new ArrayList<String>();
+		dataDisclosees = new ArrayList<String>();
+		description = "(not given)";
+		furtherDescription = "(not given)";
 	}
 
 	public void setPurpose(String purpose) {
@@ -34,28 +36,28 @@ public class Purpose {
 		return furtherDescription;
 	}
 
-	public void setSubjects(ArrayList<String> subjects) {
-		this.subjects = subjects;
+	public void setDataSubjects(ArrayList<String> subjects) {
+		this.dataSubjects = subjects;
 	}
 
-	public ArrayList<String> getSubjects() {
-		return subjects;
+	public ArrayList<String> getDataSubjects() {
+		return dataSubjects;
 	}
 
-	public void setClasses(ArrayList<String> classes) {
-		this.classes = classes;
+	public void setDataClasses(ArrayList<String> classes) {
+		this.dataClasses = classes;
 	}
 
-	public ArrayList<String> getClasses() {
-		return classes;
+	public ArrayList<String> getDataClasses() {
+		return dataClasses;
 	}
 
-	public void setDisclosees(ArrayList<String> disclosees) {
-		this.disclosees = disclosees;
+	public void setDataDisclosees(ArrayList<String> disclosees) {
+		this.dataDisclosees = disclosees;
 	}
 
-	public ArrayList<String> getDisclosees() {
-		return disclosees;
+	public ArrayList<String> getDataDisclosees() {
+		return dataDisclosees;
 	}
 
 	public void setTransfers(String transfers) {
@@ -64,6 +66,57 @@ public class Purpose {
 
 	public String getTransfers() {
 		return transfers;
+	}
+
+	public String toJSON() {
+		String quote = "'";
+		String comma = ",";
+		String json = "{";
+		// purpose
+		String lists;
+		int i;
+
+		// purpose
+		json += "'purpose' : '" + purpose + quote + comma;
+
+		// description
+		json += "'description' : '" + description + quote + comma;
+		// further description
+		json += "'furtherDescription' : '" + furtherDescription + quote + comma;
+
+		// subjects
+		i = 0;
+		lists = "'dataSubjects' : [{'dataSubject' : '" + dataSubjects.get(i)
+				+ "'}";
+		for (i = 1; i < dataSubjects.size(); i++) {
+			lists += ",{'dataSubject' : '" + dataSubjects.get(i) + quote + "}";
+		}
+		lists += "],";
+		json += lists;
+
+		// classes
+		i = 0;
+		lists = "'dataClasses' : [{'dataClass' : '" + dataClasses.get(i) + "'}";
+		for (i = 1; i < dataClasses.size(); i++) {
+			lists += ",{'dataClass' : '" + dataClasses.get(i) + quote + "}";
+		}
+		lists += "],";
+		json += lists;
+
+		// disclosees
+		i = 0;
+		lists = "'dataDisclosees' : [{'dataDisclosee' : '"
+				+ dataDisclosees.get(i) + "'}";
+		for (i = 1; i < dataDisclosees.size(); i++) {
+			lists += ",{'dataDisclosee' : '" + dataDisclosees.get(i) + quote
+					+ "}";
+		}
+		lists += "],";
+		json += lists;
+
+		// transfer
+		json += "'transfer' : '" + transfers + quote + "}";
+		return json;
 	}
 
 }
