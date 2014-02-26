@@ -47,7 +47,7 @@ public class RegistryHandler extends DefaultHandler {
 	private Record dataController;
 
 	public RegistryHandler() throws IOException {
-		out = new PrintWriter(new BufferedWriter(new FileWriter("stats.txt")));
+		out = new PrintWriter(new BufferedWriter(new FileWriter("files/other/stats.txt")));
 
 	}
 
