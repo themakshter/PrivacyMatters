@@ -14,6 +14,13 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
+import com.mongodb.BasicDBObject;
+import com.mongodb.DB;
+import com.mongodb.DBCollection;
+import com.mongodb.MongoClient;
+import com.mongodb.MongoClientURI;
+import com.mongodb.util.JSON;
+
 public class RegistryHandler extends DefaultHandler {
 	private PrintWriter out;
 	private int recordCount, regNumCount, orgNameCount, companiesHouseCount,
@@ -21,6 +28,10 @@ public class RegistryHandler extends DefaultHandler {
 			endDateCount, exemptFlagCount, tradingNameCount, ukContactCount,
 			subjectAccessCount, natureOfWorkCount, newBlobCount, oldBlobCount,
 			neitherBlobCount, listCount = 0;
+	private static MongoClientURI dbURI; 
+	private MongoClient client;
+	private static DB database;
+	private static DBCollection registry;	
 	private int[] listNums = { 0, 0, 0, 0, 0, 0 };
 	private int type = 0;
 	private static final int REGISTRATION_NUMBER = 1;
@@ -48,6 +59,11 @@ public class RegistryHandler extends DefaultHandler {
 
 	public RegistryHandler() throws IOException {
 		out = new PrintWriter(new BufferedWriter(new FileWriter("files/other/stats.txt")));
+		dbURI = new MongoClientURI("mongodb://admin:incorrect@ds033629.mongolab.com:33629/data_controllers");
+		client = new MongoClient(dbURI);
+		database = client.getDB(dbURI.getDatabase());
+		registry = database.getCollection("registry");
+		registry.drop();
 
 	}
 
@@ -162,10 +178,12 @@ public class RegistryHandler extends DefaultHandler {
 			out.println("Sum : " + sum);
 			out.println("lists in old format : " + listCount);
 			out.close();
+			client.close();
 			System.out.println("done!");
 			break;
-		case "RECORD":
-			System.out.println(dataController.toJSON());
+		case "RECORD":			
+			BasicDBObject document = (BasicDBObject)JSON.parse(dataController.toJSON());
+			registry.insert(document);
 		default:
 			break;
 

@@ -211,12 +211,12 @@ public class Record {
 			for (i = 1; i < oldFormat.size(); i++) {
 				purposes += comma + oldFormat.get(i).toJSON();
 			}
-			purposes += "],";
+			purposes += "]";
 			json += purposes;
 		} else if (format.equals("new")) {
 			json += newFormat.toJSON();
 		}
-
+		json += "}";
 		return json;
 	}
 

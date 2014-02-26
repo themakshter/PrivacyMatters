@@ -111,7 +111,7 @@ public class NatureOfWork {
 		json += lists;
 
 		// transfer
-		json += "'transfer' : '" + transfers + quote + "}";
+		json += "'transfer' : '" + transfers + quote;
 		return json;
 	}
 
