@@ -1,55 +1,63 @@
+package models;
 import java.util.ArrayList;
 
-public class NatureOfWork {
-	private ArrayList<String> purposes, dataSubjects, dataClasses,
-			dataDisclosees;
+public class Purpose {
+	private String purpose, description, furtherDescription, transfers;
+	private ArrayList<String> dataSubjects, dataDisclosees, dataClasses;
 
-	private String natureOfWork, transfers;
-
-	public NatureOfWork() {
-		purposes = new ArrayList<String>();
+	public Purpose() {
 		dataSubjects = new ArrayList<String>();
 		dataClasses = new ArrayList<String>();
 		dataDisclosees = new ArrayList<String>();
+		description = "(not given)";
+		furtherDescription = "(not given)";
 	}
 
-	public void setNatureOfWork(String nature) {
-		natureOfWork = nature.split("-")[1];
+	public void setPurpose(String purpose) {
+		this.purpose = purpose;
 	}
 
-	public String getNatureOfWork() {
-		return natureOfWork;
+	public String getPurpose() {
+		return purpose;
 	}
 
-	public void setPurposes(ArrayList<String> purposes) {
-		this.purposes = purposes;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
-	public ArrayList<String> getPurposes() {
-		return purposes;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setSubjects(ArrayList<String> subjects) {
+	public void setFurtherDescription(String further) {
+		furtherDescription = further;
+	}
+
+	public String getFurtherDescription() {
+		return furtherDescription;
+	}
+
+	public void setDataSubjects(ArrayList<String> subjects) {
 		this.dataSubjects = subjects;
 	}
 
-	public ArrayList<String> getSubjects() {
+	public ArrayList<String> getDataSubjects() {
 		return dataSubjects;
 	}
 
-	public void setClasses(ArrayList<String> classes) {
+	public void setDataClasses(ArrayList<String> classes) {
 		this.dataClasses = classes;
 	}
 
-	public ArrayList<String> getClasses() {
+	public ArrayList<String> getDataClasses() {
 		return dataClasses;
 	}
 
-	public void setDisclosees(ArrayList<String> disclosees) {
+	public void setDataDisclosees(ArrayList<String> disclosees) {
 		this.dataDisclosees = disclosees;
 	}
 
-	public ArrayList<String> getDisclosees() {
+	public ArrayList<String> getDataDisclosees() {
 		return dataDisclosees;
 	}
 
@@ -64,20 +72,18 @@ public class NatureOfWork {
 	public String toJSON() {
 		String quote = "'";
 		String comma = ",";
-		String json = "";
-		int i = 0;
+		String json = "{";
+		// purpose
 		String lists;
-		// Nature of work
-		json += "'natureOfWork' : '" + natureOfWork + quote + comma;
+		int i;
 
-		// Purposes
-		i = 0;
-		lists = "'purposes' : [{'purpose' : '" + purposes.get(i) + "'}";
-		for (i = 1; i < purposes.size(); i++) {
-			lists += ",{'purpose' : '" + purposes.get(i) + quote + "}";
-		}
-		lists += "],";
-		json += lists;
+		// purpose
+		json += "'purpose' : '" + purpose + quote + comma;
+
+		// description
+		json += "'description' : '" + description + quote + comma;
+		// further description
+		json += "'furtherDescription' : '" + furtherDescription + quote + comma;
 
 		// subjects
 		i = 0;

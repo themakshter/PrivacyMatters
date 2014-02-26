@@ -1,8 +1,14 @@
+package parser;
+
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+
+import models.NatureOfWork;
+import models.Purpose;
+import models.Record;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;

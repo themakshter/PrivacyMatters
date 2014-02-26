@@ -1,3 +1,4 @@
+package parser;
 import java.io.File;
 
 import javax.xml.parsers.SAXParser;
@@ -8,7 +9,7 @@ import org.xml.sax.helpers.DefaultHandler;
 public class RegistryParser {
 	public static void main(String[] args) {
 		//RegistryParser.parse(args[0]);
-		RegistryParser.parse("registry_example_5.xml");
+		RegistryParser.parse("files/registryFiles/registry_example_5.xml");
 	}
 	
 	public static void parse(String fileName){

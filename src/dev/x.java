@@ -1,3 +1,4 @@
+package dev;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -12,7 +13,7 @@ import org.jsoup.select.Elements;
 public class x {
 	public static void main(String[] args) throws IOException {
 		long start = System.currentTimeMillis();
-		File input = new File("nature_of_work_description_1.html");
+		File input = new File("files/natureOfWorkDescriptions/nature_of_work_description_1.html");
 		String html = readFile(input.toString());
 		parseNatureOfWork(html);
 		long end = System.currentTimeMillis();
