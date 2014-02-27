@@ -1,9 +1,14 @@
 package controllers;
 
+import org.codehaus.jackson.JsonNode;
+
 import play.*;
+import play.libs.Json;
 import play.mvc.*;
 import views.html.*;
 import com.mongodb.*;
+
+
 public class Application extends Controller {
   
     public static Result index() {
@@ -11,13 +16,21 @@ public class Application extends Controller {
     }
     
     public static Result getController(){
+    	String json = "Could not connect";
+    	String result = "(could not find)";
     	try{
-    		MongoClient mongoClient = new MongoClient("localhost",27017);
+    		MongoClient client = new MongoClient("localhost",27017);
+    		DB database = client.getDB("dataControllers");
+    		DBCollection registry = database.getCollection("registry");
+    		DBCursor cursor = registry.find();
+    		json = cursor.next().toString();
+    		client.close();
+    		JsonNode node = (JsonNode) Json.parse(json);
+    		result = node.findPath("organisationName").getTextValue();
     	}catch(Exception e){
-    		
+    		System.out.println(e);
     	}
-    	String json = "{\"x\" : \"1\"}";
-    	return ok(json);
+    	return ok(result);
     }
   
 }
