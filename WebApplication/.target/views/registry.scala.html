@@ -1,0 +1,12 @@
+@(controllers: List[RegistryListItem])
+
+@main("Registry of Data Controllers") {
+    <h1>Data Controllers</h1>
+	<ul>
+	@for(controller <- controllers){
+		<li>
+			<a href="..\dataController\@controller.getRegistrationNumber()">@controller.getOrganisationName()</a>
+		</li>
+	}
+	</ul>    
+}
