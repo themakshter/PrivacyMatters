@@ -59,9 +59,10 @@ public class RegistryHandler extends DefaultHandler {
 
 	public RegistryHandler() throws IOException {
 		out = new PrintWriter(new BufferedWriter(new FileWriter("files/other/stats.txt")));
-		dbURI = new MongoClientURI("mongodb://admin:incorrect@ds033629.mongolab.com:33629/data_controllers");
-		client = new MongoClient(dbURI);
-		database = client.getDB(dbURI.getDatabase());
+		//dbURI = new MongoClientURI("mongodb://admin:incorrect@ds033629.mongolab.com:33629/data_controllers");
+		//client = new MongoClient(dbURI);
+		client = new MongoClient("localhost",27017);
+		database = client.getDB("dataControllers");
 		registry = database.getCollection("registry");
 		registry.drop();
 
