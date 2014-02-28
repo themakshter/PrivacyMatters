@@ -2,17 +2,17 @@ package models;
 
 import java.util.ArrayList;
 
-public class Record {
+public class DataController {
 	private String registrationNumber, organisationName, companiesHouseNumber,
 			address, postcode, country, foiFlag, startDate, endDate,
 			exemptFlag, tradingName, ukContact, subjectAccess, format;
 
 	// new format
-	private NatureOfWork newFormat;
+	private NewFormat newFormat;
 	// old format
-	private ArrayList<Purpose> oldFormat;
+	private ArrayList<OldFormat> oldFormat;
 
-	public Record() {
+	public DataController() {
 		registrationNumber = "";
 		organisationName = "";
 		companiesHouseNumber = "(not given)";
@@ -27,6 +27,7 @@ public class Record {
 		ukContact = "";
 		subjectAccess = "";
 		format = "";
+		oldFormat = new ArrayList<OldFormat>();
 	}
 
 	public String getRegistrationNumber() {
@@ -121,16 +122,16 @@ public class Record {
 		return ukContact;
 	}
 
-	public void setUkContact(String ukContactFlag) {
-		this.ukContact = ukContactFlag;
+	public void setUkContact(String ukContact) {
+		this.ukContact = ukContact;
 	}
 
 	public String getSubjectAccess() {
 		return subjectAccess;
 	}
 
-	public void setSubjectAccess(String subjectAccessFlag) {
-		this.subjectAccess = subjectAccessFlag;
+	public void setSubjectAccess(String subjectAccess) {
+		this.subjectAccess = subjectAccess;
 	}
 
 	public String getFormat() {
@@ -138,87 +139,23 @@ public class Record {
 	}
 
 	public void setFormat(String format) {
-		this.format = format.toLowerCase();
-		switch (format) {
-		case "old":
-			oldFormat = new ArrayList<Purpose>();
-			break;
-		case "new":
-			newFormat = new NatureOfWork();
-			break;
-		case "neither":
-			break;
-		default:
-			break;
-		}
+		this.format = format;
 	}
 
-	public NatureOfWork getNewFormat() {
+	public NewFormat getNewFormat() {
 		return newFormat;
 	}
 
-	public void setNewFormat(NatureOfWork newFormat) {
+	public void setNewFormat(NewFormat newFormat) {
 		this.newFormat = newFormat;
 	}
 
-	public ArrayList<Purpose> getOldFormat() {
+	public ArrayList<OldFormat> getOldFormat() {
 		return oldFormat;
 	}
 
-	public void setOldFormat(ArrayList<Purpose> oldFormat) {
+	public void setOldFormat(ArrayList<OldFormat> oldFormat) {
 		this.oldFormat = oldFormat;
-	}
-
-	public String toJSON() {
-		String comma = ",";
-		String quote = "'";
-		String json = "{";
-		// Registration number
-		json += "'registrationNumber' : '" + registrationNumber + quote + comma;
-		// Organisation name
-		json += "'organisationName' : '" + organisationName + quote + comma;
-		// Companies House number
-		json += "'companiesHouseNumber' : '" + companiesHouseNumber + quote
-				+ comma;
-		// Address
-		json += "'address' : '" + address + quote + comma;
-		// Postcode
-		json += "'postcode' : '" + postcode + quote + comma;
-		// Country
-		json += "'country' : '" + country + quote + comma;
-		// FOI Flag
-		json += "'foiFlag' : '" + foiFlag + quote + comma;
-		// Start date
-		json += "'startDate' : '" + startDate + quote + comma;
-		// End date
-		json += "'endDate' : '" + endDate + quote + comma;
-		// Exempt flag
-		json += "'exemptFlag' : '" + exemptFlag + quote + comma;
-		// Trading name
-		json += "'tradingName' : '" + tradingName + quote + comma;
-		// UK contact
-		json += "'ukContact' : '" + ukContact + quote + comma;
-		// Subject access
-		json += "'subjectAccess' : '" + subjectAccess + quote + comma;
-		// format
-		json += "'format' : '" + format + quote + comma;
-
-		// description
-
-		// older format
-		if (format.equals("old")) {
-			int i = 0;
-			String purposes = "'purposes' : [" + oldFormat.get(i).toJSON();
-			for (i = 1; i < oldFormat.size(); i++) {
-				purposes += comma + oldFormat.get(i).toJSON();
-			}
-			purposes += "]";
-			json += purposes;
-		} else if (format.equals("new")) {
-			json += newFormat.toJSON();
-		}
-		json += "}";
-		return json;
 	}
 
 }

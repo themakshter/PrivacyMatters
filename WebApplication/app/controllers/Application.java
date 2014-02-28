@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.codehaus.jackson.JsonNode;
+import org.codehaus.jackson.map.ObjectMapper;
 
 import play.*;
 import play.libs.Json;
@@ -75,17 +76,103 @@ public class Application extends Controller {
     
     public static Result dataController(String registrationNumber){
     	String result = "Data Controller doesn't exist";
+    	DataController controller = new DataController();
+		
     	try{
     		DBCollection registry = connectToDB("registry");
     		BasicDBObject query = new BasicDBObject("registrationNumber",registrationNumber);
     		DBCursor cursor = registry.find(query);
-    		//JsonNode node = Json.parse(cursor.next().toString());
-    		result = cursor.next().toString();
+    		String json = cursor.next().toString();
     		closeDB();
+    		JsonNode node = Json.parse(json);
+    		
+    		//set main variables
+    		controller.setRegistrationNumber(node.findPath("registrationNumber").getTextValue());
+    		controller.setOrganisationName(node.findPath("organisationName").getTextValue());
+	    	controller.setCompaniesHouseNumber(node.findPath("companiesHouseNumber").getTextValue());
+	    	controller.setAddress(node.findPath("address").getTextValue());
+	    	controller.setPostcode(node.findPath("postcode").getTextValue());
+	    	controller.setCountry(node.findPath("country").getTextValue());
+	    	controller.setFoiFlag(node.findPath("foiFlag").getTextValue());
+	    	controller.setStartDate(node.findPath("startDate").getTextValue());
+	    	controller.setEndDate(node.findPath("endDate").getTextValue());
+	    	controller.setExemptFlag(node.findPath("exemptFlag").getTextValue());
+	    	controller.setTradingName(node.findPath("tradingName").getTextValue());
+	    	controller.setUkContact(node.findPath("ukContact").getTextValue());
+	    	controller.setSubjectAccess(node.findPath("subjectAccess").getTextValue());
+	    	controller.setFormat(node.findPath("format").getTextValue());
+    		String format = controller.getFormat();
+	    	
+    		//handling it differently
+    		if(format.equals("old")){
+    			ArrayList<OldFormat> purposes = new ArrayList<OldFormat>();
+    			JsonNode arrNode = new ObjectMapper().readTree(json).get("purposes");
+    			result = "" + arrNode.size();
+    			OldFormat purpose;
+    			for(JsonNode n : arrNode){
+    				purpose = new OldFormat();
+    				purpose.setPurpose(n.findPath("purpose").getTextValue());
+    				purpose.setDescription(n.findPath("description").getTextValue());
+    				purpose.setFurtherDescription(n.findPath("furtherDescription").getTextValue());
+    				purpose.setTransfers(n.findPath("transfer").getTextValue());
+    				ArrayList<String> dataSubjects,dataClasses,dataDisclosees;
+    				JsonNode subNode = new ObjectMapper().readTree(n.toString()).get("dataSubjects");
+    				dataSubjects = new ArrayList<String>();
+    				for(JsonNode sNode:subNode){
+    					dataSubjects.add(sNode.findPath("dataSubject").getTextValue());
+    				}
+    				purpose.setDataSubjects(dataSubjects);
+    				JsonNode classNode = new ObjectMapper().readTree(n.toString()).get("dataClasses");
+    				dataClasses = new ArrayList<String>();
+    				for(JsonNode cNode:classNode){
+    					dataClasses.add(cNode.findPath("dataClass").getTextValue());
+    				}
+    				purpose.setDataClasses(dataClasses);
+    				JsonNode discNode = new ObjectMapper().readTree(n.toString()).get("dataDisclosees");
+    				dataDisclosees = new ArrayList<String>();
+    				for(JsonNode dNode:discNode){
+    					dataDisclosees.add(dNode.findPath("dataDisclosee").getTextValue());
+    				}
+    				purpose.setDataDisclosees(dataDisclosees);
+    				purposes.add(purpose);
+    			}
+    			controller.setOldFormat(purposes);
+	    	}else if(format.equals("new")){
+	    		NewFormat newFormat = new NewFormat();
+	    		newFormat.setNatureOfWork(node.findPath("natureOfWork").getTextValue());
+	    		newFormat.setTransfers(node.findPath("transfer").getTextValue());
+	    		ArrayList<String> purposes,dataSubjects,dataClasses,dataDisclosees;
+	    		JsonNode purpNode = new ObjectMapper().readTree(json).get("purposes");
+				purposes = new ArrayList<String>();
+				for(JsonNode pNode:purpNode){
+					purposes.add(pNode.findPath("purpose").getTextValue());
+				}
+				newFormat.setPurposes(purposes);	    		
+	    		JsonNode subNode = new ObjectMapper().readTree(json).get("dataSubjects");
+				dataSubjects = new ArrayList<String>();
+				for(JsonNode sNode:subNode){
+					dataSubjects.add(sNode.findPath("dataSubject").getTextValue());
+				}
+				newFormat.setDataSubjects(dataSubjects);
+				JsonNode classNode = new ObjectMapper().readTree(json).get("dataClasses");
+				dataClasses = new ArrayList<String>();
+				for(JsonNode cNode:classNode){
+					dataClasses.add(cNode.findPath("dataClass").getTextValue());
+				}
+				newFormat.setDataClasses(dataClasses);
+				JsonNode discNode = new ObjectMapper().readTree(json).get("dataDisclosees");
+				dataDisclosees = new ArrayList<String>();
+				for(JsonNode dNode:discNode){
+					dataDisclosees.add(dNode.findPath("dataDisclosee").getTextValue());
+				}
+				newFormat.setDataDisclosees(dataDisclosees);
+				controller.setNewFormat(newFormat);
+	    	}
+  			
     	}catch(Exception e){
     		System.out.println(e);
     	}
-    	return ok(result);
+    	return ok(dataController.render(controller));
     }
   
 }

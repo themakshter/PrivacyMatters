@@ -1,7 +1,114 @@
-@(message: String)
+@(dataController: DataController)
 
-@main("Welcome to Play 2.1") {
+@main(dataController.getOrganisationName()) {
+    <fieldset id="general_info">
+    <legend>General Information</legend>
+    <b>Registration Number</b>			: @dataController.getRegistrationNumber()<br>
+    <b>Name</b> 						: @dataController.getOrganisationName()<br>
+    <b>Trading Name</b> 				: @dataController.getTradingName()<br>
+    <b>Companies House Number</b>		: @dataController.getCompaniesHouseNumber()<br>
+    <b>Start Date</b> 					:	@dataController.getStartDate()<br>
+    <b>End Date</b> 					:	@dataController.getEndDate()<br>
+    <b>Freedom of Information Flag</b> 	:	@dataController.getFoiFlag()<br>
+    <b>Exempt from processing</b> 		:	@dataController.getExemptFlag()<br>    
+    <b>Contact in UK</b> 				:	@dataController.getUkContact()<br>
+    <b>Subject Access</b>			 	:	@dataController.getSubjectAccess<br>
+    </fieldset>
     
-    @play20.welcome(message, style = "Java")
-    
+    <fieldset id="contact">
+    <legend>Contact</legend>
+    <b>Address</b> 	:	@dataController.getAddress()<br>
+    <b>Postcode</b> 	:	@dataController.getPostcode()<br>
+    <b>Country</b> 	:	@dataController.getCountry()<br>
+    </fieldset>
+     
+    @if(dataController.getFormat().equals("new")){
+    	<p>This is the new format</p>
+    	<fieldset>
+		<legend>General</legend>
+    	<b>Nature of Work</b> 	:	@dataController.getNewFormat().getNatureOfWork()<br>
+    	<b>Transfers</b>		:	@dataController.getNewFormat().getTransfers()
+    	</fieldset>
+    	    	
+    	<fieldset id="newFormat_purposes">
+    	<legend>Purposes</legend>
+    	<ul>
+    		@for(purpose <- dataController.getNewFormat().getPurposes()){
+    			<li>@purpose</li>
+    		}
+    	</ul>
+    	</fieldset>
+    	<fieldset id="newFormat_classes">
+    	<legend>Data Classes</legend>
+    	<ul>
+    		@for(dataClass <- dataController.getNewFormat().getDataClasses()){
+    			<li>@dataClass</li>
+    		}
+    	</ul>
+    	</fieldset>
+    	
+    	<fieldset id="newFormat_subjects">
+    	<legend>Data Subjects</legend>
+    	<ul>
+    		@for(dataSubject <- dataController.getNewFormat().getDataSubjects()){
+    			<li>@dataSubject</li>
+    		}
+    	</ul>
+    	</fieldset>
+    	
+    	<fieldset id="newFormat_disclosees">
+    	<legend>Disclosees</legend>
+    	<ul>
+    		@for(dataDisclosee <- dataController.getNewFormat().getDataDisclosees()){
+    			<li>@dataDisclosee</li>
+    		}
+    	</ul>
+    	</fieldset>
+    	
+    }else{
+    	@if(dataController.getFormat().equals("old")){
+    		<p>This is the older format<p>
+    		@for(purpose <- dataController.getOldFormat()){
+    			<fieldset id="oldFormat_purpose">
+    				<legend>Purpose : <b>@purpose.getPurpose()</b></legend>
+    				<fieldset>
+    				<legend>General</legend>
+    					<b>Description</b> 		:	@purpose.getDescription()<br>
+    					<b>Further description</b> 		:	@purpose.getFurtherDescription()<br>
+    					<b>Transfers</b>		:	@purpose.getTransfers()
+    				</fieldset>
+    				
+    				<fieldset id="oldFormat_classes">
+    					<legend>Data Classes</legend>
+    					<ul>
+    						@for(dataClass <- purpose.getDataClasses()){
+    						<li>@dataClass</li>
+    						}
+    					</ul>
+    				</fieldset>
+    				
+    				<fieldset id="oldFormat_subjects">
+    					<legend>Data Subjects</legend>
+    					<ul>
+    						@for(subject <- purpose.getDataSubjects()){
+    						<li>@subject</li>
+    						}
+    					</ul>
+    				</fieldset>
+    				
+    				<fieldset id="oldFormat_disclosees">
+    					<legend>Data Disclosees</legend>
+    					<ul>
+    						@for(disclosee <- purpose.getDataDisclosees()){
+    						<li>@disclosee</li>
+    						}
+    					</ul>
+    				</fieldset>
+    				
+    				
+    				
+    			</fieldset>   		
+    		}
+    	}
+    } 
 }

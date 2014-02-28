@@ -59,10 +59,11 @@ public class RegistryHandler extends DefaultHandler {
 
 	public RegistryHandler() throws IOException {
 		out = new PrintWriter(new BufferedWriter(new FileWriter("files/other/stats.txt")));
-		//dbURI = new MongoClientURI("mongodb://admin:incorrect@ds033629.mongolab.com:33629/data_controllers");
-		//client = new MongoClient(dbURI);
-		client = new MongoClient("localhost",27017);
-		database = client.getDB("dataControllers");
+		dbURI = new MongoClientURI("mongodb://admin:incorrect@ds033629.mongolab.com:33629/data_controllers");
+		client = new MongoClient(dbURI);
+		//client = new MongoClient("localhost",27017);
+		//database = client.getDB("dataControllers");
+		DB database = client.getDB(dbURI.getDatabase());
 		registry = database.getCollection("registry");
 		registry.drop();
 
@@ -76,6 +77,7 @@ public class RegistryHandler extends DefaultHandler {
 			break;
 		case "RECORD":
 			type = RECORD;
+			address = "";
 			dataController = new Record();
 			recordCount++;
 			break;
@@ -183,6 +185,7 @@ public class RegistryHandler extends DefaultHandler {
 			System.out.println("done!");
 			break;
 		case "RECORD":			
+			//System.out.println("Address : " + dataController.getAddress());
 			BasicDBObject document = (BasicDBObject)JSON.parse(dataController.toJSON());
 			registry.insert(document);
 		default:
