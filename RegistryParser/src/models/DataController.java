@@ -1,7 +1,6 @@
 package models;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 
 public class DataController {
@@ -32,20 +31,17 @@ public class DataController {
 	}
 	
 	public void convertOldFormatToNewFormat(){
-		NewFormat newForm = new NewFormat();
-		HashSet<String> purposes,dataSubjects,dataClasses,dataDisclosees;
-		newForm.setNatureOfWork("This cannot be found");
-		purposes = new HashSet<String>();
+		newFormat = new NewFormat();
+		HashSet<String> dataSubjects,dataClasses,dataDisclosees;
+		newFormat.setNatureOfWork("Nature - NotAvailale");
+		newFormat.setTransfers(oldFormat.get(0).getTransfers());
 		dataSubjects = new HashSet<String>();
 		dataClasses = new HashSet<String>();
 		dataDisclosees = new HashSet<String>();		
-		HashMap<String,Integer> transfers = new HashMap<String,Integer>();
-		String transfer = "";
-		int maxNumber = 0;
 		for(Purpose p : oldFormat){
 			
 			//purposes
-			purposes.add(p.getPurpose());
+			newFormat.addPurpose(p.getPurpose());
 			
 			//data subjects
 			for(String dataSubject: p.getDataSubjects()){
@@ -57,8 +53,14 @@ public class DataController {
 				dataClasses.add(dataClass);
 			}
 			
+			//data disclosees
+			for(String dataDisclosee : p.getDataDisclosees()){
+				dataDisclosees.add(dataDisclosee);
+			}
 		}
-		
+		newFormat.setDataSubjects(new ArrayList<String>(dataSubjects));
+		newFormat.setDataClasses(new ArrayList<String>(dataClasses));
+		newFormat.setDataDisclosees(new ArrayList<String>(dataDisclosees));		
 	}
 
 	public String getRegistrationNumber() {

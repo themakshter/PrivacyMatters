@@ -292,6 +292,7 @@ public class RegistryHandler extends DefaultHandler {
 			oldBlobCount++;
 			dataController.setFormat("old");
 			oldFormat(list);
+			dataController.convertOldFormatToNewFormat();
 		} else {
 			neitherBlobCount++;
 			dataController.setFormat("neither");
