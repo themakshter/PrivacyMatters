@@ -374,9 +374,13 @@ public class RegistryHandler extends DefaultHandler {
 				transfer = "" + list.get(index).toLowerCase();
 				if (index + 1 < list.size()) {
 					while (!list.get(index + 1).toLowerCase()
-							.contains("purpose")) {
+							.contains("purpose") || index + 1 < list.size()) {
 						transfer += " " + list.get(index).toLowerCase();
-						index++;
+						if (index + 1 < list.size()) {
+							break;
+						}else{
+							index++;
+						}
 					}
 				}
 				oldFormatPurpose.setTransfers(transfer);
@@ -390,11 +394,20 @@ public class RegistryHandler extends DefaultHandler {
 	public void newFormat(ArrayList<String> list) {
 		int index = 0;
 		NewFormat newFormat = new NewFormat();
-		newFormat.setNatureOfWork(list.get(index));
-		index++;
+		//newFormat.setNatureOfWork(list.get(index));
 		while (index < list.size()) {
 			String dataPurpose, dataClass, dataSubject, dataDisclosee, transfer;
-
+			
+			if(list.get(index).contains("Nature")){
+				String natureOfWork = "";
+				while(!list.get(index).toLowerCase()
+					.contains("description ")){
+					natureOfWork += list.get(index);
+					index++;
+				}
+				newFormat.setNatureOfWork(natureOfWork);
+			}
+			
 			// Reasons/purpose for processing
 			if (list.get(index).toLowerCase()
 					.contains("reasons/purposes for processing")) {
