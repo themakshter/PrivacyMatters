@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 
 import org.codehaus.jackson.JsonNode;
-import org.codehaus.jackson.map.ObjectMapper;
 
 import com.google.gson.*;
 import play.libs.Json;
@@ -70,10 +69,10 @@ public class Application extends Controller {
     			String regNo = node.findPath("registrationNumber").getTextValue();
     			String name = node.findPath("organisationName").getTextValue();
     			regList.add(new RegistryListItem(regNo,name));
-    		};
+    		}
     		closeDB();
     	}catch(Exception e){
-    		System.out.println(e);
+    		e.printStackTrace();
     	}
     	return regList;
     }

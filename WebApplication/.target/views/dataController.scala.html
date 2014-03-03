@@ -45,6 +45,16 @@
     			<li>@dataClass</li>
     		}
     	</ul>
+    	@if(dataController.getNewFormat().getSensitiveData.size() > 0){
+    		<fieldset>
+    		<legend>Sensitive Data</legend>
+    		<ul>
+    			@for(sensitiveData <- dataController.getNewFormat().getSensitiveData()){
+    				<li>@sensitiveData</li>
+    			}
+    		</ul>
+    		</fieldset>
+    		}
     	</fieldset>
     	
     	<fieldset id="newFormat_subjects">

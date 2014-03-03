@@ -300,14 +300,12 @@ public class RegistryHandler extends DefaultHandler {
 
 	public void oldFormat(ArrayList<String> list) {
 		ArrayList<Purpose> oldFormat = new ArrayList<Purpose>();
-		ArrayList<String> listItems;
 		Purpose oldFormatPurpose = new Purpose();
 		String purpose, description, furtherDescription, dataSubject, dataClass, dataDisclosee, transfer;
 		int index = 0;
 		while (index < list.size()) {
 			String text = list.get(index);
 			String[] s = text.split(" ");
-
 			// Purpose
 			if (s[0].equals("Purpose") && !s[1].equals("Description:")) {
 				oldFormatPurpose = new Purpose();
@@ -337,42 +335,36 @@ public class RegistryHandler extends DefaultHandler {
 
 			// Data Subjects
 			if (text.toLowerCase().contains("data subjects are")) {
-				listItems = new ArrayList<String>();
 				dataSubject = "";
 				index += 1;
 				while (!list.get(index + 1).toLowerCase()
 						.contains("data classes are")) {
 					dataSubject = list.get(index).toLowerCase();
-					listItems.add(dataSubject);
+					oldFormatPurpose.addDataSubject(dataSubject);
 					index++;
 				}
-				oldFormatPurpose.setDataSubjects(listItems);
 			}
 			// Data Classes
 			if (text.toLowerCase().contains("data classes are")) {
-				listItems = new ArrayList<String>();
 				dataClass = "";
 				index += 1;
 				while (!list.get(index + 1).toLowerCase()
 						.contains("disclosures")) {
 					dataClass = list.get(index).toLowerCase();
-					listItems.add(dataClass);
+					oldFormatPurpose.addDataClass(dataClass);
 					index++;
 				}
-				oldFormatPurpose.setDataClasses(listItems);
 			}
 
 			// Disclosees
 			if (text.toLowerCase().contains("disclosures")) {
-				listItems = new ArrayList<String>();
 				dataDisclosee = "";
 				index += 1;
 				while (!list.get(index + 1).toLowerCase().contains("transfer")) {
 					dataDisclosee = list.get(index).toLowerCase();
-					listItems.add(dataDisclosee);
+					oldFormatPurpose.addDataDisclosee(dataDisclosee);
 					index++;
 				}
-				oldFormatPurpose.setDataDisclosees(listItems);
 			}
 
 			// Transfers
@@ -397,37 +389,38 @@ public class RegistryHandler extends DefaultHandler {
 	public void newFormat(ArrayList<String> list) {
 		int index = 0;
 		NewFormat newFormat = new NewFormat();
-		ArrayList<String> listItems;
 		newFormat.setNatureOfWork(list.get(index));
 		index++;
 		while (index < list.size()) {
-			String dataPurpose, dataClass, dataSubject, dataDisclosee, transfer, space;
+			String dataPurpose, dataClass, dataSubject, dataDisclosee, transfer;
 
 			// Reasons/purpose for processing
 			if (list.get(index).toLowerCase()
 					.contains("reasons/purposes for processing")) {
-				listItems = new ArrayList<String>();
+				//listItems = new ArrayList<String>();
 				dataPurpose = "";
 				index += 1;
 				if (list.get(index + 1).toLowerCase()
 						.contains("type/classes of information")) {
 					dataPurpose = list.get(index);
-					listItems.add(dataPurpose);
+					//listItems.add(dataPurpose);
+					newFormat.addPurpose(dataPurpose);
 				} else {
 					index += 1;
 					while (!list.get(index).toLowerCase()
 							.contains("type/classes of information")) {
 						dataPurpose = list.get(index);
-						listItems.add(dataPurpose);
+						//listItems.add(dataPurpose);
+						newFormat.addPurpose(dataPurpose);
 						index++;
 					}
 				}
-				newFormat.setPurposes(listItems);
+				//newFormat.setPurposes(listItems);
 			}
 			// Type/classes of information processed
 			if (list.get(index).toLowerCase()
 					.contains("type/classes of information")) {
-				listItems = new ArrayList<String>();
+				boolean sensitive = false;
 				dataClass = "";
 				index += 1;
 				if (list.get(index + 1).contains(
@@ -435,49 +428,49 @@ public class RegistryHandler extends DefaultHandler {
 					dataClass = list.get(index);
 				} else {
 					index += 1;
-					space = "";
 					while (!list.get(index).toLowerCase()
 							.contains("information is processed about")) {
 						if (list.get(index).contains("sensitive classes")) {
-							space = "[SENSITIVE]";
+						sensitive = true;
 						} else {
-							dataClass = list.get(index) + space;
-							listItems.add(dataClass);
+							dataClass = list.get(index);
+							if(sensitive){
+								newFormat.addSensitiveData(dataClass);
+							}else{
+								newFormat.addDataClass(dataClass);
+							}
 						}
 						index++;
 					}
 				}
-				newFormat.setClasses(listItems);
 			}
 			// Who the information is processed about
 			if (list.get(index).contains("information is processed about")) {
-				listItems = new ArrayList<String>();
+				//listItems = new ArrayList<String>();
 				dataSubject = "";
 				index += 1;
 				if (list.get(index + 1).contains(
 						"information may be shared with")) { // only one line
 					dataSubject = list.get(index);
-					listItems.add(dataSubject);
+					newFormat.addDataSubject(dataSubject);
 				} else {
 					index += 1;
 					while (!list.get(index).toLowerCase()
 							.contains("information may be shared with")) {
 						dataSubject = list.get(index);
-						listItems.add(dataSubject);
+						newFormat.addDataSubject(dataSubject);
 						index++;
 					}
 				}
-				newFormat.setSubjects(listItems);
 			}
 
 			// Who the information may be shared with
 			if (list.get(index).contains("information may be shared with")) {
-				listItems = new ArrayList<String>();
 				dataDisclosee = "";
 				index += 1;
 				if (list.get(index + 1).contains("Transfers")) {
 					dataDisclosee = list.get(index);
-					listItems.add(dataDisclosee);
+					newFormat.addDataDisclosee(dataDisclosee);
 				} else {
 					index += 1;
 					if (list.get(index).contains("necessary or required")) {
@@ -485,11 +478,10 @@ public class RegistryHandler extends DefaultHandler {
 					}
 					while (!list.get(index).contains("Transfers")) {
 						dataDisclosee = list.get(index);
-						listItems.add(dataDisclosee);
+						newFormat.addDataDisclosee(dataDisclosee);
 						index++;
 					}
 				}
-				newFormat.setDisclosees(listItems);
 			}
 
 			// Transfer

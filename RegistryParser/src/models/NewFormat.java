@@ -2,7 +2,7 @@ package models;
 import java.util.ArrayList;
 
 public class NewFormat {
-	private ArrayList<String> purposes, dataSubjects, dataClasses,
+	private ArrayList<String> purposes, dataSubjects, dataClasses,sensitiveData,
 			dataDisclosees;
 
 	private String natureOfWork, transfers;
@@ -12,6 +12,7 @@ public class NewFormat {
 		dataSubjects = new ArrayList<String>();
 		dataClasses = new ArrayList<String>();
 		dataDisclosees = new ArrayList<String>();
+		sensitiveData = new ArrayList<String>();
 	}
 
 	public void setNatureOfWork(String nature) {
@@ -22,6 +23,10 @@ public class NewFormat {
 		return natureOfWork;
 	}
 
+	public void addPurpose(String purpose){
+		purposes.add(purpose);
+	}
+	
 	public void setPurposes(ArrayList<String> purposes) {
 		this.purposes = purposes;
 	}
@@ -30,27 +35,51 @@ public class NewFormat {
 		return purposes;
 	}
 
-	public void setSubjects(ArrayList<String> subjects) {
+	public void addDataSubject(String dataSubject){
+		dataSubjects.add(dataSubject);
+	}
+	
+	public void setDataSubjects(ArrayList<String> subjects) {
 		this.dataSubjects = subjects;
 	}
 
-	public ArrayList<String> getSubjects() {
+	public ArrayList<String> getDataSubjects() {
 		return dataSubjects;
 	}
 
-	public void setClasses(ArrayList<String> classes) {
+	public void addDataClass(String dataClass){
+		dataClasses.add(dataClass);
+	}
+	
+	public void setDataClasses(ArrayList<String> classes) {
 		this.dataClasses = classes;
 	}
 
-	public ArrayList<String> getClasses() {
+	public ArrayList<String> getDataClasses() {
 		return dataClasses;
 	}
 
-	public void setDisclosees(ArrayList<String> disclosees) {
+	public ArrayList<String> getSensitiveData() {
+		return sensitiveData;
+	}
+
+	public void setSensitiveData(ArrayList<String> sensitiveData) {
+		this.sensitiveData = sensitiveData;
+	}
+	
+	public void addSensitiveData(String sensitiveData){
+		this.sensitiveData.add(sensitiveData);
+	}
+	
+	public void addDataDisclosee(String dataDisclosee){
+		dataDisclosees.add(dataDisclosee);
+	}
+	
+	public void setDataDisclosees(ArrayList<String> disclosees) {
 		this.dataDisclosees = disclosees;
 	}
 
-	public ArrayList<String> getDisclosees() {
+	public ArrayList<String> getDataDisclosees() {
 		return dataDisclosees;
 	}
 

@@ -37,6 +37,10 @@ public class Purpose {
 		return furtherDescription;
 	}
 
+	public void addDataSubject(String dataSubject){
+		dataSubjects.add(dataSubject);
+	}
+	
 	public void setDataSubjects(ArrayList<String> subjects) {
 		this.dataSubjects = subjects;
 	}
@@ -45,12 +49,20 @@ public class Purpose {
 		return dataSubjects;
 	}
 
+	public void addDataClass(String dataClass){
+		dataClasses.add(dataClass);
+	}
+	
 	public void setDataClasses(ArrayList<String> classes) {
 		this.dataClasses = classes;
 	}
 
 	public ArrayList<String> getDataClasses() {
 		return dataClasses;
+	}
+	
+	public void addDataDisclosee(String dataDisclosee){
+		dataDisclosees.add(dataDisclosee);
 	}
 
 	public void setDataDisclosees(ArrayList<String> disclosees) {

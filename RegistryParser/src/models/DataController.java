@@ -1,6 +1,8 @@
 package models;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 
 public class DataController {
 	private String registrationNumber, organisationName, companiesHouseNumber,
@@ -27,6 +29,36 @@ public class DataController {
 		ukContact = "";
 		subjectAccess = "";
 		format = "";
+	}
+	
+	public void convertOldFormatToNewFormat(){
+		NewFormat newForm = new NewFormat();
+		HashSet<String> purposes,dataSubjects,dataClasses,dataDisclosees;
+		newForm.setNatureOfWork("This cannot be found");
+		purposes = new HashSet<String>();
+		dataSubjects = new HashSet<String>();
+		dataClasses = new HashSet<String>();
+		dataDisclosees = new HashSet<String>();		
+		HashMap<String,Integer> transfers = new HashMap<String,Integer>();
+		String transfer = "";
+		int maxNumber = 0;
+		for(Purpose p : oldFormat){
+			
+			//purposes
+			purposes.add(p.getPurpose());
+			
+			//data subjects
+			for(String dataSubject: p.getDataSubjects()){
+				dataSubjects.add(dataSubject);
+			}
+			
+			//data classes
+			for(String dataClass: p.getDataClasses()){
+				dataClasses.add(dataClass);
+			}
+			
+		}
+		
 	}
 
 	public String getRegistrationNumber() {
@@ -168,5 +200,11 @@ public class DataController {
 	public void setOldFormat(ArrayList<Purpose> oldFormat) {
 		this.oldFormat = oldFormat;
 	}
+	
+	public void addPurpose(Purpose purpose){
+		oldFormat.add(purpose);
+	}
+	
+	
 
 }

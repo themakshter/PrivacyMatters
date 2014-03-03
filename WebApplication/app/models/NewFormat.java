@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class NewFormat {
 	private ArrayList<String> purposes, dataSubjects, dataClasses,
-			dataDisclosees;
+			dataDisclosees,sensitiveData;
 
 	private String natureOfWork, transfers;
 
@@ -14,6 +14,7 @@ public class NewFormat {
 		dataSubjects = new ArrayList<String>();
 		dataClasses = new ArrayList<String>();
 		dataDisclosees = new ArrayList<String>();
+		sensitiveData = new ArrayList<String>();
 	}
 
 	public ArrayList<String> getPurposes() {
@@ -40,6 +41,15 @@ public class NewFormat {
 		this.dataClasses = dataClasses;
 	}
 
+	public ArrayList<String> getSensitiveData() {
+		return sensitiveData;
+	}
+
+	public void setSensitiveData(ArrayList<String> sensitiveData) {
+		this.sensitiveData = sensitiveData;
+	}
+
+	
 	public ArrayList<String> getDataDisclosees() {
 		return dataDisclosees;
 	}
