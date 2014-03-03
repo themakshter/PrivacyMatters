@@ -1,13 +1,13 @@
 package models;
 import java.util.ArrayList;
 
-public class NatureOfWork {
+public class NewFormat {
 	private ArrayList<String> purposes, dataSubjects, dataClasses,
 			dataDisclosees;
 
 	private String natureOfWork, transfers;
 
-	public NatureOfWork() {
+	public NewFormat() {
 		purposes = new ArrayList<String>();
 		dataSubjects = new ArrayList<String>();
 		dataClasses = new ArrayList<String>();

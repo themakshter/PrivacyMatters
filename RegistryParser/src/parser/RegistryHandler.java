@@ -6,14 +6,16 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
-import models.NatureOfWork;
+import models.NewFormat;
 import models.Purpose;
-import models.Record;
+import models.DataController;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
@@ -55,7 +57,7 @@ public class RegistryHandler extends DefaultHandler {
 	private static final int REGISTRATION = 20;
 	private static final int RECORD = 21;
 	private String address = "";
-	private Record dataController;
+	private DataController dataController;
 
 	public RegistryHandler() throws IOException {
 		out = new PrintWriter(new BufferedWriter(new FileWriter("files/other/stats.txt")));
@@ -78,7 +80,7 @@ public class RegistryHandler extends DefaultHandler {
 		case "RECORD":
 			type = RECORD;
 			address = "";
-			dataController = new Record();
+			dataController = new DataController();
 			recordCount++;
 			break;
 		case "REGISTRATION_NUMBER":
@@ -185,7 +187,9 @@ public class RegistryHandler extends DefaultHandler {
 			System.out.println("done!");
 			break;
 		case "RECORD":			
-			//System.out.println("Address : " + dataController.getAddress());
+			Gson gson = new Gson();
+//			System.out.println(gson.toJson(dataController));			
+//			System.out.println(dataController.toJSON());
 			BasicDBObject document = (BasicDBObject)JSON.parse(dataController.toJSON());
 			registry.insert(document);
 		default:
@@ -394,7 +398,7 @@ public class RegistryHandler extends DefaultHandler {
 
 	public void newFormat(ArrayList<String> list) {
 		int index = 0;
-		NatureOfWork newFormat = new NatureOfWork();
+		NewFormat newFormat = new NewFormat();
 		ArrayList<String> listItems;
 		newFormat.setNatureOfWork(list.get(index));
 		index++;

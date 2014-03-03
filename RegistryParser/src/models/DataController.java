@@ -2,17 +2,17 @@ package models;
 
 import java.util.ArrayList;
 
-public class Record {
+public class DataController {
 	private String registrationNumber, organisationName, companiesHouseNumber,
 			address, postcode, country, foiFlag, startDate, endDate,
 			exemptFlag, tradingName, ukContact, subjectAccess, format;
 
 	// new format
-	private NatureOfWork newFormat;
+	private NewFormat newFormat;
 	// old format
 	private ArrayList<Purpose> oldFormat;
 
-	public Record() {
+	public DataController() {
 		registrationNumber = "";
 		organisationName = "";
 		companiesHouseNumber = "(not given)";
@@ -144,7 +144,7 @@ public class Record {
 			oldFormat = new ArrayList<Purpose>();
 			break;
 		case "new":
-			newFormat = new NatureOfWork();
+			newFormat = new NewFormat();
 			break;
 		case "neither":
 			break;
@@ -153,11 +153,11 @@ public class Record {
 		}
 	}
 
-	public NatureOfWork getNewFormat() {
+	public NewFormat getNewFormat() {
 		return newFormat;
 	}
 
-	public void setNewFormat(NatureOfWork newFormat) {
+	public void setNewFormat(NewFormat newFormat) {
 		this.newFormat = newFormat;
 	}
 

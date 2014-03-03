@@ -18,6 +18,17 @@ import models.*;
 public class Application extends Controller {
 	private static MongoClient client;
 
+	  public static DBCollection connectToDB(String collection) throws UnknownHostException{
+  	   	MongoClientURI dbURI = new MongoClientURI("mongodb://admin:incorrect@ds033629.mongolab.com:33629/data_controllers");
+  		client = new MongoClient(dbURI);
+  		DB database = client.getDB(dbURI.getDatabase());
+  		DBCollection collectionRetrived = database.getCollection(collection);
+  		return collectionRetrived;
+	  }
+  
+	  public static void closeDB(){
+		  client.close();
+	  }	
 	
     public static Result index() {
         return ok(index.render("Privacy Matters"));
@@ -39,19 +50,12 @@ public class Application extends Controller {
     	return ok(result);
     }
     
-    public static DBCollection connectToDB(String collection) throws UnknownHostException{
-    	   	MongoClientURI dbURI = new MongoClientURI("mongodb://admin:incorrect@ds033629.mongolab.com:33629/data_controllers");
-    		client = new MongoClient(dbURI);
-    		DB database = client.getDB(dbURI.getDatabase());
-    		DBCollection collectionRetrived = database.getCollection(collection);
-    		return collectionRetrived;
-    }
-    
-    public static void closeDB(){
-    	client.close();
-    }
-    
     public static Result registry(){
+    	ArrayList<RegistryListItem> regList = getRegistry();
+    	return ok(registry.render(regList));
+    }
+    
+    public static ArrayList<RegistryListItem> getRegistry(){
     	ArrayList<RegistryListItem> regList = new ArrayList<RegistryListItem>();
     	try{
     		DBObject controller;
@@ -71,10 +75,15 @@ public class Application extends Controller {
     	}catch(Exception e){
     		System.out.println(e);
     	}
-    	return ok(registry.render(regList));
+    	return regList;
     }
     
-    public static Result dataController(String registrationNumber){
+    public static Result registryJSON(){
+    	ArrayList<RegistryListItem> regList = getRegistry();
+    	return ok(Json.toJson(regList));
+    }
+    
+    public static DataController getDataController(String registrationNumber){
     	String result = "Data Controller doesn't exist";
     	DataController controller = new DataController();
 		
@@ -105,12 +114,12 @@ public class Application extends Controller {
 	    	
     		//handling it differently
     		if(format.equals("old")){
-    			ArrayList<OldFormat> purposes = new ArrayList<OldFormat>();
+    			ArrayList<Purpose> purposes = new ArrayList<Purpose>();
     			JsonNode arrNode = new ObjectMapper().readTree(json).get("purposes");
     			result = "" + arrNode.size();
-    			OldFormat purpose;
+    			Purpose purpose;
     			for(JsonNode n : arrNode){
-    				purpose = new OldFormat();
+    				purpose = new Purpose();
     				purpose.setPurpose(n.findPath("purpose").getTextValue());
     				purpose.setDescription(n.findPath("description").getTextValue());
     				purpose.setFurtherDescription(n.findPath("furtherDescription").getTextValue());
@@ -172,7 +181,17 @@ public class Application extends Controller {
     	}catch(Exception e){
     		System.out.println(e);
     	}
+    	return controller;
+    }
+    
+    public static Result dataController(String registrationNumber){
+    	DataController controller = getDataController(registrationNumber);
     	return ok(dataController.render(controller));
+    }
+    
+    public static Result dataControllerJSON(String registrationNumber){
+    	DataController controller = getDataController(registrationNumber);
+    	return ok(Json.toJson(controller));
     }
   
 }

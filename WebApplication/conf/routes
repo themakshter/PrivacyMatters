@@ -5,12 +5,13 @@
 # Home page
 GET     /                           			controllers.Application.index()
 
-# Registy
+# Registry
 GET		/registry								controllers.Application.registry()
 GET		/dataController/:registrationNumber		controllers.Application.dataController(registrationNumber:String)
 
+#JSON
+GET		/getRegistry							controllers.Application.registryJSON()
+GET		/getDataController/:registrationNumber	controllers.Application.dataControllerJSON(registrationNumber:String)
 
-# Testing
-GET		/getController							controllers.Application.getController()
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

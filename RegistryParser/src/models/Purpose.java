@@ -14,7 +14,7 @@ public class Purpose {
 	}
 
 	public void setPurpose(String purpose) {
-		this.purpose = purpose;
+		this.purpose = purpose.replaceAll("&", "and");		
 	}
 
 	public String getPurpose() {

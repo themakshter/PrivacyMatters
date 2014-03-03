@@ -2,12 +2,12 @@ package models;
 
 import java.util.ArrayList;
 
-public class OldFormat {
+public class Purpose {
 	private String purpose, description, furtherDescription, transfers;
 
 	private ArrayList<String> dataSubjects, dataDisclosees, dataClasses;
 
-	public OldFormat() {
+	public Purpose() {
 		dataSubjects = new ArrayList<String>();
 		dataClasses = new ArrayList<String>();
 		dataDisclosees = new ArrayList<String>();

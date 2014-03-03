@@ -10,7 +10,7 @@ public class DataController {
 	// new format
 	private NewFormat newFormat;
 	// old format
-	private ArrayList<OldFormat> oldFormat;
+	private ArrayList<Purpose> oldFormat;
 
 	public DataController() {
 		registrationNumber = "";
@@ -27,7 +27,7 @@ public class DataController {
 		ukContact = "";
 		subjectAccess = "";
 		format = "";
-		oldFormat = new ArrayList<OldFormat>();
+		oldFormat = new ArrayList<Purpose>();
 	}
 
 	public String getRegistrationNumber() {
@@ -150,11 +150,11 @@ public class DataController {
 		this.newFormat = newFormat;
 	}
 
-	public ArrayList<OldFormat> getOldFormat() {
+	public ArrayList<Purpose> getOldFormat() {
 		return oldFormat;
 	}
 
-	public void setOldFormat(ArrayList<OldFormat> oldFormat) {
+	public void setOldFormat(ArrayList<Purpose> oldFormat) {
 		this.oldFormat = oldFormat;
 	}
 
