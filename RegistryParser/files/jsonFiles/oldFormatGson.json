@@ -1,0 +1,41 @@
+{
+	"registrationNumber": "W1588379",
+	"organisationName": "RONDO MEDIA CYF",
+	"companiesHouseNumber": "6502186",
+	"address": "LON CAE FFYNNON, CIBYN, CAERNARFON, GWYNEDD",
+	"postcode": "LL55 2BD",
+	"country": "UNITED KINGDOM",
+	"foiFlag": "N",
+	"startDate": "2009-01-19",
+	"endDate": "2014-01-18",
+	"exemptFlag": "N",
+	"tradingName": "(not given)",
+	"ukContact": "None",
+	"subjectAccess": "None",
+	"format": "old",
+	"oldFormat": [{
+		"purpose": "Staff Administration",
+		"description": "Appointments or removals, pay, discipline, superannuation, work management or other personnel matters in relation to the staff of the data controller.",
+		"furtherDescription": "(not given)",
+		"transfers": "worldwide",
+		"dataSubjects": ["staff including volunteers, agents, temporary and casual workers"],
+		"dataDisclosees": ["data subjects themselves", "relatives, guardians or other persons associated with the data subject", "current, past or prospective employers of the data subject", "education, training establishments and examining bodies", "business associates and other professional advisers", "other companies in the same group as the data controller", "suppliers, providers of goods or services", "financial organisations and advisers", "central government"],
+		"dataClasses": ["personal details", "family, lifestyle and social circumstances", "education and training details", "employment details", "financial details", "racial or ethnic origin", "religious or other beliefs of a similar nature", "trade union membership"]
+	}, {
+		"purpose": "Advertising, Marketing and Public Relations",
+		"description": "Advertising or marketing the business of the data controller, activity, goods or services and promoting public relations in connection with that business or activity, or those goods or services.",
+		"furtherDescription": "(not given)",
+		"transfers": "none outside the european economic area",
+		"dataSubjects": ["customers and clients", "complainants, correspondents and enquirers"],
+		"dataDisclosees": ["data subjects themselves", "business associates and other professional advisers"],
+		"dataClasses": ["personal details", "family, lifestyle and social circumstances"]
+	}, {
+		"purpose": "Accounts and Records",
+		"description": "Keeping accounts related to any business or other activity carried on by the data controller, or deciding whether to accept any person as a customer or supplier, or keeping records of purchases, sales or other transactions for the purpose of ensuring that the requisite payments and deliveries are made or services provided by him or to him in respect of those transactions, or for the purpose of making financial or management forecasts to assist him in the conduct of any such business or activity",
+		"furtherDescription": "(not given)",
+		"transfers": "none outside the european economic area",
+		"dataSubjects": ["customers and clients", "suppliers"],
+		"dataDisclosees": ["business associates and other professional advisers", "employees and agents of the data controller", "other companies in the same group as the data controller", "suppliers, providers of goods or services", "financial organisations and advisers", "credit reference agencies", "debt collection and tracing agencies"],
+		"dataClasses": ["personal details", "financial details"]
+	}]
+}

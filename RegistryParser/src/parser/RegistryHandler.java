@@ -188,9 +188,7 @@ public class RegistryHandler extends DefaultHandler {
 			break;
 		case "RECORD":			
 			Gson gson = new Gson();
-//			System.out.println(gson.toJson(dataController));			
-//			System.out.println(dataController.toJSON());
-			BasicDBObject document = (BasicDBObject)JSON.parse(dataController.toJSON());
+			BasicDBObject document = (BasicDBObject)JSON.parse(gson.toJson(dataController));
 			registry.insert(document);
 		default:
 			break;

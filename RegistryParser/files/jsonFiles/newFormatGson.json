@@ -1,0 +1,24 @@
+{
+	"registrationNumber": "ZA013235",
+	"organisationName": "ERESBY SPECIAL SCHOOL",
+	"companiesHouseNumber": "(not given)",
+	"address": "ERESBY AVENUE, SPILSBY, LINCOLNSHIRE",
+	"postcode": "PE23 5HU",
+	"country": "UNITED KINGDOM",
+	"foiFlag": "Y",
+	"startDate": "2013-06-14",
+	"endDate": "2014-06-13",
+	"exemptFlag": "N",
+	"tradingName": "(not given)",
+	"ukContact": "None",
+	"subjectAccess": "None",
+	"format": "new",
+	"newFormat": {
+		"purposes": ["We process personal information to enable us to provide education, training, welfare and educational support services, to administer school property; maintaining our own accounts and records, undertake fundraising; support and manage our employees. We also use CCTV for security and the prevention and detection of crime."],
+		"dataSubjects": ["employees", "students and pupils", "professional experts and advisers", "members of school boards", "sponsors and supporters", "suppliers and service providers", "complainants, enquirers", "individuals captured by CCTV images"],
+		"dataClasses": ["personal details", "family details", "lifestyle and social circumstances", "education and employment details", "financial details", "goods and services", "disciplinary and attendance records", "vetting checks", "visual images, personal appearance and behaviour", "physical or mental health details[SENSITIVE]", "racial or ethnic origin[SENSITIVE]", "religious or other beliefs[SENSITIVE]", "trade union membership[SENSITIVE]", "sexual life[SENSITIVE]", "information about offences and alleged offences[SENSITIVE]"],
+		"dataDisclosees": ["family, associates and representatives of the person whose personal data we are processing", "educators and examining bodies", "careers service", "school boards", "local and central government", "academy trusts", "healthcare, social and welfare organisations", "police forces, courts", "current, past or prospective employers", "voluntary and charitable organisations", "business associates, professional advisers", "suppliers and service providers", "financial organisations", "press and the media"],
+		"natureOfWork": " Academy",
+		"transfers": "it may sometimes be necessary to transfer personal information overseas. when this is needed information is only shared within the european economic area (eea). any transfers made will be in full compliance with all aspects of the data protection act."
+	}
+}
