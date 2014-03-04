@@ -76,7 +76,7 @@ public class DataController {
 	}
 
 	public void setOrganisationName(String organisationName) {
-		this.organisationName = organisationName;
+		this.organisationName = organisationName;	
 	}
 
 	public String getCompaniesHouseNumber() {

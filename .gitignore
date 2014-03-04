@@ -2,5 +2,5 @@
 .project
 .settings/org.eclipse.jdt.core.prefs
 *.class
-register08.2013.xml
 /.git*
+RegistryParser/files/registryFiles/register*

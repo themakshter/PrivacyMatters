@@ -92,6 +92,8 @@ public class Application extends Controller {
     		closeDB();
     		Gson gson = new Gson();
     		controller = gson.fromJson(json, DataController.class);
+    		controller.fixName();
+    		System.out.println(controller.getOrganisationName());
     	}catch(Exception e){
     		System.out.println(e);
     	}

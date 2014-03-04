@@ -9,7 +9,7 @@ import org.xml.sax.helpers.DefaultHandler;
 public class RegistryParser {
 	public static void main(String[] args) {
 		//RegistryParser.parse(args[0]);
-		RegistryParser.parse("files/registryFiles/registry_example_8.xml");
+		RegistryParser.parse("files/registryFiles/registry_example_9.xml");
 	}
 	
 	public static void parse(String fileName){

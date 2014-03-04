@@ -29,6 +29,10 @@ public class DataController {
 		format = "";
 		oldFormat = new ArrayList<Purpose>();
 	}
+	
+	public void fixName(){
+		organisationName = organisationName.replaceAll("andAMP", "&");
+	}
 
 	public String getRegistrationNumber() {
 		return registrationNumber;

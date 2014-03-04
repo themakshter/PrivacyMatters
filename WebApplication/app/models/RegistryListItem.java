@@ -5,7 +5,8 @@ public class RegistryListItem {
 
 	public RegistryListItem(String regNo,String orgName){
 		registrationNumber = regNo;
-		organisationName = orgName;
+		organisationName = orgName.replaceAll("andAMP", "&");
+		
 	}
 	
 	public String getRegistrationNumber(){
