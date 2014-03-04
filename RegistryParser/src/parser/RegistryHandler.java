@@ -15,7 +15,6 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
@@ -29,12 +28,11 @@ public class RegistryHandler extends DefaultHandler {
 			postcodeCount, countryCount, foiCount, startDateCount,
 			endDateCount, exemptFlagCount, tradingNameCount, ukContactCount,
 			subjectAccessCount, natureOfWorkCount, newBlobCount, oldBlobCount,
-			neitherBlobCount, listCount = 0;
+			neitherBlobCount;
 	private static MongoClientURI dbURI; 
 	private MongoClient client;
 	private static DB database;
 	private static DBCollection registry;	
-	private int[] listNums = { 0, 0, 0, 0, 0, 0 };
 	private int type = 0;
 	private static final int REGISTRATION_NUMBER = 1;
 	private static final int ORGANISATION_NAME = 2;
@@ -65,7 +63,7 @@ public class RegistryHandler extends DefaultHandler {
 		client = new MongoClient(dbURI);
 		//client = new MongoClient("localhost",27017);
 		//database = client.getDB("dataControllers");
-		DB database = client.getDB(dbURI.getDatabase());
+		database = client.getDB(dbURI.getDatabase());
 		registry = database.getCollection("registry");
 		registry.drop();
 
@@ -160,7 +158,7 @@ public class RegistryHandler extends DefaultHandler {
 			throws SAXException {
 		switch (qName.toUpperCase()) {
 		case "REGISTRATION":
-			out.println("Register statistics for 08/2013" + "\nRecords : "
+			out.println("Register statistics for 01/2014" + "\nRecords : "
 					+ recordCount + "\nRegistration Numbers : " + regNumCount
 					+ "\nOrganisation Names : " + orgNameCount
 					+ "\nCompanies House Numbers : " + companiesHouseCount
@@ -175,13 +173,6 @@ public class RegistryHandler extends DefaultHandler {
 					+ "\nOld Data Formats (Purpose 1...) : " + oldBlobCount
 					+ "\nNew Data Formats (Nature of work...) : "
 					+ newBlobCount + "\nNeither Format : " + neitherBlobCount);
-			int sum = 0;
-			for (int i = 0; i < listNums.length; i++) {
-				out.println(i + " num of items : " + listNums[i]);
-				sum += listNums[i];
-			}
-			out.println("Sum : " + sum);
-			out.println("lists in old format : " + listCount);
 			out.close();
 			client.close();
 			System.out.println("done!");

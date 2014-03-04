@@ -25,3 +25,22 @@ Neither Format : 11
 5 num of items : 1878
 Sum : 87373
 lists in old format : 0
+
+Register statistics for 01/2014
+
+Records : 382597
+Registration Numbers : 382597
+Organisation Names : 382597
+Companies House Numbers : 161422
+Postcodes : 382044
+Countries : 381921
+FOI Flags : 382597
+Start Dates : 382597
+End Dates : 382597
+Exempt Flags : 382597
+Trading Names : 90397
+UK Contact Flags : 382597
+Subject Access Flags : 382597
+Nature of Work Descriptions : 382591
+Old Data Formats (Purpose 1...) : 133293
+New Data Formats (Nature of work...) : 249279
