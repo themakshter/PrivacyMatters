@@ -1,3 +1,9 @@
+Aims:
+- Making people more aware of their information
+- Having a better, more understandable website than the ICO one
+- Find out which format is preferred
+
+
 Some questions to ask
 
 - Were you aware of ICO and the Data Controller registry?
@@ -12,7 +18,6 @@ Some questions to ask
 - What other information would you like to know about the data controller apart from the statistics?
 
 Tasks
-
 
 (For ASDA Stores) - older format
 
