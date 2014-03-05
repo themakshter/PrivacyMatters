@@ -3,32 +3,41 @@
 @main(dataController.getOrganisationName()) {
     <fieldset id="general_info">
     <legend>General Information</legend>
-    <b>Registration Number</b>			: @dataController.getRegistrationNumber()<br>
-    <b>Name</b> 						: @dataController.getOrganisationName()<br>
-    <b>Trading Name</b> 				: @dataController.getTradingName()<br>
-    <b>Companies House Number</b>		: @dataController.getCompaniesHouseNumber()<br>
-    <b>Start Date</b> 					:	@dataController.getStartDate()<br>
-    <b>End Date</b> 					:	@dataController.getEndDate()<br>
-    <b>Freedom of Information Flag</b> 	:	@dataController.getFoiFlag()<br>
-    <b>Exempt from processing</b> 		:	@dataController.getExemptFlag()<br>    
-    <b>Contact in UK</b> 				:	@dataController.getUkContact()<br>
-    <b>Subject Access</b>			 	:	@dataController.getSubjectAccess<br>
+    <ul>
+    	<li><b>Registration Number</b>			:   @dataController.getRegistrationNumber()</li>
+    	<li id="organisationName"><b>Name</b> 	:   @dataController.getOrganisationName()</li>
+    	<li><b>Trading Name</b> 				:   @dataController.getTradingName()</li>
+  	 	<li><b>Companies House Number</b>		:   @dataController.getCompaniesHouseNumber()</li>
+ 	  	<li><b>Start Date</b> 					:	@dataController.getStartDate()</li>
+ 	   	<li><b>End Date</b> 					:	@dataController.getEndDate()<br></li>
+    	<li><b>Freedom of Information Flag</b> 	:	@dataController.getFoiFlag()</li>
+    	<li><b>Exempt from processing</b> 		:	@dataController.getExemptFlag()</li>
+    	<li><b>Contact in UK</b> 				:	@dataController.getUkContact()</li>
+    	<li><b>Subject Access</b>			 	:	@dataController.getSubjectAccess()</li>
+    </ul>
     </fieldset>
     
     <fieldset id="contact">
     <legend>Contact</legend>
-    <b>Address</b> 	:	@dataController.getAddress()<br>
-    <b>Postcode</b> 	:	@dataController.getPostcode()<br>
-    <b>Country</b> 	:	@dataController.getCountry()<br>
+    <ul>
+    	<li id="address"><b>Address</b> : @dataController.getAddress()</li>
+    	<li id="postcode"><b>Postcode</b>: @dataController.getPostcode()</li>
+    	<li id="country"><b>Country</b> : @dataController.getCountry()</li>
+    </ul>
+    @if(dataController.getAddress().length() > 1){
+    	<div id="map_canvas"></div>
+    }
     </fieldset>
      
     @if(dataController.getFormat().equals("new")){
     	<p>This is the new format</p>
     	<fieldset>
 		<legend>General</legend>
-    	<b>Nature of Work</b> 	:	@dataController.getNewFormat().getNatureOfWork()<br>
-    	<b>Transfers</b>		:	@dataController.getNewFormat().getTransfers()
-    	</fieldset>
+		<ul>
+			<li><b>Nature of Work</b> 	:	@dataController.getNewFormat().getNatureOfWork()</li>
+			<li><b>Transfers</b>		:	@dataController.getNewFormat().getTransfers()</li>
+		</ul>
+       	</fieldset>
     	    	
     	<fieldset id="newFormat_purposes">
     	<legend>Purposes</legend>
@@ -83,9 +92,11 @@
     				<legend>Purpose : <b>@purpose.getPurpose()</b></legend>
     				<fieldset>
     				<legend>General</legend>
-    					<b>Description</b> 		:	@purpose.getDescription()<br>
-    					<b>Further description</b> 		:	@purpose.getFurtherDescription()<br>
-    					<b>Transfers</b>		:	@purpose.getTransfers()
+    				<ul>
+    					<li><b>Description</b> 		:	@purpose.getDescription()</li>
+    					<li><b>Further description</b> 		:	@purpose.getFurtherDescription()</li>
+    					<li><b>Transfers</b>		:	@purpose.getTransfers()</li>
+    				</ul>
     				</fieldset>
     				
     				<fieldset id="oldFormat_classes">
@@ -113,9 +124,7 @@
     						<li>@disclosee</li>
     						}
     					</ul>
-    				</fieldset>
-    				
-    				
+    				</fieldset>  				
     				
     			</fieldset>   		
     		}
