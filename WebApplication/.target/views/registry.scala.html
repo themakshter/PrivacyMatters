@@ -1,7 +1,9 @@
 @(controllers: List[RegistryListItem])
 
 @main("Registry of Data Controllers") {
+    <div class="page-header">
     <h1>Data Controllers (@controllers.size())</h1>
+	</div>
 	<ul>
 	@for(controller <- controllers){
 		<li>

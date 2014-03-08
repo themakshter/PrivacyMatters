@@ -3,3 +3,28 @@
         height: 400px;
         background-color: #CCC;
       }
+      
+.row {
+    display: table;
+}
+
+[class*="col-"] {
+    float: none;
+    display: table-cell;
+    vertical-align: top;
+}
+
+.panel-body{
+	height :100%;
+}
+
+.dl-horizontal dt{
+	width:50%;
+	text-align:left;
+}
+
+.dl-horizontal dd{
+	width:50%;
+
+}
+

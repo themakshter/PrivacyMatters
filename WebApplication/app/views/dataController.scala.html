@@ -1,36 +1,37 @@
 @(dataController: DataController)
 
 @main(dataController.getOrganisationName()) {
-    <fieldset id="general_info">
-    <legend>General Information</legend>
-    <ul>
-    	<li><b>Registration Number</b>			:   @dataController.getRegistrationNumber()</li>
-    	<li id="organisationName"><b>Name</b> 	:   @dataController.getOrganisationName()</li>
-    	<li><b>Trading Name</b> 				:   @dataController.getTradingName()</li>
-  	 	<li><b>Companies House Number</b>		:   @dataController.getCompaniesHouseNumber()</li>
- 	  	<li><b>Start Date</b> 					:	@dataController.getStartDate()</li>
- 	   	<li><b>End Date</b> 					:	@dataController.getEndDate()<br></li>
-    	<li><b>Freedom of Information Flag</b> 	:	@dataController.getFoiFlag()</li>
-    	<li><b>Exempt from processing</b> 		:	@dataController.getExemptFlag()</li>
-    	<li><b>Contact in UK</b> 				:	@dataController.getUkContact()</li>
-    	<li><b>Subject Access</b>			 	:	@dataController.getSubjectAccess()</li>
-    </ul>
-    </fieldset>
-    
-    <fieldset id="contact">
-    <legend>Contact</legend>
+<h1 id="organisationName" class="text-center">@dataController.getOrganisationName()</h1>
+<div class="row">
+	<div class="col-xs-6 col-sm-6">
+    <div class="page-header"><h3>General Information</h3></div>
+    <dl class="dl-horizontal" id="freelance">
+    	<dt>Registration Number </dt><dd>@dataController.getRegistrationNumber()</dd>
+    	<dt>Trading Name </dt><dd>@dataController.getTradingName()</dd>
+    	<dt >Companies House Number </dt><dd>@dataController.getCompaniesHouseNumber()</dd>
+    	<dt>Start Date </dt><dd>@dataController.getStartDate()</dd>
+    	<dt>End Date </dt><dd>@dataController.getEndDate()</dd>
+    	<dt>Freedom of Information Flag </dt><dd>@dataController.getFoiFlag()</dd>
+    	<dt>Exempt from processing </dt><dd>@dataController.getExemptFlag()</dd>
+    	<dt>Contact in UK </dt><dd>@dataController.getUkContact()</dd>
+    	<dt>Subject Access </dt><dd>@dataController.getSubjectAccess()</dd>
+    </div>
+    <div class="col-xs-6 col-sm-6">
+	<div class="page-header"><h3>Contact</h3></div>
     <ul>
     	<li id="address"><b>Address</b> : @dataController.getAddress()</li>
     	<li id="postcode"><b>Postcode</b>: @dataController.getPostcode()</li>
     	<li id="country"><b>Country</b> : @dataController.getCountry()</li>
     </ul>
     @if(dataController.getAddress().length() > 1){
+        <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+		<script src="@routes.Assets.at("javascripts/map.js")" type="text/javascript"></script>
     	<div id="map_canvas"></div>
     }
     </fieldset>
-     
+    </div>
+     </div>
     @if(dataController.getFormat().equals("new")){
-    	<p>This is the new format</p>
     	<fieldset>
 		<legend>General</legend>
 		<ul>
@@ -47,46 +48,68 @@
     		}
     	</ul>
     	</fieldset>
-    	<fieldset id="newFormat_classes">
-    	<legend>Data Classes</legend>
+    	<div class="row">
+    	<div class="col-xs-4 col-sm-4">
+    	<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">Data Classes</h3>
+					</div>
+					<div class="panel-body">
     	<ul>
     		@for(dataClass <- dataController.getNewFormat().getDataClasses()){
     			<li>@dataClass</li>
     		}
     	</ul>
     	@if(dataController.getNewFormat().getSensitiveData.size() > 0){
-    		<fieldset>
-    		<legend>Sensitive Data</legend>
+    		<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">Sensitive Data</h3>
+					</div>
+					<div class="panel-body ">
     		<ul>
     			@for(sensitiveData <- dataController.getNewFormat().getSensitiveData()){
     				<li>@sensitiveData</li>
     			}
     		</ul>
-    		</fieldset>
+    		</div>
+    		</div>
     		}
-    	</fieldset>
-    	
-    	<fieldset id="newFormat_subjects">
-    	<legend>Data Subjects</legend>
+    	</div>
+    	</div>
+    	</div>
+    		<div class="col-xs-4 col-sm-4">
+    		<div class="clearfix visible-xs"></div>
+    	<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">Data Subjects</h3>
+					</div>
+					<div class="panel-body">
     	<ul>
     		@for(dataSubject <- dataController.getNewFormat().getDataSubjects()){
     			<li>@dataSubject</li>
     		}
     	</ul>
-    	</fieldset>
-    	
-    	<fieldset id="newFormat_disclosees">
-    	<legend>Disclosees</legend>
+    	</div>
+    	</div>
+    	</div>
+    		<div class="col-xs-4 col-sm-4">
+    	<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">Data Disclosees</h3>
+					</div>
+					<div class="panel-body">
     	<ul>
     		@for(dataDisclosee <- dataController.getNewFormat().getDataDisclosees()){
     			<li>@dataDisclosee</li>
     		}
     	</ul>
-    	</fieldset>
+    	</div>
+    	</div>
+    	</div>
+    	</div>
     	
     }else{
     	@if(dataController.getFormat().equals("old")){
-    		<p>This is the older format<p>
     		@for(purpose <- dataController.getOldFormat()){
     			<fieldset id="oldFormat_purpose">
     				<legend>Purpose : <b>@purpose.getPurpose()</b></legend>

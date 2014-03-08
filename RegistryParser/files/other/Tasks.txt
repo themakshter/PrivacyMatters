@@ -13,9 +13,9 @@ Some questions to ask
 - How helpful are the statistics for each data controller?
 - How helpful are the overall statistics? 
 - How often would you like to visit such a website?
-- What are the uses of such a website to you?
-- Which format do you prefer from the two? Older with distinction between purposes or the new which is generic?
-- What other information would you like to know about the data controller apart from the statistics?
+- What are the uses of such a website to you? - 
+- Which format do you prefer from the two? Older with distinction between purposes or the new which is generic? 
+- What other information would you like to know about the data controller apart from the statistics? - 
 
 Tasks
 
