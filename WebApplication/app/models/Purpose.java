@@ -18,6 +18,10 @@ public class Purpose {
 	public String getPurpose() {
 		return purpose;
 	}
+	
+	public String getUniquePurpose(){
+		return purpose.split(",")[0];
+	}
 
 	public void setPurpose(String purpose) {
 		this.purpose = purpose;

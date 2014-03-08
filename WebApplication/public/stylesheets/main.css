@@ -25,6 +25,11 @@
 
 .dl-horizontal dd{
 	width:50%;
-
 }
+
+.panel-heading {
+    cursor: pointer;
+}
+
+
 
