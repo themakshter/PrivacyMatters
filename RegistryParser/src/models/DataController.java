@@ -1,12 +1,17 @@
 package models;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashSet;
 
 public class DataController {
 	private String registrationNumber, organisationName, companiesHouseNumber,
-			address, postcode, country, foiFlag, startDate, endDate,
-			exemptFlag, tradingName, ukContact, subjectAccess, format;
+			postcode, country, foiFlag, exemptFlag, tradingName, ukContact,
+			subjectAccess, format;
+	private Calendar startDate, endDate;
+	private ArrayList<String> address;
 
 	// new format
 	private NewFormat newFormat;
@@ -17,50 +22,48 @@ public class DataController {
 		registrationNumber = "";
 		organisationName = "";
 		companiesHouseNumber = "(not given)";
-		address = "";
 		postcode = "(not given)";
 		country = "(not given)";
 		foiFlag = "";
-		startDate = "";
-		endDate = "";
 		exemptFlag = "";
 		tradingName = "(not given)";
 		ukContact = "";
 		subjectAccess = "";
 		format = "";
+		address = new ArrayList<String>();
 	}
-	
-	public void convertOldFormatToNewFormat(){
+
+	public void convertOldFormatToNewFormat() {
 		newFormat = new NewFormat();
-		HashSet<String> dataSubjects,dataClasses,dataDisclosees;
+		HashSet<String> dataSubjects, dataClasses, dataDisclosees;
 		newFormat.setNatureOfWork("Nature - NotAvailale");
 		newFormat.setTransfers(oldFormat.get(0).getTransfers());
 		dataSubjects = new HashSet<String>();
 		dataClasses = new HashSet<String>();
-		dataDisclosees = new HashSet<String>();		
-		for(Purpose p : oldFormat){
-			
-			//purposes
+		dataDisclosees = new HashSet<String>();
+		for (Purpose p : oldFormat) {
+
+			// purposes
 			newFormat.addPurpose(p.getPurpose());
-			
-			//data subjects
-			for(String dataSubject: p.getDataSubjects()){
+
+			// data subjects
+			for (String dataSubject : p.getDataSubjects()) {
 				dataSubjects.add(dataSubject);
 			}
-			
-			//data classes
-			for(String dataClass: p.getDataClasses()){
+
+			// data classes
+			for (String dataClass : p.getDataClasses()) {
 				dataClasses.add(dataClass);
 			}
-			
-			//data disclosees
-			for(String dataDisclosee : p.getDataDisclosees()){
+
+			// data disclosees
+			for (String dataDisclosee : p.getDataDisclosees()) {
 				dataDisclosees.add(dataDisclosee);
 			}
 		}
 		newFormat.setDataSubjects(new ArrayList<String>(dataSubjects));
 		newFormat.setDataClasses(new ArrayList<String>(dataClasses));
-		newFormat.setDataDisclosees(new ArrayList<String>(dataDisclosees));		
+		newFormat.setDataDisclosees(new ArrayList<String>(dataDisclosees));
 	}
 
 	public String getRegistrationNumber() {
@@ -76,7 +79,7 @@ public class DataController {
 	}
 
 	public void setOrganisationName(String organisationName) {
-		this.organisationName = organisationName;	
+		this.organisationName = organisationName.toUpperCase();
 	}
 
 	public String getCompaniesHouseNumber() {
@@ -87,12 +90,22 @@ public class DataController {
 		this.companiesHouseNumber = companiesHouseNumber;
 	}
 
-	public String getAddress() {
+	public void addAdressLine(String line) {
+		String addressLine = "";
+		String[] words = line.toLowerCase().split(" ");
+		for (String s : words) {
+			s = s.substring(0, 1).toUpperCase() + s.substring(1);
+			addressLine += s + " ";
+		}
+		address.add(addressLine.trim());
+	}
+
+	public ArrayList<String> getAddress() {
 		return address;
 	}
 
-	public void setAddress(String address) {
-		this.address = address;
+	public String getAddressAsLine() {
+		return "";
 	}
 
 	public String getPostcode() {
@@ -120,19 +133,37 @@ public class DataController {
 	}
 
 	public String getStartDate() {
-		return startDate;
+		SimpleDateFormat sdf = new SimpleDateFormat("EEEEs, d MMMM, yyyy");
+		String date = sdf.format(startDate.getTime());
+		return date;
 	}
 
 	public void setStartDate(String startDate) {
-		this.startDate = startDate;
+		this.startDate = Calendar.getInstance();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		try {
+			this.startDate.setTime(sdf.parse(startDate));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 	public String getEndDate() {
-		return endDate;
+		SimpleDateFormat sdf = new SimpleDateFormat("EEEE, d MMMM, yyyy");
+		String date = sdf.format(endDate.getTime());
+		return date;
 	}
 
 	public void setEndDate(String endDate) {
-		this.endDate = endDate;
+		this.endDate = Calendar.getInstance();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		try {
+			this.endDate.setTime(sdf.parse(endDate));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 	public String getExemptFlag() {
@@ -155,16 +186,16 @@ public class DataController {
 		return ukContact;
 	}
 
-	public void setUkContact(String ukContactFlag) {
-		this.ukContact = ukContactFlag;
+	public void setUkContact(String ukContact) {
+		this.ukContact = ukContact;
 	}
 
 	public String getSubjectAccess() {
 		return subjectAccess;
 	}
 
-	public void setSubjectAccess(String subjectAccessFlag) {
-		this.subjectAccess = subjectAccessFlag;
+	public void setSubjectAccess(String subjectAccess) {
+		this.subjectAccess = subjectAccess;
 	}
 
 	public String getFormat() {
@@ -202,11 +233,9 @@ public class DataController {
 	public void setOldFormat(ArrayList<Purpose> oldFormat) {
 		this.oldFormat = oldFormat;
 	}
-	
-	public void addPurpose(Purpose purpose){
+
+	public void addPurpose(Purpose purpose) {
 		oldFormat.add(purpose);
 	}
-	
-	
 
 }

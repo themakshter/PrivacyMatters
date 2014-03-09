@@ -1,12 +1,16 @@
 package models;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class DataController {
 	private String registrationNumber, organisationName, companiesHouseNumber,
-			address, postcode, country, foiFlag, startDate, endDate,
-			exemptFlag, tradingName, ukContact, subjectAccess, format;
-
+			postcode, country, foiFlag, exemptFlag, tradingName, ukContact,
+			subjectAccess, format;
+	private Calendar startDate, endDate;
+	private ArrayList<String> address;
 	// new format
 	private NewFormat newFormat;
 	// old format
@@ -16,12 +20,9 @@ public class DataController {
 		registrationNumber = "";
 		organisationName = "";
 		companiesHouseNumber = "(not given)";
-		address = "";
 		postcode = "(not given)";
 		country = "(not given)";
 		foiFlag = "";
-		startDate = "";
-		endDate = "";
 		exemptFlag = "";
 		tradingName = "(not given)";
 		ukContact = "";
@@ -29,8 +30,8 @@ public class DataController {
 		format = "";
 		oldFormat = new ArrayList<Purpose>();
 	}
-	
-	public void fixName(){
+
+	public void fixName() {
 		organisationName = organisationName.replaceAll("andAMP", "&");
 	}
 
@@ -58,12 +59,22 @@ public class DataController {
 		this.companiesHouseNumber = companiesHouseNumber;
 	}
 
-	public String getAddress() {
+	public void addAdressLine(String line) {
+		String addressLine = "";
+		String[] words = line.toLowerCase().split(" ");
+		for (String s : words) {
+			s = s.substring(0, 1).toUpperCase() + s.substring(1);
+			addressLine += s + " ";
+		}
+		address.add(addressLine.trim());
+	}
+
+	public ArrayList<String> getAddress() {
 		return address;
 	}
 
-	public void setAddress(String address) {
-		this.address = address;
+	public String getAddressAsLine() {
+		return "";
 	}
 
 	public String getPostcode() {
@@ -91,19 +102,37 @@ public class DataController {
 	}
 
 	public String getStartDate() {
-		return startDate;
+		SimpleDateFormat sdf = new SimpleDateFormat("EEEE, d MMMM, yyyy");
+		String date = sdf.format(startDate.getTime());
+		return date;
 	}
 
 	public void setStartDate(String startDate) {
-		this.startDate = startDate;
+		this.startDate = Calendar.getInstance();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		try {
+			this.startDate.setTime(sdf.parse(startDate));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 	public String getEndDate() {
-		return endDate;
+		SimpleDateFormat sdf = new SimpleDateFormat("EEEE, d MMMM, yyyy");
+		String date = sdf.format(endDate.getTime());
+		return date;
 	}
 
 	public void setEndDate(String endDate) {
-		this.endDate = endDate;
+		this.endDate = Calendar.getInstance();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		try {
+			this.endDate.setTime(sdf.parse(endDate));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 	public String getExemptFlag() {

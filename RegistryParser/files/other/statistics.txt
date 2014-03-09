@@ -44,3 +44,4 @@ Subject Access Flags : 382597
 Nature of Work Descriptions : 382591
 Old Data Formats (Purpose 1...) : 133293
 New Data Formats (Nature of work...) : 249279
+Neither Format : 19

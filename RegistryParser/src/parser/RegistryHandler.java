@@ -54,15 +54,14 @@ public class RegistryHandler extends DefaultHandler {
 	private static final int NATURE_OF_WORK = 19;
 	private static final int REGISTRATION = 20;
 	private static final int RECORD = 21;
-	private String address = "";
 	private DataController dataController;
 
 	public RegistryHandler() throws IOException {
 		out = new PrintWriter(new BufferedWriter(new FileWriter("files/other/stats.txt")));
 		dbURI = new MongoClientURI("mongodb://admin:incorrect@ds033629.mongolab.com:33629/data_controllers");
 		client = new MongoClient(dbURI);
-		//client = new MongoClient("localhost",27017);
-		//database = client.getDB("dataControllers");
+//		client = new MongoClient("localhost",27017);
+//		database = client.getDB("dataControllers");
 		database = client.getDB(dbURI.getDatabase());
 		registry = database.getCollection("registry");
 		registry.drop();
@@ -77,7 +76,6 @@ public class RegistryHandler extends DefaultHandler {
 			break;
 		case "RECORD":
 			type = RECORD;
-			address = "";
 			dataController = new DataController();
 			recordCount++;
 			break;
@@ -178,7 +176,9 @@ public class RegistryHandler extends DefaultHandler {
 			System.out.println("done!");
 			break;
 		case "RECORD":			
+			//System.out.println(recordCount);
 			Gson gson = new Gson();
+			//System.out.println(gson.toJson(dataController));
 			BasicDBObject document = (BasicDBObject)JSON.parse(gson.toJson(dataController));
 			registry.insert(document);
 		default:
@@ -204,27 +204,26 @@ public class RegistryHandler extends DefaultHandler {
 			type = 0;
 			break;
 		case ADDRESS_1:
-			address += new String(ch, start, length).trim();
+			dataController.addAdressLine(new String(ch, start, length).trim());
 			type = 0;
 			break;
 		case ADDRESS_2:
-			address += ", " + new String(ch, start, length).trim();
+			dataController.addAdressLine(new String(ch, start, length).trim());
 			type = 0;
 			break;
 		case ADDRESS_3:
-			address += ", " + new String(ch, start, length).trim();
+			dataController.addAdressLine(new String(ch, start, length).trim());
 			type = 0;
 			break;
 		case ADDRESS_4:
-			address += ", " + new String(ch, start, length).trim();
+			dataController.addAdressLine(new String(ch, start, length).trim());
 			type = 0;
 			break;
 		case ADDRESS_5:
-			address += ", " + new String(ch, start, length).trim();
+			dataController.addAdressLine(new String(ch, start, length).trim());
 			type = 0;
 			break;
 		case POSTCODE:
-			dataController.setAddress(address);
 			dataController.setPostcode(new String(ch, start, length));
 			type = 0;
 			break;

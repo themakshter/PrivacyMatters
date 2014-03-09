@@ -3,7 +3,10 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -12,13 +15,24 @@ import org.jsoup.select.Elements;
 
 public class x {
 	public static void main(String[] args) throws IOException {
-		long start = System.currentTimeMillis();
-		File input = new File("files/natureOfWorkDescriptions/nature_of_work_description_1.html");
-		String html = readFile(input.toString());
-		parseNatureOfWork(html);
-		long end = System.currentTimeMillis();
-		long timeTaken = (end - start)/1000;
-		System.out.println("Time taken : " + (timeTaken) + "seconds");
+//		long start = System.currentTimeMillis();
+//		File input = new File("files/natureOfWorkDescriptions/nature_of_work_description_1.html");
+//		String html = readFile(input.toString());
+//		parseNatureOfWork(html);
+//		long end = System.currentTimeMillis();
+//		long timeTaken = (end - start)/1000;
+//		System.out.println("Time taken : " + (timeTaken) + "seconds");
+		Calendar x = Calendar.getInstance();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		try {
+			x.setTime(sdf.parse("2014-10-24"));
+		//	System.out.println("time set");
+			sdf = new SimpleDateFormat("EEEE,MMMM d, yyyy");
+			System.out.println(sdf.format(x.getTime()));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public static void oldFormat(Document doc) {
