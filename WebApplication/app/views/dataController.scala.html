@@ -23,6 +23,10 @@
     	<li id="postcode"><b>Postcode</b>: @dataController.getPostcode()</li>
     	<li id="country"><b>Country</b> : @dataController.getCountry()</li>
     </ul>
+    <address>
+    @dataController.getAddress()<br>
+    @dataController.getPostcode()
+    </address>
     @if(dataController.getAddress().length() > 1){
         <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
 		<script src="@routes.Assets.at("javascripts/map.js")" type="text/javascript"></script>
@@ -50,60 +54,62 @@
     	</fieldset>
     	<div class="row">
     	<div class="col-xs-4 col-sm-4">
-    	<div class="panel panel-default">
+    	<div class="panel panel-info">
 					<div class="panel-heading">
 						<h3 class="panel-title">Data Classes</h3>
 					</div>
-					<div class="panel-body">
-    	<ul>
+
+    	<ul class="list-group">
     		@for(dataClass <- dataController.getNewFormat().getDataClasses()){
-    			<li>@dataClass</li>
+    			<li class="list-group-item">@dataClass</li>
     		}
     	</ul>
     	@if(dataController.getNewFormat().getSensitiveData.size() > 0){
-    		<div class="panel panel-default">
+    		<div class="panel-body">
+    		<div class="panel panel-danger">
 					<div class="panel-heading">
 						<h3 class="panel-title">Sensitive Data</h3>
 					</div>
-					<div class="panel-body ">
-    		<ul>
+			
+    		<ul class="list-group">
     			@for(sensitiveData <- dataController.getNewFormat().getSensitiveData()){
-    				<li>@sensitiveData</li>
+    				<li class="list-group-item">@sensitiveData</li>
     			}
     		</ul>
+
     		</div>
     		</div>
     		}
-    	</div>
+ 
     	</div>
     	</div>
     		<div class="col-xs-4 col-sm-4">
     		<div class="clearfix visible-xs"></div>
-    	<div class="panel panel-default">
+    	<div class="panel panel-info">
 					<div class="panel-heading">
 						<h3 class="panel-title">Data Subjects</h3>
 					</div>
-					<div class="panel-body">
-    	<ul>
+					
+    	<ul class="list-group">
     		@for(dataSubject <- dataController.getNewFormat().getDataSubjects()){
-    			<li>@dataSubject</li>
+    			<li class="list-group-item">@dataSubject</li>
     		}
     	</ul>
-    	</div>
+   
     	</div>
     	</div>
     		<div class="col-xs-4 col-sm-4">
-    	<div class="panel panel-default">
+    	<div class="panel panel-info">
 					<div class="panel-heading">
 						<h3 class="panel-title">Data Disclosees</h3>
 					</div>
-					<div class="panel-body">
-    	<ul>
+
+    	<ul class="list-group">
     		@for(dataDisclosee <- dataController.getNewFormat().getDataDisclosees()){
-    			<li>@dataDisclosee</li>
+    			<li class="list-group-item">@dataDisclosee</li>
     		}
     	</ul>
-    	</div>
+    	
     	</div>
     	</div>
     	</div>
@@ -130,7 +136,7 @@
     				
     				<div class="row">
     	<div class="col-xs-4 col-sm-4">
-    	<div class="panel panel-default">
+    	<div class="panel panel-info">
 					<div class="panel-heading">
 						<h3 class="panel-title">Data Classes</h3>
 					</div>
@@ -145,7 +151,7 @@
     				</div>
     				
     				<div class="col-xs-4 col-sm-4">
-    	<div class="panel panel-default">
+    	<div class="panel panel-info">
 					<div class="panel-heading">
 						<h3 class="panel-title">Data Subjects</h3>
 					</div>
@@ -160,7 +166,7 @@
     				</div>
     				
     				<div class="col-xs-4 col-sm-4">
-    	<div class="panel panel-default">
+    	<div class="panel panel-info">
 					<div class="panel-heading">
 						<h3 class="panel-title">Data Disclosees</h3>
 					</div>
