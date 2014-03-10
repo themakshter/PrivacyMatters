@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 public class DataController {
 	private String registrationNumber, organisationName, companiesHouseNumber,
@@ -22,6 +23,8 @@ public class DataController {
 		companiesHouseNumber = "(not given)";
 		postcode = "(not given)";
 		country = "(not given)";
+		startDate = new GregorianCalendar(0,0,0);
+		endDate =  new GregorianCalendar(0,0,0);
 		foiFlag = "";
 		exemptFlag = "";
 		tradingName = "(not given)";

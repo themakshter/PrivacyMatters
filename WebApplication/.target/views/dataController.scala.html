@@ -123,8 +123,7 @@
     		@for(purpose <- dataController.getOldFormat()){
  			<div class="panel panel-default">   			
     				<div class="panel-heading" data-toggle="collapse" data-parent="#accordion" data-target=#@purpose.getUniquePurpose()>
-    				<h4 class="panel-title"><a class="accordion-toggle">@purpose.getPurpose()</a></h4>
-    				</div>
+    				<h4 class="panel-title"><a class="accordion-toggle">@purpose.getPurpose()</a></h4></div>
     				<div id=@purpose.getUniquePurpose() class="panel-collapse collapse">
     				<div class="panel-body">
     				<fieldset>
