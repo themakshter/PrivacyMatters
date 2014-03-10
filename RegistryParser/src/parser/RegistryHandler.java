@@ -5,6 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 import models.NewFormat;
 import models.Purpose;
@@ -28,11 +29,12 @@ public class RegistryHandler extends DefaultHandler {
 			postcodeCount, countryCount, foiCount, startDateCount,
 			endDateCount, exemptFlagCount, tradingNameCount, ukContactCount,
 			subjectAccessCount, natureOfWorkCount, newBlobCount, oldBlobCount,
-			neitherBlobCount;
+			neitherBlobCount,errorCount;
+	private HashSet<String> subjectAccess,contactUK,foiFlag,exempt;
 	private static MongoClientURI dbURI; 
 	private MongoClient client;
 	private static DB database;
-	private static DBCollection registry;	
+	private static DBCollection collection;	
 	private int type = 0;
 	private static final int REGISTRATION_NUMBER = 1;
 	private static final int ORGANISATION_NAME = 2;
@@ -60,11 +62,15 @@ public class RegistryHandler extends DefaultHandler {
 		out = new PrintWriter(new BufferedWriter(new FileWriter("files/other/stats.txt")));
 		dbURI = new MongoClientURI("mongodb://admin:incorrect@ds033629.mongolab.com:33629/data_controllers");
 		client = new MongoClient(dbURI);
+		subjectAccess = new HashSet<String>();
+		foiFlag = new HashSet<String>();
+		contactUK = new HashSet<String>();
+		exempt = new HashSet<String>();
 //		client = new MongoClient("localhost",27017);
 //		database = client.getDB("dataControllers");
 		database = client.getDB(dbURI.getDatabase());
-		registry = database.getCollection("registry");
-		registry.drop();
+//		collection = database.getCollection("registry");
+//		collection.drop();
 
 	}
 
@@ -169,18 +175,24 @@ public class RegistryHandler extends DefaultHandler {
 					+ "\nSubject Access Flags : " + subjectAccessCount
 					+ "\nNature of Work Descriptions : " + natureOfWorkCount
 					+ "\nOld Data Formats (Purpose 1...) : " + oldBlobCount
-					+ "\nNew Data Formats (Nature of work...) : "
-					+ newBlobCount + "\nNeither Format : " + neitherBlobCount);
+					+ "\nNew Data Formats (Nature of work...) : "+ newBlobCount 
+					+ "\nNeither Format : " + neitherBlobCount
+					+ "\ndistinct exempt : " + exempt.size()
+					+ "\ndistinct foi : "  + foiFlag.size()
+					+ "\ndistinct contactuk : " + contactUK.size()
+					+ "\ndistinct subjectAccess : " + subjectAccess.size()
+					+ "\nErrors in parsing : " + errorCount);
 			out.close();
 			client.close();
+			
 			System.out.println("done!");
 			break;
 		case "RECORD":			
-			//System.out.println(recordCount);
-			Gson gson = new Gson();
+			System.out.println(recordCount);
+			//Gson gson = new Gson();
 			//System.out.println(gson.toJson(dataController));
-			BasicDBObject document = (BasicDBObject)JSON.parse(gson.toJson(dataController));
-			registry.insert(document);
+			//BasicDBObject document = (BasicDBObject)JSON.parse(gson.toJson(dataController));
+			//collection.insert(document);
 		default:
 			break;
 
@@ -190,73 +202,77 @@ public class RegistryHandler extends DefaultHandler {
 	public void characters(char ch[], int start, int length)
 			throws SAXException {
 		switch (type) {
-		case REGISTRATION_NUMBER:
-			dataController.setRegistrationNumber(new String(ch, start, length));
-			type = 0;
-			break;
-		case ORGANISATION_NAME:
-			dataController.setOrganisationName(new String(ch, start, length));
-			type = 0;
-			break;
-		case COMPANIES_HOUSE_NUMBER:
-			dataController
-					.setCompaniesHouseNumber(new String(ch, start, length));
-			type = 0;
-			break;
-		case ADDRESS_1:
-			dataController.addAdressLine(new String(ch, start, length).trim());
-			type = 0;
-			break;
-		case ADDRESS_2:
-			dataController.addAdressLine(new String(ch, start, length).trim());
-			type = 0;
-			break;
-		case ADDRESS_3:
-			dataController.addAdressLine(new String(ch, start, length).trim());
-			type = 0;
-			break;
-		case ADDRESS_4:
-			dataController.addAdressLine(new String(ch, start, length).trim());
-			type = 0;
-			break;
-		case ADDRESS_5:
-			dataController.addAdressLine(new String(ch, start, length).trim());
-			type = 0;
-			break;
-		case POSTCODE:
-			dataController.setPostcode(new String(ch, start, length));
-			type = 0;
-			break;
-		case COUNTRY:
-			dataController.setCountry(new String(ch, start, length));
-			type = 0;
-			break;
+//		case REGISTRATION_NUMBER:
+//			dataController.setRegistrationNumber(new String(ch, start, length));
+//			type = 0;
+//			break;
+//		case ORGANISATION_NAME:
+//			dataController.setOrganisationName(new String(ch, start, length));
+//			type = 0;
+//			break;
+//		case COMPANIES_HOUSE_NUMBER:
+//			dataController
+//					.setCompaniesHouseNumber(new String(ch, start, length));
+//			type = 0;
+//			break;
+//		case ADDRESS_1:
+//			dataController.addAdressLine(new String(ch, start, length).trim());
+//			type = 0;
+//			break;
+//		case ADDRESS_2:
+//			dataController.addAdressLine(new String(ch, start, length).trim());
+//			type = 0;
+//			break;
+//		case ADDRESS_3:
+//			dataController.addAdressLine(new String(ch, start, length).trim());
+//			type = 0;
+//			break;
+//		case ADDRESS_4:
+//			dataController.addAdressLine(new String(ch, start, length).trim());
+//			type = 0;
+//			break;
+//		case ADDRESS_5:
+//			dataController.addAdressLine(new String(ch, start, length).trim());
+//			type = 0;
+//			break;
+//		case POSTCODE:
+//			dataController.setPostcode(new String(ch, start, length));
+//			type = 0;
+//			break;
+//		case COUNTRY:
+//			dataController.setCountry(new String(ch, start, length));
+//			type = 0;
+//			break;
 		case FOI:
-			dataController.setFoiFlag(new String(ch, start, length));
+//			dataController.setFoiFlag(new String(ch, start, length));
+			foiFlag.add(new String(ch, start, length));
 			type = 0;
 			break;
-		case START_DATE:
-			dataController.setStartDate(new String(ch, start, length));
-			type = 0;
-			break;
-		case END_DATE:
-			dataController.setEndDate(new String(ch, start, length));
-			type = 0;
-			break;
+//		case START_DATE:
+//			dataController.setStartDate(new String(ch, start, length));
+//			type = 0;
+//			break;
+//		case END_DATE:
+//			dataController.setEndDate(new String(ch, start, length));
+//			type = 0;
+//			break;
 		case EXEMPT_FLAG:
-			dataController.setExemptFlag(new String(ch, start, length));
+//			dataController.setExemptFlag(new String(ch, start, length));
+			exempt.add(new String(ch, start, length));
 			type = 0;
 			break;
-		case TRADING_NAME:
-			dataController.setTradingName(new String(ch, start, length));
-			type = 0;
-			break;
+//		case TRADING_NAME:
+//			dataController.setTradingName(new String(ch, start, length));
+//			type = 0;
+//			break;
 		case UK_CONTACT:
-			dataController.setUkContact(new String(ch, start, length));
+//			dataController.setUkContact(new String(ch, start, length));
+			contactUK.add(new String(ch, start, length));
 			type = 0;
 			break;
 		case SUBJECT_ACCESS_CONTACT:
-			dataController.setSubjectAccess(new String(ch, start, length));
+//			dataController.setSubjectAccess(new String(ch, start, length));
+			subjectAccess.add(new String(ch, start, length));
 			type = 0;
 			break;
 		case NATURE_OF_WORK:
@@ -274,6 +290,7 @@ public class RegistryHandler extends DefaultHandler {
 		if (list.size() > 0) {
 			heading = list.get(0);
 		}
+		try{
 		if (heading.contains("Nature")) {
 			newBlobCount++;
 			dataController.setFormat("new");
@@ -286,6 +303,11 @@ public class RegistryHandler extends DefaultHandler {
 		} else {
 			neitherBlobCount++;
 			dataController.setFormat("neither");
+		}
+		}catch(Exception e){
+			errorCount++;
+			out.println(html);
+			
 		}
 	}
 
