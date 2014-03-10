@@ -2,7 +2,6 @@ $(document).ready(function() {
 $(".purpose").click(function() {
 	if($(this).find("span").hasClass('glyphicon glyphicon-plus'))
 	{
-		console.log("opening");
 		$(".icon").removeClass("glyphicon glyphicon-minus").addClass("glyphicon glyphicon-plus");
 		$(this).find("span").removeClass("glyphicon glyphicon-plus").addClass("glyphicon glyphicon-minus");
 //		$(this).find(".glyphicon").remove(); 
