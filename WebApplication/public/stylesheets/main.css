@@ -31,6 +31,11 @@
     cursor: pointer;
 }
 
+.glyphicon{
+	float:right;
+}
+
+/*
 .panel-heading .accordion-toggle:after {
     /* symbol for "opening" panels */
     font-family: 'Glyphicons Halflings';  /* essential for enabling glyphicon */
@@ -38,6 +43,7 @@
     float: right;        /* adjust as needed */
     color: grey;         /* adjust as needed */
 }
+*/
 
 
 
