@@ -3,452 +3,253 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
+import com.google.gson.Gson;
+
+import models.NewFormat;
+import models.Purpose;
+
+
 
 public class x {
+	private static NewFormat newFormat;
+	private static ArrayList<Purpose> oldFormat = new ArrayList<Purpose>();
 	public static void main(String[] args) throws IOException {
-//		long start = System.currentTimeMillis();
-//		File input = new File("files/natureOfWorkDescriptions/nature_of_work_description_1.html");
-//		String html = readFile(input.toString());
-//		parseNatureOfWork(html);
-//		long end = System.currentTimeMillis();
-//		long timeTaken = (end - start)/1000;
-//		System.out.println("Time taken : " + (timeTaken) + "seconds");
-		Calendar x = Calendar.getInstance();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		try {
-			x.setTime(sdf.parse("2014-10-24"));
-		//	System.out.println("time set");
-			sdf = new SimpleDateFormat("EEEE,MMMM d, yyyy");
-			System.out.println(sdf.format(x.getTime()));
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		File input = new File("files/natureOfWorkDescriptions/nature_of_work_description_2.html");
+		String html = readFile(input.toString());
+		doStuff(html);
+		System.out.println("done");
 	}
 	
-	public static void oldFormat(Document doc) {
-		System.out.println("Purposes");
-		Elements paragraphs = doc.getElementsByTag("p");
-		int index = 0;
-		while (index < paragraphs.size()) {
-			String text = paragraphs.get(index).text();
-			if (text.contains("Purpose")
-					&& !(text.equals("Purpose Description"))) {
-				index += 1;
-				System.out.println("\tPurpose : "
-						+ paragraphs.get(index).text());
-				index += 2;
-				System.out.println("\t\tDescription : "
-						+ paragraphs.get(index).text());
-				index += 1;
-				text = paragraphs.get(index).text();
-				if (text.toLowerCase().contains("further description")) {
-					index += 1;
-					System.out.println("\t\tFurther description : "
-							+ paragraphs.get(index).text().toLowerCase());
-					index += 2;
-				} else {
-					index += 1;
-				}
-				System.out.println("\t\tData subjects : "
-						+ paragraphs.get(index).text());
-				index += 1;
-				text = paragraphs.get(index).text();
-				if (text.equals("Data Classes are:")) {
-					index += 1;
-				} else {
-					System.out.println("\t\tFurther subjects : "
-							+ paragraphs.get(index).text().toLowerCase());
-					index += 2;
-				}
-				System.out.println("\t\tData classes : "
-						+ paragraphs.get(index).text());
-				index += 1;
-				text = paragraphs.get(index).text();
-				if (text.contains("Disclosures")) {
-					index += 1;
-				} else {
-					System.out.println("\t\tFurther classes : "
-							+ paragraphs.get(index).text().toLowerCase());
-					index += 2;
-				}
-				text = paragraphs.get(index + 1).text();
-				if (!text.equals("Transfers:")) {
-					System.out.println("\t\tFurther disclosees : "
-							+ paragraphs.get(index).text().toLowerCase());
-					index += 1;
-				}
-				System.out.println("\t\tDisclosees : "
-						+ paragraphs.get(index).text());
-				index += 2;
-				System.out.println("\t\tTransfers : "
-						+ paragraphs.get(index).text());
-			}
-			index += 1;
-		}
-	}
-	
-	public static void oldFormat2(Document doc){
-		System.out.println("Purposes");
-		String tab = "\t";
-		Elements paragraphs = doc.getElementsByTag("p");
-		int index = 0;
-		while(index < paragraphs.size()){
-			String text,purpose,description,furtherDescription,subjects,classes,disclosees,transfers;
-			//Purpose name
-			text = paragraphs.get(index).text();
-			String[] s = text.split(" ");
-			if(s[0].equals("Purpose") && !s[1].equals("Description:") ){
-				purpose =tab + "Purpose : ";
-				index+=1;
-				purpose += paragraphs.get(index).text();
-				System.out.println(purpose);
-			}
-
-			//Purpose Description
-			if(paragraphs.get(index).text().contains("Purpose Description")){
-				index+=1;
-				description = tab + "Description : ";
-				description += paragraphs.get(index).text();
-				System.out.println(description);
-			}
-			
-			//Further Description
-			if(paragraphs.get(index).text().toLowerCase().contains("further description")){
-				index+=1;
-				
-			}
-			//Data subjects
-			
-			//Data classes
-			
-			//Disclosees
-			
-			//Transfers
-			
-			
-			index++;
-		}
-	}
-	
-	public static void parseNatureOfWork(String html) {
+	public static void doStuff(String html) {
+		String heading = "none found";
+		Gson gson = new Gson();
 		ArrayList<String> list = stripTags(html);
-		String heading = list.get(0);
+		if (list.size() > 0) {
+			heading = list.get(0);
+		}
 		if (heading.contains("Nature")) {
+			System.out.println("new format");
 			newFormat(list);
+			System.out.println(gson.toJson(newFormat));
 		} else if (heading.contains("Purpose")) {
-			oldFormat3(list);
+			System.out.println("old format");
+			oldFormat(list);
+			System.out.println(gson.toJson(oldFormat));
+		}else{
+			System.out.println("neither");
 		}
 	}
-
 	
 	
-	public static void oldFormat3(ArrayList<String> list){
-		System.out.println("Purposes");
-		String tab = "\t";
-		String purpose,description,furtherDescription,subjects,classes,disclosees,transfers;
+	public static void oldFormat(ArrayList<String> list) {
+		oldFormat = new ArrayList<Purpose>();
+		Purpose oldFormatPurpose = new Purpose();
+		String purpose, description, furtherDescription, dataSubject, dataClass, dataDisclosee, transfer;
 		int index = 0;
-		while(index < list.size()){
+		while (index < list.size()) {
 			String text = list.get(index);
 			String[] s = text.split(" ");
-			
-			//Purpose
-			if(s[0].equals("Purpose") && !s[1].equals("Description:")){
-				index+=1;
-				purpose = tab + "Purpose : ";
-				purpose += list.get(index);
-				System.out.println(purpose);
+			// Purpose
+			if (s[0].equals("Purpose") && !s[1].equals("Description:")) {
+				oldFormatPurpose = new Purpose();
+				index += 1;
+				purpose = list.get(index);
+				oldFormatPurpose.setPurpose(purpose);
 			}
-			
-			//Description
-			if(text.equals("Purpose Description:")){
-				index+=1;
-				description = tab + tab + "Description : ";
-				description += list.get(index);
-				System.out.println(description);
+
+			// Description
+			if (text.equals("Purpose Description:")) {
+				index += 1;
+				description = list.get(index);
+				oldFormatPurpose.setDescription(description);
 			}
-				
-			//Further description
-			if(text.toLowerCase().contains("further description")){
-				index+=1;
-				furtherDescription = tab + tab + "Further description : ";
-				while(!list.get(index+1).toLowerCase().contains("data subjects are")){
+
+			// Further description
+			if (text.toLowerCase().contains("further description")) {
+				index += 1;
+				furtherDescription = "";
+				while (!list.get(index + 1).toLowerCase()
+						.contains("data subjects are")) {
 					furtherDescription += list.get(index).toLowerCase() + " ";
 					index++;
 				}
-				System.out.println(furtherDescription);
+				oldFormatPurpose.setFurtherDescription(furtherDescription);
 			}
-				
-			//Data Subjects
-			if(text.toLowerCase().contains("data subjects are")){
-				subjects =  tab + tab + "Subjects : ";
-				index+=1;
-				while(!list.get(index+1).toLowerCase().contains("data classes are")){
-					subjects += list.get(index).toLowerCase() + ", ";
-					index++;
-				}
-				System.out.println(subjects);
-			}
-			//Data Classes
-			if(text.toLowerCase().contains("data classes are")){
-				classes =  tab + tab + "Classes : ";
-				index+=1;
-				while(!list.get(index+1).toLowerCase().contains("disclosures")){
-					classes += list.get(index).toLowerCase() + ", ";
-					index++;
-				}
-				System.out.println(classes);
-			}
-						
-			//Disclosees
-			if(text.toLowerCase().contains("disclosures")){
-				disclosees =  tab + tab + "Disclosees : ";
-				index+=1;
-				while(!list.get(index+1).toLowerCase().contains("transfer")){
-					disclosees += list.get(index).toLowerCase() + ", ";
-					index++;
-				}
-				System.out.println(disclosees);
-			}
-			
-			//Transfers
-			if(text.contains("Transfers")){
-				index+=1;
-				transfers =  tab + tab + "Transfers : " + list.get(index).toLowerCase();
-				if(index +1 < list.size()){
-					while(!list.get(index+1).toLowerCase().contains("purpose")){
-						transfers += " " + list.get(index).toLowerCase();
-						index++;
-					}
-				}
-				System.out.println(transfers);
-			}
-			index++;
-		}
-	}
 
-	public static void newFormat(ArrayList<String> list) {
-		int index = 0;
-		System.out.println(list.get(index));
-		index++;
-		while (index < list.size()) {
-			String purposes, classes, subjects, disclosees, space;
-
-			// Reasons/purpose for processing
-			if (list.get(index).toLowerCase()
-					.contains("reasons/purposes for processing")) {
-				purposes = "Purpose : ";
+			// Data Subjects
+			if (text.toLowerCase().contains("data subjects are")) {
+				dataSubject = "";
 				index += 1;
-				if (list.get(index + 1).toLowerCase()
-						.contains("type/classes of information")) {
-					purposes += list.get(index);
-				} else {
-					index += 1;
-					space = ", ";
-					while (!list.get(index).toLowerCase()
-							.contains("type/classes of information")) {
-						purposes += list.get(index) + space;
-						index++;
-					}
+				while (!list.get(index + 1).toLowerCase()
+						.contains("data classes are")) {
+					dataSubject = list.get(index).toLowerCase();
+					oldFormatPurpose.addDataSubject(dataSubject);
+					index++;
 				}
-				purposes = purposes.trim();
-				System.out.println(purposes);
 			}
-			// Type/classes of information processed
-			if (list.get(index).toLowerCase()
-					.contains("type/classes of information")) {
-				classes = "Data classes : ";
+			// Data Classes
+			if (text.toLowerCase().contains("data classes are")) {
+				dataClass = "";
 				index += 1;
-				if (list.get(index + 1).contains(
-						"information is processed about")) { // only one line
-					classes += list.get(index);
-				} else {
-					index += 1;
-					space = ", ";
-					while (!list.get(index).toLowerCase().contains("information is processed about")) {
-						if (list.get(index).contains("sensitive classes")) {
-							space = "[SENSITIVE], ";
-						} else {
-							classes += list.get(index) + space;
+				while (!list.get(index + 1).toLowerCase()
+						.contains("disclosures")) {
+					dataClass = list.get(index).toLowerCase();
+					oldFormatPurpose.addDataClass(dataClass);
+					index++;
+				}
+			}
+
+			// Disclosees
+			if (text.toLowerCase().contains("sources (s) and disclosures")) {
+				dataDisclosee = "";
+				index += 1;
+				while (!list.get(index + 1).toLowerCase().contains("transfer")) {
+					dataDisclosee = list.get(index).toLowerCase();
+					oldFormatPurpose.addDataDisclosee(dataDisclosee);
+					index++;
+				}
+			}
+
+			// Transfers
+			if (text.contains("Transfers")) {
+				index += 1;
+				transfer = "" + list.get(index).toLowerCase();
+				if (index + 1 <= (list.size() - 1)) {
+					while (!list.get(index + 1).toLowerCase()
+							.contains("purpose")) {
+						transfer += " " + list.get(index).toLowerCase();
+						index++;
+						if (index >= list.size() - 1) {
+							transfer += " " + list.get(index).toLowerCase();
+							break;
 						}
-						index++;
-					}
-
-				}
-				classes = classes.trim();
-				System.out.println(classes);
-			}
-			// Who the information is processed about
-			if (list.get(index).contains("information is processed about")) {
-				subjects = "Data Subjects : ";
-				index += 1;
-				if (list.get(index + 1).contains(
-						"information may be shared with")) { // only one line
-					subjects += list.get(index);
-				} else {
-					space = ", ";
-					index += 1;
-					while (!list.get(index).toLowerCase()
-							.contains("information may be shared with")) {
-						subjects += list.get(index) + space;
-						index++;
 					}
 				}
-				subjects = subjects.trim();
-				System.out.println(subjects);
+				oldFormatPurpose.setTransfers(transfer);
+				oldFormat.add(oldFormatPurpose);
 			}
-
-			// Who the information may be shared with
-			if (list.get(index).contains("information may be shared with")) {
-				disclosees = "Data Disclosees : ";
-				index += 1;
-				if (list.get(index + 1).contains("Transfers")) {
-					disclosees += list.get(index);
-				} else {
-					index += 1;
-					if (list.get(index).contains("necessary or required")) {
-						index += 1;
-					}
-					space = ", ";
-					while (!list.get(index).contains("Transfers")) {
-						disclosees += list.get(index) + space;
-						index++;
-					}
-				}
-				disclosees = disclosees.trim();
-				System.out.println(disclosees);
-			}
-
-			// Transfer
-			if (list.get(index).contains("Transfers")) {
-				String transfers = "Transfers : ";
-				index += 1;
-				transfers += list.get(index);
-				System.out.println(transfers);
-			}
-
 			index++;
 		}
-		System.out.println();
 	}
 	
-	public static void newFormat2(ArrayList<String> list){
+	public static void newFormat(ArrayList<String> list) {
 		int index = 0;
-		String[] headings = {"reasons/purposes for processing","type/classes of information","information is processed about","information may be shared with","transfers"};
-		System.out.println(list.get(index));
-		index++;
+		newFormat = new NewFormat();
+		//newFormat.setNatureOfWork(list.get(index));
 		while (index < list.size()) {
-			String purposes, classes, subjects, disclosees, space;
-
+			String dataPurpose, dataClass, dataSubject, dataDisclosee, transfer;
+			
+			if(list.get(index).contains("Nature")){
+				String natureOfWork = "";
+				while(!list.get(index).toLowerCase()
+					.contains("description ")){
+					natureOfWork += list.get(index);
+					index++;
+				}
+				newFormat.setNatureOfWork(natureOfWork);
+			}
+			
 			// Reasons/purpose for processing
 			if (list.get(index).toLowerCase()
 					.contains("reasons/purposes for processing")) {
-				purposes = "Purpose : ";
+				//listItems = new ArrayList<String>();
+				dataPurpose = "";
 				index += 1;
 				if (list.get(index + 1).toLowerCase()
-						.contains("type/classes of information")) {
-					purposes += list.get(index);
+						.contains("classes of information processed")) {
+					dataPurpose = list.get(index);
+					//listItems.add(dataPurpose);
+					newFormat.addPurpose(dataPurpose);
 				} else {
 					index += 1;
-					space = ", ";
 					while (!list.get(index).toLowerCase()
-							.contains("type/classes of information")) {
-						purposes += list.get(index) + space;
+							.contains("classes of information processed")) {
+						dataPurpose = list.get(index);
+						//listItems.add(dataPurpose);
+						newFormat.addPurpose(dataPurpose);
 						index++;
 					}
 				}
-				purposes = purposes.trim();
-				System.out.println(purposes);
+				//newFormat.setPurposes(listItems);
 			}
 			// Type/classes of information processed
 			if (list.get(index).toLowerCase()
-					.contains("type/classes of information")) {
-				classes = "Data classes : ";
+					.contains("classes of information processed")) {
+				boolean sensitive = false;
+				dataClass = "";
 				index += 1;
 				if (list.get(index + 1).contains(
 						"information is processed about")) { // only one line
-					classes += list.get(index);
+					dataClass = list.get(index);
 				} else {
 					index += 1;
-					space = ", ";
-					while (!list.get(index).toLowerCase().contains("information is processed about")) {
+					while (!list.get(index).toLowerCase()
+							.contains("information is processed about")) {
 						if (list.get(index).contains("sensitive classes")) {
-							space = "[SENSITIVE], ";
+						sensitive = true;
 						} else {
-							classes += list.get(index) + space;
+							dataClass = list.get(index);
+							if(sensitive){
+								newFormat.addSensitiveData(dataClass);
+							}else{
+								newFormat.addDataClass(dataClass);
+							}
 						}
 						index++;
 					}
-
 				}
-				classes = classes.trim();
-				System.out.println(classes);
 			}
 			// Who the information is processed about
 			if (list.get(index).contains("information is processed about")) {
-				subjects = "Data Subjects : ";
+				//listItems = new ArrayList<String>();
+				dataSubject = "";
 				index += 1;
 				if (list.get(index + 1).contains(
 						"information may be shared with")) { // only one line
-					subjects += list.get(index);
+					dataSubject = list.get(index);
+					newFormat.addDataSubject(dataSubject);
 				} else {
-					space = ", ";
 					index += 1;
 					while (!list.get(index).toLowerCase()
 							.contains("information may be shared with")) {
-						subjects += list.get(index) + space;
+						dataSubject = list.get(index);
+						newFormat.addDataSubject(dataSubject);
 						index++;
 					}
 				}
-				subjects = subjects.trim();
-				System.out.println(subjects);
 			}
 
 			// Who the information may be shared with
 			if (list.get(index).contains("information may be shared with")) {
-				disclosees = "Data Disclosees : ";
+				dataDisclosee = "";
 				index += 1;
 				if (list.get(index + 1).contains("Transfers")) {
-					disclosees += list.get(index);
+					dataDisclosee = list.get(index);
+					newFormat.addDataDisclosee(dataDisclosee);
 				} else {
 					index += 1;
 					if (list.get(index).contains("necessary or required")) {
 						index += 1;
 					}
-					space = ", ";
 					while (!list.get(index).contains("Transfers")) {
-						disclosees += list.get(index) + space;
+						dataDisclosee = list.get(index);
+						newFormat.addDataDisclosee(dataDisclosee);
 						index++;
 					}
 				}
-				disclosees = disclosees.trim();
-				System.out.println(disclosees);
 			}
 
 			// Transfer
 			if (list.get(index).contains("Transfers")) {
-				String transfers = "Transfers : ";
+				transfer = "";
 				index += 1;
-				transfers += list.get(index);
-				System.out.println(transfers);
+				transfer = list.get(index).toLowerCase();
+				newFormat.setTransfers(transfer);
 			}
-
 			index++;
 		}
-		System.out.println();
-	}
-
-	public static void checkHeading(){
-		
 	}
 	
 	public static ArrayList<String> stripTags(String text) {
@@ -470,9 +271,6 @@ public class x {
 				}
 			}
 		}
-//		for (int i = 0; i < listOfStrings.size(); i++) {
-//			System.out.println(i + "\t: " + listOfStrings.get(i));
-//		}
 		return listOfStrings;
 	}
 

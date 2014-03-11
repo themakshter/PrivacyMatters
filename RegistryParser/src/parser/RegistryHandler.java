@@ -29,7 +29,7 @@ public class RegistryHandler extends DefaultHandler {
 			postcodeCount, countryCount, foiCount, startDateCount,
 			endDateCount, exemptFlagCount, tradingNameCount, ukContactCount,
 			subjectAccessCount, natureOfWorkCount, newBlobCount, oldBlobCount,
-			neitherBlobCount,errorCount;
+			neitherBlobCount,errorCount,newErrorCount,oldErrorCount;
 	private HashSet<String> subjectAccess,contactUK,foiFlag,exempt;
 	private static MongoClientURI dbURI; 
 	private MongoClient client;
@@ -181,7 +181,9 @@ public class RegistryHandler extends DefaultHandler {
 					+ "\ndistinct foi : "  + foiFlag.size()
 					+ "\ndistinct contactuk : " + contactUK.size()
 					+ "\ndistinct subjectAccess : " + subjectAccess.size()
-					+ "\nErrors in parsing : " + errorCount);
+					+ "\nErrors in parsing : " + errorCount
+					+ "\n new format errors : " + newErrorCount
+					+ "\n old error count :" + oldErrorCount);
 			out.close();
 			client.close();
 			
@@ -306,6 +308,12 @@ public class RegistryHandler extends DefaultHandler {
 		}
 		}catch(Exception e){
 			errorCount++;
+			String format = dataController.getFormat();
+			if(format.equals("old")){
+				oldErrorCount++;
+			}else if(format.equals("new")){
+				newErrorCount++;
+			}
 			out.println(html);
 			
 		}
@@ -384,14 +392,14 @@ public class RegistryHandler extends DefaultHandler {
 			if (text.contains("Transfers")) {
 				index += 1;
 				transfer = "" + list.get(index).toLowerCase();
-				if (index + 1 < list.size()) {
+				if (index + 1 <= (list.size() - 1)) {
 					while (!list.get(index + 1).toLowerCase()
-							.contains("purpose") || index + 1 < list.size()) {
+							.contains("purpose")) {
 						transfer += " " + list.get(index).toLowerCase();
-						if (index + 1 < list.size()) {
+						index++;
+						if (index >= list.size() - 1) {
+							transfer += " " + list.get(index).toLowerCase();
 							break;
-						}else{
-							index++;
 						}
 					}
 				}
@@ -529,7 +537,7 @@ public class RegistryHandler extends DefaultHandler {
 		for (int i = 0; i < text.length(); i++) {
 			if (text.charAt(i) == '<') {
 				blob = true;
-				if (sb.length() > 3 && !(sb.toString().equals("&nbsp;"))) {
+				if (sb.length() > 1 && !(sb.toString().equals("&nbsp;"))) {
 					listOfStrings.add(sb.toString().trim());
 				}
 				sb = new StringBuilder();
