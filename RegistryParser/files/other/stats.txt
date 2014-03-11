@@ -20,6 +20,6 @@ distinct exempt : 2
 distinct foi : 2
 distinct contactuk : 2
 distinct subjectAccess : 1
-Errors in parsing : 31
- new format errors : 31
+Errors in parsing : 32
+ new format errors : 32
  old error count :0

@@ -1,4 +1,5 @@
 package dev;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -8,20 +9,21 @@ import java.util.ArrayList;
 import com.google.gson.Gson;
 
 import models.NewFormat;
+import models.OtherPurpose;
 import models.Purpose;
-
-
 
 public class x {
 	private static NewFormat newFormat;
 	private static ArrayList<Purpose> oldFormat = new ArrayList<Purpose>();
+
 	public static void main(String[] args) throws IOException {
-		File input = new File("files/natureOfWorkDescriptions/nature_of_work_description_1.html");
+		File input = new File(
+				"files/natureOfWorkDescriptions/nature_of_work_description_1.html");
 		String html = readFile(input.toString());
 		doStuff(html);
-		System.out.println("done");
+		//System.out.println("done");
 	}
-	
+
 	public static void doStuff(String html) {
 		String heading = "none found";
 		Gson gson = new Gson();
@@ -36,12 +38,11 @@ public class x {
 			System.out.println("old format");
 			oldFormat(list);
 			System.out.println(gson.toJson(oldFormat));
-		}else{
+		} else {
 			System.out.println("neither");
 		}
 	}
-	
-	
+
 	public static void oldFormat(ArrayList<String> list) {
 		oldFormat = new ArrayList<Purpose>();
 		Purpose oldFormatPurpose = new Purpose();
@@ -132,44 +133,51 @@ public class x {
 			index++;
 		}
 	}
-	
+
 	public static void newFormat(ArrayList<String> list) {
-		String[] headings={"description of processing","classes of information","information is processed about","information may be shared with","reasons/purposes for processing","transfer"};
+		String[] headings = { "description of processing",
+				"classes of information processed", "information is processed about",
+				"information may be shared with",
+				"reasons/purposes for processing", "transfer",
+				"crime prevention", "consulting and advisory services",
+				"trading and sharing personal information",
+				"providing financial services and advice",
+				"undertaking research" };
+		String[] otherPurposes = {"crime prevention", "consulting and advisory services",
+				"trading and sharing personal information",
+				"providing financial services and advice",
+				"undertaking research"};
 		int index = 0;
 		newFormat = new NewFormat();
-		//newFormat.setNatureOfWork(list.get(index));
+		OtherPurpose otherPurpose;
 		while (index < list.size()) {
 			String dataPurpose, dataClass, dataSubject, dataDisclosee, transfer;
-			
-			if(list.get(index).contains("Nature")){
+
+			if (list.get(index).contains("Nature")) {
 				String natureOfWork = "";
-				while(!headingsContain(list.get(index), headings)){
+				while (!headingsContain(list.get(index), headings)) {
 					natureOfWork += list.get(index);
 					index++;
 				}
 				newFormat.setNatureOfWork(natureOfWork);
 			}
-			
+
 			// Reasons/purpose for processing
 			if (list.get(index).toLowerCase()
 					.contains("reasons/purposes for processing")) {
-				//listItems = new ArrayList<String>();
 				dataPurpose = "";
 				index += 1;
-				if (headingsContain(list.get(index+1), headings)) {
+				if (headingsContain(list.get(index + 1), headings)) {
 					dataPurpose = list.get(index);
-					//listItems.add(dataPurpose);
 					newFormat.addPurpose(dataPurpose);
 				} else {
 					index += 1;
 					while (!headingsContain(list.get(index), headings)) {
 						dataPurpose = list.get(index);
-						//listItems.add(dataPurpose);
 						newFormat.addPurpose(dataPurpose);
 						index++;
 					}
 				}
-				//newFormat.setPurposes(listItems);
 			}
 			// Type/classes of information processed
 			if (list.get(index).toLowerCase()
@@ -177,18 +185,20 @@ public class x {
 				boolean sensitive = false;
 				dataClass = "";
 				index += 1;
-				if (headingsContain(list.get(index+1), headings)) { // only one line
+				if (headingsContain(list.get(index + 1), headings)) { //only one line
 					dataClass = list.get(index);
 				} else {
-					index += 1;
+					if(!list.get(index + 1).contains("sensitive classes")){
+						index += 1;
+					}
 					while (!headingsContain(list.get(index), headings)) {
 						if (list.get(index).contains("sensitive classes")) {
-						sensitive = true;
+							sensitive = true;
 						} else {
 							dataClass = list.get(index);
-							if(sensitive){
+							if (sensitive) {
 								newFormat.addSensitiveData(dataClass);
-							}else{
+							} else {
 								newFormat.addDataClass(dataClass);
 							}
 						}
@@ -198,10 +208,12 @@ public class x {
 			}
 			// Who the information is processed about
 			if (list.get(index).contains("information is processed about")) {
-				//listItems = new ArrayList<String>();
+				// listItems = new ArrayList<String>();
 				dataSubject = "";
 				index += 1;
-				if (headingsContain(list.get(index+1), headings)) { // only one line
+				if (headingsContain(list.get(index + 1), headings)) { // only
+																		// one
+																		// line
 					dataSubject = list.get(index);
 					newFormat.addDataSubject(dataSubject);
 				} else {
@@ -218,7 +230,7 @@ public class x {
 			if (list.get(index).contains("information may be shared with")) {
 				dataDisclosee = "";
 				index += 1;
-				if (headingsContain(list.get(index+1), headings)) {
+				if (headingsContain(list.get(index + 1), headings)) {
 					dataDisclosee = list.get(index);
 					newFormat.addDataDisclosee(dataDisclosee);
 				} else {
@@ -241,10 +253,26 @@ public class x {
 				transfer = list.get(index).toLowerCase();
 				newFormat.setTransfers(transfer);
 			}
+			
+			// other purposes
+			if (headingsContain(list.get(index), otherPurposes)) {
+				otherPurpose = new OtherPurpose();
+				otherPurpose.setPurpose(list.get(index));
+				index += 1;
+				String statement = "";
+				while (!headingsContain(list.get(index), headings)) {
+					statement += list.get(index);
+					index++;
+				}
+				otherPurpose.setStatement(statement);
+				newFormat.addOtherPurpose(otherPurpose);
+			}
+			
+			
 			index++;
 		}
 	}
-	
+
 	public static ArrayList<String> stripTags(String text) {
 		boolean blob = false;
 		StringBuilder sb = new StringBuilder();
@@ -268,18 +296,18 @@ public class x {
 		return listOfStrings;
 	}
 
-	public static boolean headingsContain(String text,String[] headings){
+	public static boolean headingsContain(String text, String[] headings) {
 		text = text.toLowerCase();
 		boolean found = false;
-		for(String s :headings){
-			if(text.contains(s)){
+		for (String s : headings) {
+			if (text.contains(s)) {
 				found = true;
 				break;
 			}
 		}
 		return found;
 	}
-	
+
 	public static String readFile(String fileName) throws IOException {
 		BufferedReader br = new BufferedReader(new FileReader(fileName));
 		try {

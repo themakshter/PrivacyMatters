@@ -4,15 +4,16 @@ import java.util.ArrayList;
 public class NewFormat {
 	private ArrayList<String> purposes, dataSubjects, dataClasses,sensitiveData,
 			dataDisclosees;
-
 	private String natureOfWork, transfers;
-
+	private ArrayList<OtherPurpose> otherPurposes;
+	
 	public NewFormat() {
 		purposes = new ArrayList<String>();
 		dataSubjects = new ArrayList<String>();
 		dataClasses = new ArrayList<String>();
 		dataDisclosees = new ArrayList<String>();
 		sensitiveData = new ArrayList<String>();
+		otherPurposes = new ArrayList<OtherPurpose>();
 	}
 
 	public void setNatureOfWork(String nature) {
@@ -90,5 +91,17 @@ public class NewFormat {
 
 	public String getTransfers() {
 		return transfers;
+	}
+	
+	public ArrayList<OtherPurpose> getOtherPurposes() {
+		return otherPurposes;
+	}
+
+	public void setOtherPurposes(ArrayList<OtherPurpose> otherPurposes) {
+		this.otherPurposes = otherPurposes;
+	}
+	
+	public void addOtherPurpose(OtherPurpose otherPurpose){
+		this.otherPurposes.add(otherPurpose);
 	}
 }

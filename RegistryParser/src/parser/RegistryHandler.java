@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 import models.NewFormat;
+import models.OtherPurpose;
 import models.Purpose;
 import models.DataController;
 
@@ -29,12 +30,12 @@ public class RegistryHandler extends DefaultHandler {
 			postcodeCount, countryCount, foiCount, startDateCount,
 			endDateCount, exemptFlagCount, tradingNameCount, ukContactCount,
 			subjectAccessCount, natureOfWorkCount, newBlobCount, oldBlobCount,
-			neitherBlobCount,errorCount,newErrorCount,oldErrorCount;
-	private HashSet<String> subjectAccess,contactUK,foiFlag,exempt;
-	private static MongoClientURI dbURI; 
+			neitherBlobCount, errorCount, newErrorCount, oldErrorCount;
+	private HashSet<String> subjectAccess, contactUK, foiFlag, exempt;
+	private static MongoClientURI dbURI;
 	private MongoClient client;
 	private static DB database;
-	private static DBCollection collection;	
+	private static DBCollection collection;
 	private int type = 0;
 	private static final int REGISTRATION_NUMBER = 1;
 	private static final int ORGANISATION_NAME = 2;
@@ -59,18 +60,20 @@ public class RegistryHandler extends DefaultHandler {
 	private DataController dataController;
 
 	public RegistryHandler() throws IOException {
-		out = new PrintWriter(new BufferedWriter(new FileWriter("files/other/stats.txt")));
-		dbURI = new MongoClientURI("mongodb://admin:incorrect@ds033629.mongolab.com:33629/data_controllers");
+		out = new PrintWriter(new BufferedWriter(new FileWriter(
+				"files/other/stats.txt")));
+		dbURI = new MongoClientURI(
+				"mongodb://admin:incorrect@ds033629.mongolab.com:33629/data_controllers");
 		client = new MongoClient(dbURI);
 		subjectAccess = new HashSet<String>();
 		foiFlag = new HashSet<String>();
 		contactUK = new HashSet<String>();
 		exempt = new HashSet<String>();
-//		client = new MongoClient("localhost",27017);
-//		database = client.getDB("dataControllers");
+		// client = new MongoClient("localhost",27017);
+		// database = client.getDB("dataControllers");
 		database = client.getDB(dbURI.getDatabase());
-//		collection = database.getCollection("registry");
-//		collection.drop();
+		// collection = database.getCollection("registry");
+		// collection.drop();
 
 	}
 
@@ -175,10 +178,10 @@ public class RegistryHandler extends DefaultHandler {
 					+ "\nSubject Access Flags : " + subjectAccessCount
 					+ "\nNature of Work Descriptions : " + natureOfWorkCount
 					+ "\nOld Data Formats (Purpose 1...) : " + oldBlobCount
-					+ "\nNew Data Formats (Nature of work...) : "+ newBlobCount 
-					+ "\nNeither Format : " + neitherBlobCount
+					+ "\nNew Data Formats (Nature of work...) : "
+					+ newBlobCount + "\nNeither Format : " + neitherBlobCount
 					+ "\ndistinct exempt : " + exempt.size()
-					+ "\ndistinct foi : "  + foiFlag.size()
+					+ "\ndistinct foi : " + foiFlag.size()
 					+ "\ndistinct contactuk : " + contactUK.size()
 					+ "\ndistinct subjectAccess : " + subjectAccess.size()
 					+ "\nErrors in parsing : " + errorCount
@@ -186,15 +189,16 @@ public class RegistryHandler extends DefaultHandler {
 					+ "\n old error count :" + oldErrorCount);
 			out.close();
 			client.close();
-			
+
 			System.out.println("done!");
 			break;
-		case "RECORD":			
+		case "RECORD":
 			System.out.println(recordCount);
-			//Gson gson = new Gson();
-			//System.out.println(gson.toJson(dataController));
-			//BasicDBObject document = (BasicDBObject)JSON.parse(gson.toJson(dataController));
-			//collection.insert(document);
+			// Gson gson = new Gson();
+			// System.out.println(gson.toJson(dataController));
+			// BasicDBObject document =
+			// (BasicDBObject)JSON.parse(gson.toJson(dataController));
+			// collection.insert(document);
 		default:
 			break;
 
@@ -204,76 +208,76 @@ public class RegistryHandler extends DefaultHandler {
 	public void characters(char ch[], int start, int length)
 			throws SAXException {
 		switch (type) {
-//		case REGISTRATION_NUMBER:
-//			dataController.setRegistrationNumber(new String(ch, start, length));
-//			type = 0;
-//			break;
-//		case ORGANISATION_NAME:
-//			dataController.setOrganisationName(new String(ch, start, length));
-//			type = 0;
-//			break;
-//		case COMPANIES_HOUSE_NUMBER:
-//			dataController
-//					.setCompaniesHouseNumber(new String(ch, start, length));
-//			type = 0;
-//			break;
-//		case ADDRESS_1:
-//			dataController.addAdressLine(new String(ch, start, length).trim());
-//			type = 0;
-//			break;
-//		case ADDRESS_2:
-//			dataController.addAdressLine(new String(ch, start, length).trim());
-//			type = 0;
-//			break;
-//		case ADDRESS_3:
-//			dataController.addAdressLine(new String(ch, start, length).trim());
-//			type = 0;
-//			break;
-//		case ADDRESS_4:
-//			dataController.addAdressLine(new String(ch, start, length).trim());
-//			type = 0;
-//			break;
-//		case ADDRESS_5:
-//			dataController.addAdressLine(new String(ch, start, length).trim());
-//			type = 0;
-//			break;
-//		case POSTCODE:
-//			dataController.setPostcode(new String(ch, start, length));
-//			type = 0;
-//			break;
-//		case COUNTRY:
-//			dataController.setCountry(new String(ch, start, length));
-//			type = 0;
-//			break;
+		// case REGISTRATION_NUMBER:
+		// dataController.setRegistrationNumber(new String(ch, start, length));
+		// type = 0;
+		// break;
+		// case ORGANISATION_NAME:
+		// dataController.setOrganisationName(new String(ch, start, length));
+		// type = 0;
+		// break;
+		// case COMPANIES_HOUSE_NUMBER:
+		// dataController
+		// .setCompaniesHouseNumber(new String(ch, start, length));
+		// type = 0;
+		// break;
+		// case ADDRESS_1:
+		// dataController.addAdressLine(new String(ch, start, length).trim());
+		// type = 0;
+		// break;
+		// case ADDRESS_2:
+		// dataController.addAdressLine(new String(ch, start, length).trim());
+		// type = 0;
+		// break;
+		// case ADDRESS_3:
+		// dataController.addAdressLine(new String(ch, start, length).trim());
+		// type = 0;
+		// break;
+		// case ADDRESS_4:
+		// dataController.addAdressLine(new String(ch, start, length).trim());
+		// type = 0;
+		// break;
+		// case ADDRESS_5:
+		// dataController.addAdressLine(new String(ch, start, length).trim());
+		// type = 0;
+		// break;
+		// case POSTCODE:
+		// dataController.setPostcode(new String(ch, start, length));
+		// type = 0;
+		// break;
+		// case COUNTRY:
+		// dataController.setCountry(new String(ch, start, length));
+		// type = 0;
+		// break;
 		case FOI:
-//			dataController.setFoiFlag(new String(ch, start, length));
+			// dataController.setFoiFlag(new String(ch, start, length));
 			foiFlag.add(new String(ch, start, length));
 			type = 0;
 			break;
-//		case START_DATE:
-//			dataController.setStartDate(new String(ch, start, length));
-//			type = 0;
-//			break;
-//		case END_DATE:
-//			dataController.setEndDate(new String(ch, start, length));
-//			type = 0;
-//			break;
+		// case START_DATE:
+		// dataController.setStartDate(new String(ch, start, length));
+		// type = 0;
+		// break;
+		// case END_DATE:
+		// dataController.setEndDate(new String(ch, start, length));
+		// type = 0;
+		// break;
 		case EXEMPT_FLAG:
-//			dataController.setExemptFlag(new String(ch, start, length));
+			// dataController.setExemptFlag(new String(ch, start, length));
 			exempt.add(new String(ch, start, length));
 			type = 0;
 			break;
-//		case TRADING_NAME:
-//			dataController.setTradingName(new String(ch, start, length));
-//			type = 0;
-//			break;
+		// case TRADING_NAME:
+		// dataController.setTradingName(new String(ch, start, length));
+		// type = 0;
+		// break;
 		case UK_CONTACT:
-//			dataController.setUkContact(new String(ch, start, length));
+			// dataController.setUkContact(new String(ch, start, length));
 			contactUK.add(new String(ch, start, length));
 			type = 0;
 			break;
 		case SUBJECT_ACCESS_CONTACT:
-//			dataController.setSubjectAccess(new String(ch, start, length));
+			// dataController.setSubjectAccess(new String(ch, start, length));
 			subjectAccess.add(new String(ch, start, length));
 			type = 0;
 			break;
@@ -292,30 +296,30 @@ public class RegistryHandler extends DefaultHandler {
 		if (list.size() > 0) {
 			heading = list.get(0);
 		}
-		try{
-		if (heading.contains("Nature")) {
-			newBlobCount++;
-			dataController.setFormat("new");
-			newFormat(list);
-		} else if (heading.contains("Purpose")) {
-			oldBlobCount++;
-			dataController.setFormat("old");
-			oldFormat(list);
-			dataController.convertOldFormatToNewFormat();
-		} else {
-			neitherBlobCount++;
-			dataController.setFormat("neither");
-		}
-		}catch(Exception e){
+		try {
+			if (heading.contains("Nature")) {
+				newBlobCount++;
+				dataController.setFormat("new");
+				newFormat(list);
+			} else if (heading.contains("Purpose")) {
+				oldBlobCount++;
+				dataController.setFormat("old");
+				oldFormat(list);
+				dataController.convertOldFormatToNewFormat();
+			} else {
+				neitherBlobCount++;
+				dataController.setFormat("neither");
+			}
+		} catch (Exception e) {
 			errorCount++;
 			String format = dataController.getFormat();
-			if(format.equals("old")){
+			if (format.equals("old")) {
 				oldErrorCount++;
-			}else if(format.equals("new")){
+			} else if (format.equals("new")) {
 				newErrorCount++;
 			}
 			out.println(html);
-			
+
 		}
 	}
 
@@ -412,42 +416,54 @@ public class RegistryHandler extends DefaultHandler {
 	}
 
 	public void newFormat(ArrayList<String> list) {
-		String[] headings={"description of processing","classes of information","information is processed about","information may be shared with","reasons/purposes for processing","transfer"};
+		String[] headings = { "description of processing",
+				"classes of information processed", "information is processed about",
+				"information may be shared with",
+				"reasons/purposes for processing", "transfer",
+				"crime prevention", "consulting and advisory services",
+				"trading and sharing personal information",
+				"providing financial services and advice",
+				"undertaking research" };
+		String[] otherPurposes = {"crime prevention", "consulting and advisory services",
+				"trading and sharing personal information",
+				"providing financial services and advice",
+				"undertaking research"};
 		int index = 0;
 		NewFormat newFormat = new NewFormat();
-		//newFormat.setNatureOfWork(list.get(index));
+		OtherPurpose otherPurpose;
+		// newFormat.setNatureOfWork(list.get(index));
 		while (index < list.size()) {
 			String dataPurpose, dataClass, dataSubject, dataDisclosee, transfer;
-			
-			if(list.get(index).contains("Nature")){
+
+			if (list.get(index).contains("Nature")) {
 				String natureOfWork = "";
-				while(!headingsContain(list.get(index), headings)){
+				while (!headingsContain(list.get(index), headings)) {
 					natureOfWork += list.get(index);
 					index++;
 				}
 				newFormat.setNatureOfWork(natureOfWork);
 			}
-			
+
 			// Reasons/purpose for processing
 			if (list.get(index).toLowerCase()
 					.contains("reasons/purposes for processing")) {
-				//listItems = new ArrayList<String>();
+				// listItems = new ArrayList<String>();
 				dataPurpose = "";
 				index += 1;
-				if (headingsContain(list.get(index+1), headings)) {
+				if (headingsContain(list.get(index + 1), headings)) {
 					dataPurpose = list.get(index);
-					//listItems.add(dataPurpose);
+					// listItems.add(dataPurpose);
 					newFormat.addPurpose(dataPurpose);
 				} else {
 					index += 1;
 					while (!headingsContain(list.get(index), headings)) {
 						dataPurpose = list.get(index);
-						//listItems.add(dataPurpose);
+						// listItems.add(dataPurpose);
 						newFormat.addPurpose(dataPurpose);
 						index++;
 					}
 				}
-				//newFormat.setPurposes(listItems);
+				// newFormat.setPurposes(listItems);
 			}
 			// Type/classes of information processed
 			if (list.get(index).toLowerCase()
@@ -455,18 +471,20 @@ public class RegistryHandler extends DefaultHandler {
 				boolean sensitive = false;
 				dataClass = "";
 				index += 1;
-				if (headingsContain(list.get(index+1), headings)) { // only one line
+				if (headingsContain(list.get(index + 1), headings)) { //only one line
 					dataClass = list.get(index);
 				} else {
-					index += 1;
+					if(!list.get(index + 1).contains("sensitive classes")){
+						index += 1;
+					}
 					while (!headingsContain(list.get(index), headings)) {
 						if (list.get(index).contains("sensitive classes")) {
-						sensitive = true;
+							sensitive = true;
 						} else {
 							dataClass = list.get(index);
-							if(sensitive){
+							if (sensitive) {
 								newFormat.addSensitiveData(dataClass);
-							}else{
+							} else {
 								newFormat.addDataClass(dataClass);
 							}
 						}
@@ -474,12 +492,15 @@ public class RegistryHandler extends DefaultHandler {
 					}
 				}
 			}
+			
 			// Who the information is processed about
 			if (list.get(index).contains("information is processed about")) {
-				//listItems = new ArrayList<String>();
+				// listItems = new ArrayList<String>();
 				dataSubject = "";
 				index += 1;
-				if (headingsContain(list.get(index+1), headings)) { // only one line
+				if (headingsContain(list.get(index + 1), headings)) { // only
+																		// one
+																		// line
 					dataSubject = list.get(index);
 					newFormat.addDataSubject(dataSubject);
 				} else {
@@ -496,7 +517,7 @@ public class RegistryHandler extends DefaultHandler {
 			if (list.get(index).contains("information may be shared with")) {
 				dataDisclosee = "";
 				index += 1;
-				if (headingsContain(list.get(index+1), headings)) {
+				if (headingsContain(list.get(index + 1), headings)) {
 					dataDisclosee = list.get(index);
 					newFormat.addDataDisclosee(dataDisclosee);
 				} else {
@@ -511,6 +532,21 @@ public class RegistryHandler extends DefaultHandler {
 					}
 				}
 			}
+			
+			// other purposes
+			if (headingsContain(list.get(index), otherPurposes)) {
+				otherPurpose = new OtherPurpose();
+				otherPurpose.setPurpose(list.get(index));
+				index += 1;
+				String statement = "";
+				while (!headingsContain(list.get(index), headings)) {
+					statement += list.get(index);
+					index++;
+				}
+				otherPurpose.setStatement(statement);
+				newFormat.addOtherPurpose(otherPurpose);
+			}			
+			
 
 			// Transfer
 			if (list.get(index).contains("Transfers")) {
@@ -519,17 +555,19 @@ public class RegistryHandler extends DefaultHandler {
 				transfer = list.get(index).toLowerCase();
 				newFormat.setTransfers(transfer);
 			}
+			
+
 			index++;
 		}
 
 		dataController.setNewFormat(newFormat);
 	}
-	
-	public boolean headingsContain(String text,String[] headings){
+
+	public boolean headingsContain(String text, String[] headings) {
 		text = text.toLowerCase();
 		boolean found = false;
-		for(String s :headings){
-			if(text.contains(s)){
+		for (String s : headings) {
+			if (text.contains(s)) {
 				found = true;
 				break;
 			}

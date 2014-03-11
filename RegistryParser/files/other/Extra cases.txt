@@ -1,3 +1,396 @@
+<FONT size=2 face=verdana>
+<P><STRONG>Nature of work - </STRONG></P>
+<P>&nbsp;</P>
+<P style="MARGIN: 0cm 0cm 0pt" class=Default><SPAN style="FONT-FAMILY: 'Calibri','sans-serif'; COLOR: windowtext; FONT-SIZE: 11.5pt; mso-bidi-font-family: Calibri"><STRONG>Community Energy Direct (CED) Nature of Work description <?xml:namespace prefix = o ns = "urn:schemas-microsoft-com:office:office" /><o:p></o:p></STRONG></SPAN></P>
+<P style="MARGIN: 0cm 0cm 0pt" class=Default><SPAN style="COLOR: windowtext; FONT-SIZE: 11.5pt"><o:p><FONT face=Arial>&nbsp;</FONT></o:p></SPAN></P>
+<P style="MARGIN: 0cm 0cm 0pt" class=Default><SPAN style="FONT-FAMILY: 'Calibri','sans-serif'; COLOR: windowtext; FONT-SIZE: 11.5pt; mso-bidi-font-family: Calibri">CED is an industrial and provident society owned by its members, who are community interest bodies, with consumer-facing operations. <o:p></o:p></SPAN></P>
+<P style="MARGIN: 0cm 0cm 0pt" class=Default><SPAN style="FONT-FAMILY: 'Calibri','sans-serif'; COLOR: windowtext; FONT-SIZE: 11.5pt; mso-bidi-font-family: Calibri"><o:p>&nbsp;</o:p></SPAN></P>
+<P style="MARGIN: 0cm 0cm 0pt" class=Default><SPAN style="FONT-FAMILY: 'Calibri','sans-serif'; COLOR: windowtext; FONT-SIZE: 11.5pt; mso-bidi-font-family: Calibri">CED and its members are all bound by their constitutions to focus on achieving the following principles <o:p></o:p></SPAN></P>
+<P style="MARGIN: 0cm 0cm 0pt" class=Default><SPAN style="FONT-FAMILY: 'Calibri','sans-serif'; COLOR: windowtext; FONT-SIZE: 11.5pt; mso-bidi-font-family: Calibri"><o:p>&nbsp;</o:p></SPAN></P>
+<P style="MARGIN: 0cm 0cm 0pt" class=Default><SPAN style="FONT-FAMILY: 'Calibri','sans-serif'; COLOR: windowtext; FONT-SIZE: 11.5pt; mso-bidi-font-family: Calibri">• delivering cost-effective energy; <o:p></o:p></SPAN></P>
+<P style="MARGIN: 0cm 0cm 0pt" class=Default><SPAN style="FONT-FAMILY: 'Calibri','sans-serif'; COLOR: windowtext; FONT-SIZE: 11.5pt; mso-bidi-font-family: Calibri"><o:p>&nbsp;</o:p></SPAN></P>
+<P style="MARGIN: 0cm 0cm 0pt" class=Default><SPAN style="FONT-FAMILY: 'Calibri','sans-serif'; COLOR: windowtext; FONT-SIZE: 11.5pt; mso-bidi-font-family: Calibri">• promoting the development and community ownership of low carbon energy <SPAN style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN style="mso-spacerun: yes">&nbsp;</SPAN><SPAN style="mso-spacerun: yes">&nbsp;&nbsp;</SPAN>generation assets; <o:p></o:p></SPAN></P>
+<P style="MARGIN: 0cm 0cm 0pt" class=Default><SPAN style="FONT-FAMILY: 'Calibri','sans-serif'; COLOR: windowtext; FONT-SIZE: 11.5pt; mso-bidi-font-family: Calibri"><o:p>&nbsp;</o:p></SPAN></P>
+<P style="MARGIN: 0cm 0cm 0pt" class=Default><SPAN style="FONT-FAMILY: 'Calibri','sans-serif'; COLOR: windowtext; FONT-SIZE: 11.5pt; mso-bidi-font-family: Calibri">• increasing community awareness of resource efficiency and sustainable development. <o:p></o:p></SPAN></P>
+<P style="MARGIN: 0cm 0cm 0pt" class=Default><SPAN style="FONT-FAMILY: 'Calibri','sans-serif'; COLOR: windowtext; FONT-SIZE: 11.5pt; mso-bidi-font-family: Calibri"><o:p>&nbsp;</o:p></SPAN></P>
+<P style="MARGIN: 0cm 0cm 0pt" class=Default><SPAN style="FONT-FAMILY: 'Calibri','sans-serif'; COLOR: windowtext; FONT-SIZE: 11.5pt; mso-bidi-font-family: Calibri">CED’s members are referred to below as Community Energy Societies. <o:p></o:p></SPAN></P>
+<P style="MARGIN: 0cm 0cm 0pt" class=Default><SPAN style="FONT-FAMILY: 'Calibri','sans-serif'; COLOR: windowtext; FONT-SIZE: 11.5pt; mso-bidi-font-family: Calibri">CED’s activities include: <o:p></o:p></SPAN></P>
+<P style="MARGIN: 0cm 0cm 0pt" class=Default><SPAN style="FONT-FAMILY: 'Calibri','sans-serif'; COLOR: windowtext; FONT-SIZE: 11.5pt; mso-bidi-font-family: Calibri"><o:p>&nbsp;</o:p></SPAN></P>
+<P style="MARGIN: 0cm 0cm 0pt" class=Default><SPAN style="FONT-FAMILY: 'Calibri','sans-serif'; COLOR: windowtext; FONT-SIZE: 11.5pt; mso-bidi-font-family: Calibri">• to promote and encourage within the United Kingdom the formation and development of <I><STRONG>Community Energy Societies</STRONG></I>; <o:p></o:p></SPAN></P>
+<P style="MARGIN: 0cm 0cm 0pt" class=Default><SPAN style="FONT-FAMILY: 'Calibri','sans-serif'; COLOR: windowtext; FONT-SIZE: 11.5pt; mso-bidi-font-family: Calibri"><o:p>&nbsp;</o:p></SPAN></P>
+<P style="MARGIN: 0cm 0cm 0pt" class=Default><SPAN style="FONT-FAMILY: 'Calibri','sans-serif'; COLOR: windowtext; FONT-SIZE: 11.5pt; mso-bidi-font-family: Calibri">• to promulgate principles, on which <I><STRONG>Community Energy Societies </STRONG></I>should operate and to issue guidance on best practice for <I><STRONG>Community Energy Societies </STRONG></I>in relation to financial management, accounting standards, corporate governance, openness, efficiency, democracy or any other aspect of the affairs of <I><STRONG>Community Energy Societies</STRONG></I>; <o:p></o:p></SPAN></P>
+<P style="MARGIN: 0cm 0cm 0pt" class=Default><SPAN style="FONT-FAMILY: 'Calibri','sans-serif'; COLOR: windowtext; FONT-SIZE: 11.5pt; mso-bidi-font-family: Calibri"><o:p>&nbsp;</o:p></SPAN></P>
+<P style="MARGIN: 0cm 0cm 0pt" class=Default><SPAN style="FONT-FAMILY: 'Calibri','sans-serif'; COLOR: windowtext; FONT-SIZE: 11.5pt; mso-bidi-font-family: Calibri">• to comply with and monitor compliance by members with the Association’s principles; <o:p></o:p></SPAN></P>
+<P style="MARGIN: 0cm 0cm 0pt" class=Default><SPAN style="FONT-FAMILY: 'Calibri','sans-serif'; COLOR: windowtext; FONT-SIZE: 11.5pt; mso-bidi-font-family: Calibri"><o:p>&nbsp;</o:p></SPAN></P>
+<P style="MARGIN: 0cm 0cm 0pt" class=Default><SPAN style="FONT-FAMILY: 'Calibri','sans-serif'; COLOR: windowtext; FONT-SIZE: 11.5pt; mso-bidi-font-family: Calibri">• to act as an association or representative body of <I><STRONG>Community Energy Societies </STRONG></I>in dealing with central, regional and local government, statutory bodies, regulators and such other bodies as the Association decides from time to time; <o:p></o:p></SPAN></P>
+<P style="MARGIN: 0cm 0cm 0pt" class=Default><SPAN style="FONT-FAMILY: 'Calibri','sans-serif'; COLOR: windowtext; FONT-SIZE: 11.5pt; mso-bidi-font-family: Calibri"><o:p>&nbsp;</o:p></SPAN></P>
+<P style="MARGIN: 0cm 0cm 0pt" class=Default><SPAN style="FONT-FAMILY: 'Calibri','sans-serif'; COLOR: windowtext; FONT-SIZE: 11.5pt; mso-bidi-font-family: Calibri">• to act as a representative body for <I><STRONG>Community Energy Societies </STRONG></I>in order to negotiate commercial arrangements with third parties in the energy market <o:p></o:p></SPAN></P>
+<P style="MARGIN: 0cm 0cm 0pt" class=Default><SPAN style="FONT-FAMILY: 'Calibri','sans-serif'; COLOR: windowtext; FONT-SIZE: 11.5pt; mso-bidi-font-family: Calibri"><o:p>&nbsp;</o:p></SPAN></P>
+<P style="MARGIN: 0cm 0cm 0pt" class=Default><SPAN style="FONT-FAMILY: 'Calibri','sans-serif'; COLOR: windowtext; FONT-SIZE: 11.5pt; mso-bidi-font-family: Calibri">• to protect, promote and further the interests of <I><STRONG>Community Energy Societies</STRONG></I>; </SPAN><SPAN style="FONT-FAMILY: 'Calibri','sans-serif'; COLOR: windowtext; FONT-SIZE: 8pt; mso-bidi-font-family: Calibri"><o:p></o:p></SPAN></P>
+<P style="MARGIN: 0cm 0cm 0pt" class=Default><SPAN style="FONT-FAMILY: 'Calibri','sans-serif'; COLOR: windowtext; FONT-SIZE: 8pt; mso-bidi-font-family: Calibri"><o:p>&nbsp;</o:p></SPAN><SPAN style="COLOR: windowtext"><o:p><FONT size=3 face=Arial>&nbsp;</FONT></o:p></SPAN></P>
+<P style="PAGE-BREAK-BEFORE: always; MARGIN: 0cm 0cm 0pt" class=Default><SPAN style="FONT-FAMILY: 'Calibri','sans-serif'; COLOR: windowtext; FONT-SIZE: 11.5pt; mso-bidi-font-family: Calibri">• to provide advice and services for payment or free of charge to <STRONG><I>Community </I><o:p></o:p></STRONG></SPAN></P>
+<P style="MARGIN: 0cm 0cm 0pt" class=Default><I><SPAN style="FONT-FAMILY: 'Calibri','sans-serif'; COLOR: windowtext; FONT-SIZE: 11.5pt; mso-bidi-font-family: Calibri"><STRONG>Energy Societies </STRONG></SPAN></I><SPAN style="FONT-FAMILY: 'Calibri','sans-serif'; COLOR: windowtext; FONT-SIZE: 11.5pt; mso-bidi-font-family: Calibri">in relation to any aspect of their affairs; <o:p></o:p></SPAN></P>
+<P style="MARGIN: 0cm 0cm 0pt" class=Default><SPAN style="FONT-FAMILY: 'Calibri','sans-serif'; COLOR: windowtext; FONT-SIZE: 11.5pt; mso-bidi-font-family: Calibri"><o:p>&nbsp;</o:p></SPAN></P>
+<P style="MARGIN: 0cm 0cm 0pt" class=Default><SPAN style="FONT-FAMILY: 'Calibri','sans-serif'; COLOR: windowtext; FONT-SIZE: 11.5pt; mso-bidi-font-family: Calibri">• to assist in the resolution of disputes between Members; <o:p></o:p></SPAN></P>
+<P style="MARGIN: 0cm 0cm 0pt" class=Default><SPAN style="FONT-FAMILY: 'Calibri','sans-serif'; COLOR: windowtext; FONT-SIZE: 11.5pt; mso-bidi-font-family: Calibri"><o:p>&nbsp;</o:p></SPAN></P>
+<P style="MARGIN: 0cm 0cm 0pt" class=Default><SPAN style="FONT-FAMILY: 'Calibri','sans-serif'; COLOR: windowtext; FONT-SIZE: 11.5pt; mso-bidi-font-family: Calibri">• to consider draft rules submitted by an industrial and provident society applying for membership of the Association, and rule changes proposed by members in the light of the Association’s Principles and to exercise any power granted under the Rules of any <I><STRONG>Community Energy Society</STRONG></I>. <o:p></o:p></SPAN></P>
+<P style="MARGIN: 0cm 0cm 0pt" class=Default><SPAN style="FONT-FAMILY: 'Calibri','sans-serif'; COLOR: windowtext; FONT-SIZE: 11.5pt; mso-bidi-font-family: Calibri"><o:p>&nbsp;</o:p></SPAN></P>
+<P style="MARGIN: 0cm 0cm 0pt" class=Default><SPAN style="FONT-FAMILY: 'Calibri','sans-serif'; COLOR: windowtext; FONT-SIZE: 11.5pt; mso-bidi-font-family: Calibri">Practical examples of these activities, and how they may involve personal data are set out below:- <o:p></o:p></SPAN></P>
+<P style="MARGIN: 0cm 0cm 0pt" class=Default><SPAN style="FONT-FAMILY: 'Calibri','sans-serif'; COLOR: windowtext; FONT-SIZE: 11.5pt; mso-bidi-font-family: Calibri"><o:p>&nbsp;</o:p></SPAN></P>
+<P style="MARGIN: 0cm 0cm 0pt" class=Default><SPAN style="FONT-FAMILY: 'Calibri','sans-serif'; COLOR: windowtext; FONT-SIZE: 11.5pt; mso-bidi-font-family: Calibri">• Introducing consumers either directly or indirectly (via its members) to switching services providers such as Which! <o:p></o:p></SPAN></P>
+<P style="MARGIN: 0cm 0cm 0pt" class=Default><SPAN style="FONT-FAMILY: 'Calibri','sans-serif'; COLOR: windowtext; FONT-SIZE: 11.5pt; mso-bidi-font-family: Calibri"><o:p>&nbsp;</o:p></SPAN></P>
+<P style="MARGIN: 0cm 0cm 0pt" class=Default><SPAN style="FONT-FAMILY: 'Calibri','sans-serif'; COLOR: windowtext; FONT-SIZE: 11.5pt; mso-bidi-font-family: Calibri">• Running consumer energy switching schemes <o:p></o:p></SPAN></P>
+<P style="MARGIN: 0cm 0cm 0pt" class=Default><SPAN style="FONT-FAMILY: 'Calibri','sans-serif'; COLOR: windowtext; FONT-SIZE: 11.5pt; mso-bidi-font-family: Calibri"><o:p>&nbsp;</o:p></SPAN></P>
+<P style="MARGIN: 0cm 0cm 0pt" class=Default><SPAN style="FONT-FAMILY: 'Calibri','sans-serif'; COLOR: windowtext; FONT-SIZE: 11.5pt; mso-bidi-font-family: Calibri">• Providing administrative support services for local smart-energy clubs, created by local community bodies such as housing associations and local authorities, whose aim is to attract consumers and encourage them to adopt energy efficient practices and participate in group energy-switching schemes <o:p></o:p></SPAN></P>
+<P style="MARGIN: 0cm 0cm 0pt" class=Default><SPAN style="FONT-FAMILY: 'Calibri','sans-serif'; COLOR: windowtext; FONT-SIZE: 11.5pt; mso-bidi-font-family: Calibri"><o:p>&nbsp;</o:p></SPAN></P>
+<P style="MARGIN: 0cm 0cm 0pt" class=Default><SPAN style="FONT-FAMILY: 'Calibri','sans-serif'; COLOR: windowtext; FONT-SIZE: 11.5pt; mso-bidi-font-family: Calibri">• Surveying consumer attitudes to energy and energy usage <o:p></o:p></SPAN></P>
+<P style="MARGIN: 0cm 0cm 0pt" class=Default><SPAN style="FONT-FAMILY: 'Calibri','sans-serif'; COLOR: windowtext; FONT-SIZE: 11.5pt; mso-bidi-font-family: Calibri"><o:p>&nbsp;</o:p></SPAN></P>
+<P style="MARGIN: 0cm 0cm 0pt" class=Default><SPAN style="FONT-FAMILY: 'Calibri','sans-serif'; COLOR: windowtext; FONT-SIZE: 11.5pt; mso-bidi-font-family: Calibri">• Creating and running websites as necessary to support the above actions <o:p></o:p></SPAN></P>
+<P style="MARGIN: 0cm 0cm 0pt" class=Default><SPAN style="FONT-FAMILY: 'Calibri','sans-serif'; COLOR: windowtext; FONT-SIZE: 11.5pt; mso-bidi-font-family: Calibri"><o:p>&nbsp;</o:p></SPAN></P>
+<P style="LINE-HEIGHT: normal; MARGIN: 0cm 0cm 0pt" class=MsoNormal><SPAN style="FONT-FAMILY: 'Calibri','sans-serif'; FONT-SIZE: 11.5pt; mso-bidi-font-family: Calibri">• CED is in partnership with the Department of Energy and Climate change (DECC), concerning elements of its work. All information shared with DECC as a result of CED’s work will be provided on an anonymised, aggregated basis.</SPAN><SPAN style="FONT-SIZE: 12pt"><o:p></o:p></SPAN></P>
+<P>&nbsp;</P></FONT>
+<B><FONT size=2 face=verdana>
+<P>Nature of work - General business </P>
+<P></B></P><B>
+<P>Description of processing</P></B>
+<P>The following is a broad description of the way this organisation/data controller processes personal information. To understand how your own personal information is processed you may need to refer to any personal communications you have received, check any privacy notices the organisation has provided or contact the organisation to ask about your personal circumstances. </P><B>
+<P><BR></P>
+<P>Reasons/purposes for processing information</P></B>
+<P>We process personal information to enable us to maintain our accounts and records and to support and manage our staff. </P>
+<P><BR></P><B>
+<P>Type/classes of information processed</P></B>
+<P>We process information relevant to the above reasons/purposes. This may include:</P>
+<UL>
+<LI>personal details 
+<LI>family, lifestyle and social circumstances 
+<LI>financial details 
+<LI>employment and education details 
+<LI>goods or services provided</LI></UL>
+<P><BR></P>
+<P>We also process sensitive classes of information that may include:</P>
+<UL>
+<LI>physical or mental health details 
+<LI>racial or ethnic origin 
+<LI>religious or other beliefs of a similar nature 
+<LI>trade union membership</LI></UL>
+<P><BR></P><B>
+<P>Who the information is processed about</P></B>
+<P>We process personal information about our:</P>
+<UL>
+<LI>employees 
+<LI>customers and clients 
+<LI>suppliers and services providers 
+<LI>advisers, consultants and other professional experts 
+<LI>complainants and enquirers</LI></UL>
+<P><BR></P><B>
+<P>Who the information may be shared with</P></B>
+<P>We sometimes need to share the personal information we process with the individual themself and also with other organisations. Where this is necessary we are required to comply with all aspects of the Data Protection Act (DPA). What follows is a description of the types of organisations we may need to share some of the personal information we process with for one or more reasons. </P>
+<P><BR></P>
+<P>Where necessary or required we share information with:</P>
+<UL>
+<LI>family, associates and representatives of the person whose personal data we are processing 
+<LI>employment and recruitment agencies 
+<LI>current, past and prospective employers 
+<LI>educators and examining bodies 
+<LI>central government 
+<LI>credit reference agencies 
+<LI>suppliers and service providers 
+<LI>debt collection and tracing agencies 
+<LI>financial organisations 
+<LI>healthcare, social and welfare advisers or practitioners
+<LI>employees and agents of the data controller
+<LI>other companies in the same group as the data controller
+<LI>trade employer associations and professional bodies
+<LI>data processors</LI></UL></FONT><B><FONT size=2 face=verdana>
+<P><BR></P>
+<P>Transfers</B></P>
+<P>&nbsp;</P></FONT>
+<B><FONT size=2 face=verdana>
+<P>Nature of work - Property Consultants / Overseas Property Investment</P></B>
+<P><BR></P><B>
+<P>Description of processing</P></B>
+<P>The following is a broad description of the way this organisation/data controller processes personal information. To understand how your own personal information is processed you may need to refer to any personal communications you have received, check any privacy notices the organisation has provided or contact the organisation to ask about your personal circumstances. </P><B>
+<P><BR></P>
+<P>Reasons/purposes for processing information</P></B>
+<P>We process personal information to enable us to provide consultancy and advisory services, to promote our services, to maintain our own accounts and records and to support and manage our employees.</P>
+<P><BR></P><B>
+<P>Type/classes of information processed</P></B>
+<P>We process information relating to the above reasons/purposes. This information may include:</P>
+<UL>
+<LI>personal details 
+<LI>family, lifestyle and social circumstances 
+<LI>business activities of the person whose personal information we are processing 
+<LI>goods and services provided 
+<LI>financial details 
+<LI>education details 
+<LI>employment details</LI></UL>
+<P><BR></P>
+<P>We also process sensitive classes of information that may include:</P>
+<UL>
+<LI>racial or ethnic origin </LI></UL><B>
+<P><BR></P>
+<P>Who the information is processed about</P></B>
+<P>We process personal information about our customers, clients and employees, complainants and enquirers, suppliers, advisers and other professional experts.</P>
+<P><BR></P><B>
+<P>Who the information may be shared with</P></B>
+<P>We sometimes need to share the personal information we process with the individual themself and also with other organisations. Where this is necessary we are required to comply with all aspects of the Data Protection Act (DPA). What follows is a description of the types of organisations we may need to share some of the personal information we process with for one or more reasons. </P>
+<P><BR></P>
+<P>Where necessary or required we share information with:</P>
+<UL>
+<LI>business associates and other professional advisers 
+<LI>family, associates and representatives of the person whose personal data we are processing 
+<LI>financial organisations 
+<LI>current, past or prospective employers 
+<LI>educators and examining bodies 
+<LI>suppliers and services providers 
+<LI>traders in personal data</LI></UL></FONT>
+<P><BR></P><FONT size=2 face=verdana><B>
+<P>Consultancy and Advisory Services </B></P>
+<P>Information is processed for consultancy and advisory services that are offered. For this reason the information processed may include name, contact details, family details, financial details, and the goods and services provided. This information may be about customers and clients. Where necessary this information is shared with the data subject themselves, business associates and other professional advisers, current, past or prospective employers and service providers.</P></FONT><B><FONT size=2 face=verdana>
+<P><BR></P>
+<P>Transfers</B></P></FONT>
+<B><FONT size=2 face=verdana>
+<P>Nature of work - Retail/Wholesale</P>
+<P><BR></P>
+<P>Description of processing</P></B>
+<P>The following is a broad description of the way this organisation/data controller processes personal information. To understand how your own personal information is processed you may need to refer to any personal communications you have received, check any privacy notices the organisation has provided or contact the organisation to ask about your personal circumstances. </P>
+<P><BR></P><B>
+<P>Reasons/purposes for processing information</P></B>
+<P>We process personal information to enable us to buy, sell, promote and advertise our products and services; maintain our own accounts and records; support and manage our employees; the trading and sharing of personal information; the use of CCTV systems for crime prevention.</P>
+<P><BR></P><B>
+<P>Type/classes of information processed</P></B>
+<P>We process information relevant to the above reasons/purposes. This may include:</P>
+<UL>
+<LI>personal details 
+<LI>family details 
+<LI>lifestyle and social circumstances 
+<LI>education and employment details 
+<LI>financial details 
+<LI>goods and services</LI></UL>
+<P><BR></P>
+<P>We also process sensitive classes of information that may include: </P>
+<UL>
+<LI>racial or ethnic origin 
+<LI>religious or other beliefs 
+<LI>trade union membership 
+<LI>physical or mental health details 
+<LI>offences and alleged offences 
+<LI>visual images, personal appearance and behaviour 
+<LI>criminal proceedings and behaviour
+<LI>political opinions
+<LI>sexual life
+<LI>details of complaints</LI></UL>
+<P><BR></P><B>
+<P>Who the information is processed about</P></B>
+<P>We process personal information about: </P>
+<UL>
+<LI>employees 
+<LI>customers 
+<LI>suppliers 
+<LI>service providers 
+<LI>enquirers, complainants 
+<LI>offenders and suspected offenders 
+<LI>individuals captured by CCTV images
+<LI>relatives, guardians and associates
+<LI>advisors, consultants and other professional experts
+<LI>subject of complaints</LI></UL>
+<P><BR></P><B>
+<P>Who the information may be shared with</P></B>
+<P>We sometimes need to share the personal information we process with the individual themself and also with other organisations. Where this is necessary we are required to comply with all aspects of the Data Protection Act (DPA). What follows is a description of the types of organisations we may need to share some of the personal information we process with for one or more reasons. </P>
+<P><BR></P>
+<P>Where necessary or required we share information with: </P>
+<UL>
+<LI>employees 
+<LI>customers 
+<LI>suppliers 
+<LI>family, associates and representatives of the person whose personal data we are processing 
+<LI>services providers 
+<LI>current, past and prospective employers 
+<LI>business associates 
+<LI>financial organisations 
+<LI>recruitment and employment agencies 
+<LI>educators and examining bodies 
+<LI>other companies in the same group 
+<LI>credit reference agencies 
+<LI>debt collection and tracing agencies 
+<LI>central government 
+<LI>traders in personal data 
+<LI>police forces and security organisations
+<LI>data subject themselves
+<LI>persons making an enquiry or complaint
+<LI>survey and research organisations
+<LI>local government
+<LI>ombudsmen and regulatory authorities
+<LI>the media
+<LI>data processors</LI></UL></FONT>
+<P><BR></P><FONT size=2 face=verdana><B>
+<P>CCTV - Crime Prevention and/or Staff Monitoring </B></P>
+<P>CCTV is used for maintaining the security of property and premises and for preventing and investigating crime, it may also be used to monitor staff when carrying out work duties. For these reasons the information processed may include visual images, personal appearance and behaviours. This information may be about staff, customers and clients, offenders and suspected offenders, members of the public and those inside, entering or in the immediate vicinity of the area under surveillance. Where necessary or required this information is shared with the data subjects themselves, employees and agents, services providers, police forces, security organisations and persons making an enquiry.</P></FONT>
+<P><BR></P><FONT size=2 face=verdana><B>
+<P>Trading and Sharing Personal Information</B></P>
+<P>Personal information is traded and shared as a primary business function. For this reason the information processed may include name, contact details, family details, financial details, employment details, and goods and services. This information may be about customers and clients. The information may be traded or shared with business associates and professional advisers, agents, service providers, customers and clients, and traders in personal data.</P></FONT><B><FONT size=2 face=verdana>
+<P><BR></P>
+<P>Transfers</P>
+<P></B>&nbsp;</P></FONT>
+<B><FONT size=2 face=verdana>
+<P>Nature of work - Photographer</P>
+<P>&nbsp;</P>
+<P></B><B>Description of processing</P></B>
+<P>The following is a broad description of the way this organisation/data controller processes personal information. To understand how your own personal information is processed you may need to refer to any personal communications you have received, check any privacy notices the organisation has provided or contact the organisation to ask about your personal circumstances. </P><B>
+<P><BR></P>
+<P>Reasons/purposes for processing information</P></B>
+<P>We process personal information to enable us to promote our goods and services, to maintain our accounts and records and to support and manage our staff. </P>
+<P><BR></P><B>
+<P>Type/classes of information processed</P></B>
+<P>We process information relevant to the above reasons/purposes. This may include:</P>
+<UL>
+<LI>personal details 
+<LI>family, lifestyle and social circumstances 
+<LI>financial details 
+<LI>employment and education details 
+<LI>goods or services provided</LI></UL>
+<P><BR></P>
+<P>We also process sensitive classes of information that may include:</P>
+<UL>
+<LI>physical or mental health details 
+<LI>racial or ethnic origin 
+<LI>religious or other beliefs of a similar nature 
+<LI>trade union membership</LI></UL>
+<P><BR></P><B>
+<P>Who the information is processed about</P></B>
+<P>We process personal information about our:</P>
+<UL>
+<LI>employees 
+<LI>customers and clients 
+<LI>suppliers and services providers 
+<LI>advisers, consultants and other professional experts 
+<LI>complainants and enquirers</LI></UL>
+<P><BR></P><B>
+<P>Who the information may be shared with</P></B>
+<P>We sometimes need to share the personal information we process with the individual themself and also with other organisations. Where this is necessary we are required to comply with all aspects of the Data Protection Act (DPA). What follows is a description of the types of organisations we may need to share some of the personal information we process with for one or more reasons. </P>
+<P><BR></P>
+<P>Where necessary or required we share information with:</P>
+<UL>
+<LI>family, associates and representatives of the person whose personal data we are processing 
+<LI>employment and recruitment agencies 
+<LI>current, past and prospective employers 
+<LI>educators and examining bodies 
+<LI>central government 
+<LI>credit reference agencies 
+<LI>suppliers and service providers 
+<LI>debt collection and tracing agencies 
+<LI>financial organisations</LI></UL></FONT><B><FONT size=2 face=verdana>
+<P><BR></P>
+<P>Transfers</P>
+<P></B>&nbsp;</P></FONT>
+<B><FONT size=2 face=verdana>
+<P>Nature of work - General business </P>
+<P></B></P><B>
+<P>Description of processing</P></B>
+<P>The following is a broad description of the way this organisation/data controller processes personal information. To understand how your own personal information is processed please see the terms and conditions<B><BR>of your Davy product or service or write to us at Data Protection Officer, Davy, Donegall House, 7 Donegall Square North, belfast BT1 5GB.</B></P>
+<P><B>&nbsp;</P>
+<P>Reasons/purposes for processing information</P></B>
+<P>We process personal information to enable us to provide investment services which may include financial advice, to maintain our accounts and records and to support and manage our staff. </P>
+<P><BR></P><B>
+<P>Type/classes of information processed</P></B>
+<P>We process information relevant to the above reasons/purposes. This may include:</P>
+<UL>
+<LI>personal details 
+<LI>family, lifestyle and social circumstances 
+<LI>financial details 
+<LI>employment and education details 
+<LI>goods or services provided</LI></UL>
+<P><BR></P>
+<P>We also process sensitive classes of information that may include:</P>
+<UL>
+<LI>physical or mental health details 
+<LI>racial or ethnic origin 
+<LI>religious or other beliefs of a similar nature </LI></UL>
+<P><BR></P><B>
+<P>Who the information is processed about</P></B>
+<P>We process personal information about our:</P>
+<UL>
+<LI>employees 
+<LI>customers and clients 
+<LI>suppliers and services providers 
+<LI>advisers, consultants and other professional experts 
+<LI>complainants and enquirers
+<LI>relatives, guardians and associates of the data subject</LI></UL>
+<P><BR></P><B>
+<P>Who the information may be shared with</P></B>
+<P>We sometimes need to share the personal information we process with the individual themself and also with other organisations. Where this is necessary we are required to comply with all aspects of the Data Protection Act (DPA). What follows is a description of the types of organisations we may need to share some of the personal information we process with for one or more reasons. </P>
+<P><BR></P>
+<P>Where necessary or required we share information with:</P>
+<UL>
+<LI>family, associates and representatives of the person whose personal data we are processing 
+<LI>employment and recruitment agencies 
+<LI>current, past and prospective employers 
+<LI>educators and examining bodies 
+<LI>central government 
+<LI>credit reference agencies 
+<LI>suppliers and service providers 
+<LI>debt collection and tracing agencies 
+<LI>financial organisations
+<LI>ombudsmen and regulatory authorities 
+<LI>healthcare social and welfare advisors and practitioners</LI></UL></FONT>
+<P><BR></P><FONT size=2 face=verdana><B>
+<P>Providing Financial Services and Advice</B></P>
+<P>Personal information is also processed in order to provide financial services and advice. For this reason the information processed may include name, contact details, family details, lifestyle and social circumstances, financial details, goods and services and sensitive classes of information that may include physical or mental health details. This information may be about clients, family and associates of clients, suppliers and enquirers. Where necessary or required this information is shared with the data subjects themselves, professional advisers and consultants, services providers, credit reference agencies.</P></FONT><B><FONT size=2 face=verdana>
+<P><BR></P>
+<P>Transfers</B></P></FONT>
+<B><FONT size=2 face=verdana>
+<P>Nature of work - Healthcare</P>
+<P><BR></P>
+<P>Description of processing</P></B>
+<P>The following is a broad description of the way this organisation/data controller processes personal information. To understand how your own personal information is processed you may need to refer to any personal communications you have received, check any privacy notices the organisation has provided or contact the organisation to ask about your personal circumstances. </P>
+<P><BR></P><B>
+<P>Reasons/purposes for processing information</P></B>
+<P>We process personal information to enable us to provide health services to our patients, to maintain our accounts and records, promote our services and to support and manage our employees.</P>
+<P><BR></P><B>
+<P>Type/classes of information processed</P></B>
+<P>We process information relevant to the above reasons/purposes. This information may include:</P>
+<UL>
+<LI>personal details 
+<LI>family details 
+<LI>lifestyle and social circumstances 
+<LI>goods and services 
+<LI>financial details 
+<LI>employment and education details </LI></UL>
+<P><BR></P>
+<P>We also process sensitive classes of information that may include:</P>
+<UL>
+<LI>physical or mental health details 
+<LI>sexual life 
+<LI>racial or ethnic origin 
+<LI>trade union membership 
+<LI>religious or other beliefs of a similar nature 
+<LI>offences and alleged offences </LI></UL>
+<P><BR></P><B>
+<P>Who the information is processed about</P></B>
+<P>We process personal information about our:</P>
+<UL>
+<LI>patients 
+<LI>customers and clients 
+<LI>staff 
+<LI>suppliers 
+<LI>business contacts 
+<LI>professional advisers</LI></UL>
+<P><BR></P><B>
+<P>Who the information may be shared with</P></B>
+<P>We sometimes need to share the personal information we process with the individual themself and also with other organisations. Where this is necessary we are required to comply with all aspects of the Data Protection Act (DPA). What follows is a description of the types of organisations we may need to share some of the personal information we process with for one or more reasons. </P>
+<P><BR></P>
+<P>Where necessary or required we share information with:</P>
+<UL>
+<LI>healthcare professionals 
+<LI>social and welfare organisations 
+<LI>central government 
+<LI>business associates 
+<LI>family, associates and representatives of the person whose personal data we are processing 
+<LI>suppliers and service providers; 
+<LI>financial organisations 
+<LI>current, past and prospective employers; 
+<LI>employment agencies and examining bodies</LI></UL></FONT><B><FONT size=2 face=verdana>
+<P><BR></P></B></FONT>
 <B><FONT size=2 face=verdana>
 <P>Nature of work - Accountant/Auditor</P>
 <P><BR></P></B>
@@ -85,6 +478,65 @@
 <P>Where necessary or required we share information with: </P>
 <UL>
 <LI>family, associates and representatives of the person whose personal information we are processing </LI></UL></FONT>
+<B><FONT size=2 face=verdana>
+<P>Nature of work - Healthcare</P>
+<P><BR></P>
+<P>Description of processing</P></B>
+<P>The following is a broad description of the way this organisation/data controller processes personal information. To understand how your own personal information is processed you may need to refer to any personal communications you have received, check any privacy notices the organisation has provided or contact the organisation to ask about your personal circumstances. </P>
+<P><BR></P><B>
+<P>Reasons/purposes for processing information</P></B>
+<P>We process personal information to enable us to provide health services to our patients, to maintain our accounts and records, promote our services and to support and manage our employees.</P>
+<P><BR></P><B>
+<P>Type/classes of information processed</P></B>
+<P>We process information relevant to the above reasons/purposes. This information may include:</P>
+<UL>
+<LI>personal details 
+<LI>family details 
+<LI>lifestyle and social circumstances 
+<LI>goods and services 
+<LI>financial details 
+<LI>employment and education details </LI></UL>
+<P><BR></P>
+<P>We also process sensitive classes of information that may include:</P>
+<UL>
+<LI>physical or mental health details 
+<LI>sexual life 
+<LI>racial or ethnic origin 
+<LI>trade union membership 
+<LI>religious or other beliefs of a similar nature 
+<LI>offences and alleged offences </LI></UL>
+<P><BR></P><B>
+<P>Who the information is processed about</P></B>
+<P>We process personal information about our:</P>
+<UL>
+<LI>patients 
+<LI>customers and clients 
+<LI>staff 
+<LI>suppliers 
+<LI>business contacts 
+<LI>professional advisers</LI></UL>
+<P><BR></P><B>
+<P>Who the information may be shared with</P></B>
+<P>We sometimes need to share the personal information we process with the individual themself and also with other organisations. Where this is necessary we are required to comply with all aspects of the Data Protection Act (DPA). What follows is a description of the types of organisations we may need to share some of the personal information we process with for one or more reasons. </P>
+<P><BR></P>
+<P>Where necessary or required we share information with:</P>
+<UL>
+<LI>healthcare professionals 
+<LI>social and welfare organisations 
+<LI>central government 
+<LI>business associates 
+<LI>family, associates and representatives of the person whose personal data we are processing 
+<LI>suppliers and service providers; 
+<LI>financial organisations 
+<LI>current, past and prospective employers; 
+<LI>employment agencies and examining bodies</LI></UL></FONT>
+<P><BR></P><FONT size=2 face=verdana><B>
+<P>CCTV - Crime Prevention and/or Staff Monitoring </B></P>
+<P>CCTV is used for maintaining the security of property and premises and for preventing and investigating crime, it may also be used to monitor staff when carrying out work duties. For these reasons the information processed may include visual images, personal appearance and behaviours. This information may be about staff, customers and clients, offenders and suspected offenders, members of the public and those inside, entering or in the immediate vicinity of the area under surveillance. Where necessary or required this information is shared with the data subjects themselves, employees and agents, services providers, police forces, security organisations and persons making an enquiry.</P></FONT>
+<P><BR></P><FONT size=2 face=verdana><B>
+<P>Undertaking Research </P></B>
+<P>Personal information is also processed in order to undertake research. For this reason the information processed may include name, contact details, family details, lifestyle and social circumstances, financial details, good and services. The sensitive types of information may include physical or mental health details, racial or ethnic origin and religious or other beliefs. This information is about survey respondents. Where necessary or required this information may be shared with customers and clients, agents, service providers, survey and research organisations.</P></FONT><B><FONT size=2 face=verdana>
+<P><BR></P></B></FONT>
 <B><FONT size=2 face=verdana>
 <P>Nature of work - Unitary Authority</P></B>
 <P><BR></P><B>
@@ -1340,4 +1792,3 @@
 <P>CCTV - Crime Prevention and/or Staff Monitoring </B></P>
 <P>CCTV is used for maintaining the security of property and premises and for preventing and investigating crime, it may also be used to monitor staff when carrying out work duties. For these reasons the information processed may include visual images, personal appearance and behaviours. This information may be about staff, customers and clients, offenders and suspected offenders, members of the public and those inside, entering or in the immediate vicinity of the area under surveillance. Where necessary or required this information is shared with the data subjects themselves, employees and agents, services providers, police forces, security organisations and persons making an enquiry.</P></FONT><B><FONT size=2 face=verdana>
 <P><BR></P></B></FONT>
-
