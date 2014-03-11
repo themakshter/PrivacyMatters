@@ -412,6 +412,7 @@ public class RegistryHandler extends DefaultHandler {
 	}
 
 	public void newFormat(ArrayList<String> list) {
+		String[] headings={"description of processing","classes of information","information is processed about","information may be shared with","reasons/purposes for processing","transfer"};
 		int index = 0;
 		NewFormat newFormat = new NewFormat();
 		//newFormat.setNatureOfWork(list.get(index));
@@ -420,8 +421,7 @@ public class RegistryHandler extends DefaultHandler {
 			
 			if(list.get(index).contains("Nature")){
 				String natureOfWork = "";
-				while(!list.get(index).toLowerCase()
-					.contains("description ")){
+				while(!headingsContain(list.get(index), headings)){
 					natureOfWork += list.get(index);
 					index++;
 				}
@@ -434,15 +434,13 @@ public class RegistryHandler extends DefaultHandler {
 				//listItems = new ArrayList<String>();
 				dataPurpose = "";
 				index += 1;
-				if (list.get(index + 1).toLowerCase()
-						.contains("type/classes of information")) {
+				if (headingsContain(list.get(index+1), headings)) {
 					dataPurpose = list.get(index);
 					//listItems.add(dataPurpose);
 					newFormat.addPurpose(dataPurpose);
 				} else {
 					index += 1;
-					while (!list.get(index).toLowerCase()
-							.contains("type/classes of information")) {
+					while (!headingsContain(list.get(index), headings)) {
 						dataPurpose = list.get(index);
 						//listItems.add(dataPurpose);
 						newFormat.addPurpose(dataPurpose);
@@ -453,17 +451,15 @@ public class RegistryHandler extends DefaultHandler {
 			}
 			// Type/classes of information processed
 			if (list.get(index).toLowerCase()
-					.contains("type/classes of information")) {
+					.contains("classes of information processed")) {
 				boolean sensitive = false;
 				dataClass = "";
 				index += 1;
-				if (list.get(index + 1).contains(
-						"information is processed about")) { // only one line
+				if (headingsContain(list.get(index+1), headings)) { // only one line
 					dataClass = list.get(index);
 				} else {
 					index += 1;
-					while (!list.get(index).toLowerCase()
-							.contains("information is processed about")) {
+					while (!headingsContain(list.get(index), headings)) {
 						if (list.get(index).contains("sensitive classes")) {
 						sensitive = true;
 						} else {
@@ -483,14 +479,12 @@ public class RegistryHandler extends DefaultHandler {
 				//listItems = new ArrayList<String>();
 				dataSubject = "";
 				index += 1;
-				if (list.get(index + 1).contains(
-						"information may be shared with")) { // only one line
+				if (headingsContain(list.get(index+1), headings)) { // only one line
 					dataSubject = list.get(index);
 					newFormat.addDataSubject(dataSubject);
 				} else {
 					index += 1;
-					while (!list.get(index).toLowerCase()
-							.contains("information may be shared with")) {
+					while (!headingsContain(list.get(index), headings)) {
 						dataSubject = list.get(index);
 						newFormat.addDataSubject(dataSubject);
 						index++;
@@ -502,7 +496,7 @@ public class RegistryHandler extends DefaultHandler {
 			if (list.get(index).contains("information may be shared with")) {
 				dataDisclosee = "";
 				index += 1;
-				if (list.get(index + 1).contains("Transfers")) {
+				if (headingsContain(list.get(index+1), headings)) {
 					dataDisclosee = list.get(index);
 					newFormat.addDataDisclosee(dataDisclosee);
 				} else {
@@ -510,7 +504,7 @@ public class RegistryHandler extends DefaultHandler {
 					if (list.get(index).contains("necessary or required")) {
 						index += 1;
 					}
-					while (!list.get(index).contains("Transfers")) {
+					while (!headingsContain(list.get(index), headings)) {
 						dataDisclosee = list.get(index);
 						newFormat.addDataDisclosee(dataDisclosee);
 						index++;
@@ -527,7 +521,20 @@ public class RegistryHandler extends DefaultHandler {
 			}
 			index++;
 		}
+
 		dataController.setNewFormat(newFormat);
+	}
+	
+	public boolean headingsContain(String text,String[] headings){
+		text = text.toLowerCase();
+		boolean found = false;
+		for(String s :headings){
+			if(text.contains(s)){
+				found = true;
+				break;
+			}
+		}
+		return found;
 	}
 
 	public ArrayList<String> stripTags(String text) {
@@ -537,8 +544,9 @@ public class RegistryHandler extends DefaultHandler {
 		for (int i = 0; i < text.length(); i++) {
 			if (text.charAt(i) == '<') {
 				blob = true;
-				if (sb.length() > 1 && !(sb.toString().equals("&nbsp;"))) {
-					listOfStrings.add(sb.toString().trim());
+				String toAdd = sb.toString().trim().replaceAll("&nbsp;", "");
+				if (toAdd.length() > 1 && !(toAdd.toString().equals("&nbsp;"))) {
+					listOfStrings.add(toAdd);
 				}
 				sb = new StringBuilder();
 			} else if (text.charAt(i) == '>') {
