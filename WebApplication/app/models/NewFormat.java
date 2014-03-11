@@ -7,7 +7,8 @@ public class NewFormat {
 			dataDisclosees,sensitiveData;
 
 	private String natureOfWork, transfers;
-
+	
+	private ArrayList<OtherPurpose> otherPurposes;
 	
 	public NewFormat() {
 		purposes = new ArrayList<String>();
@@ -15,6 +16,7 @@ public class NewFormat {
 		dataClasses = new ArrayList<String>();
 		dataDisclosees = new ArrayList<String>();
 		sensitiveData = new ArrayList<String>();
+		otherPurposes = new ArrayList<OtherPurpose>();
 	}
 
 	public ArrayList<String> getPurposes() {
@@ -73,5 +75,14 @@ public class NewFormat {
 	public void setTransfers(String transfers) {
 		this.transfers = transfers;
 	}
+	
+	public ArrayList<OtherPurpose> getOtherPurposes() {
+		return otherPurposes;
+	}
+
+	public void setOtherPurposes(ArrayList<OtherPurpose> otherPurposes) {
+		this.otherPurposes = otherPurposes;
+	}
+	
 
 }

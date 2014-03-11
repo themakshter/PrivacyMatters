@@ -45,3 +45,10 @@ Nature of Work Descriptions : 382591
 Old Data Formats (Purpose 1...) : 133293
 New Data Formats (Nature of work...) : 249279
 Neither Format : 19
+distinct exempt : 2
+distinct foi : 2
+distinct contactuk : 2
+distinct subjectAccess : 1
+Errors in parsing : 32
+ new format errors : 32
+ old error count :0

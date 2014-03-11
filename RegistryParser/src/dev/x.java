@@ -300,7 +300,7 @@ public class x {
 		text = text.toLowerCase();
 		boolean found = false;
 		for (String s : headings) {
-			if (text.contains(s)) {
+			if (text.contains(s) && !text.contains("nature")) {
 				found = true;
 				break;
 			}

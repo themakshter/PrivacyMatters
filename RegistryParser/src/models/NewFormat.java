@@ -18,7 +18,6 @@ public class NewFormat {
 
 	public void setNatureOfWork(String nature) {
 		natureOfWork = nature.replaceAll("Nature of work -", "").trim();
-		//System.out.println(natureOfWork);
 	}
 
 	public String getNatureOfWork() {
