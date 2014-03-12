@@ -7,6 +7,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 
 import models.GeneralStatistics;
 import models.NewFormat;
@@ -34,8 +35,8 @@ public class RegistryHandler extends DefaultHandler {
 	private HashMap<String,StatisticObject> natureOfWorkMap,dataPurposeMap,dataClassMap,dataSubjectMap,sensitiveDataMap,dataDiscloseeMap;
 	private static MongoClientURI dbURI;
 	private MongoClient client;
-	private static DB database;
-	private static DBCollection collection;
+	private DB database;
+	private DBCollection collection;
 	private int type = 0;
 	private DataController dataController;
 	private GeneralStatistics generalStats;
@@ -84,10 +85,10 @@ public class RegistryHandler extends DefaultHandler {
 		// client = new MongoClient("localhost",27017);
 		// database = client.getDB("dataControllers");
 		database = client.getDB(dbURI.getDatabase());
-		collection = database.getCollection("generalStatistics");
-		collection.drop();
-		collection = database.getCollection("registry");
-		collection.drop();
+		String[] collections = { "generalStatistics", "natureOfWorkStats",
+				"purposesStats", "dataClassesStats", "dataSubjectsStats",
+				"dataDiscloseeStats", "registry" };
+		dropCollections(collections);
 
 	}
 
@@ -96,6 +97,7 @@ public class RegistryHandler extends DefaultHandler {
 		switch (qName.toUpperCase()) {
 		case "REGISTRATION":
 			type = REGISTRATION;
+			System.out.println("adding records...");
 			break;
 		case "RECORD":
 			type = RECORD;
@@ -196,26 +198,18 @@ public class RegistryHandler extends DefaultHandler {
 					+ "\nNew format errors : " + generalStats.getNewErrorCount()
 					+ "\nOld error count :" + generalStats.getOldErrorCount());
 			
+			addMapToDB(natureOfWorkMap, "natureOfWorkStats");
+			addMapToDB(dataPurposeMap, "purposesStats");
+			addMapToDB(dataClassMap, "dataClassesStats");
+			addMapToDB(dataSubjectMap, "dataSubjectsStats");
+			addMapToDB(dataDiscloseeMap, "dataDiscloseeStats");
+			//addMap(map, collection);
 			
-			out.println(gson.toJson(natureOfWorkSet));
-			out.println(gson.toJson(dataPurposeSet));
-			out.println(gson.toJson(dataClassSet));
-			out.println(gson.toJson(sensitiveDataSet));
-			out.println(gson.toJson(dataSubjectSet));
-			out.println(gson.toJson(dataDiscloseeSet));
-			
-			out.println(gson.toJson(natureOfWorkMap));
-			out.println(gson.toJson(dataPurposeMap));
-			out.println(gson.toJson(dataClassMap));
-			out.println(gson.toJson(sensitiveDataMap));
-			out.println(gson.toJson(dataSubjectMap));
-			out.println(gson.toJson(dataDiscloseeMap));
-			out.close();
 			collection = database.getCollection("generalStatistics");
 			document = (BasicDBObject) JSON.parse(gson.toJson(generalStats));
 			collection.insert(document);
 			client.close();
-			
+			out.close();
 			
 			System.out.println("done!");
 			break;
@@ -593,6 +587,15 @@ public class RegistryHandler extends DefaultHandler {
 
 		dataController.setNewFormat(newFormat);
 	}
+	
+	public void addMapToDB(HashMap<String,StatisticObject> map,String collectionName){
+		System.out.println("Adding statisic map to database... (" + map.size() + " items)");
+		collection = database.getCollection(collectionName);
+		for(Map.Entry<String, StatisticObject> entry : map.entrySet()){
+			BasicDBObject document = (BasicDBObject)JSON.parse(gson.toJson(entry.getValue()));
+			collection.insert(document);
+		}
+	}
 
 	public void addToMap(HashMap<String,StatisticObject> map,String text){
 		RegistryListItem company = new RegistryListItem(dataController.getRegistrationNumber(),dataController.getOrganisationName());
@@ -603,6 +606,13 @@ public class RegistryHandler extends DefaultHandler {
 			map.put(text, statObject);
 		}else{
 			map.get(text).addCompany(company);
+		}
+	}
+	
+	public void dropCollections(String[] collectionNames){
+		for(String collectionName : collectionNames){
+			collection = database.getCollection(collectionName);
+			collection.drop();
 		}
 	}
 	
