@@ -3,6 +3,10 @@ package models;
 public class OtherPurpose {
 	private String purpose,statement;
 
+	public String getUniqueName(){
+		return purpose.split(" ")[0];
+	}
+	
 	public String getPurpose() {
 		return purpose;
 	}

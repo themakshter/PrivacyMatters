@@ -319,7 +319,6 @@ public class RegistryHandler extends DefaultHandler {
 				generalStats.incrementOldBlobCount();
 				dataController.setFormat("old");
 				oldFormat(list);
-				dataController.convertOldFormatToNewFormat();
 			} else {
 				generalStats.incrementNeitherBlobCount();
 				dataController.setFormat("neither");
