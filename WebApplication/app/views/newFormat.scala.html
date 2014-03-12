@@ -1,0 +1,78 @@
+@(newFormat : NewFormat)
+    	<fieldset>
+		<legend>General</legend>
+		<ul>
+			<li><b>Nature of Work</b> 	:	@newFormat.getNatureOfWork()</li>
+			<li><b>Transfers</b>		:	@newFormat.getTransfers()</li>
+		</ul>
+       	</fieldset>
+    	    	
+    	<fieldset id="newFormat_purposes">
+    	<legend>Purposes</legend>
+    	<ul>
+    		@for(purpose <- newFormat.getPurposes()){
+    			<li>@purpose</li>
+    		}
+    	</ul>
+    	</fieldset>
+    	<div class="row">
+    	<div class="col-xs-4 col-sm-4">
+    	<div class="panel panel-info">
+					<div class="panel-heading">
+						<h3 class="panel-title">Data Classes</h3>
+					</div>
+
+    	<ul class="list-group">
+    		@for(dataClass <- newFormat.getDataClasses()){
+    			<li class="list-group-item">@dataClass</li>
+    		}
+    	</ul>
+    	@if(newFormat.getSensitiveData.size() > 0){
+    		<div class="panel-body">
+    		<div class="panel panel-danger">
+					<div class="panel-heading">
+						<h3 class="panel-title">Sensitive Data</h3>
+					</div>
+			
+    		<ul class="list-group">
+    			@for(sensitiveData <- newFormat.getSensitiveData()){
+    				<li class="list-group-item">@sensitiveData</li>
+    			}
+    		</ul>
+
+    		</div>
+    		</div>
+    		}
+ 
+    	</div>
+    	</div>
+    		<div class="col-xs-4 col-sm-4">
+    		<div class="clearfix visible-xs"></div>
+    	<div class="panel panel-info">
+					<div class="panel-heading">
+						<h3 class="panel-title">Data Subjects</h3>
+					</div>
+					
+    	<ul class="list-group">
+    		@for(dataSubject <- newFormat.getDataSubjects()){
+    			<li class="list-group-item">@dataSubject</li>
+    		}
+    	</ul>
+   
+    	</div>
+    	</div>
+    		<div class="col-xs-4 col-sm-4">
+    	<div class="panel panel-info">
+					<div class="panel-heading">
+						<h3 class="panel-title">Data Disclosees</h3>
+					</div>
+
+    	<ul class="list-group">
+    		@for(dataDisclosee <- newFormat.getDataDisclosees()){
+    			<li class="list-group-item">@dataDisclosee</li>
+    		}
+    	</ul>
+    	
+    	</div>
+    	</div>
+    	</div>
