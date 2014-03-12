@@ -10,7 +10,7 @@ New Data Formats (Nature of work...) : 107
 
 Neither Format : 0
 
-Purpose count : 23
+Purpose count : 11
 Data Classes count : 54
 Sensitive Data count : 17
 Data Subjects count : 76

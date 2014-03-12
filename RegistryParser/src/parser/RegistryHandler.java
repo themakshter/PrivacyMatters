@@ -198,11 +198,7 @@ public class RegistryHandler extends DefaultHandler {
 			document = (BasicDBObject) JSON.parse(gson.toJson(generalStats));
 			collection.insert(document);
 			client.close();
-			System.out.println(gson.toJson(dataPurposeSet));
-			System.out.println(gson.toJson(dataClassSet));
-			System.out.println(gson.toJson(sensitiveDataSet));
-			System.out.println(gson.toJson(dataSubjectSet));
-			System.out.println(gson.toJson(dataDiscloseeSet));
+			System.out.println(gson.toJson(natureOfWorkMap));
 			System.out.println("done!");
 			break;
 		case "RECORD":
