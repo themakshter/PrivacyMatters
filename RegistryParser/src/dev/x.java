@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 
 import com.google.gson.Gson;
 
@@ -17,10 +19,17 @@ public class x {
 	private static ArrayList<Purpose> oldFormat = new ArrayList<Purpose>();
 
 	public static void main(String[] args) throws IOException {
-		File input = new File(
-				"files/natureOfWorkDescriptions/nature_of_work_description_1.html");
-		String html = readFile(input.toString());
-		doStuff(html);
+//		File input = new File(
+//				"files/natureOfWorkDescriptions/nature_of_work_description_1.html");
+//		String html = readFile(input.toString());
+//		doStuff(html);
+		Gson gson = new Gson();
+		HashMap<String,HashSet<String>> x = new HashMap<String,HashSet<String>>();
+		x.put("hello",new HashSet<String>());
+		x.get("hello").add("h");
+		x.get("hello").add("y");
+		x.get("hello").add("z");
+		System.out.println(gson.toJson(x));
 		//System.out.println("done");
 	}
 

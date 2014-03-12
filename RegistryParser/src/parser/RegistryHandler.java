@@ -5,6 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 
 import models.GeneralStatistics;
@@ -12,6 +13,8 @@ import models.NewFormat;
 import models.OtherPurpose;
 import models.Purpose;
 import models.DataController;
+import models.RegistryListItem;
+import models.StatisticObject;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
@@ -27,7 +30,8 @@ import com.mongodb.util.JSON;
 
 public class RegistryHandler extends DefaultHandler {
 	private PrintWriter out;
-	private HashSet<String> purposes,dataClasses,sensitiveData,dataSubjects,dataDisclosees;
+	private HashSet<String> dataPurposeSet,dataClassSet,sensitiveDataSet,dataSubjectSet,dataDiscloseeSet;
+	private HashMap<String,StatisticObject> natureOfWorkMap,dataPurposeMap,dataClassMap,dataSubjectMap,sensitveDataMap,dataDiscloseeMap;
 	private static MongoClientURI dbURI;
 	private MongoClient client;
 	private static DB database;
@@ -36,7 +40,6 @@ public class RegistryHandler extends DefaultHandler {
 	private DataController dataController;
 	private GeneralStatistics generalStats;
 	private Gson gson;
-
 	private static final int REGISTRATION_NUMBER = 1;
 	private static final int ORGANISATION_NAME = 2;
 	private static final int COMPANIES_HOUSE_NUMBER = 3;
@@ -66,11 +69,17 @@ public class RegistryHandler extends DefaultHandler {
 		dbURI = new MongoClientURI(
 				"mongodb://admin:incorrect@ds033629.mongolab.com:33629/data_controllers");
 		client = new MongoClient(dbURI);
-		purposes = new HashSet<String>();
-		dataSubjects = new HashSet<String>();
-		dataClasses = new HashSet<String>();
-		sensitiveData =new HashSet<String>();
-		dataDisclosees = new HashSet<String>();
+		dataPurposeSet = new HashSet<String>();
+		dataSubjectSet = new HashSet<String>();
+		dataClassSet = new HashSet<String>();
+		sensitiveDataSet =new HashSet<String>();
+		dataDiscloseeSet = new HashSet<String>();
+		natureOfWorkMap = new HashMap<String,StatisticObject>();
+		dataPurposeMap = new HashMap<String,StatisticObject>();
+		dataClassMap = new HashMap<String,StatisticObject>();
+		dataSubjectMap = new HashMap<String,StatisticObject>();
+		sensitveDataMap = new HashMap<String,StatisticObject>();
+		dataDiscloseeMap = new HashMap<String,StatisticObject>();
 		// client = new MongoClient("localhost",27017);
 		// database = client.getDB("dataControllers");
 		database = client.getDB(dbURI.getDatabase());
@@ -161,11 +170,11 @@ public class RegistryHandler extends DefaultHandler {
 		BasicDBObject document;
 		switch (qName.toUpperCase()) {
 		case "REGISTRATION":
-			generalStats.setPurposesCount(purposes.size());
-			generalStats.setDataClassesCount(dataClasses.size());
-			generalStats.setSensitiveDataCount(sensitiveData.size());
-			generalStats.setDataSubjectsCount(dataSubjects.size());
-			generalStats.setDataDiscloseesCount(dataDisclosees.size());
+			generalStats.setPurposesCount(dataPurposeSet.size());
+			generalStats.setDataClassesCount(dataClassSet.size());
+			generalStats.setSensitiveDataCount(sensitiveDataSet.size());
+			generalStats.setDataSubjectsCount(dataSubjectSet.size());
+			generalStats.setDataDiscloseesCount(dataDiscloseeSet.size());
 			
 			out.println("Register statistics for 01/2014\n" 
 					+ "\nRecords : "+ generalStats.getRecordCount() 
@@ -189,6 +198,11 @@ public class RegistryHandler extends DefaultHandler {
 			document = (BasicDBObject) JSON.parse(gson.toJson(generalStats));
 			collection.insert(document);
 			client.close();
+			System.out.println(gson.toJson(dataPurposeSet));
+			System.out.println(gson.toJson(dataClassSet));
+			System.out.println(gson.toJson(sensitiveDataSet));
+			System.out.println(gson.toJson(dataSubjectSet));
+			System.out.println(gson.toJson(dataDiscloseeSet));
 			System.out.println("done!");
 			break;
 		case "RECORD":
@@ -327,7 +341,7 @@ public class RegistryHandler extends DefaultHandler {
 				oldFormatPurpose = new Purpose();
 				index += 1;
 				purpose = list.get(index);
-				purposes.add(purpose);
+				dataPurposeSet.add(purpose);
 				oldFormatPurpose.setPurpose(purpose);
 			}
 
@@ -357,7 +371,7 @@ public class RegistryHandler extends DefaultHandler {
 				while (!list.get(index + 1).toLowerCase()
 						.contains("data classes are")) {
 					dataSubject = list.get(index).toLowerCase();
-					dataSubjects.add(dataSubject);
+					dataSubjectSet.add(dataSubject);
 					oldFormatPurpose.addDataSubject(dataSubject);
 					index++;
 				}
@@ -369,7 +383,7 @@ public class RegistryHandler extends DefaultHandler {
 				while (!list.get(index + 1).toLowerCase()
 						.contains("disclosures")) {
 					dataClass = list.get(index).toLowerCase();
-					dataClasses.add(dataClass);
+					dataClassSet.add(dataClass);
 					oldFormatPurpose.addDataClass(dataClass);
 					index++;
 				}
@@ -381,7 +395,7 @@ public class RegistryHandler extends DefaultHandler {
 				index += 1;
 				while (!list.get(index + 1).toLowerCase().contains("transfer")) {
 					dataDisclosee = list.get(index).toLowerCase();
-					dataDisclosees.add(dataDisclosee);
+					dataDiscloseeSet.add(dataDisclosee);
 					oldFormatPurpose.addDataDisclosee(dataDisclosee);
 					index++;
 				}
@@ -435,6 +449,7 @@ public class RegistryHandler extends DefaultHandler {
 					index++;
 				}
 				newFormat.setNatureOfWork(natureOfWork);
+				addToMap(natureOfWorkMap,newFormat.getNatureOfWork());
 			}
 
 			// Reasons/purpose for processing
@@ -449,7 +464,6 @@ public class RegistryHandler extends DefaultHandler {
 					index += 1;
 					while (!headingsContain(list.get(index), headings)) {
 						dataPurpose = list.get(index);
-						purposes.add(dataPurpose);
 						newFormat.addPurpose(dataPurpose);
 						index++;
 					}
@@ -473,10 +487,10 @@ public class RegistryHandler extends DefaultHandler {
 						} else {
 							dataClass = list.get(index);
 							if (sensitive) {
-								sensitiveData.add(dataClass);
+								sensitiveDataSet.add(dataClass);
 								newFormat.addSensitiveData(dataClass);
 							} else {
-								dataClasses.add(dataClass);
+								dataClassSet.add(dataClass);
 								newFormat.addDataClass(dataClass);
 							}
 						}
@@ -496,7 +510,7 @@ public class RegistryHandler extends DefaultHandler {
 					index += 1;
 					while (!headingsContain(list.get(index), headings)) {
 						dataSubject = list.get(index);
-						dataSubjects.add(dataSubject);
+						dataSubjectSet.add(dataSubject);
 						newFormat.addDataSubject(dataSubject);
 						index++;
 					}
@@ -517,7 +531,7 @@ public class RegistryHandler extends DefaultHandler {
 					}
 					while (!headingsContain(list.get(index), headings)) {
 						dataDisclosee = list.get(index);
-						dataDisclosees.add(dataDisclosee);
+						dataDiscloseeSet.add(dataDisclosee);
 						newFormat.addDataDisclosee(dataDisclosee);
 						index++;
 					}
@@ -527,7 +541,7 @@ public class RegistryHandler extends DefaultHandler {
 			// other purposes
 			if (headingsContain(list.get(index), otherPurposes)) {
 				otherPurpose = new OtherPurpose();
-				purposes.add(list.get(index));
+				dataPurposeSet.add(list.get(index));
 				otherPurpose.setPurpose(list.get(index));
 				index += 1;
 				String statement = "";
@@ -554,7 +568,19 @@ public class RegistryHandler extends DefaultHandler {
 		dataController.setNewFormat(newFormat);
 	}
 
-	public static boolean headingsContain(String text, String[] headings) {
+	public void addToMap(HashMap<String,StatisticObject> map,String text){
+		RegistryListItem company = new RegistryListItem(dataController.getRegistrationNumber(),dataController.getOrganisationName());
+		if(!map.containsKey(text)){
+			StatisticObject statObject = new StatisticObject();
+			statObject.setType(text);
+			statObject.addCompany(company);
+			map.put(text, statObject);
+		}else{
+			map.get(text).addCompany(company);
+		}
+	}
+	
+	public boolean headingsContain(String text, String[] headings) {
 		text = text.toLowerCase();
 		boolean found = false;
 		for (String s : headings) {
