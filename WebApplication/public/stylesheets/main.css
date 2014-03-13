@@ -59,11 +59,7 @@ body {
 -------------------------------------------------- */
 /* Not required for template or sticky footer method. */
 
-.container {
-  width: auto;
-  max-width: 680px;
-  padding: 0 15px;
-}
+
 .container .text-muted {
   margin: 20px 0;
 }
@@ -72,5 +68,36 @@ body {
 	padding-bottom:30px;
 }
 
+.search-form{
+	left:25%;
+	margin-left:auto;
+	margin-right:auto;
+	text-align:center;
+    position:fixed;
+}
 
+.search-box{
+	width:100%;
+	height:40px;
+    font-size:20px;
+}
 
+.search-button{
+	margin-top:10px;
+	width:30%;
+}
+
+#searchtext {
+    height:40px;
+    font-size:20px;
+    margin-bottom: 10px;
+    width:100%;
+}
+
+#searchbutton {
+    width:35%;
+}
+
+#mainsearchform {
+    margin-top: 200px;
+}

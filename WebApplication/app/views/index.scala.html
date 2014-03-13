@@ -2,10 +2,14 @@
 
 @main("Privacy Matters") {
 
-	<form id="searchBar">
-		<input type="text" name="query">
-		<input type="submit" value="Search">
-	</form>
+	<form id="mainsearchform"class="search-form col-xs-12 col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-3">
+            <div class="form-group">
+                <input type="text" name="query" placeholder="find a data controller" class="form-control search" id="searchtext">
+            </div>
+        <div >
+            <button type="submit" class="btn btn-lg btn-primary" id="searchbutton">search</button>
+        </div>
+    </form>
 	
 	<a href="../registry">Registry</a>
 
