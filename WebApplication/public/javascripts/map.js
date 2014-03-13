@@ -9,7 +9,7 @@ var latlng;
 function initialize() {
 	var address = $("#address").text();
 	var postcode = $("#postcode").text();
-	var fullAddress = $("address").text();
+	var fullAddress = address + " " + postcode;
 	postcode = document.getElementById('postcode').innerHTML.replace("Postcode","");
 	postcode = postcode.replace(":","");
 	organisation = document.getElementById('organisationName').innerHTML.replace("Name","");
