@@ -3,7 +3,7 @@
 @main(dataController.getOrganisationName()) {
 	<h1 id="organisationName" class="text-center">@dataController.getOrganisationName()</h1>
 	<div class="row">
-		<div class="col-xs-6 col-sm-6">
+		<div class="col-xs-6">
 			<div class="page-header">
 				<h2>General Information</h2>
 			</div>
@@ -18,8 +18,7 @@
 				<dt>Contact in UK</dt><dd>@dataController.getUkContact()</dd>
 				<dt>Subject Access</dt><dd>@dataController.getSubjectAccess()</dd>
 		</div>
-		<div class="col-xs-6 col-sm-6">
-		
+		<div class="col-xs-6">
 			<div class="page-header">
 				<h2>Contact</h2>
 			</div>
@@ -46,7 +45,6 @@
 				<div id="map_canvas"></div>
 			</div>
 			}
-	
 			</div>
 		</div>
 	</div>
