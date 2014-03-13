@@ -7,20 +7,20 @@ var organisation;
 var latlng;
 
 function initialize() {
-	address = document.getElementById('address').innerHTML.replace("Address","");
-	address = address.replace(":","");
+	var address = $("#address").text();
+	var postcode = $("#postcode").text();
+	var fullAddress = $("address").text();
 	postcode = document.getElementById('postcode').innerHTML.replace("Postcode","");
 	postcode = postcode.replace(":","");
 	organisation = document.getElementById('organisationName').innerHTML.replace("Name","");
 	organisation = organisation.replace(":","");
-	var fullAddress = address + ", " + postcode;
 	var contentString = '<div id="content">' +
 		'<div id="siteNotice">' +
 		'</div>' +
-		'<h1 id="firstHeading" class="firstHeading">' + organisation + '</h1>' +
+		'<h4 id="firstHeading" class="firstHeading">' + organisation + '</h1>' +
 		'<div id="bodyContent">' +
-		'<p><b>Address</b> :  ' + address + '</p>' +
-		'<p><b>Postcode</b> : ' + postcode + '</p>' +
+		'<p>' + address +'</p>' +
+		'<p>' + postcode + '</p>' +
 		'</div>' +
 		'</div>';
 

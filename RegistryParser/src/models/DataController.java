@@ -121,7 +121,11 @@ public class DataController {
 	}
 
 	public void setCountry(String country) {
-		this.country = country;
+		this.country="";
+		for(String s : country.split(" ")){
+			this.country += s.substring(0, 1).toUpperCase() + s.substring(1).toLowerCase() + " ";
+		}
+		this.country = this.country.trim();
 	}
 
 	public String getFoiFlag() {

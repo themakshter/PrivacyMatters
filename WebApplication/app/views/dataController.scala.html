@@ -22,16 +22,15 @@
 			<div class="page-header">
 				<h2>Contact</h2>
 			</div>
-			<ul>
-				<li id="address"><b>Address</b> : @dataController.getAddress()</li>
-				<li id="postcode"><b>Postcode</b>: @dataController.getPostcode()</li>
-				<li id="country"><b>Country</b> : @dataController.getCountry()</li>
-			</ul>
-			<address id="address">
+			<address>
+				<div id="address">
 				@for(line <- dataController.getAddress()){ 
-					@line<br> 
+					@line,<br> 
 				}
+				@dataController.getCountry()</div><br>
+				<div id="postcode">
 				@dataController.getPostcode()
+				</div>
 			</address>
 			@if(dataController.getAddress().size() > 0){
 				<script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
