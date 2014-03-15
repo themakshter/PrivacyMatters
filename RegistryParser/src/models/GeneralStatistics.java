@@ -3,9 +3,44 @@ package models;
 public class GeneralStatistics {
 	private int recordCount, companiesHouseCount, addressCount, postcodeCount,
 			tradingNameCount, natureOfWorkCount, newBlobCount, oldBlobCount,
-			neitherBlobCount, errorCount, newErrorCount, oldErrorCount,
-			purposesCount, dataClassesCount,sensitiveDataCount,dataSubjectsCount,
-			dataDiscloseesCount;
+			neitherBlobCount, purposesCount, dataClassesCount,
+			sensitiveDataCount, dataSubjectsCount, dataDiscloseesCount;
+
+	public void setRecordCount(int recordCount) {
+		this.recordCount = recordCount;
+	}
+
+	public void setCompaniesHouseCount(int companiesHouseCount) {
+		this.companiesHouseCount = companiesHouseCount;
+	}
+
+	public void setAddressCount(int addressCount) {
+		this.addressCount = addressCount;
+	}
+
+	public void setPostcodeCount(int postcodeCount) {
+		this.postcodeCount = postcodeCount;
+	}
+
+	public void setTradingNameCount(int tradingNameCount) {
+		this.tradingNameCount = tradingNameCount;
+	}
+
+	public void setNatureOfWorkCount(int natureOfWorkCount) {
+		this.natureOfWorkCount = natureOfWorkCount;
+	}
+
+	public void setNewBlobCount(int newBlobCount) {
+		this.newBlobCount = newBlobCount;
+	}
+
+	public void setOldBlobCount(int oldBlobCount) {
+		this.oldBlobCount = oldBlobCount;
+	}
+
+	public void setNeitherBlobCount(int neitherBlobCount) {
+		this.neitherBlobCount = neitherBlobCount;
+	}
 
 	public void incrementRecordCount() {
 		this.recordCount++;
@@ -43,18 +78,6 @@ public class GeneralStatistics {
 		this.neitherBlobCount++;
 	}
 
-	public void incrementErrorCount() {
-		this.errorCount++;
-	}
-
-	public void incrementNewErrorCount() {
-		this.newErrorCount++;
-	}
-
-	public void incrementOldErrorCount() {
-		this.oldErrorCount++;
-	}
-
 	public void setPurposesCount(int count) {
 		this.purposesCount = count;
 	}
@@ -63,10 +86,10 @@ public class GeneralStatistics {
 		this.dataClassesCount = count;
 	}
 
-	public void setSensitiveDataCount(int count){
+	public void setSensitiveDataCount(int count) {
 		this.sensitiveDataCount = count;
 	}
-	
+
 	public void setDataSubjectsCount(int count) {
 		this.dataSubjectsCount = count;
 	}
@@ -111,18 +134,6 @@ public class GeneralStatistics {
 		return neitherBlobCount;
 	}
 
-	public int getErrorCount() {
-		return errorCount;
-	}
-
-	public int getNewErrorCount() {
-		return newErrorCount;
-	}
-
-	public int getOldErrorCount() {
-		return oldErrorCount;
-	}
-
 	public int getPurposesCount() {
 		return purposesCount;
 	}
@@ -130,8 +141,8 @@ public class GeneralStatistics {
 	public int getDataClassesCount() {
 		return dataClassesCount;
 	}
-	
-	public int getSensitiveDataCount(){
+
+	public int getSensitiveDataCount() {
 		return sensitiveDataCount;
 	}
 
@@ -143,5 +154,4 @@ public class GeneralStatistics {
 		return dataDiscloseesCount;
 	}
 
-	
 }

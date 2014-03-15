@@ -11,6 +11,7 @@ public class DatabaseBuilder {
 		//RegistryParser.parse(args[0]);
 		buildRegistry("files/registryFiles/registry_example_9.xml");
 		addStatistics();
+		System.out.println("done!");
 	}
 	
 	public static void buildRegistry(String fileName){

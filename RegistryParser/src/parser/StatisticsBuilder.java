@@ -28,7 +28,6 @@ import models.RegistryListItem;
 import models.StatisticObject;
 
 public class StatisticsBuilder {
-
 	private PrintWriter out;
 
 	private HashSet<String> natureOfWorkSet, dataPurposeSet, dataClassSet,
@@ -46,8 +45,10 @@ public class StatisticsBuilder {
 	public StatisticsBuilder() throws Exception {
 		gson = new Gson();
 		generalStats = new GeneralStatistics();
-		out = new PrintWriter(new BufferedWriter(new FileWriter("files/other/builderStatistics.txt")));
-		dbURI = new MongoClientURI("mongodb://admin:incorrect@ds033629.mongolab.com:33629/data_controllers");
+		out = new PrintWriter(new BufferedWriter(new FileWriter(
+				"files/other/builderStatistics.txt")));
+		dbURI = new MongoClientURI(
+				"mongodb://admin:incorrect@ds033629.mongolab.com:33629/data_controllers");
 		client = new MongoClient(dbURI);
 		natureOfWorkSet = new HashSet<String>();
 		dataPurposeSet = new HashSet<String>();
@@ -66,7 +67,7 @@ public class StatisticsBuilder {
 		database = client.getDB(dbURI.getDatabase());
 		String[] collections = { "generalStatistics", "natureOfWorkStats",
 				"purposesStats", "dataClassesStats", "dataSubjectsStats",
-				"dataDiscloseeStats" };
+				"dataDiscloseeStats","sensitiveDataStats" };
 		dropCollections(collections);
 	}
 
@@ -74,108 +75,137 @@ public class StatisticsBuilder {
 		String json;
 		collection = database.getCollection("registry");
 		DBCursor cursor = collection.find();
-		while(cursor.hasNext()){
+		generalStats.setRecordCount(cursor.size());
+
+		while (cursor.hasNext()) {
 			json = cursor.next().toString();
 			dataController = gson.fromJson(json, DataController.class);
 			analyseController(dataController);
 		}
-		
+
 		generalStats.setPurposesCount(dataPurposeSet.size());
 		generalStats.setDataClassesCount(dataClassSet.size());
 		generalStats.setSensitiveDataCount(sensitiveDataSet.size());
 		generalStats.setDataSubjectsCount(dataSubjectSet.size());
 		generalStats.setDataDiscloseesCount(dataDiscloseeSet.size());
-		
-		
+
 		addMapToDB(natureOfWorkMap, "natureOfWorkStats");
-		addMapToDB(sensitiveDataMap,"sensitiveDataStats");
+		addMapToDB(sensitiveDataMap, "sensitiveDataStats");
 		addMapToDB(dataPurposeMap, "purposesStats");
 		addMapToDB(dataClassMap, "dataClassesStats");
 		addMapToDB(dataSubjectMap, "dataSubjectsStats");
 		addMapToDB(dataDiscloseeMap, "dataDiscloseeStats");
-		System.out.println();
+		
+		collection = database.getCollection("generalStats");
+		BasicDBObject document = (BasicDBObject) JSON.parse(gson.toJson(generalStats));
+		collection.insert(document);
+		client.close();
+		out.close();
+		System.out.println("Added statistics");
 	}
-	
-	public void analyseController(DataController controller){
+
+	public void analyseController(DataController controller) {
+		// Companies House
+		if (controller.getCompaniesHouseNumber().length() == 8) {
+			generalStats.incrementCompaniesHouseCount();
+		}
+
+		// Trading Name
+		if (!controller.getTradingName().equals("(not given)")) {
+			generalStats.incrementTradingNameCount();
+		}
+
+		// Address
+		if (controller.getAddress().size() > 0) {
+			generalStats.incrementAddressCount();
+		}
+
+		// Postcode
+		if (!controller.getPostcode().equals("(not given)")) {
+			generalStats.incrementPostcodeCount();
+		}
+
 		String format = controller.getFormat();
-		if(format.equals("old")){
-			for(Purpose purpose: controller.getOldFormat()){
-				//purpose
+		if (format.equals("old")) {
+			generalStats.incrementOldBlobCount();
+			for (Purpose purpose : controller.getOldFormat()) {
+				// purpose
 				dataPurposeSet.add(purpose.getPurpose());
-				addToMap(dataPurposeMap,purpose.getPurpose());
-				
-				//data classes
-				for(String dataClass : purpose.getDataClasses()){
+				addToMap(dataPurposeMap, purpose.getPurpose());
+
+				// data classes
+				for (String dataClass : purpose.getDataClasses()) {
 					dataClassSet.add(dataClass);
-					addToMap(dataClassMap,dataClass);
+					addToMap(dataClassMap, dataClass);
 				}
-				
-				//data subjects
-				for(String dataSubject : purpose.getDataSubjects()){
+
+				// data subjects
+				for (String dataSubject : purpose.getDataSubjects()) {
 					dataSubjectSet.add(dataSubject);
-					addToMap(dataSubjectMap,dataSubject);
+					addToMap(dataSubjectMap, dataSubject);
 				}
-				
-				//data disclosees
-				for(String dataDisclosee : purpose.getDataDisclosees()){
+
+				// data disclosees
+				for (String dataDisclosee : purpose.getDataDisclosees()) {
 					dataDiscloseeSet.add(dataDisclosee);
-					addToMap(dataDiscloseeMap,dataDisclosee);
+					addToMap(dataDiscloseeMap, dataDisclosee);
 				}
-				
+
 			}
-			
-		}else if(format.equals("new")){
+
+		} else if (format.equals("new")) {
+			generalStats.incrementNewBlobCount();
+
 			NewFormat newFormat = controller.getNewFormat();
-			
-			addToMap(natureOfWorkMap,newFormat.getNatureOfWork());
+
+			addToMap(natureOfWorkMap, newFormat.getNatureOfWork());
 			natureOfWorkSet.add(newFormat.getNatureOfWork());
-			
-			//data classes 
-			for(String dataClass : newFormat.getDataClasses()){
-				if(checkValue(dataClass,newFormat.getDataClasses())){
+
+			// data classes
+			for (String dataClass : newFormat.getDataClasses()) {
+				if (checkValue(dataClass, newFormat.getDataClasses())) {
 					dataClassSet.add(dataClass);
-					addToMap(dataClassMap,dataClass);
-				}		
+					addToMap(dataClassMap, dataClass);
+				}
 			}
-			
-			//sensitive data
-			for(String sensitiveData: newFormat.getSensitiveData()){
+
+			// sensitive data
+			for (String sensitiveData : newFormat.getSensitiveData()) {
 				sensitiveDataSet.add(sensitiveData);
-				addToMap(sensitiveDataMap,sensitiveData);
+				addToMap(sensitiveDataMap, sensitiveData);
 			}
-			//data subjects
-			for(String dataSubject : newFormat.getDataSubjects()){
-				if(checkValue(dataSubject,newFormat.getDataSubjects())){
-				dataSubjectSet.add(dataSubject);
-				addToMap(dataSubjectMap,dataSubject);
+			// data subjects
+			for (String dataSubject : newFormat.getDataSubjects()) {
+				if (checkValue(dataSubject, newFormat.getDataSubjects())) {
+					dataSubjectSet.add(dataSubject);
+					addToMap(dataSubjectMap, dataSubject);
 				}
 			}
-			
-			//data disclosees
-			for(String dataDisclosee : newFormat.getDataDisclosees()){
-				if(checkValue(dataDisclosee,newFormat.getDataDisclosees())){
+
+			// data disclosees
+			for (String dataDisclosee : newFormat.getDataDisclosees()) {
+				if (checkValue(dataDisclosee, newFormat.getDataDisclosees())) {
 					dataDiscloseeSet.add(dataDisclosee);
-					addToMap(dataDiscloseeMap,dataDisclosee);
+					addToMap(dataDiscloseeMap, dataDisclosee);
 				}
 			}
-			
-			//Other purposes
-			for(OtherPurpose purpose : newFormat.getOtherPurposes()){
+
+			// Other purposes
+			for (OtherPurpose purpose : newFormat.getOtherPurposes()) {
 				dataPurposeSet.add(purpose.getPurpose());
-				addToMap(dataPurposeMap,purpose.getPurpose());
+				addToMap(dataPurposeMap, purpose.getPurpose());
 			}
 		}
 	}
-	
-	
-	public boolean checkValue(String item,ArrayList<String> list){
-		return (item.split(" ").length < 15 && list.size() > 1); 
+
+	public boolean checkValue(String item, ArrayList<String> list) {
+		return (item.split(" ").length < 15 && list.size() > 1);
 	}
-	
 
 	public void addMapToDB(HashMap<String, StatisticObject> map,
 			String collectionName) {
-		System.out.println("Adding statisic map to database for " + collectionName.replace("Stats", "") + "... (" + map.size()
+		System.out.println("Adding statisic map to database for "
+				+ collectionName.replace("Stats", "") + "... (" + map.size()
 				+ " items)");
 		collection = database.getCollection(collectionName);
 		for (Map.Entry<String, StatisticObject> entry : map.entrySet()) {

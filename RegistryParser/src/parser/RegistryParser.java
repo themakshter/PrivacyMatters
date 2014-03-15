@@ -5,17 +5,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
 
-import models.GeneralStatistics;
 import models.NewFormat;
 import models.OtherPurpose;
 import models.Purpose;
 import models.DataController;
-import models.RegistryListItem;
-import models.StatisticObject;
+
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
@@ -41,9 +36,9 @@ public class RegistryParser extends DefaultHandler {
 
 	// Other
 	private DataController dataController;
-	private GeneralStatistics generalStats;
 	private Gson gson;
-
+	int count;
+	
 	// Tags for parser
 	private int type = 0;
 	private static final int REGISTRATION_NUMBER = 1;
@@ -69,8 +64,7 @@ public class RegistryParser extends DefaultHandler {
 
 	public RegistryParser() throws IOException {
 		gson = new Gson();
-		generalStats = new GeneralStatistics();
-		out = new PrintWriter(new BufferedWriter(new FileWriter("files/other/parsingStatistics.txt")));
+		out = new PrintWriter(new BufferedWriter(new FileWriter("files/other/Errors.txt")));
 		dbURI = new MongoClientURI("mongodb://admin:incorrect@ds033629.mongolab.com:33629/data_controllers");
 		client = new MongoClient(dbURI);
 		// client = new MongoClient("localhost",27017);
@@ -90,8 +84,8 @@ public class RegistryParser extends DefaultHandler {
 			break;
 		case "RECORD":
 			type = RECORD;
+			count++;
 			dataController = new DataController();
-			generalStats.incrementRecordCount();
 			break;
 		case "REGISTRATION_NUMBER":
 			type = REGISTRATION_NUMBER;
@@ -101,7 +95,6 @@ public class RegistryParser extends DefaultHandler {
 			break;
 		case "COMPANIES_HOUSE_NUMBER":
 			type = COMPANIES_HOUSE_NUMBER;
-			generalStats.incrementCompaniesHouseCount();
 			break;
 		case "ORGANISATION_ADDRESS_LINE_1":
 			type = ADDRESS_1;
@@ -119,7 +112,6 @@ public class RegistryParser extends DefaultHandler {
 			type = ADDRESS_5;
 			break;
 		case "ORGANISATION_POSTCODE":
-			generalStats.incrementPostcodeCount();
 			type = POSTCODE;
 			break;
 		case "ORGANISATION_COUNTRY":
@@ -139,7 +131,6 @@ public class RegistryParser extends DefaultHandler {
 			break;
 		case "TRADING_NAMES":
 			type = TRADING_NAME;
-			generalStats.incrementTradingNameCount();
 			break;
 		case "CONTACT_IN_UK_C1":
 			type = UK_CONTACT;
@@ -149,7 +140,6 @@ public class RegistryParser extends DefaultHandler {
 			break;
 		case "NATURE_OF_WORK_DESCRIPTION":
 			type = NATURE_OF_WORK;
-			generalStats.incrementNatureOfWorkCount();
 			break;
 		default:
 			break;
@@ -162,39 +152,14 @@ public class RegistryParser extends DefaultHandler {
 		BasicDBObject document;
 		switch (qName.toUpperCase()) {
 		case "REGISTRATION":
-
-			out.println("Register statistics for 01/2014\n" + "\nRecords : "
-					+ generalStats.getRecordCount()
-					+ "\nCompanies House Numbers : "
-					+ generalStats.getCompaniesHouseCount() + "\nPostcodes : "
-					+ generalStats.getPostcodeCount() + "\nTrading Names : "
-					+ generalStats.getTradingNameCount()
-					+ "\nNature of Work Descriptions : "
-					+ generalStats.getNatureOfWorkCount()
-					+ "\nOld Data Formats (Purpose 1...) : "
-					+ generalStats.getOldBlobCount()
-					+ "\nNew Data Formats (Nature of work...) : "
-					+ generalStats.getNewBlobCount() + "\n\nNeither Format : "
-					+ generalStats.getNeitherBlobCount()
-					+ "\n\nErrors in parsing : " + generalStats.getErrorCount()
-					+ "\nNew format errors : "
-					+ generalStats.getNewErrorCount() + "\nOld error count :"
-					+ generalStats.getOldErrorCount());
-
-			// addMap(map, collection);
-
-			collection = database.getCollection("generalStatistics");
-			document = (BasicDBObject) JSON.parse(gson.toJson(generalStats));
-			collection.insert(document);
 			client.close();
 			out.close();
-
 			System.out.println("Registry filled!");
 			break;
 		case "RECORD":
-			System.out.println(generalStats.getRecordCount());
 			document = (BasicDBObject) JSON.parse(gson.toJson(dataController));
 			collection.insert(document);
+			System.out.println(count);
 		default:
 			break;
 
@@ -293,25 +258,19 @@ public class RegistryParser extends DefaultHandler {
 		}
 		try {
 			if (heading.contains("Nature")) {
-				generalStats.incrementNewBlobCount();
 				dataController.setFormat("new");
 				newFormat(list);
 			} else if (heading.contains("Purpose")) {
-				generalStats.incrementOldBlobCount();
 				dataController.setFormat("old");
 				oldFormat(list);
 				dataController.convertOldFormatToNewFormat();
 			} else {
-				generalStats.incrementNeitherBlobCount();
 				dataController.setFormat("neither");
 			}
 		} catch (Exception e) {
-			generalStats.incrementErrorCount();
 			String format = dataController.getFormat();
 			if (format.equals("old")) {
-				generalStats.incrementOldErrorCount();
 			} else if (format.equals("new")) {
-				generalStats.incrementNewErrorCount();
 			}
 			out.println(html);
 		}
