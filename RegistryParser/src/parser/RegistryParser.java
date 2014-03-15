@@ -203,9 +203,6 @@ public class RegistryParser extends DefaultHandler {
 			type = 0;
 			break;
 		case POSTCODE:
-			if (dataController.getAddress().size() > 0) {
-
-			}
 			dataController.setPostcode(new String(ch, start, length));
 			type = 0;
 			break;

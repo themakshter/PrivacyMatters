@@ -30,8 +30,6 @@ import models.StatisticObject;
 public class StatisticsBuilder {
 	private PrintWriter out;
 
-	private HashSet<String> natureOfWorkSet, dataPurposeSet, dataClassSet,
-			sensitiveDataSet, dataSubjectSet, dataDiscloseeSet;
 	private HashMap<String, StatisticObject> natureOfWorkMap, dataPurposeMap,
 			dataClassMap, dataSubjectMap, sensitiveDataMap, dataDiscloseeMap;
 	private static MongoClientURI dbURI;
@@ -50,12 +48,6 @@ public class StatisticsBuilder {
 		dbURI = new MongoClientURI(
 				"mongodb://admin:incorrect@ds033629.mongolab.com:33629/data_controllers");
 		client = new MongoClient(dbURI);
-		natureOfWorkSet = new HashSet<String>();
-		dataPurposeSet = new HashSet<String>();
-		dataSubjectSet = new HashSet<String>();
-		dataClassSet = new HashSet<String>();
-		sensitiveDataSet = new HashSet<String>();
-		dataDiscloseeSet = new HashSet<String>();
 		natureOfWorkMap = new HashMap<String, StatisticObject>();
 		dataPurposeMap = new HashMap<String, StatisticObject>();
 		dataClassMap = new HashMap<String, StatisticObject>();
@@ -83,11 +75,11 @@ public class StatisticsBuilder {
 			analyseController(dataController);
 		}
 
-		generalStats.setPurposesCount(dataPurposeSet.size());
-		generalStats.setDataClassesCount(dataClassSet.size());
-		generalStats.setSensitiveDataCount(sensitiveDataSet.size());
-		generalStats.setDataSubjectsCount(dataSubjectSet.size());
-		generalStats.setDataDiscloseesCount(dataDiscloseeSet.size());
+		generalStats.setPurposesCount(dataPurposeMap.size());
+		generalStats.setDataClassesCount(dataClassMap.size());
+		generalStats.setSensitiveDataCount(sensitiveDataMap.size());
+		generalStats.setDataSubjectsCount(dataSubjectMap.size());
+		generalStats.setDataDiscloseesCount(dataDiscloseeMap.size());
 
 		addMapToDB(natureOfWorkMap, "natureOfWorkStats");
 		addMapToDB(sensitiveDataMap, "sensitiveDataStats");
@@ -130,24 +122,20 @@ public class StatisticsBuilder {
 			generalStats.incrementOldBlobCount();
 			for (Purpose purpose : controller.getOldFormat()) {
 				// purpose
-				dataPurposeSet.add(purpose.getPurpose());
 				addToMap(dataPurposeMap, purpose.getPurpose());
 
 				// data classes
 				for (String dataClass : purpose.getDataClasses()) {
-					dataClassSet.add(dataClass);
 					addToMap(dataClassMap, dataClass);
 				}
 
 				// data subjects
 				for (String dataSubject : purpose.getDataSubjects()) {
-					dataSubjectSet.add(dataSubject);
 					addToMap(dataSubjectMap, dataSubject);
 				}
 
 				// data disclosees
 				for (String dataDisclosee : purpose.getDataDisclosees()) {
-					dataDiscloseeSet.add(dataDisclosee);
 					addToMap(dataDiscloseeMap, dataDisclosee);
 				}
 
@@ -159,25 +147,21 @@ public class StatisticsBuilder {
 			NewFormat newFormat = controller.getNewFormat();
 
 			addToMap(natureOfWorkMap, newFormat.getNatureOfWork());
-			natureOfWorkSet.add(newFormat.getNatureOfWork());
-
+			
 			// data classes
 			for (String dataClass : newFormat.getDataClasses()) {
 				if (checkValue(dataClass, newFormat.getDataClasses())) {
-					dataClassSet.add(dataClass);
 					addToMap(dataClassMap, dataClass);
 				}
 			}
 
 			// sensitive data
 			for (String sensitiveData : newFormat.getSensitiveData()) {
-				sensitiveDataSet.add(sensitiveData);
 				addToMap(sensitiveDataMap, sensitiveData);
 			}
 			// data subjects
 			for (String dataSubject : newFormat.getDataSubjects()) {
 				if (checkValue(dataSubject, newFormat.getDataSubjects())) {
-					dataSubjectSet.add(dataSubject);
 					addToMap(dataSubjectMap, dataSubject);
 				}
 			}
@@ -185,14 +169,12 @@ public class StatisticsBuilder {
 			// data disclosees
 			for (String dataDisclosee : newFormat.getDataDisclosees()) {
 				if (checkValue(dataDisclosee, newFormat.getDataDisclosees())) {
-					dataDiscloseeSet.add(dataDisclosee);
 					addToMap(dataDiscloseeMap, dataDisclosee);
 				}
 			}
 
 			// Other purposes
 			for (OtherPurpose purpose : newFormat.getOtherPurposes()) {
-				dataPurposeSet.add(purpose.getPurpose());
 				addToMap(dataPurposeMap, purpose.getPurpose());
 			}
 		}
