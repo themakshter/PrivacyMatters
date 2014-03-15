@@ -9,7 +9,7 @@ import org.xml.sax.helpers.DefaultHandler;
 public class DatabaseBuilder {
 	public static void main(String[] args) {
 		//RegistryParser.parse(args[0]);
-		//DatabaseBuilder.buildRegistry("files/registryFiles/registry_example_9.xml");
+		buildRegistry("files/registryFiles/registry_example_9.xml");
 		addStatistics();
 	}
 	
@@ -32,7 +32,6 @@ public class DatabaseBuilder {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 	}
 	
 }

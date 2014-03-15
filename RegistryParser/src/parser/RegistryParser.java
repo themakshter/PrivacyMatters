@@ -30,17 +30,22 @@ import com.mongodb.MongoClientURI;
 import com.mongodb.util.JSON;
 
 public class RegistryParser extends DefaultHandler {
+	// Writer for some counts
 	private PrintWriter out;
-	private HashSet<String> natureOfWorkSet,dataPurposeSet,dataClassSet,sensitiveDataSet,dataSubjectSet,dataDiscloseeSet;
-	private HashMap<String,StatisticObject> natureOfWorkMap,dataPurposeMap,dataClassMap,dataSubjectMap,sensitiveDataMap,dataDiscloseeMap;
+
+	// MongoDB variables
 	private static MongoClientURI dbURI;
 	private MongoClient client;
 	private DB database;
 	private DBCollection collection;
-	private int type = 0;
+
+	// Other
 	private DataController dataController;
 	private GeneralStatistics generalStats;
 	private Gson gson;
+
+	// Tags for parser
+	private int type = 0;
 	private static final int REGISTRATION_NUMBER = 1;
 	private static final int ORGANISATION_NAME = 2;
 	private static final int COMPANIES_HOUSE_NUMBER = 3;
@@ -61,27 +66,13 @@ public class RegistryParser extends DefaultHandler {
 	private static final int NATURE_OF_WORK = 19;
 	private static final int REGISTRATION = 20;
 	private static final int RECORD = 21;
-	
+
 	public RegistryParser() throws IOException {
 		gson = new Gson();
 		generalStats = new GeneralStatistics();
-		out = new PrintWriter(new BufferedWriter(new FileWriter(
-				"files/other/parsingStatistics.txt")));
-		dbURI = new MongoClientURI(
-				"mongodb://admin:incorrect@ds033629.mongolab.com:33629/data_controllers");
+		out = new PrintWriter(new BufferedWriter(new FileWriter("files/other/parsingStatistics.txt")));
+		dbURI = new MongoClientURI("mongodb://admin:incorrect@ds033629.mongolab.com:33629/data_controllers");
 		client = new MongoClient(dbURI);
-		natureOfWorkSet = new HashSet<String>();
-		dataPurposeSet = new HashSet<String>();
-		dataSubjectSet = new HashSet<String>();
-		dataClassSet = new HashSet<String>();
-		sensitiveDataSet =new HashSet<String>();
-		dataDiscloseeSet = new HashSet<String>();
-		natureOfWorkMap = new HashMap<String,StatisticObject>();
-		dataPurposeMap = new HashMap<String,StatisticObject>();
-		dataClassMap = new HashMap<String,StatisticObject>();
-		dataSubjectMap = new HashMap<String,StatisticObject>();
-		sensitiveDataMap = new HashMap<String,StatisticObject>();
-		dataDiscloseeMap = new HashMap<String,StatisticObject>();
 		// client = new MongoClient("localhost",27017);
 		// database = client.getDB("dataControllers");
 		database = client.getDB(dbURI.getDatabase());
@@ -171,49 +162,38 @@ public class RegistryParser extends DefaultHandler {
 		BasicDBObject document;
 		switch (qName.toUpperCase()) {
 		case "REGISTRATION":
-			generalStats.setPurposesCount(dataPurposeSet.size());
-			generalStats.setDataClassesCount(dataClassSet.size());
-			generalStats.setSensitiveDataCount(sensitiveDataSet.size());
-			generalStats.setDataSubjectsCount(dataSubjectSet.size());
-			generalStats.setDataDiscloseesCount(dataDiscloseeSet.size());
-			
-			out.println("Register statistics for 01/2014\n" 
-					+ "\nRecords : "+ generalStats.getRecordCount() 
-					+ "\nCompanies House Numbers : " + generalStats.getCompaniesHouseCount()
-					+ "\nPostcodes : " + generalStats.getPostcodeCount() 
-					+ "\nTrading Names : " + generalStats.getTradingNameCount()
-					+ "\nNature of Work Descriptions : " + generalStats.getNatureOfWorkCount()
-					+ "\nOld Data Formats (Purpose 1...) : " + generalStats.getOldBlobCount()
-					+ "\nNew Data Formats (Nature of work...) : "+ generalStats.getNewBlobCount()
-					+ "\n\nNeither Format : " + generalStats.getNeitherBlobCount()
-					+ "\n\nPurpose count : " + generalStats.getPurposesCount() + " " + dataPurposeMap.size()
-					+ "\nData Classes count : " + generalStats.getDataClassesCount() + " " + dataClassMap.size()
-					+ "\nSensitive Data count : " + generalStats.getSensitiveDataCount()+ " " + sensitiveDataMap.size()
-					+ "\nData Subjects count : " + generalStats.getDataSubjectsCount()+ " " + dataSubjectMap.size()
-					+ "\nDataDisclosees count : " + generalStats.getDataDiscloseesCount()+ " " + dataDiscloseeMap.size()
-					+ "\nNature of Work count : " + natureOfWorkSet.size()  + " " + natureOfWorkMap.size()
+
+			out.println("Register statistics for 01/2014\n" + "\nRecords : "
+					+ generalStats.getRecordCount()
+					+ "\nCompanies House Numbers : "
+					+ generalStats.getCompaniesHouseCount() + "\nPostcodes : "
+					+ generalStats.getPostcodeCount() + "\nTrading Names : "
+					+ generalStats.getTradingNameCount()
+					+ "\nNature of Work Descriptions : "
+					+ generalStats.getNatureOfWorkCount()
+					+ "\nOld Data Formats (Purpose 1...) : "
+					+ generalStats.getOldBlobCount()
+					+ "\nNew Data Formats (Nature of work...) : "
+					+ generalStats.getNewBlobCount() + "\n\nNeither Format : "
+					+ generalStats.getNeitherBlobCount()
 					+ "\n\nErrors in parsing : " + generalStats.getErrorCount()
-					+ "\nNew format errors : " + generalStats.getNewErrorCount()
-					+ "\nOld error count :" + generalStats.getOldErrorCount());
-			
-			addMapToDB(natureOfWorkMap, "natureOfWorkStats");
-			addMapToDB(dataPurposeMap, "purposesStats");
-			addMapToDB(dataClassMap, "dataClassesStats");
-			addMapToDB(dataSubjectMap, "dataSubjectsStats");
-			addMapToDB(dataDiscloseeMap, "dataDiscloseeStats");
-			//addMap(map, collection);
-			
+					+ "\nNew format errors : "
+					+ generalStats.getNewErrorCount() + "\nOld error count :"
+					+ generalStats.getOldErrorCount());
+
+			// addMap(map, collection);
+
 			collection = database.getCollection("generalStatistics");
 			document = (BasicDBObject) JSON.parse(gson.toJson(generalStats));
 			collection.insert(document);
 			client.close();
 			out.close();
-			
-			System.out.println("done!");
+
+			System.out.println("Registry filled!");
 			break;
 		case "RECORD":
 			System.out.println(generalStats.getRecordCount());
-			document = (BasicDBObject)JSON.parse(gson.toJson(dataController));
+			document = (BasicDBObject) JSON.parse(gson.toJson(dataController));
 			collection.insert(document);
 		default:
 			break;
@@ -224,67 +204,70 @@ public class RegistryParser extends DefaultHandler {
 	public void characters(char ch[], int start, int length)
 			throws SAXException {
 		switch (type) {
-		 case REGISTRATION_NUMBER:
-		 dataController.setRegistrationNumber(new String(ch, start, length));
-		 type = 0;
-		 break;
-		 case ORGANISATION_NAME:
-		 dataController.setOrganisationName(new String(ch, start, length));
-		 type = 0;
-		 break;
-		 case COMPANIES_HOUSE_NUMBER:
-		 dataController
-		 .setCompaniesHouseNumber(new String(ch, start, length));
-		 type = 0;
-		 break;
-		 case ADDRESS_1:
-		 dataController.addAdressLine(new String(ch, start, length).trim());
-		 type = 0;
-		 break;
-		 case ADDRESS_2:
-		 dataController.addAdressLine(new String(ch, start, length).trim());
-		 type = 0;
-		 break;
-		 case ADDRESS_3:
-		 dataController.addAdressLine(new String(ch, start, length).trim());
-		 type = 0;
-		 break;
-		 case ADDRESS_4:
-		 dataController.addAdressLine(new String(ch, start, length).trim());
-		 type = 0;
-		 break;
-		 case ADDRESS_5:
-		 dataController.addAdressLine(new String(ch, start, length).trim());
-		 type = 0;
-		 break;
-		 case POSTCODE:
-		 dataController.setPostcode(new String(ch, start, length));
-		 type = 0;
-		 break;
-		 case COUNTRY:
-		 dataController.setCountry(new String(ch, start, length));
-		 type = 0;
-		 break;
+		case REGISTRATION_NUMBER:
+			dataController.setRegistrationNumber(new String(ch, start, length));
+			type = 0;
+			break;
+		case ORGANISATION_NAME:
+			dataController.setOrganisationName(new String(ch, start, length));
+			type = 0;
+			break;
+		case COMPANIES_HOUSE_NUMBER:
+			dataController
+					.setCompaniesHouseNumber(new String(ch, start, length));
+			type = 0;
+			break;
+		case ADDRESS_1:
+			dataController.addAdressLine(new String(ch, start, length).trim());
+			type = 0;
+			break;
+		case ADDRESS_2:
+			dataController.addAdressLine(new String(ch, start, length).trim());
+			type = 0;
+			break;
+		case ADDRESS_3:
+			dataController.addAdressLine(new String(ch, start, length).trim());
+			type = 0;
+			break;
+		case ADDRESS_4:
+			dataController.addAdressLine(new String(ch, start, length).trim());
+			type = 0;
+			break;
+		case ADDRESS_5:
+			dataController.addAdressLine(new String(ch, start, length).trim());
+			type = 0;
+			break;
+		case POSTCODE:
+			if (dataController.getAddress().size() > 0) {
+
+			}
+			dataController.setPostcode(new String(ch, start, length));
+			type = 0;
+			break;
+		case COUNTRY:
+			dataController.setCountry(new String(ch, start, length));
+			type = 0;
+			break;
 		case FOI:
 			dataController.setFoiFlag(new String(ch, start, length));
 			type = 0;
 			break;
-		 case START_DATE:
-		 dataController.setStartDate(new String(ch, start, length));
-		 type = 0;
-		 break;
-		 case END_DATE:
-		 dataController.setEndDate(new String(ch, start, length));
-		 type = 0;
-		 break;
+		case START_DATE:
+			dataController.setStartDate(new String(ch, start, length));
+			type = 0;
+			break;
+		case END_DATE:
+			dataController.setEndDate(new String(ch, start, length));
+			type = 0;
+			break;
 		case EXEMPT_FLAG:
 			dataController.setExemptFlag(new String(ch, start, length));
 			type = 0;
 			break;
-		 case TRADING_NAME:
-		 dataController.setTradingName(new String(ch, start, length));
-		 type = 0;
-		 break;
+		case TRADING_NAME:
+			dataController.setTradingName(new String(ch, start, length));
+			type = 0;
+			break;
 		case UK_CONTACT:
 			dataController.setUkContact(new String(ch, start, length));
 			type = 0;
@@ -330,7 +313,7 @@ public class RegistryParser extends DefaultHandler {
 			} else if (format.equals("new")) {
 				generalStats.incrementNewErrorCount();
 			}
-			out.println(html);   
+			out.println(html);
 		}
 	}
 
@@ -347,8 +330,6 @@ public class RegistryParser extends DefaultHandler {
 				oldFormatPurpose = new Purpose();
 				index += 1;
 				purpose = list.get(index);
-				dataPurposeSet.add(purpose);
-				addToMap(dataPurposeMap,purpose);
 				oldFormatPurpose.setPurpose(purpose);
 			}
 
@@ -378,8 +359,6 @@ public class RegistryParser extends DefaultHandler {
 				while (!list.get(index + 1).toLowerCase()
 						.contains("data classes are")) {
 					dataSubject = list.get(index).toLowerCase();
-					dataSubjectSet.add(dataSubject);
-					addToMap(dataSubjectMap,dataSubject);
 					oldFormatPurpose.addDataSubject(dataSubject);
 					index++;
 				}
@@ -391,8 +370,6 @@ public class RegistryParser extends DefaultHandler {
 				while (!list.get(index + 1).toLowerCase()
 						.contains("disclosures")) {
 					dataClass = list.get(index).toLowerCase();
-					dataClassSet.add(dataClass);
-					addToMap(dataClassMap,dataClass);
 					oldFormatPurpose.addDataClass(dataClass);
 					index++;
 				}
@@ -404,8 +381,6 @@ public class RegistryParser extends DefaultHandler {
 				index += 1;
 				while (!list.get(index + 1).toLowerCase().contains("transfer")) {
 					dataDisclosee = list.get(index).toLowerCase();
-					dataDiscloseeSet.add(dataDisclosee);
-					addToMap(dataDiscloseeMap,dataDisclosee);
 					oldFormatPurpose.addDataDisclosee(dataDisclosee);
 					index++;
 				}
@@ -436,17 +411,18 @@ public class RegistryParser extends DefaultHandler {
 
 	public void newFormat(ArrayList<String> list) {
 		String[] headings = { "description of processing",
-				"classes of information processed", "information is processed about",
+				"classes of information processed",
+				"information is processed about",
 				"information may be shared with",
 				"reasons/purposes for processing", "transfer",
 				"crime prevention", "and advisory services",
 				"trading and sharing personal information",
 				"providing financial services and advice",
 				"undertaking research" };
-		String[] otherPurposes = {"crime prevention", "and advisory services",
+		String[] otherPurposes = { "crime prevention", "and advisory services",
 				"trading and sharing personal information",
 				"providing financial services and advice",
-				"undertaking research"};
+				"undertaking research" };
 		int index = 0;
 		NewFormat newFormat = new NewFormat();
 		OtherPurpose otherPurpose;
@@ -459,8 +435,7 @@ public class RegistryParser extends DefaultHandler {
 					index++;
 				}
 				newFormat.setNatureOfWork(natureOfWork);
-				natureOfWorkSet.add(newFormat.getNatureOfWork());
-				addToMap(natureOfWorkMap,newFormat.getNatureOfWork());
+
 			}
 
 			// Reasons/purpose for processing
@@ -486,10 +461,12 @@ public class RegistryParser extends DefaultHandler {
 				boolean sensitive = false;
 				dataClass = "";
 				index += 1;
-				if (headingsContain(list.get(index + 1), headings)) { //only one line
+				if (headingsContain(list.get(index + 1), headings)) { // only
+																		// one
+																		// line
 					dataClass = list.get(index);
 				} else {
-					if(!list.get(index + 1).contains("sensitive classes")){
+					if (!list.get(index + 1).contains("sensitive classes")) {
 						index += 1;
 					}
 					while (!headingsContain(list.get(index), headings)) {
@@ -498,14 +475,9 @@ public class RegistryParser extends DefaultHandler {
 						} else {
 							dataClass = list.get(index);
 							if (sensitive) {
-								sensitiveDataSet.add(dataClass);
-								addToMap(sensitiveDataMap,dataClass);
+
 								newFormat.addSensitiveData(dataClass);
 							} else {
-								if(dataClass.split(" ").length < 15){
-									dataClassSet.add(dataClass);
-									addToMap(dataClassMap,dataClass);
-								}								
 								newFormat.addDataClass(dataClass);
 							}
 						}
@@ -513,20 +485,20 @@ public class RegistryParser extends DefaultHandler {
 					}
 				}
 			}
-			
+
 			// Who the information is processed about
 			if (list.get(index).contains("information is processed about")) {
 				dataSubject = "";
 				index += 1;
-				if (headingsContain(list.get(index + 1), headings)) { //only one line
+				if (headingsContain(list.get(index + 1), headings)) { // only
+																		// one
+																		// line
 					dataSubject = list.get(index);
 					newFormat.addDataSubject(dataSubject);
 				} else {
 					index += 1;
 					while (!headingsContain(list.get(index), headings)) {
 						dataSubject = list.get(index);
-						dataSubjectSet.add(dataSubject);
-						addToMap(dataSubjectMap,dataSubject);
 						newFormat.addDataSubject(dataSubject);
 						index++;
 					}
@@ -547,19 +519,16 @@ public class RegistryParser extends DefaultHandler {
 					}
 					while (!headingsContain(list.get(index), headings)) {
 						dataDisclosee = list.get(index);
-						dataDiscloseeSet.add(dataDisclosee);
-						addToMap(dataDiscloseeMap,dataDisclosee);
 						newFormat.addDataDisclosee(dataDisclosee);
 						index++;
 					}
 				}
 			}
-			
+
 			// other purposes
-			if (headingsContain(list.get(index), otherPurposes) && list.get(index).split(" ").length < 10) {
+			if (headingsContain(list.get(index), otherPurposes)
+					&& list.get(index).split(" ").length < 10) {
 				otherPurpose = new OtherPurpose();
-				dataPurposeSet.add(list.get(index));
-				addToMap(dataPurposeMap,list.get(index));
 				otherPurpose.setPurpose(list.get(index));
 				index += 1;
 				String statement = "";
@@ -569,8 +538,7 @@ public class RegistryParser extends DefaultHandler {
 				}
 				otherPurpose.setStatement(statement);
 				newFormat.addOtherPurpose(otherPurpose);
-			}			
-			
+			}
 
 			// Transfer
 			if (list.get(index).contains("Transfers")) {
@@ -585,35 +553,7 @@ public class RegistryParser extends DefaultHandler {
 
 		dataController.setNewFormat(newFormat);
 	}
-	
-	public void addMapToDB(HashMap<String,StatisticObject> map,String collectionName){
-		System.out.println("Adding statisic map to database... (" + map.size() + " items)");
-		collection = database.getCollection(collectionName);
-		for(Map.Entry<String, StatisticObject> entry : map.entrySet()){
-			BasicDBObject document = (BasicDBObject)JSON.parse(gson.toJson(entry.getValue()));
-			collection.insert(document);
-		}
-	}
 
-	public void addToMap(HashMap<String,StatisticObject> map,String text){
-		RegistryListItem company = new RegistryListItem(dataController.getRegistrationNumber(),dataController.getOrganisationName());
-		if(!map.containsKey(text)){
-			StatisticObject statObject = new StatisticObject();
-			statObject.setType(text);
-			statObject.addCompany(company);
-			map.put(text, statObject);
-		}else{
-			map.get(text).addCompany(company);
-		}
-	}
-	
-	public void dropCollections(String[] collectionNames){
-		for(String collectionName : collectionNames){
-			collection = database.getCollection(collectionName);
-			collection.drop();
-		}
-	}
-	
 	public boolean headingsContain(String text, String[] headings) {
 		text = text.toLowerCase();
 		boolean found = false;
