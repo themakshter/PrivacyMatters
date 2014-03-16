@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 
@@ -23,13 +24,40 @@ public class x {
 //				"files/natureOfWorkDescriptions/nature_of_work_description_1.html");
 //		String html = readFile(input.toString());
 //		doStuff(html);
-		Gson gson = new Gson();
-		HashMap<String,HashSet<String>> x = new HashMap<String,HashSet<String>>();
-		x.put("hello",new HashSet<String>());
-		x.get("hello").add("h");
-		x.get("hello").add("y");
-		x.get("hello").add("z");
-		System.out.println(gson.toJson(x));
+//		Gson gson = new Gson();
+//		HashMap<String,HashSet<String>> x = new HashMap<String,HashSet<String>>();
+//		x.put("hello",new HashSet<String>());
+//		x.get("hello").add("h");
+//		x.get("hello").add("y");
+//		x.get("hello").add("z");
+//		System.out.println(gson.toJson(x));
+//		ArrayList<Integer> list = new ArrayList<Integer>();
+//		list.add(3);
+//		list.add(3);
+//		list.add(1);
+//		list.add(0);
+//		list.add(9);
+//		list.add(5);
+//		System.out.println("normal positions");
+//		for(Integer i: list){
+//			System.out.println(i);
+//		}
+//		Collections.sort(list);
+//		System.out.println("soreted");
+//		for(Integer i:list){
+//			System.out.println(i);
+//		}
+//		
+//		if(list.size() % 2 ==0){
+//			int middle = list.size()/2;
+//			middle = (list.get(middle - 1) + list.get(middle))/2;
+//			System.out.println("median in this " + list.get(middle));
+//		}else{	//odd number
+//			int middle = Math.round(list.size() / 2);
+//			System.out.println("median in this " + list.get(middle));
+//		}
+//		
+//		
 		//System.out.println("done");
 	}
 

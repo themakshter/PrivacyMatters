@@ -21,6 +21,7 @@ import com.mongodb.util.JSON;
 
 import models.DataController;
 import models.GeneralStatistics;
+import models.NatureOfWorkObject;
 import models.NewFormat;
 import models.OtherPurpose;
 import models.Purpose;
@@ -30,8 +31,9 @@ import models.StatisticObject;
 public class StatisticsBuilder {
 	private PrintWriter out;
 
-	private HashMap<String, StatisticObject> natureOfWorkMap, dataPurposeMap,
+	private HashMap<String, StatisticObject> dataPurposeMap,
 			dataClassMap, dataSubjectMap, sensitiveDataMap, dataDiscloseeMap;
+	private HashMap<String, NatureOfWorkObject> natureOfWorkMap;
 	private static MongoClientURI dbURI;
 	private MongoClient client;
 	private DB database;
@@ -48,7 +50,7 @@ public class StatisticsBuilder {
 		dbURI = new MongoClientURI(
 				"mongodb://admin:incorrect@ds033629.mongolab.com:33629/data_controllers");
 		client = new MongoClient(dbURI);
-		natureOfWorkMap = new HashMap<String, StatisticObject>();
+		natureOfWorkMap = new HashMap<String, NatureOfWorkObject>();
 		dataPurposeMap = new HashMap<String, StatisticObject>();
 		dataClassMap = new HashMap<String, StatisticObject>();
 		dataSubjectMap = new HashMap<String, StatisticObject>();
@@ -81,7 +83,8 @@ public class StatisticsBuilder {
 		generalStats.setDataSubjectsCount(dataSubjectMap.size());
 		generalStats.setDataDiscloseesCount(dataDiscloseeMap.size());
 
-		addMapToDB(natureOfWorkMap, "natureOfWorkStats");
+		
+		addNatureOfWorkToDB();
 		addMapToDB(sensitiveDataMap, "sensitiveDataStats");
 		addMapToDB(dataPurposeMap, "purposesStats");
 		addMapToDB(dataClassMap, "dataClassesStats");
@@ -143,10 +146,9 @@ public class StatisticsBuilder {
 
 		} else if (format.equals("new")) {
 			generalStats.incrementNewBlobCount();
-
 			NewFormat newFormat = controller.getNewFormat();
 
-			addToMap(natureOfWorkMap, newFormat.getNatureOfWork());
+			addToNatureOfWork();
 			
 			// data classes
 			for (String dataClass : newFormat.getDataClasses()) {
@@ -154,17 +156,22 @@ public class StatisticsBuilder {
 					addToMap(dataClassMap, dataClass);
 				}
 			}
-
+			addForMedianToNatureOfWork("dataClass");
+			
 			// sensitive data
 			for (String sensitiveData : newFormat.getSensitiveData()) {
 				addToMap(sensitiveDataMap, sensitiveData);
 			}
+			addForMedianToNatureOfWork("sensitiveData");
+			
 			// data subjects
 			for (String dataSubject : newFormat.getDataSubjects()) {
 				if (checkValue(dataSubject, newFormat.getDataSubjects())) {
 					addToMap(dataSubjectMap, dataSubject);
+					
 				}
 			}
+			addForMedianToNatureOfWork("dataSubject");
 
 			// data disclosees
 			for (String dataDisclosee : newFormat.getDataDisclosees()) {
@@ -172,7 +179,8 @@ public class StatisticsBuilder {
 					addToMap(dataDiscloseeMap, dataDisclosee);
 				}
 			}
-
+			addForMedianToNatureOfWork("dataDisclosee");
+			
 			// Other purposes
 			for (OtherPurpose purpose : newFormat.getOtherPurposes()) {
 				addToMap(dataPurposeMap, purpose.getPurpose());
@@ -184,6 +192,21 @@ public class StatisticsBuilder {
 		return (item.split(" ").length < 15 && list.size() > 1);
 	}
 
+	public void addNatureOfWorkToDB() {
+		NatureOfWorkObject object;
+		System.out.println("Adding statisic map to database for natureOfWork" + "... (" + natureOfWorkMap.size()
+				+ " items)");
+		collection = database.getCollection("natureOfWorkStats");
+		for (Map.Entry<String, NatureOfWorkObject> entry : natureOfWorkMap.entrySet()) {
+			object = entry.getValue();
+			object.calculateMedians();
+			BasicDBObject document = (BasicDBObject) JSON.parse(gson
+					.toJson(object));
+			collection.insert(document);
+		}
+		
+	}
+	
 	public void addMapToDB(HashMap<String, StatisticObject> map,
 			String collectionName) {
 		System.out.println("Adding statisic map to database for "
@@ -196,7 +219,7 @@ public class StatisticsBuilder {
 			collection.insert(document);
 		}
 	}
-
+	
 	public void addToMap(HashMap<String, StatisticObject> map, String text) {
 		RegistryListItem company = new RegistryListItem(
 				dataController.getRegistrationNumber(),
@@ -210,6 +233,44 @@ public class StatisticsBuilder {
 			map.get(text).addCompany(company);
 		}
 	}
+	
+	public void addToNatureOfWork() {
+		String natureOfWork = dataController.getNewFormat().getNatureOfWork();
+		RegistryListItem company = new RegistryListItem(
+				dataController.getRegistrationNumber(),
+				dataController.getOrganisationName());
+		if (!natureOfWorkMap.containsKey(natureOfWork)) {
+			NatureOfWorkObject statObject = new NatureOfWorkObject();
+			statObject.setType(natureOfWork);
+			statObject.addCompany(company);
+			natureOfWorkMap.put(natureOfWork, statObject);
+		} else {
+			natureOfWorkMap.get(natureOfWork).addCompany(company);
+		}
+	}
+	
+	public void addForMedianToNatureOfWork(String type) {
+		String natureOfWork = dataController.getNewFormat().getNatureOfWork();
+		switch(type){
+			case "dataClass":
+				natureOfWorkMap.get(natureOfWork).addDataClass(dataController.getNewFormat().getDataClasses().size());
+				break;
+			case "sensitiveData":
+				natureOfWorkMap.get(natureOfWork).addSensitiveData(dataController.getNewFormat().getSensitiveData().size());
+				break;
+			case "dataSubject":
+				natureOfWorkMap.get(natureOfWork).addDataSubject(dataController.getNewFormat().getDataSubjects().size());
+				break;
+			case "dataDisclosee":
+				natureOfWorkMap.get(natureOfWork).addDataDisclosee(dataController.getNewFormat().getDataDisclosees().size());
+				break;
+			default:
+				break;
+		}
+	}
+	
+	
+	
 
 	public void dropCollections(String[] collectionNames) {
 		for (String collectionName : collectionNames) {
