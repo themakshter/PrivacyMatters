@@ -122,10 +122,10 @@ public class Application extends Controller {
 				natMedian = median = size = 0;
 				break;
 			}
-			if (median > size) {
+			if (size > median) {
 				statement += "This is greater than the median for all data controllers, which is "
 						+ median + ".";
-			} else if (median < size) {
+			} else if (size < median) {
 				statement += "This is less than the median for all data controllers, which is "
 						+ median + ".";
 			} else {

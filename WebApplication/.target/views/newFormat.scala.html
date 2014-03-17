@@ -30,7 +30,7 @@
 					<div class="col-xs-4 col-sm-4">
 						<div class="panel panel-info">
 							<div class="panel-heading">
-								<h4 class="panel-title">Data Classes <a class="pull-right pop-over" data-toggle="popover" data-placement="top" data-content="@Application.getNewFormatMedianStatistic("dataClass",newFormat)"><span class="badge">@newFormat.getDataClasses.size()</span></a></h4>
+								<h4 class="panel-title">Data Classes <a class="pull-right pop-over" data-toggle="popover" data-placement="left" data-content="@Application.getNewFormatMedianStatistic("dataClass",newFormat)"><span class="badge">@newFormat.getDataClasses.size()</span></a></h4>
 							</div>
 							<ul class="list-group">
 								@for(dataClass <- newFormat.getDataClasses()){
@@ -41,7 +41,7 @@
 								<div class="panel-body">
 									<div class="panel panel-danger">
 										<div class="panel-heading">
-											<h3 class="panel-title">Sensitive Data <span class="badge pull-right">@newFormat.getSensitiveData.size()</span></h3>
+											<h3 class="panel-title">Sensitive Data <a class="pull-right pop-over" data-toggle="popover" data-placement="left" data-content="@Application.getNewFormatMedianStatistic("sensitiveData",newFormat)"><span class="badge pull-right">@newFormat.getSensitiveData.size()</span></a></h3>
 										</div>
 
 										<ul class="list-group">
@@ -60,7 +60,7 @@
 						<div class="clearfix visible-xs"></div>
 						<div class="panel panel-info">
 							<div class="panel-heading">
-								<h4 class="panel-title">Data Subjects <span class="badge pull-right">@newFormat.getDataSubjects().size()</span></h4>
+								<h4 class="panel-title">Data Subjects <a class="pull-right pop-over" data-toggle="popover" data-placement="left" data-content="@Application.getNewFormatMedianStatistic("dataSubject",newFormat)"><span class="badge pull-right">@newFormat.getDataSubjects().size()</span></a></h4>
 							</div>
 							<ul class="list-group">
 								@for(dataSubject <- newFormat.getDataSubjects()){
@@ -73,7 +73,7 @@
 					<div class="col-xs-4 col-sm-4">
 						<div class="panel panel-info">
 							<div class="panel-heading">
-								<h4 class="panel-title">Data Disclosees <span class="badge pull-right">@newFormat.getDataDisclosees().size()</span></h4>
+								<h4 class="panel-title">Data Disclosees <a class="pull-right pop-over" data-toggle="popover" data-placement="left" data-content="@Application.getNewFormatMedianStatistic("dataDisclosee",newFormat)"><span class="badge pull-right">@newFormat.getDataDisclosees().size()</span></a></h4>
 							</div>
 
 							<ul class="list-group">
