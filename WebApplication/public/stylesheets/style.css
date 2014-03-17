@@ -32,8 +32,10 @@
     cursor: pointer;
 }
 
-/* Sticky footer styles
--------------------------------------------------- */
+.popover{
+	width :300px;
+}
+
 html {
   position: relative;
   min-height: 100%;
@@ -50,12 +52,6 @@ body {
   height: 60px;
   background-color: #f5f5f5;
 }
-
-
-/* Custom page CSS
--------------------------------------------------- */
-/* Not required for template or sticky footer method. */
-
 
 .text-muted {
   margin: 20px 0;

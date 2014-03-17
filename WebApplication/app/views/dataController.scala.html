@@ -1,6 +1,8 @@
 @(dataController: DataController)
 
 @main(dataController.getOrganisationName()) {
+	<script src="@routes.Assets.at("javascripts/tooltip.js")" type="text/javascript"></script>
+	<script src="@routes.Assets.at("javascripts/popover.js")" type="text/javascript"></script>
 	<h1 id="organisationName" class="text-center">@dataController.getOrganisationName()</h1>
 	<div class="row">
 		<div class="col-xs-6">
