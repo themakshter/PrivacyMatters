@@ -4,7 +4,41 @@ public class GeneralStatistics {
 	private int recordCount, companiesHouseCount, addressCount, postcodeCount,
 			tradingNameCount, natureOfWorkCount, newBlobCount, oldBlobCount,
 			neitherBlobCount, purposesCount, dataClassesCount,
-			sensitiveDataCount, dataSubjectsCount, dataDiscloseesCount;
+			sensitiveDataCount, dataSubjectsCount, dataDiscloseesCount,
+			medianDataClasses, medianDataSubjects, medianDataDisclosees,
+			medianSensitiveData;
+
+	public int getMedianDataClasses() {
+		return medianDataClasses;
+	}
+
+	public void setMedianDataClasses(int medianDataClasses) {
+		this.medianDataClasses = medianDataClasses;
+	}
+
+	public int getMedianDataSubjects() {
+		return medianDataSubjects;
+	}
+
+	public void setMedianDataSubjects(int medianDataSubjects) {
+		this.medianDataSubjects = medianDataSubjects;
+	}
+
+	public int getMedianDataDisclosees() {
+		return medianDataDisclosees;
+	}
+
+	public void setMedianDataDisclosees(int medianDataDisclosees) {
+		this.medianDataDisclosees = medianDataDisclosees;
+	}
+
+	public int getMedianSensitiveData() {
+		return medianSensitiveData;
+	}
+
+	public void setMedianSensitiveData(int medianSensitiveData) {
+		this.medianSensitiveData = medianSensitiveData;
+	}
 
 	public void setRecordCount(int recordCount) {
 		this.recordCount = recordCount;
