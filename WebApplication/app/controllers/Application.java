@@ -1,9 +1,6 @@
 package controllers;
 
-import java.net.UnknownHostException;
 import java.util.ArrayList;
-
-
 import org.codehaus.jackson.JsonNode;
 
 import com.google.gson.*;
@@ -15,20 +12,7 @@ import models.*;
 
 
 public class Application extends Controller {
-	private static MongoClient client;
-	private static DB database;
-	  
-	public static void connectToDB() throws UnknownHostException{
-  	   	MongoClientURI dbURI = new MongoClientURI("mongodb://admin:incorrect@ds033629.mongolab.com:33629/data_controllers");
-  		client = new MongoClient(dbURI);
-  		database = client.getDB(dbURI.getDatabase());
-	  }
-	
-	  public static void closeDB(){
-		  client.close();
-	  }	
-	
-    public static Result index() {
+	  public static Result index() {
         return ok(index.render("Privacy Matters"));
     }
     
@@ -43,7 +27,7 @@ public class Application extends Controller {
     		DBObject controller;
     		String json;
     		JsonNode node;
-    		connectToDB();
+    		DB database = Util.connectToDB();
     		DBCollection registry = database.getCollection("registry");
     		DBCursor cursor = registry.find();
     		while(cursor.hasNext()){
@@ -54,11 +38,11 @@ public class Application extends Controller {
     			String name = node.findPath("organisationName").getTextValue();
     			regList.add(new RegistryListItem(regNo,name));
     		}
-    		closeDB();
+    		Util.closeDB();
+        	return regList;
     	}catch(Exception e){
-    		e.printStackTrace();
+    		return regList;
     	}
-    	return regList;
     }
     
     public static Result registryJSON(){
@@ -72,10 +56,11 @@ public class Application extends Controller {
 		String statement = "(cannot connect)";
 		String json;
 		try {
-			connectToDB();
+			DB database = Util.connectToDB();
 			Gson gson = new Gson();
 			DBCollection collection = database.getCollection("generalStats");
 			DBCursor cursor = collection.find();
+			
 			json = cursor.next().toString();
 			GeneralStatistics generalStats = gson.fromJson(json,
 					GeneralStatistics.class);
@@ -141,34 +126,38 @@ public class Application extends Controller {
 			} else {
 				statement += "Moreover, this is equal to the median for all data controllers having the same nature of work.";
 			}
-			closeDB();
+			Util.closeDB();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return statement;
 	}
 
-    public static DataController getDataController(String registrationNumber){
+	public static DataController getDataController(String registrationNumber){
     	DataController controller = new DataController();
     	try{
-    		connectToDB();
+    		DB database = Util.connectToDB();
     		DBCollection registry = database.getCollection("registry");
     		BasicDBObject query = new BasicDBObject("registrationNumber",registrationNumber);
     		DBCursor cursor = registry.find(query);
     		String json = cursor.next().toString();
-    		closeDB();
+    		Util.closeDB();
     		Gson gson = new Gson();
     		controller = gson.fromJson(json, DataController.class);
     		controller.fixName();
+    		return controller;
     	}catch(Exception e){
-    		System.out.println(e);
+    		return null;
     	}
-    	return controller;
     }
     
     public static Result dataController(String registrationNumber){
     	DataController controller = getDataController(registrationNumber);
-    	return ok(dataController.render(controller));
+    	if(controller == null){
+    		return notFound("<h1>DataController not found</h1>").as("text/html");
+    	}else{
+    		return ok(dataController.render(controller));
+    	}
     }
     
     public static Result dataControllerJSON(String registrationNumber){
