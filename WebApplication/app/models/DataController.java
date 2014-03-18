@@ -77,7 +77,12 @@ public class DataController {
 	}
 
 	public String getAddressAsLine() {
-		return "";
+		String address= "";
+		for(String line:this.address)
+		{
+			address += line+ " ";
+		}
+		return address;
 	}
 
 	public String getPostcode() {

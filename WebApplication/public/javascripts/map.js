@@ -9,11 +9,8 @@ var latlng;
 function initialize() {
 	var address = $("#address").text();
 	var postcode = $("#postcode").text();
-	var fullAddress = address + " " + postcode;
-	postcode = document.getElementById('postcode').innerHTML.replace("Postcode","");
-	postcode = postcode.replace(":","");
-	organisation = document.getElementById('organisationName').innerHTML.replace("Name","");
-	organisation = organisation.replace(":","");
+	var fullAddress = postcode;
+	var organisation = $("#organisationName").text();
 	var contentString = '<div id="content">' +
 		'<div id="siteNotice">' +
 		'</div>' +
@@ -37,7 +34,6 @@ function initialize() {
 				mapTypeId: google.maps.MapTypeId.ROADMAP
 			}
 			map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
-
 			marker = new google.maps.Marker({
 				map: map,
 				position: latlng
@@ -58,5 +54,9 @@ function initialize() {
 		}
 	});
 }
+
+function replaceAll(find, replace, str) {
+	  return str.replace(new RegExp(find, 'g'), replace);
+	}
 
 google.maps.event.addDomListener(window, 'load', initialize);

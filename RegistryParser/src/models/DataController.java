@@ -94,8 +94,10 @@ public class DataController {
 		String addressLine = "";
 		String[] words = line.toLowerCase().split(" ");
 		for (String s : words) {
-			s = s.substring(0, 1).toUpperCase() + s.substring(1);
-			addressLine += s + " ";
+			if (s.length() > 1) {
+				s = s.substring(0, 1).toUpperCase() + s.substring(1);
+				addressLine += s + " ";
+			}
 		}
 		address.add(addressLine.trim());
 	}
