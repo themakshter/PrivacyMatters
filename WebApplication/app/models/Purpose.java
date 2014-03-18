@@ -20,7 +20,7 @@ public class Purpose {
 	}
 	
 	public String getUniquePurpose(){
-		return purpose.split(",")[0].toLowerCase();
+		return purpose.replaceAll("\\| |/|,","_");
 	}
 
 	public void setPurpose(String purpose) {
