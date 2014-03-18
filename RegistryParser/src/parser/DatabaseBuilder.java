@@ -10,7 +10,7 @@ public class DatabaseBuilder {
 	public static void main(String[] args) {
 		//RegistryParser.parse(args[0]);
 		buildRegistry("files/registryFiles/registry_example_9.xml");
-		//addStatistics();
+		addStatistics();
 		System.out.println("done!");
 	}
 	

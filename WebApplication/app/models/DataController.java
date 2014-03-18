@@ -8,7 +8,7 @@ import java.util.GregorianCalendar;
 
 public class DataController {
 	private String registrationNumber, organisationName, companiesHouseNumber,
-			postcode, country, foiFlag, exemptFlag, tradingName, ukContact,
+			postcode, country, foiFlag, exemptFlag,foiStatement,exemptStatement,tradingName, ukContact,
 			subjectAccess, format;
 	private Calendar startDate, endDate;
 	private ArrayList<String> address;
@@ -95,6 +95,14 @@ public class DataController {
 	public void setCountry(String country) {
 		this.country = country;
 	}
+	
+	public String getFoiStatement() {
+		return foiStatement;
+	}
+
+	public void setFoiStatement(String foiStatement) {
+		this.foiStatement = foiStatement;
+	}
 
 	public String getFoiFlag() {
 		return foiFlag;
@@ -136,6 +144,14 @@ public class DataController {
 			e.printStackTrace();
 		}
 
+	}
+	
+	public String getExemptStatement() {
+		return exemptStatement;
+	}
+
+	public void setExemptStatement(String exemptStatement) {
+		this.exemptStatement = exemptStatement;
 	}
 
 	public String getExemptFlag() {
