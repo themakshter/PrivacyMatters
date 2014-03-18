@@ -8,8 +8,11 @@ import java.util.HashSet;
 
 public class DataController {
 	private String registrationNumber, organisationName, companiesHouseNumber,
-			postcode, country, foiFlag, exemptFlag, tradingName, ukContact,
+			postcode, country, foiFlag, exemptFlag,foiStatement,exemptStatement, tradingName, ukContact,
 			subjectAccess, format;
+	
+	
+
 	private Calendar startDate, endDate;
 	private ArrayList<String> address;
 
@@ -134,7 +137,22 @@ public class DataController {
 
 	public void setFoiFlag(String foiFlag) {
 		this.foiFlag = foiFlag;
+		if(foiFlag.equals("Y")){
+			foiStatement = "This data controller is a public authority under the Freedom of Information Act 2000 or a Scottish public authority under Freedom of Information (Scotland) Act 2000";
+		}else if(foiFlag.equals("N")){
+			foiStatement = "Not a public authority";
+		}
+		
 	}
+	
+	public String getFoiStatement() {
+		return foiStatement;
+	}
+
+	public void setFoiStatement(String foiStatement) {
+		this.foiStatement = foiStatement;
+	}
+
 
 	public String getStartDate() {
 		SimpleDateFormat sdf = new SimpleDateFormat("EEEEs, d MMMM, yyyy");
@@ -167,7 +185,6 @@ public class DataController {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	public String getExemptFlag() {
@@ -176,6 +193,19 @@ public class DataController {
 
 	public void setExemptFlag(String exemptFlag) {
 		this.exemptFlag = exemptFlag;
+		if(exemptFlag.equals("Y")){
+			exemptStatement = "This data controller does not need to notify the registry of some data that it processes";
+		}else if(exemptFlag.equals("N")){
+			exemptStatement = "This data controller must notify the registry of all the data it processes";
+		}
+	}
+	
+	public String getExemptStatement() {
+		return exemptStatement;
+	}
+
+	public void setExemptStatement(String exemptStatement) {
+		this.exemptStatement = exemptStatement;
 	}
 
 	public String getTradingName() {
