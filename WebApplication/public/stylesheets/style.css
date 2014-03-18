@@ -19,14 +19,23 @@
 	height :100%;
 }
 
-.dl-horizontal dt{
-	width:50%;
-	text-align:left;
+#freelance{
+	min-width:400px;
+	display:block;
+	margin-left:auto;
+	margin-right:auto;
 }
 
-.dl-horizontal dd{
-	width:50%;
+#freelance dt{
+	text-align:left;
+	width:40%;
 }
+
+#freelance dd{
+	width:60%;
+}
+
+
 
 .panel-heading {
     cursor: pointer;

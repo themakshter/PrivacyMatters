@@ -11,38 +11,18 @@
 			</div>
 			<dl class="dl-horizontal" id="freelance">
 				<dt>Registration Number</dt><dd>@dataController.getRegistrationNumber()</dd>
+				<dt>Start of Registration</dt><dd>@dataController.getStartDate()</dd>
+				<dt>End of Registration</dt><dd>@dataController.getEndDate()</dd>
 				<dt>Trading Name</dt><dd>@dataController.getTradingName()</dd>
 				<dt>Companies House Number</dt><dd>@dataController.getCompaniesHouseNumber()</dd>
-				<dt>Start Date</dt><dd>@dataController.getStartDate()</dd>
-				<dt>End Date</dt><dd>@dataController.getEndDate()</dd>
-				<dt>Freedom of Information Flag</dt><dd>@dataController.getFoiFlag()</dd>
-				<dt>Exempt from processing</dt><dd>@dataController.getExemptFlag()</dd>
-				<dt>Contact in UK</dt><dd>@dataController.getUkContact()</dd>
-				<dt>Subject Access</dt><dd>@dataController.getSubjectAccess()</dd>
-			</dl>
-			<p class="pull-left text-justify"><strong>Registration Number:</strong> @dataController.getRegistrationNumber()</p>
-			<div class="pull-right text-center date">
-				<p><strong>Registered From</strong><br>
-				@dataController.getStartDate() <strong>to</strong> @dataController.getEndDate()</p>
-			</div>
-			<div class="clearfix"></div>
-			<p><strong>Trading Name:</strong> @dataController.getTradingName()</p>
-			<p><strong>Companies House Number:</strong> @dataController.getCompaniesHouseNumber()
-			@if(!dataController.getCompaniesHouseNumber().equals("(not given)")){
-			 <br>(Visit data controller's page at <a target="_blank" href="http://data.companieshouse.gov.uk/doc/company/@dataController.getCompaniesHouseNumber()">Companies House</a> or <a target="_blank" href="https://opencorporates.com/companies/gb/@dataController.getCompaniesHouseNumber()">Open Corporates</a>)
-			}
-			<p>
-			@if(dataController.getExemptFlag().equals("Y")){
-				This data controller <strong>does not</strong> need to notify the registry of all the data it processes.
-			}else{
-				This data controller <strong>must</strong> to notify the registry of all the data it processes.
-			}
-			
-			@if(dataController.getFoiFlag().equals("Y")){
-				<p>This data controller is a <strong>public authority</strong> under the the Freedom of Information Act 2000</p>
-			}
-
-			
+				@if(!dataController.getCompaniesHouseNumber.equals("(none)")){
+				<dt>Companies House page</dt> <dd><a target="_blank" href="http://data.companieshouse.gov.uk/doc/company/@dataController.getCompaniesHouseNumber()">http://data.companieshouse.gov.uk/doc...</a></dd>
+				<dt>OpenCorporates page</dt> <dd><a target="_blank" href="https://opencorporates.com/companies/gb/@dataController.getCompaniesHouseNumber()">https://opencorporates.com/companies...</a></dd>
+				
+				}					
+				<dt>Public authority</dt><dd>@dataController.getFoiFlag()</dd>
+				<dt>Exempt from notification</dt><dd>@dataController.getExemptFlag()</dd>
+			</dl>				
 		</div>
 		<div class="col-xs-6 contact">
 			<div class="page-header">

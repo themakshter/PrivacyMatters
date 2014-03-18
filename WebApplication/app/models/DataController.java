@@ -20,14 +20,14 @@ public class DataController {
 	public DataController() {
 		registrationNumber = "";
 		organisationName = "";
-		companiesHouseNumber = "(not given)";
+		companiesHouseNumber = "(none)";
 		postcode = "(not given)";
 		country = "(not given)";
 		startDate = new GregorianCalendar(0,0,0);
 		endDate =  new GregorianCalendar(0,0,0);
 		foiFlag = "";
 		exemptFlag = "";
-		tradingName = "(not given)";
+		tradingName = "(none)";
 		ukContact = "";
 		subjectAccess = "";
 		format = "";
@@ -105,7 +105,7 @@ public class DataController {
 	}
 
 	public String getStartDate() {
-		SimpleDateFormat sdf = new SimpleDateFormat("d-MMM-yyyy");
+		SimpleDateFormat sdf = new SimpleDateFormat("d MMM yyyy");
 		String date = sdf.format(startDate.getTime());
 		return date;
 	}
@@ -122,7 +122,7 @@ public class DataController {
 	}
 
 	public String getEndDate() {
-		SimpleDateFormat sdf = new SimpleDateFormat("d-MMM-yyyy");
+		SimpleDateFormat sdf = new SimpleDateFormat("d MMM yyyy");
 		String date = sdf.format(endDate.getTime());
 		return date;
 	}

@@ -21,12 +21,12 @@ public class DataController {
 	public DataController() {
 		registrationNumber = "";
 		organisationName = "";
-		companiesHouseNumber = "(not given)";
+		companiesHouseNumber = "(none)";
 		postcode = "(not given)";
 		country = "(not given)";
 		foiFlag = "";
 		exemptFlag = "";
-		tradingName = "(not given)";
+		tradingName = "(none)";
 		ukContact = "";
 		subjectAccess = "";
 		format = "";
