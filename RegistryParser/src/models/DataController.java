@@ -133,7 +133,12 @@ public class DataController {
 	}
 
 	public void setFoiFlag(String foiFlag) {
-		this.foiFlag = foiFlag;
+		if(foiFlag.equals("Y")){
+			this.foiFlag = "Yes";
+		}else if(foiFlag.equals("N")){
+			this.foiFlag = "No";
+		}
+
 	}
 
 	public String getStartDate() {
@@ -175,7 +180,11 @@ public class DataController {
 	}
 
 	public void setExemptFlag(String exemptFlag) {
-		this.exemptFlag = exemptFlag;
+		if(exemptFlag.equals("Y")){
+			this.exemptFlag = "Yes";
+		}else if(exemptFlag.equals("N")){
+			this.exemptFlag = "No";
+		}
 	}
 
 	public String getTradingName() {
