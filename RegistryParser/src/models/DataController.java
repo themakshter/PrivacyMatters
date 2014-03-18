@@ -138,9 +138,9 @@ public class DataController {
 	public void setFoiFlag(String foiFlag) {
 		this.foiFlag = foiFlag;
 		if(foiFlag.equals("Y")){
-			foiStatement = "This data controller is a public authority under the Freedom of Information Act 2000 or a Scottish public authority under Freedom of Information (Scotland) Act 2000";
+			foiStatement = "This data controller is a public authority under the Freedom of Information Act 2000 or a Scottish public authority under Freedom of Information (Scotland) Act 2000.";
 		}else if(foiFlag.equals("N")){
-			foiStatement = "Not a public authority";
+			foiStatement = "Not a public authority.";
 		}
 		
 	}
@@ -194,9 +194,9 @@ public class DataController {
 	public void setExemptFlag(String exemptFlag) {
 		this.exemptFlag = exemptFlag;
 		if(exemptFlag.equals("Y")){
-			exemptStatement = "This data controller does not need to notify the registry of some data that it processes";
+			exemptStatement = "This data controller does not need to notify the registry of some data that it processes.";
 		}else if(exemptFlag.equals("N")){
-			exemptStatement = "This data controller must notify the registry of all the data it processes";
+			exemptStatement = "This data controller must notify the registry of all the data it processes.";
 		}
 	}
 	
