@@ -137,7 +137,7 @@ public class DataController {
 	}
 
 	public String getStartDate() {
-		SimpleDateFormat sdf = new SimpleDateFormat("EEEEs, d MMMM, yyyy");
+		SimpleDateFormat sdf = new SimpleDateFormat("d MMMM, yyyy");
 		String date = sdf.format(startDate.getTime());
 		return date;
 	}
@@ -154,7 +154,7 @@ public class DataController {
 	}
 
 	public String getEndDate() {
-		SimpleDateFormat sdf = new SimpleDateFormat("EEEE, d MMMM, yyyy");
+		SimpleDateFormat sdf = new SimpleDateFormat("d MMMM, yyyy");
 		String date = sdf.format(endDate.getTime());
 		return date;
 	}
