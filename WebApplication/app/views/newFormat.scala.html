@@ -107,9 +107,13 @@
 						</div>
 					</div>
 					<div class="row">
+						<div class="col-xs-4 col-sm-4"><div class="text-center graph-heading" id="left-heading"></div></div>
+						<div class="col-xs-4 col-sm-4"><div class="text-center graph-heading" id="middle-heading"></div></div>
+						<div class="col-xs-4 col-sm-4"><div class="text-center graph-heading" id="right-heading"></div></div>
+					</div>
+					<div class="row">
 						<div class="col-xs-4 col-sm-4">
 							
-							<div class="text-center graph-heading" id="left-heading"></div>
 							<div class="graph" id="left-graph" width="400"></div>
 							
 							<div class="hidden" id="dataClasses-size">@newFormat.getDataClasses().size()</div>
@@ -133,7 +137,6 @@
 
 						</div>
 						<div class="col-xs-4 col-sm-4">
-							<div class="text-center graph-heading" id="middle-heading"></div>
 							<div class="graph" id="middle-graph" width="400"></div>
 							<div class="hidden" id="dataSubjects-size">@newFormat.getDataSubjects().size()</div>
 							<div class="hidden" id="dataSubjects-median">@Values.getMedian("dataSubject")</div>
@@ -145,7 +148,6 @@
 							}
 						</div>
 						<div class="col-xs-4 col-sm-4">
-							<div class="text-center graph-heading" id="right-heading"></div>
 							<div class="graph" id="right-graph" width="400"></div>
 							
 							<div class="hidden" id="dataDisclosees-size">@newFormat.getDataDisclosees().size()</div>
