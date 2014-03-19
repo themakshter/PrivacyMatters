@@ -19,4 +19,8 @@ public class Util {
 	  public static void closeDB(){
 		  client.close();
 	  }	
+	  
+	  public static String getUniqueString(String st){
+		  return st.replaceAll("\\| |/|,","_");
+	  }
 }

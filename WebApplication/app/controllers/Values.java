@@ -4,6 +4,7 @@ import java.net.UnknownHostException;
 
 import models.GeneralStatistics;
 import models.NatureOfWorkObject;
+import models.StatisticObject;
 
 import com.google.gson.Gson;
 import com.mongodb.BasicDBObject;
@@ -16,10 +17,8 @@ public class Values extends Controller{
 
 	public static int getMedian(String type) {
 		try {
-			DB database;
 			String json;
-			database = Util.connectToDB();
-			DBCollection collection = database.getCollection("generalStats");
+			DBCollection collection = Util.connectToDB().getCollection("generalStats");
 			json = collection.find().next().toString();
 			Util.closeDB();
 			Gson gson = new Gson();
@@ -44,11 +43,9 @@ public class Values extends Controller{
 
 	public static int getNatureOfWorkMedian(String type,String natureOfWork){
 		try{
-			DB database;
 			String json;
 			Gson gson = new Gson();
-			database = Util.connectToDB();
-			DBCollection collection = database.getCollection("natureOfWorkStats");
+			DBCollection collection = Util.connectToDB().getCollection("natureOfWorkStats");
 			BasicDBObject query = new BasicDBObject("type",natureOfWork);
 			json = collection.find(query).next().toString();
 			NatureOfWorkObject nat = gson.fromJson(json,
@@ -70,12 +67,27 @@ public class Values extends Controller{
 		}
 	}
 	
+	public static int getNumberOfControllers(String type,String queryString){
+		String collectionName = type+"Stats";
+		 try{
+			 String json;
+			 Gson gson= new Gson();
+			 DBCollection collection= Util.connectToDB().getCollection(collectionName);
+			 BasicDBObject query = new BasicDBObject("type",queryString);
+			 json = collection.find(query).next().toString();
+			 StatisticObject statObject = gson.fromJson(json, StatisticObject.class);
+			 return statObject.getSize();
+		 }catch(Exception e){
+			 return 0;
+		 }
+	}
+	
 	public static int getNumberOfRecords(){
 		try{
-			DB database;
-			database = Util.connectToDB();
-			DBCollection collection = database.getCollection("registry");
-			return (int) collection.count();
+			DBCollection collection = Util.connectToDB().getCollection("registry");
+			int count = (int) collection.count();
+			Util.closeDB();
+			return (int) count;
 		}catch(Exception e){
 			return 0;
 		}

@@ -71,7 +71,7 @@ public class StatisticsBuilder {
 		// database = client.getDB("dataControllers");
 		database = client.getDB(dbURI.getDatabase());
 		String[] collections = { "generalStats", "natureOfWorkStats",
-				"purposesStats", "dataClassesStats", "dataSubjectsStats",
+				"purposeStats", "dataClassStats", "dataSubjectStats",
 				"dataDiscloseeStats", "sensitiveDataStats" };
 		dropCollections(collections);
 	}

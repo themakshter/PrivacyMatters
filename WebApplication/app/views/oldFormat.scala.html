@@ -7,13 +7,13 @@
 	@for(purpose <- purposes){
 		<div class="panel panel-default">
 			<div class="panel-heading purpose" data-toggle="collapse"
-				data-parent="#accordion" data-target=#@purpose.getUniquePurpose()>
+				data-parent="#accordion" data-target=#@Util.getUniqueString(purpose.getPurpose())>
 				<h3 class="panel-title purpose-title">
 					<a class="accordion-toggle">@purpose.getPurpose() <span
 						class="glyphicon glyphicon-plus pull-right"></span></a>
 				</h3>
 			</div>
-			<div id=@purpose.getUniquePurpose() class="panel-collapse collapse">
+			<div id=@Util.getUniqueString(purpose.getPurpose()) class="panel-collapse collapse">
 				<div class="panel-body">
 					<fieldset>
 						<legend>General</legend>

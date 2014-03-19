@@ -19,10 +19,6 @@ public class Purpose {
 		return purpose;
 	}
 	
-	public String getUniquePurpose(){
-		return purpose.replaceAll("\\| |/|,","_");
-	}
-
 	public void setPurpose(String purpose) {
 		this.purpose = purpose;
 	}

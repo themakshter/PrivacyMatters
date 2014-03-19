@@ -3,10 +3,6 @@ package models;
 public class OtherPurpose {
 	private String purpose,statement;
 
-	public String getUniqueName(){
-		return purpose.replaceAll("\\| |/|,","_");
-	}
-	
 	public String getPurpose() {
 		return purpose;
 	}

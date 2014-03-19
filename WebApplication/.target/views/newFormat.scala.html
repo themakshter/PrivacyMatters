@@ -146,13 +146,13 @@
 		@for(purpose <- newFormat.getOtherPurposes()){
 			<div class="panel panel-default">
 				<div class="panel-heading purpose" data-toggle="collapse"
-					data-parent="#accordion" data-target=#@purpose.getUniqueName()>
+					data-parent="#accordion" data-target=#@Util.getUniqueString(purpose.getPurpose())>
 					<h4 class="panel-title purpose-title">
 						<a class="accordion-toggle">@purpose.getPurpose() <span
 							class="glyphicon glyphicon-plus pull-right"></span></a>
 					</h4>
 				</div>
-				<div id=@purpose.getUniqueName() class="panel-collapse collapse">
+				<div id=@Util.getUniqueString(purpose.getPurpose()) class="panel-collapse collapse">
 					<div class="panel-body">@purpose.getStatement()</div>
 				</div>
 			</div>
