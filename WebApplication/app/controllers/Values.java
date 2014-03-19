@@ -50,6 +50,7 @@ public class Values extends Controller{
 			json = collection.find(query).next().toString();
 			NatureOfWorkObject nat = gson.fromJson(json,
 					NatureOfWorkObject.class);
+			Util.closeDB();
 			switch (type) {
 			case "dataClass":
 				return nat.getMedianDataClasses();
@@ -76,6 +77,7 @@ public class Values extends Controller{
 			 BasicDBObject query = new BasicDBObject("type",queryString);
 			 json = collection.find(query).next().toString();
 			 StatisticObject statObject = gson.fromJson(json, StatisticObject.class);
+			 Util.closeDB();
 			 return statObject.getSize();
 		 }catch(Exception e){
 			 //e.printStackTrace();
