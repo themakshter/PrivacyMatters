@@ -54,13 +54,8 @@
 							}
 
 						</div>
-						<div id="dataClasses-graph" width="400">
-						<div class="values" id="dataClass-size">@newFormat.getDataClasses().size()</div><div class="values" id="dataClass-median">@Values.getMedian("dataClass")</div><div class="values" id="dataClass-natMed">@Values.getNatureOfWorkMedian("dataClass",newFormat.getNatureOfWork())</div>
-						</div>
-						<div id="sensitiveData-graph" width="400">
-						<div class="values" id="sensitiveData-size">@newFormat.getSensitiveData().size()</div><div class="values" id="sensitiveData-median">@Values.getMedian("sensitiveData")</div><div class="values" id="sensitiveData-natMed">@Values.getNatureOfWorkMedian("sensitiveData",newFormat.getNatureOfWork())</div>
-						</div>
-											</div>
+						
+					</div>
 					<div class="col-xs-4 col-sm-4">
 						<div class="clearfix visible-xs"></div>
 						<div class="panel panel-info">
@@ -73,8 +68,6 @@
 								}
 							</ul>
 						</div>
-						<div id="dataSubjects-graph" width="400"></div>
-						<div class="values" id="dataSubject-size">@newFormat.getDataSubjects().size()</div><div class="values" id="dataSubject-median">@Values.getMedian("dataSubject")</div><div class="values" id="dataSubject-natMed">@Values.getNatureOfWorkMedian("dataSubject",newFormat.getNatureOfWork())</div>
 						
 					</div>
 					<div class="col-xs-4 col-sm-4">
@@ -90,10 +83,27 @@
 							</ul>
 
 						</div>
-						<div id="dataDisclosees-graph" width="400"></div>
-						<div class="values" id="dataDisclosee-size">@newFormat.getDataDisclosees().size()</div><div class="values" id="dataDisclosee-median">@Values.getMedian("dataDisclosee")</div><div class="values" id="dataDisclosee-natMed">@Values.getNatureOfWorkMedian("dataDisclosee",newFormat.getNatureOfWork())</div>
+						</div>
+				</div>
+				<div class="row">
+				<div class="col-xs-4 col-sm-4">
+				<div id="dataClasses-graph" width="400"></div>
+						<div class="values" id="dataClass-size">@newFormat.getDataClasses().size()</div><div class="values" id="dataClass-median">@Values.getMedian("dataClass")</div><div class="values" id="dataClass-natMed">@Values.getNatureOfWorkMedian("dataClass",newFormat.getNatureOfWork())</div>
 						
-					</div>
+						<div id="sensitiveData-graph" width="400"></div>
+						<div class="values" id="sensitiveData-size">@newFormat.getSensitiveData().size()</div><div class="values" id="sensitiveData-median">@Values.getMedian("sensitiveData")</div><div class="values" id="sensitiveData-natMed">@Values.getNatureOfWorkMedian("sensitiveData",newFormat.getNatureOfWork())</div>
+						
+				</div>
+				<div class="col-xs-4 col-sm-4">
+				<div id="dataSubjects-graph" width="400"></div>
+						<div class="values" id="dataSubject-size">@newFormat.getDataSubjects().size()</div><div class="values" id="dataSubject-median">@Values.getMedian("dataSubject")</div><div class="values" id="dataSubject-natMed">@Values.getNatureOfWorkMedian("dataSubject",newFormat.getNatureOfWork())</div>
+						
+				</div>
+				<div class="col-xs-4 col-sm-4">
+				<div id="dataDisclosees-graph" width="400"></div>
+						<div class="values" id="dataDisclosee-size">@newFormat.getDataDisclosees().size()</div><div class="values" id="dataDisclosee-median">@Values.getMedian("dataDisclosee")</div><div class="values" id="dataDisclosee-natMed">@Values.getNatureOfWorkMedian("dataDisclosee",newFormat.getNatureOfWork())</div>
+					
+				</div>
 				</div>
 			</div>
 		</div>
