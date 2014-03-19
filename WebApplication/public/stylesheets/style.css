@@ -35,7 +35,9 @@
 	width:60%;
 }
 
-
+.values{
+	display:none;
+}
 
 .panel-heading {
     cursor: pointer;

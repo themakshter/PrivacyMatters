@@ -9,7 +9,6 @@ import com.google.gson.Gson;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
-import com.mongodb.DBCursor;
 
 import play.mvc.Controller;
 
@@ -71,7 +70,14 @@ public class Values extends Controller{
 		}
 	}
 	
-	public static void getNumberOfRecords(){
-		
+	public static int getNumberOfRecords(){
+		try{
+			DB database;
+			database = Util.connectToDB();
+			DBCollection collection = database.getCollection("registry");
+			return (int) collection.count();
+		}catch(Exception e){
+			return 0;
+		}
 	}
 }

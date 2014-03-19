@@ -28,7 +28,7 @@
 				<div class="row">
 					<div class="col-xs-4 col-sm-4">
 						<div class="panel panel-info">
-							<div class="panel-heading">
+							<div class="inner-panel panel-heading" id="dataClass-panel">
 								<h4 class="panel-title">Data Classes <a class="pull-right pop-over" data-toggle="popover" data-placement="left" data-content="@Application.getNewFormatMedianStatistic("dataClass",newFormat)"><span class="badge">@newFormat.getDataClasses.size()</span></a></h4>
 							</div>
 							<ul class="list-group">
@@ -39,7 +39,7 @@
 							@if(newFormat.getSensitiveData.size() > 0){
 								<div class="panel-body">
 									<div class="panel panel-danger">
-										<div class="panel-heading">
+										<div class="inner-panel panel-heading" id="sensitiveData-panel">
 											<h3 class="panel-title">Sensitive Data <a class="pull-right pop-over" data-toggle="popover" data-placement="left" data-content="@Application.getNewFormatMedianStatistic("sensitiveData",newFormat)"><span class="badge pull-right">@newFormat.getSensitiveData.size()</span></a></h3>
 										</div>
 
@@ -54,11 +54,17 @@
 							}
 
 						</div>
-					</div>
+						<div id="dataClasses-graph" width="400">
+						<div class="values" id="dataClass-size">@newFormat.getDataClasses().size()</div><div class="values" id="dataClass-median">@Values.getMedian("dataClass")</div><div class="values" id="dataClass-natMed">@Values.getNatureOfWorkMedian("dataClass",newFormat.getNatureOfWork())</div>
+						</div>
+						<div id="sensitiveData-graph" width="400">
+						<div class="values" id="sensitiveData-size">@newFormat.getSensitiveData().size()</div><div class="values" id="sensitiveData-median">@Values.getMedian("sensitiveData")</div><div class="values" id="sensitiveData-natMed">@Values.getNatureOfWorkMedian("sensitiveData",newFormat.getNatureOfWork())</div>
+						</div>
+											</div>
 					<div class="col-xs-4 col-sm-4">
 						<div class="clearfix visible-xs"></div>
 						<div class="panel panel-info">
-							<div class="panel-heading">
+							<div class="inner-panel panel-heading" id="dataSubject-panel">
 								<h4 class="panel-title">Data Subjects <a class="pull-right pop-over" data-toggle="popover" data-placement="left" data-content="@Application.getNewFormatMedianStatistic("dataSubject",newFormat)"><span class="badge pull-right">@newFormat.getDataSubjects().size()</span></a></h4>
 							</div>
 							<ul class="list-group">
@@ -66,12 +72,14 @@
 									<li class="list-group-item">@dataSubject</li>
 								}
 							</ul>
-
 						</div>
+						<div id="dataSubjects-graph" width="400"></div>
+						<div class="values" id="dataSubject-size">@newFormat.getDataSubjects().size()</div><div class="values" id="dataSubject-median">@Values.getMedian("dataSubject")</div><div class="values" id="dataSubject-natMed">@Values.getNatureOfWorkMedian("dataSubject",newFormat.getNatureOfWork())</div>
+						
 					</div>
 					<div class="col-xs-4 col-sm-4">
 						<div class="panel panel-info">
-							<div class="panel-heading">
+							<div class="inner-panel panel-heading" id="dataDisclosee-panel">
 								<h4 class="panel-title">Data Disclosees <a class="pull-right pop-over" data-toggle="popover" data-placement="left" data-content="@Application.getNewFormatMedianStatistic("dataDisclosee",newFormat)"><span class="badge pull-right">@newFormat.getDataDisclosees().size()</span></a></h4>
 							</div>
 
@@ -82,6 +90,9 @@
 							</ul>
 
 						</div>
+						<div id="dataDisclosees-graph" width="400"></div>
+						<div class="values" id="dataDisclosee-size">@newFormat.getDataDisclosees().size()</div><div class="values" id="dataDisclosee-median">@Values.getMedian("dataDisclosee")</div><div class="values" id="dataDisclosee-natMed">@Values.getNatureOfWorkMedian("dataDisclosee",newFormat.getNatureOfWork())</div>
+						
 					</div>
 				</div>
 			</div>
