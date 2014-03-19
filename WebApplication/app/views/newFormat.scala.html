@@ -110,9 +110,9 @@
 						<div class="col-xs-4 col-sm-4">
 							<h4 class="text-center hidden" id="dataClasses-heading">Comparison of the data classes taken</h4>
 							<div class="graph" id="dataClasses-graph" width="400"></div>
-							<div class="hidden" id="dataClass-size">@newFormat.getDataClasses().size()</div>
-							<div class="hidden" id="dataClass-median">@Values.getMedian("dataClass")</div>
-							<div class="hidden" id="dataClass-natMed">@Values.getNatureOfWorkMedian("dataClass",newFormat.getNatureOfWork())</div>
+							<div class="hidden" id="dataClasses-size">@newFormat.getDataClasses().size()</div>
+							<div class="hidden" id="dataClasses-median">@Values.getMedian("dataClass")</div>
+							<div class="hidden" id="dataClasses-natMed">@Values.getNatureOfWorkMedian("dataClass",newFormat.getNatureOfWork())</div>
 
 							<h4 class="text-center hidden" id="dataClasses-heading">Comparison of the data classes taken</h4>
 							<div class="graph" id="sensitiveData-graph" width="400"></div>
@@ -124,21 +124,21 @@
 						<div class="col-xs-4 col-sm-4">
 							<h4 class="text-center hidden" id="dataSubjects-heading">Comparison of the data classes taken</h4>
 							<div class="graph" id="dataSubjects-graph" width="400"></div>
-							<div class="hidden" id="dataSubject-size">@newFormat.getDataSubjects().size()</div>
-							<div class="hidden" id="dataSubject-median">@Values.getMedian("dataSubject")</div>
-							<div class="hidden" id="dataSubject-natMed">@Values.getNatureOfWorkMedian("dataSubject",newFormat.getNatureOfWork())</div>
+							<div class="hidden" id="dataSubjects-size">@newFormat.getDataSubjects().size()</div>
+							<div class="hidden" id="dataSubjects-median">@Values.getMedian("dataSubject")</div>
+							<div class="hidden" id="dataSubjects-natMed">@Values.getNatureOfWorkMedian("dataSubject",newFormat.getNatureOfWork())</div>
 							
 						</div>
 						<div class="col-xs-4 col-sm-4">
 							<h4 class="text-center hidden" id="dataDisclosees-heading">Comparison of the data classes taken</h4>
 							<div class="graph" id="dataDisclosees-graph" width="400"></div>
-							<div class="hidden" id="dataDisclosee-size">@newFormat.getDataDisclosees().size()</div>
-							<div class="hidden" id="dataDisclosee-median">@Values.getMedian("dataDisclosee")</div>
-							<div class="hidden" id="dataDisclosee-natMed">@Values.getNatureOfWorkMedian("dataDisclosee",newFormat.getNatureOfWork())</div>
+							<div class="hidden" id="dataDisclosees-size">@newFormat.getDataDisclosees().size()</div>
+							<div class="hidden" id="dataDisclosees-median">@Values.getMedian("dataDisclosee")</div>
+							<div class="hidden" id="dataDisclosees-natMed">@Values.getNatureOfWorkMedian("dataDisclosee",newFormat.getNatureOfWork())</div>
 
 						</div>
 					</div>
-					<button type="button" id="clear-graph" class="text-center btn btn-primary" onclick="clearAll()">Clear graphs</button>
+					<button type="button" id="clear-graph" class="text-center btn btn-primary" onclick="clearAllCharts()">Clear charts</button>
 				</div>
 			</div>
 		</div>

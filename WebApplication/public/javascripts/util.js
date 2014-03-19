@@ -1,6 +1,7 @@
 $(function() {
 	$(".pop-over").popover();
 });
+
 $(document).ready(function(){
 	$(".purpose").click(
 			function() {
@@ -20,16 +21,16 @@ $(document).ready(function(){
 				var id= this.id;
 				switch(id){
 				case "dataClass-panel":
-					makeChart("dataClasses-graph");
+					makePanelChart("dataClasses");
 					break;
 				case "sensitiveData-panel":
-					makeChart("sensitiveData-graph");
+					makePanelChart("sensitiveData");
 					break;
 				case "dataSubject-panel":
-					makeChart("dataSubjects-graph");
+					makePanelChart("dataSubjects");
 					break;
 				case "dataDisclosee-panel":
-					makeChart("dataDisclosees-graph");
+					makePanelChart("dataDisclosees");
 				
 				}
 			});
@@ -37,50 +38,41 @@ $(document).ready(function(){
 });
 
 
-var makeChart = function(elementID){
-	var id = "#" + elementID;
-	$(id + " svg").remove();
-	var median,size,natMed,label1,label2,label3;
-	label1 = label2 = label3 ="(not set)";
-	switch(elementID){
-	case "dataClasses-graph":
-		$("#dataClasses-heading").show();
+var makePanelChart = function(element){
+	
+	var elementID = "#"+element;
+	var graph = element+"-graph";
+	var graphID = "#"+graph;
+	$(graphID + " svg").remove();
+	
+	var median = parseInt($(elementID+"-median").text());
+	var size = parseInt($(elementID+"-size").text());
+	var natMed = parseInt($(elementID+"-natMed").text());
+	
+	var label1 = "(not set)";
+	var label2 = "Overall Median";
+	var label3 = "Median for this nature of work";
+	
+	switch(element){
+	case "dataClasses":
+		
 		$("#sensitiveData-graph svg").remove();
-		size = parseInt($("#dataClass-size").text());
-		median = parseInt($("#dataClass-median").text());
-		natMed = parseInt($("#dataClass-natMed").text());
 		label1 = "Number of data classes collected";
-		label2 = "Overall Median"
-		label3 = "Median for this nature of work"
 		break;
-	case "sensitiveData-graph":
+	case "sensitiveData":
 		$("#dataClasses-graph svg").remove();
-		size = parseInt($("#sensitiveData-size").text());
-		median = parseInt($("#sensitiveData-median").text());
-		natMed = parseInt($("#sensitiveData-natMed").text());
 		label1 = "Number of sensitive data classes collected";
-		label2 = "Overall Median"
-		label3 = "Median for this nature of work"
 		break
-	case "dataSubjects-graph":
-		size = parseInt($("#dataSubject-size").text());
-		median = parseInt($("#dataSubject-median").text());
-		natMed = parseInt($("#dataSubject-natMed").text());
+	case "dataSubjects":
 		label1 = "Number of data subjects collected information from";
-		label2 = "Overall Median"
-		label3 = "Median for this nature of work"
 		break;
-	case "dataDisclosees-graph":
-		size = parseInt($("#dataDisclosee-size").text());
-		median = parseInt($("#dataDisclosee-median").text());
-		natMed = parseInt($("#dataDisclosee-natMed").text());
+	case "dataDisclosees":
 		label1 = "Number of data disclosees information shared with";
-		label2 = "Overall Median"
-		label3 = "Median for this nature of work"
 		break;
 	}
+
 	Morris.Bar({
-		element:elementID,
+		element:graph,
 		data:[
 		 {y:'',n:size,x:median,z:natMed}     
 		],
@@ -92,8 +84,12 @@ var makeChart = function(elementID){
 }
 
 
-var clearAll = function(){
+var clearAllCharts = function(){
 	$(".graph svg").remove();
 	$(".hidden").hide();
+}
+
+var clearPanel = function(panel){
+	
 }
 
