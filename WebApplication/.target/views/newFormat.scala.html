@@ -115,7 +115,11 @@
 							<div class="hidden" id="dataClasses-size">@newFormat.getDataClasses().size()</div>
 							<div class="hidden" id="dataClasses-median">@Values.getMedian("dataClass")</div>
 							<div class="hidden" id="dataClasses-natMed">@Values.getNatureOfWorkMedian("dataClass",newFormat.getNatureOfWork())</div>
-
+							@for(dataClass <- newFormat.getDataClasses()){
+								<div class="" id="dataClass-@Util.getUniqueString(dataClass)">@Values.getNumberOfControllers("dataClass",dataClass)</div>
+							}
+							
+							
 							<div class="hidden" id="sensitiveData-size">@newFormat.getSensitiveData().size()</div>
 							<div class="hidden" id="sensitiveData-median">@Values.getMedian("sensitiveData")</div>
 							<div class="hidden" id="sensitiveData-natMed">@Values.getNatureOfWorkMedian("sensitiveData",newFormat.getNatureOfWork())</div>
