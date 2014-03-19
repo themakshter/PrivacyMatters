@@ -1,130 +1,164 @@
 @(newFormat : NewFormat)
 
-<h3 class="text-center">This data controller's nature of work is <b>@newFormat.getNatureOfWork()</b></h3>
+<h3 class="text-center">
+	This data controller's nature of work is <b>@newFormat.getNatureOfWork()</b>
+</h3>
 <h3 class="page-header">Purposes</h3>
 <div class="container">
-<div class="panel-group" id="accordion">
-	<div class="panel panel-default">
-		<div class="panel-heading purpose" data-toggle="collapse"
-			data-parent="#accordion" data-target="#general">
-			<h3 class="panel-title purpose-title">
-				<a class="accordion-toggle">General Purposes<span
-					class="glyphicon glyphicon-plus pull-right"></span></a>
-			</h3>
-		</div>
-		<div id="general" class="panel-collapse collapse">
-			<div class="panel-body">
-				<div class="panel panel-info">
-					<div class="panel-heading">
-						<h4 class="panel-title">Purposes</h4>
-					</div>
-					<div class="panel-body">
-					@for(purpose <- newFormat.getPurposes()){
-						@purpose
-					}
-					</div>
-				</div>
-				<br>
-				<div class="row">
-					<div class="col-xs-4 col-sm-4">
-						<div class="panel panel-info">
-							<div class="inner-panel panel-heading" id="dataClass-panel">
-								<h4 class="panel-title">Data Classes <a class="pull-right pop-over" data-toggle="popover" data-placement="left" data-content="@Application.getNewFormatMedianStatistic("dataClass",newFormat)"><span class="badge">@newFormat.getDataClasses.size()</span></a></h4>
-							</div>
-							<ul class="list-group">
-								@for(dataClass <- newFormat.getDataClasses()){
-									<li class="list-group-item">@dataClass</li> 
-								}
-							</ul>
-							@if(newFormat.getSensitiveData.size() > 0){
-								<div class="panel-body">
-									<div class="panel panel-danger">
-										<div class="inner-panel panel-heading" id="sensitiveData-panel">
-											<h3 class="panel-title">Sensitive Data <a class="pull-right pop-over" data-toggle="popover" data-placement="left" data-content="@Application.getNewFormatMedianStatistic("sensitiveData",newFormat)"><span class="badge pull-right">@newFormat.getSensitiveData.size()</span></a></h3>
-										</div>
-
-										<ul class="list-group">
-											@for(sensitiveData <- newFormat.getSensitiveData()){
-												<li class="list-group-item">@sensitiveData</li>
-											}
-										</ul>
-
-									</div>
-								</div>
-							}
-
-						</div>
-						
-					</div>
-					<div class="col-xs-4 col-sm-4">
-						<div class="clearfix visible-xs"></div>
-						<div class="panel panel-info">
-							<div class="inner-panel panel-heading" id="dataSubject-panel">
-								<h4 class="panel-title">Data Subjects <a class="pull-right pop-over" data-toggle="popover" data-placement="left" data-content="@Application.getNewFormatMedianStatistic("dataSubject",newFormat)"><span class="badge pull-right">@newFormat.getDataSubjects().size()</span></a></h4>
-							</div>
-							<ul class="list-group">
-								@for(dataSubject <- newFormat.getDataSubjects()){
-									<li class="list-group-item">@dataSubject</li>
-								}
-							</ul>
-						</div>
-						
-					</div>
-					<div class="col-xs-4 col-sm-4">
-						<div class="panel panel-info">
-							<div class="inner-panel panel-heading" id="dataDisclosee-panel">
-								<h4 class="panel-title">Data Disclosees <a class="pull-right pop-over" data-toggle="popover" data-placement="left" data-content="@Application.getNewFormatMedianStatistic("dataDisclosee",newFormat)"><span class="badge pull-right">@newFormat.getDataDisclosees().size()</span></a></h4>
-							</div>
-
-							<ul class="list-group">
-								@for(dataDisclosee <- newFormat.getDataDisclosees()){
-									<li class="list-group-item">@dataDisclosee</li> 
-								}
-							</ul>
-
-						</div>
-						</div>
-				</div>
-				<div class="row">
-				<div class="col-xs-4 col-sm-4">
-				<div id="dataClasses-graph" width="400"></div>
-						<div class="values" id="dataClass-size">@newFormat.getDataClasses().size()</div><div class="values" id="dataClass-median">@Values.getMedian("dataClass")</div><div class="values" id="dataClass-natMed">@Values.getNatureOfWorkMedian("dataClass",newFormat.getNatureOfWork())</div>
-						
-						<div id="sensitiveData-graph" width="400"></div>
-						<div class="values" id="sensitiveData-size">@newFormat.getSensitiveData().size()</div><div class="values" id="sensitiveData-median">@Values.getMedian("sensitiveData")</div><div class="values" id="sensitiveData-natMed">@Values.getNatureOfWorkMedian("sensitiveData",newFormat.getNatureOfWork())</div>
-						
-				</div>
-				<div class="col-xs-4 col-sm-4">
-				<div id="dataSubjects-graph" width="400"></div>
-						<div class="values" id="dataSubject-size">@newFormat.getDataSubjects().size()</div><div class="values" id="dataSubject-median">@Values.getMedian("dataSubject")</div><div class="values" id="dataSubject-natMed">@Values.getNatureOfWorkMedian("dataSubject",newFormat.getNatureOfWork())</div>
-						
-				</div>
-				<div class="col-xs-4 col-sm-4">
-				<div id="dataDisclosees-graph" width="400"></div>
-						<div class="values" id="dataDisclosee-size">@newFormat.getDataDisclosees().size()</div><div class="values" id="dataDisclosee-median">@Values.getMedian("dataDisclosee")</div><div class="values" id="dataDisclosee-natMed">@Values.getNatureOfWorkMedian("dataDisclosee",newFormat.getNatureOfWork())</div>
-					
-				</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	@for(purpose <- newFormat.getOtherPurposes()){
+	<div class="panel-group" id="accordion">
 		<div class="panel panel-default">
 			<div class="panel-heading purpose" data-toggle="collapse"
-				data-parent="#accordion" data-target=#@purpose.getUniqueName()>
-				<h4 class="panel-title purpose-title">
-					<a class="accordion-toggle">@purpose.getPurpose() <span
+				data-parent="#accordion" data-target="#general">
+				<h3 class="panel-title purpose-title">
+					<a class="accordion-toggle">General Purposes<span
 						class="glyphicon glyphicon-plus pull-right"></span></a>
-				</h4>
+				</h3>
 			</div>
-			<div id=@purpose.getUniqueName() class="panel-collapse collapse">
-				<div class="panel-body">@purpose.getStatement()</div>
+			<div id="general" class="panel-collapse collapse">
+				<div class="panel-body">
+					<div class="panel panel-info">
+						<div class="panel-heading">
+							<h4 class="panel-title">Purposes</h4>
+						</div>
+						<div class="panel-body">@for(purpose <-newFormat.getPurposes()){
+							 @purpose 
+						}
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-xs-4 col-sm-4">
+							<div class="panel panel-info">
+								<div class="inner-panel panel-heading" id="dataClass-panel">
+									<h4 class="panel-title">
+										Data Classes <a class="pull-right pop-over"
+											data-toggle="popover" data-placement="left"
+											data-content="@Application.getNewFormatMedianStatistic("dataClass",newFormat)"><span
+											class="badge">@newFormat.getDataClasses.size()</span></a>
+									</h4>
+								</div>
+								<ul class="list-group">
+									@for(dataClass <- newFormat.getDataClasses()){
+										<li class="list-group-item">@dataClass</li> 
+									}
+								</ul>
+								@if(newFormat.getSensitiveData.size() > 0){
+									<div class="panel-body">
+										<div class="panel panel-danger">
+											<div class="inner-panel panel-heading"
+												id="sensitiveData-panel">
+												<h3 class="panel-title">
+													Sensitive Data <a class="pull-right pop-over"
+														data-toggle="popover" data-placement="left"
+														data-content="@Application.getNewFormatMedianStatistic("sensitiveData",newFormat)"><span
+														class="badge pull-right">@newFormat.getSensitiveData.size()</span></a>
+												</h3>
+											</div>
+
+											<ul class="list-group">
+												@for(sensitiveData <- newFormat.getSensitiveData()){
+													<li class="list-group-item">@sensitiveData</li> 
+												}
+											</ul>
+
+										</div>
+									</div>
+								}
+							</div>
+
+						</div>
+						<div class="col-xs-4 col-sm-4">
+							<div class="clearfix visible-xs"></div>
+							<div class="panel panel-info">
+								<div class="inner-panel panel-heading" id="dataSubject-panel">
+									<h4 class="panel-title">
+										Data Subjects <a class="pull-right pop-over"
+											data-toggle="popover" data-placement="left"
+											data-content="@Application.getNewFormatMedianStatistic("dataSubject",newFormat)"><span
+											class="badge pull-right">@newFormat.getDataSubjects().size()</span></a>
+									</h4>
+								</div>
+								<ul class="list-group">
+									@for(dataSubject <- newFormat.getDataSubjects()){
+										<li class="list-group-item">@dataSubject</li> 
+									}
+								</ul>
+							</div>
+
+						</div>
+						<div class="col-xs-4 col-sm-4">
+							<div class="panel panel-info">
+								<div class="inner-panel panel-heading" id="dataDisclosee-panel">
+									<h4 class="panel-title">
+										Data Disclosees <a class="pull-right pop-over"
+											data-toggle="popover" data-placement="left"
+											data-content="@Application.getNewFormatMedianStatistic("dataDisclosee",newFormat)"><span
+											class="badge pull-right">@newFormat.getDataDisclosees().size()</span></a>
+									</h4>
+								</div>
+
+								<ul class="list-group">
+									@for(dataDisclosee <- newFormat.getDataDisclosees()){
+										<li class="list-group-item">@dataDisclosee</li> 
+									}
+								</ul>
+
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-xs-4 col-sm-4">
+							<h4 class="text-center hidden" id="dataClasses-heading">Comparison of the data classes taken</h4>
+							<div class="graph" id="dataClasses-graph" width="400"></div>
+							<div class="hidden" id="dataClass-size">@newFormat.getDataClasses().size()</div>
+							<div class="hidden" id="dataClass-median">@Values.getMedian("dataClass")</div>
+							<div class="hidden" id="dataClass-natMed">@Values.getNatureOfWorkMedian("dataClass",newFormat.getNatureOfWork())</div>
+
+							<h4 class="text-center hidden" id="dataClasses-heading">Comparison of the data classes taken</h4>
+							<div class="graph" id="sensitiveData-graph" width="400"></div>
+							<div class="hidden" id="sensitiveData-size">@newFormat.getSensitiveData().size()</div>
+							<div class="hidden" id="sensitiveData-median">@Values.getMedian("sensitiveData")</div>
+							<div class="hidden" id="sensitiveData-natMed">@Values.getNatureOfWorkMedian("sensitiveData",newFormat.getNatureOfWork())</div>
+
+						</div>
+						<div class="col-xs-4 col-sm-4">
+							<h4 class="text-center hidden" id="dataSubjects-heading">Comparison of the data classes taken</h4>
+							<div class="graph" id="dataSubjects-graph" width="400"></div>
+							<div class="hidden" id="dataSubject-size">@newFormat.getDataSubjects().size()</div>
+							<div class="hidden" id="dataSubject-median">@Values.getMedian("dataSubject")</div>
+							<div class="hidden" id="dataSubject-natMed">@Values.getNatureOfWorkMedian("dataSubject",newFormat.getNatureOfWork())</div>
+							
+						</div>
+						<div class="col-xs-4 col-sm-4">
+							<h4 class="text-center hidden" id="dataDisclosees-heading">Comparison of the data classes taken</h4>
+							<div class="graph" id="dataDisclosees-graph" width="400"></div>
+							<div class="hidden" id="dataDisclosee-size">@newFormat.getDataDisclosees().size()</div>
+							<div class="hidden" id="dataDisclosee-median">@Values.getMedian("dataDisclosee")</div>
+							<div class="hidden" id="dataDisclosee-natMed">@Values.getNatureOfWorkMedian("dataDisclosee",newFormat.getNatureOfWork())</div>
+
+						</div>
+					</div>
+					<button type="button" id="clear-graph" class="text-center btn btn-primary" onclick="clearAll()">Clear graphs</button>
+				</div>
 			</div>
 		</div>
-	}
-</div>
+		@for(purpose <- newFormat.getOtherPurposes()){
+			<div class="panel panel-default">
+				<div class="panel-heading purpose" data-toggle="collapse"
+					data-parent="#accordion" data-target=#@purpose.getUniqueName()>
+					<h4 class="panel-title purpose-title">
+						<a class="accordion-toggle">@purpose.getPurpose() <span
+							class="glyphicon glyphicon-plus pull-right"></span></a>
+					</h4>
+				</div>
+				<div id=@purpose.getUniqueName() class="panel-collapse collapse">
+					<div class="panel-body">@purpose.getStatement()</div>
+				</div>
+			</div>
+		}
+	</div>
 </div>
 <h3 class="page-header">Transfer Policy</h3>
 <div class="container">
-<p>@newFormat.getTransfers()</p>
+	<p>@newFormat.getTransfers()</p>
 </div>

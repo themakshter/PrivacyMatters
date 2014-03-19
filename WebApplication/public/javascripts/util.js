@@ -44,6 +44,7 @@ var makeChart = function(elementID){
 	label1 = label2 = label3 ="(not set)";
 	switch(elementID){
 	case "dataClasses-graph":
+		$("#dataClasses-heading").show();
 		$("#sensitiveData-graph svg").remove();
 		size = parseInt($("#dataClass-size").text());
 		median = parseInt($("#dataClass-median").text());
@@ -88,5 +89,11 @@ var makeChart = function(elementID){
 		labels:[label1,label2,label3],
 		hideHover:'auto'
 	})
+}
+
+
+var clearAll = function(){
+	$(".graph svg").remove();
+	$(".hidden").hide();
 }
 
