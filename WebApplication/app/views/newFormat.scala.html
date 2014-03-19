@@ -39,7 +39,7 @@
 								</div>
 								<ul class="list-group">
 									@for(dataClass <- newFormat.getDataClasses()){
-										<a class="clickable list-group-item">@dataClass</a> 
+										<a class="clickable list-group-item stat-object dataClass-item" id="@Util.getUniqueString(dataClass)">@dataClass</a> 
 									}
 								</ul>
 								@if(newFormat.getSensitiveData.size() > 0){

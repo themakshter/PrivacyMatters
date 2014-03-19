@@ -34,6 +34,13 @@ $(document).ready(function(){
 				
 				}
 			});
+	
+	$(".stat-object").click(
+			function(){
+				if($(this).hasClass('dataClass-item')){
+					
+				}
+			});
 
 });
 
@@ -74,9 +81,8 @@ var makePanelChart = function(element){
 		break;
 	}
 	
-	$("#"+graph + " svg").remove();
-	$("#"+graph + " .morris-hover").remove();
-
+	clearPanel(graph);
+	
 	Morris.Bar({
 		element:graph,
 		data:[
@@ -90,12 +96,14 @@ var makePanelChart = function(element){
 }
 
 
+
 var clearAllCharts = function(){
 	$(".graph svg").remove();
 	$(".graph-heading").empty();
 }
 
 var clearPanel = function(panel){
-	
+	$("#"+panel + " svg").remove();
+	$("#"+panel + " .morris-hover").remove();
 }
 
