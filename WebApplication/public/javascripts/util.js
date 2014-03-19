@@ -40,46 +40,52 @@ $(document).ready(function(){
 var makeChart = function(elementID){
 	var id = "#" + elementID;
 	$(id + " svg").remove();
-	var median,size,natMed;
-	var label ="(not set)";
+	var median,size,natMed,label1,label2,label3;
+	label1 = label2 = label3 ="(not set)";
 	switch(elementID){
 	case "dataClasses-graph":
 		$("#sensitiveData-graph svg").remove();
 		size = parseInt($("#dataClass-size").text());
 		median = parseInt($("#dataClass-median").text());
 		natMed = parseInt($("#dataClass-natMed").text());
-		label = "Number of data classes"
+		label1 = "Number of data classes collected";
+		label2 = "Overall Median"
+		label3 = "Median for this nature of work"
 		break;
 	case "sensitiveData-graph":
 		$("#dataClasses-graph svg").remove();
 		size = parseInt($("#sensitiveData-size").text());
 		median = parseInt($("#sensitiveData-median").text());
 		natMed = parseInt($("#sensitiveData-natMed").text());
-		label = "Number of sensitive data classes"
+		label1 = "Number of sensitive data classes collected";
+		label2 = "Overall Median"
+		label3 = "Median for this nature of work"
 		break
 	case "dataSubjects-graph":
 		size = parseInt($("#dataSubject-size").text());
 		median = parseInt($("#dataSubject-median").text());
 		natMed = parseInt($("#dataSubject-natMed").text());
-		label = "Number of data subjects"
+		label1 = "Number of data subjects collected information from";
+		label2 = "Overall Median"
+		label3 = "Median for this nature of work"
 		break;
 	case "dataDisclosees-graph":
 		size = parseInt($("#dataDisclosee-size").text());
 		median = parseInt($("#dataDisclosee-median").text());
 		natMed = parseInt($("#dataDisclosee-natMed").text());
-		label = "Number of data disclosees"
+		label1 = "Number of data disclosees information shared with";
+		label2 = "Overall Median"
+		label3 = "Median for this nature of work"
 		break;
 	}
 	Morris.Bar({
 		element:elementID,
 		data:[
-		 {y:'Size',n:size},
-		 {y: 'Median',n:median},
-		 {y:'Median for this nature of work',n:natMed}     
+		 {y:'',n:size,x:median,z:natMed}     
 		],
 		xkey:'y',
-		ykeys:['n'],
-		labels:[label],
+		ykeys:['n','x','z'],
+		labels:[label1,label2,label3],
 		hideHover:'auto'
 	})
 }
