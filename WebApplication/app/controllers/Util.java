@@ -21,6 +21,6 @@ public class Util {
 	  }	
 	  
 	  public static String getUniqueString(String st){
-		  return st.replaceAll("\\| |/|,","_");
+		  return st.replaceAll("/| |,","_");
 	  }
 }
