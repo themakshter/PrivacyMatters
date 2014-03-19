@@ -41,9 +41,7 @@ $(document).ready(function(){
 var makePanelChart = function(element){
 	
 	var elementID = "#"+element;
-	var graph = element+"-graph";
-	var graphID = "#"+graph;
-	$(graphID + " svg").remove();
+	var graph;
 	
 	var median = parseInt($(elementID+"-median").text());
 	var size = parseInt($(elementID+"-size").text());
@@ -55,21 +53,28 @@ var makePanelChart = function(element){
 	
 	switch(element){
 	case "dataClasses":
-		
-		$("#sensitiveData-graph svg").remove();
+		graph = "left-graph";
+		$("#left-heading").empty().append("Data Classes Compariosn");
 		label1 = "Number of data classes collected";
 		break;
 	case "sensitiveData":
-		$("#dataClasses-graph svg").remove();
+		graph = "left-graph";
+		$("#left-heading").empty().append("Sensitive Data Comparison");
 		label1 = "Number of sensitive data classes collected";
 		break
 	case "dataSubjects":
+		graph="middle-graph";
+		$("#middle-heading").empty().append("Data Subjects Comparison");
 		label1 = "Number of data subjects collected information from";
 		break;
 	case "dataDisclosees":
+		graph="right-graph";
+		$("#right-heading").empty().append("Data Disclosees Comparison");
 		label1 = "Number of data disclosees information shared with";
 		break;
 	}
+	
+	$("#"+graph + " svg").remove();
 
 	Morris.Bar({
 		element:graph,
@@ -86,7 +91,7 @@ var makePanelChart = function(element){
 
 var clearAllCharts = function(){
 	$(".graph svg").remove();
-	$(".hidden").hide();
+	$(".graph-heading").empty();
 }
 
 var clearPanel = function(panel){

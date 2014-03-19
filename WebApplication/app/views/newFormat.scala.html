@@ -108,30 +108,31 @@
 					</div>
 					<div class="row">
 						<div class="col-xs-4 col-sm-4">
-							<h4 class="text-center hidden" id="dataClasses-heading">Comparison of the data classes taken</h4>
-							<div class="graph" id="dataClasses-graph" width="400"></div>
+							
+							<h4 class="text-center graph-heading" id="left-heading"></h4>
+							<div class="graph" id="left-graph" width="400"></div>
+							
 							<div class="hidden" id="dataClasses-size">@newFormat.getDataClasses().size()</div>
 							<div class="hidden" id="dataClasses-median">@Values.getMedian("dataClass")</div>
 							<div class="hidden" id="dataClasses-natMed">@Values.getNatureOfWorkMedian("dataClass",newFormat.getNatureOfWork())</div>
 
-							<h4 class="text-center hidden" id="dataClasses-heading">Comparison of the data classes taken</h4>
-							<div class="graph" id="sensitiveData-graph" width="400"></div>
 							<div class="hidden" id="sensitiveData-size">@newFormat.getSensitiveData().size()</div>
 							<div class="hidden" id="sensitiveData-median">@Values.getMedian("sensitiveData")</div>
 							<div class="hidden" id="sensitiveData-natMed">@Values.getNatureOfWorkMedian("sensitiveData",newFormat.getNatureOfWork())</div>
 
 						</div>
 						<div class="col-xs-4 col-sm-4">
-							<h4 class="text-center hidden" id="dataSubjects-heading">Comparison of the data classes taken</h4>
-							<div class="graph" id="dataSubjects-graph" width="400"></div>
+							<h4 class="text-center graph-heading" id="middle-heading"></h4>
+							<div class="graph" id="middle-graph" width="400"></div>
 							<div class="hidden" id="dataSubjects-size">@newFormat.getDataSubjects().size()</div>
 							<div class="hidden" id="dataSubjects-median">@Values.getMedian("dataSubject")</div>
 							<div class="hidden" id="dataSubjects-natMed">@Values.getNatureOfWorkMedian("dataSubject",newFormat.getNatureOfWork())</div>
 							
 						</div>
 						<div class="col-xs-4 col-sm-4">
-							<h4 class="text-center hidden" id="dataDisclosees-heading">Comparison of the data classes taken</h4>
-							<div class="graph" id="dataDisclosees-graph" width="400"></div>
+							<h4 class="text-center graph-heading" id="right-heading"></h4>
+							<div class="graph" id="right-graph" width="400"></div>
+							
 							<div class="hidden" id="dataDisclosees-size">@newFormat.getDataDisclosees().size()</div>
 							<div class="hidden" id="dataDisclosees-median">@Values.getMedian("dataDisclosee")</div>
 							<div class="hidden" id="dataDisclosees-natMed">@Values.getNatureOfWorkMedian("dataDisclosee",newFormat.getNatureOfWork())</div>
