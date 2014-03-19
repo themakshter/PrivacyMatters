@@ -6,7 +6,7 @@
 <div class="panel-group" id="accordion">
 	@for(purpose <- purposes){
 		<div class="panel panel-default">
-			<div class="panel-heading purpose" data-toggle="collapse"
+			<div class="panel-heading clickable purpose" data-toggle="collapse"
 				data-parent="#accordion" data-target=#@Util.getUniqueString(purpose.getPurpose())>
 				<h3 class="panel-title purpose-title">
 					<a class="accordion-toggle">@purpose.getPurpose() <span

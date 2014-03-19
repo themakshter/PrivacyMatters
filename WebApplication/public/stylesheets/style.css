@@ -39,8 +39,8 @@
 	display:none;
 }
 
-.panel-heading {
-    cursor: pointer;
+.clickable{
+	cursor:pointer;	
 }
 
 .popover{

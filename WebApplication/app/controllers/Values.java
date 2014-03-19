@@ -78,6 +78,7 @@ public class Values extends Controller{
 			 StatisticObject statObject = gson.fromJson(json, StatisticObject.class);
 			 return statObject.getSize();
 		 }catch(Exception e){
+			 //e.printStackTrace();
 			 return 0;
 		 }
 	}

@@ -101,9 +101,9 @@ public class StatisticsBuilder {
 
 		addNatureOfWorkToDB();
 		addMapToDB(sensitiveDataMap, "sensitiveDataStats");
-		addMapToDB(dataPurposeMap, "purposesStats");
-		addMapToDB(dataClassMap, "dataClassesStats");
-		addMapToDB(dataSubjectMap, "dataSubjectsStats");
+		addMapToDB(dataPurposeMap, "purposeStats");
+		addMapToDB(dataClassMap, "dataClassStats");
+		addMapToDB(dataSubjectMap, "dataSubjectStats");
 		addMapToDB(dataDiscloseeMap, "dataDiscloseeStats");
 
 		collection = database.getCollection("generalStats");
