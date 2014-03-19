@@ -66,22 +66,22 @@ var makePanelChart = function(element){
 	switch(element){
 	case "dataClasses":
 		graph = "left-graph";
-		$("#left-heading").empty().append("<h4>Data Classes Count Comparison</h4>");
+		$("#left-heading").empty().append("<h4>Data Classes Count Comparison</h4><p>This compares the number of data classes of this data controller compared to the average amount and the average amount for this nature of work</p>");
 		label1 = "Number of data classes collected";
 		break;
 	case "sensitiveData":
 		graph = "left-graph";
-		$("#left-heading").empty().append("<h4>Sensitive Data Count Comparison</h4>");
+		$("#left-heading").empty().append("<h4>Sensitive Data Count Comparison</h4><p>This compares the number of sensitive data classes of this data controller compared to the average amount and the average amount for this nature of work</p>");
 		label1 = "Number of sensitive data classes collected";
 		break
 	case "dataSubjects":
 		graph="middle-graph";
-		$("#middle-heading").empty().append("<h4>Data Subjects Count Comparison</h4>");
+		$("#middle-heading").empty().append("<h4>Data Subjects Count Comparison</h4><p>This compares the number of data subjects of this data controller compared to the average amount and the average amount for this nature of work</p>");
 		label1 = "Number of data subjects collected information from";
 		break;
 	case "dataDisclosees":
 		graph="right-graph";
-		$("#right-heading").empty().append("<h4>Data Disclosees Count Comparison</h4>");
+		$("#right-heading").empty().append("<h4>Data Disclosees Count Comparison</h4><p>This compares the number of data disclosees of this data controller compared to the average amount and the average amount for this nature of work</p>");
 		label1 = "Number of data disclosees information shared with";
 		break;
 	}
@@ -109,27 +109,27 @@ var makeItemChart = function(type,id){
 	var diff = count - number;
 	var label1,label2;
 	label1="Controllers which collect";
-	label2="Controllers which don't";
+	label2="Controllers which do not";
 	var graph;
 	switch(type){
 	case "dataClass":
 		graph="left-graph";	
 		var link=$("#lala").attr('href');
-		 $("#left-heading").empty().append("<h4>Popularity of Data Class ("+item+")</h4><p>This shows how many controllers collect this data class and how many don't</p>");
+		 $("#left-heading").empty().append("<h4>Popularity of Data Class ("+item+")</h4><p>This shows how many controllers collect this data class and how many do not</p>");
 		 break;
 	case "sensitiveData":
 		graph="left-graph";
-		$("#left-heading").empty().append("<h4>Popularity of Sensitive Data Class ("+item+")</h4><p>This shows how many controllers collect this data class and how many don't</p>");
+		$("#left-heading").empty().append("<h4>Popularity of Sensitive Data Class ("+item+")</h4><p>This shows how many controllers collect this data class and how many do not</p>");
 		break;
 	case "dataSubject":
 		graph="middle-graph";
-		$("#middle-heading").empty().append("<h4>Popularity of Sensitive Data Subject ("+item+")</h4><p>This shows how many controllers collect this information from this data subject and how many don't</p>");
+		$("#middle-heading").empty().append("<h4>Popularity of Sensitive Data Subject ("+item+")</h4><p>This shows how many controllers collect this information from this data subject and how many do not</p>");
 		break;
 	case "dataDisclosee":
 		graph="right-graph";
-		$("#right-heading").empty().append("<h4>Popularity of Data Disclosee ("+item+")</h4><p>This shows how many controllers share information with this data disclosee and how many don't</p>");
+		$("#right-heading").empty().append("<h4>Popularity of Data Disclosee ("+item+")</h4><p>This shows how many controllers share information with this data disclosee and how many do not</p>");
 		label1="Controllers which share";
-		label2="Controllers which don't";
+		label2="Controllers which do not";
 		break;	 
 	}
 	
