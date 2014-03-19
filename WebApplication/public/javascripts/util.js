@@ -75,6 +75,7 @@ var makePanelChart = function(element){
 	}
 	
 	$("#"+graph + " svg").remove();
+	$("#"+graph + " .morris-hover").remove();
 
 	Morris.Bar({
 		element:graph,
