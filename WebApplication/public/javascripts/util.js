@@ -54,22 +54,22 @@ var makePanelChart = function(element){
 	switch(element){
 	case "dataClasses":
 		graph = "left-graph";
-		$("#left-heading").empty().append("Data Classes Compariosn");
+		$("#left-heading").empty().append("Data Classes Count Comparison");
 		label1 = "Number of data classes collected";
 		break;
 	case "sensitiveData":
 		graph = "left-graph";
-		$("#left-heading").empty().append("Sensitive Data Comparison");
+		$("#left-heading").empty().append("Sensitive Data Count Comparison");
 		label1 = "Number of sensitive data classes collected";
 		break
 	case "dataSubjects":
 		graph="middle-graph";
-		$("#middle-heading").empty().append("Data Subjects Comparison");
+		$("#middle-heading").empty().append("Data Subjects Count Comparison");
 		label1 = "Number of data subjects collected information from";
 		break;
 	case "dataDisclosees":
 		graph="right-graph";
-		$("#right-heading").empty().append("Data Disclosees Comparison");
+		$("#right-heading").empty().append("Data Disclosees Count Comparison");
 		label1 = "Number of data disclosees information shared with";
 		break;
 	}
