@@ -47,6 +47,10 @@
 	width :300px;
 }
 
+.graph svg{
+	width:100%;
+}
+
 #clear-graph{
 	display:block;
 	margin-left:auto;

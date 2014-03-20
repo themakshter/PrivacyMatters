@@ -38,7 +38,6 @@ public class Application extends Controller {
     			String name = node.findPath("organisationName").getTextValue();
     			regList.add(new RegistryListItem(regNo,name));
     		}
-    		Util.closeDB();
         	return regList;
     	}catch(Exception e){
     		return regList;
@@ -126,7 +125,6 @@ public class Application extends Controller {
 			} else {
 				statement += "Moreover, this is equal to the median for all data controllers having the same nature of work.";
 			}
-			Util.closeDB();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -141,7 +139,6 @@ public class Application extends Controller {
     		BasicDBObject query = new BasicDBObject("registrationNumber",registrationNumber);
     		DBCursor cursor = registry.find(query);
     		String json = cursor.next().toString();
-    		Util.closeDB();
     		Gson gson = new Gson();
     		controller = gson.fromJson(json, DataController.class);
     		controller.fixName();

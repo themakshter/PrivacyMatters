@@ -96,16 +96,15 @@ var makePanelChart = function(element){
 		xkey:'y',
 		ykeys:['n','x','z'],
 		labels:[label1,label2,label3],
-		hideHover:'auto'
+		hideHover:'auto',
+		redraw:true
 	})
 }
 
 var makeItemChart = function(type,id){
-	console.log(type);
 	var count = parseInt($("#count").text());
 	var number = parseInt($("#"+type+"-"+id).text());
 	var item=$("#"+id).text();
-	console.log(item);
 	var diff = count - number;
 	var label1,label2;
 	label1="Controllers which collect";
@@ -140,8 +139,10 @@ var makeItemChart = function(type,id){
 		  data: [
 		    {label: label1, value: number},
 		    {label: label2, value: diff}
-		  ]
+		  ],
+		  redraw:true
 		});
+	
 	
 }
 

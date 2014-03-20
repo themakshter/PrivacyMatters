@@ -20,7 +20,6 @@ public class Values extends Controller{
 			String json;
 			DBCollection collection = Util.connectToDB().getCollection("generalStats");
 			json = collection.find().next().toString();
-			Util.closeDB();
 			Gson gson = new Gson();
 			GeneralStatistics generalStats = gson.fromJson(json,
 					GeneralStatistics.class);
@@ -50,7 +49,6 @@ public class Values extends Controller{
 			json = collection.find(query).next().toString();
 			NatureOfWorkObject nat = gson.fromJson(json,
 					NatureOfWorkObject.class);
-			Util.closeDB();
 			switch (type) {
 			case "dataClass":
 				return nat.getMedianDataClasses();
@@ -77,10 +75,8 @@ public class Values extends Controller{
 			 BasicDBObject query = new BasicDBObject("type",queryString);
 			 json = collection.find(query).next().toString();
 			 StatisticObject statObject = gson.fromJson(json, StatisticObject.class);
-			 Util.closeDB();
 			 return statObject.getSize();
 		 }catch(Exception e){
-			 //e.printStackTrace();
 			 return 0;
 		 }
 	}
@@ -89,7 +85,6 @@ public class Values extends Controller{
 		try{
 			DBCollection collection = Util.connectToDB().getCollection("registry");
 			int count = (int) collection.count();
-			Util.closeDB();
 			return (int) count;
 		}catch(Exception e){
 			return 0;
