@@ -20,10 +20,31 @@ public class Application extends Controller {
         return ok(index.render("Privacy Matters"));
     }
 	
-	public static Result hello(){
-	    DynamicForm requestData = form().bindFromRequest();
-	    String dataController = (requestData.get("dataController"));
-	    return ok(dataController);
+	public static Result search(){
+		ArrayList<RegistryListItem> regList = new ArrayList<RegistryListItem>();
+		DynamicForm requestData = form().bindFromRequest();
+		String queryString= (requestData.get("dataController"));
+	    try{
+	    	DBObject controller;
+    		String json;
+    		JsonNode node;
+	    	DB database = Util.connectToDB();
+	    	DBCollection registry = database.getCollection("registry");
+			BasicDBObject query = new BasicDBObject();
+			query.put("organisationName", java.util.regex.Pattern.compile(queryString.toUpperCase()));
+			DBCursor cursor = registry.find(query);
+			while(cursor.hasNext()){
+				controller = cursor.next();
+    			json = controller.toString();
+    			node = Json.parse(json);
+    			String regNo = node.findPath("registrationNumber").getTextValue();
+    			String name = node.findPath("organisationName").getTextValue();
+    			regList.add(new RegistryListItem(regNo,name));
+			}
+	    }catch(Exception e){
+	    	
+	    }
+	    return ok(searchResult.render(regList,queryString));
 	}
     
     public static Result registry(){

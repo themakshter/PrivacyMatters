@@ -5,7 +5,7 @@
 # Home page
 GET     /                           			controllers.Application.index()
 
-GET		/search									controllers.Application.hello()
+GET		/search									controllers.Application.search()
 
 # Registry
 GET		/registry								controllers.Application.registry()
