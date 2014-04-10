@@ -1,0 +1,98 @@
+{
+	"registrationNumber": "ZA013235",
+	"organisationName": "ERESBY SPECIAL SCHOOL",
+	"companiesHouseNumber": "(not given)",
+	"address": "ERESBY AVENUE, SPILSBY, LINCOLNSHIRE",
+	"postcode": "PE23 5HU",
+	"country": "UNITED KINGDOM",
+	"foiFlag": "Y",
+	"startDate": "2013-06-14",
+	"endDate": "2014-06-13",
+	"exemptFlag": "N",
+	"tradingName": "(not given)",
+	"ukContact": "None",
+	"subjectAccess": "None",
+	"format": "new",
+	"natureOfWork": " Academy",
+	"purposes": [{
+		"purpose": "We process personal information to enable us to provide education, training, welfare and educational support services, to administer school property; maintaining our own accounts and records, undertake fundraising; support and manage our employees. We also use CCTV for security and the prevention and detection of crime."
+	}],
+	"dataSubjects": [{
+		"dataSubject": "employees"
+	}, {
+		"dataSubject": "students and pupils"
+	}, {
+		"dataSubject": "professional experts and advisers"
+	}, {
+		"dataSubject": "members of school boards"
+	}, {
+		"dataSubject": "sponsors and supporters"
+	}, {
+		"dataSubject": "suppliers and service providers"
+	}, {
+		"dataSubject": "complainants, enquirers"
+	}, {
+		"dataSubject": "individuals captured by CCTV images"
+	}],
+	"dataClasses": [{
+		"dataClass": "personal details"
+	}, {
+		"dataClass": "family details"
+	}, {
+		"dataClass": "lifestyle and social circumstances"
+	}, {
+		"dataClass": "education and employment details"
+	}, {
+		"dataClass": "financial details"
+	}, {
+		"dataClass": "goods and services"
+	}, {
+		"dataClass": "disciplinary and attendance records"
+	}, {
+		"dataClass": "vetting checks"
+	}, {
+		"dataClass": "visual images, personal appearance and behaviour"
+	}, {
+		"dataClass": "physical or mental health details[SENSITIVE]"
+	}, {
+		"dataClass": "racial or ethnic origin[SENSITIVE]"
+	}, {
+		"dataClass": "religious or other beliefs[SENSITIVE]"
+	}, {
+		"dataClass": "trade union membership[SENSITIVE]"
+	}, {
+		"dataClass": "sexual life[SENSITIVE]"
+	}, {
+		"dataClass": "information about offences and alleged offences[SENSITIVE]"
+	}],
+	"dataDisclosees": [{
+		"dataDisclosee": "family, associates and representatives of the person whose personal data we are processing"
+	}, {
+		"dataDisclosee": "educators and examining bodies"
+	}, {
+		"dataDisclosee": "careers service"
+	}, {
+		"dataDisclosee": "school boards"
+	}, {
+		"dataDisclosee": "local and central government"
+	}, {
+		"dataDisclosee": "academy trusts"
+	}, {
+		"dataDisclosee": "healthcare, social and welfare organisations"
+	}, {
+		"dataDisclosee": "police forces, courts"
+	}, {
+		"dataDisclosee": "current, past or prospective employers"
+	}, {
+		"dataDisclosee": "voluntary and charitable organisations"
+	}, {
+		"dataDisclosee": "business associates, professional advisers"
+	}, {
+		"dataDisclosee": "suppliers and service providers"
+	}, {
+		"dataDisclosee": "financial organisations"
+	}, {
+		"dataDisclosee": "press and the media"
+	}],
+	"transfer": "it may sometimes be necessary to transfer personal information overseas. when this is needed information is only shared within the european economic area (eea). any transfers made will be in full compliance with all aspects of the data protection act."
+}

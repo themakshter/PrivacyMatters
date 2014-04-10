@@ -1,0 +1,22 @@
+Register statistics for 01/2014
+
+Records : 115
+Companies House Numbers : 27
+Postcodes : 115
+Trading Names : 13
+Nature of Work Descriptions : 115
+Old Data Formats (Purpose 1...) : 8
+New Data Formats (Nature of work...) : 107
+
+Neither Format : 0
+
+Purpose count : 11 11
+Data Classes count : 53 53
+Sensitive Data count : 18 18
+Data Subjects count : 76 76
+DataDisclosees count : 123 123
+Nature of Work count : 44 44
+
+Errors in parsing : 0
+New format errors : 0
+Old error count :0
