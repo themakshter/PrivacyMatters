@@ -142,9 +142,8 @@ var makeItemChart = function(type,id){
 		  ],
 		  redraw:true
 		});
-	
-	
 }
+
 
 
 
