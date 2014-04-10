@@ -4,17 +4,27 @@ import java.util.ArrayList;
 import org.codehaus.jackson.JsonNode;
 
 import com.google.gson.*;
+
+import play.data.DynamicForm;
+import static play.data.Form.*;
 import play.libs.Json;
 import play.mvc.*;
 import views.html.*;
 import com.mongodb.*;
 import models.*;
 
-
 public class Application extends Controller {
-	  public static Result index() {
+
+		
+	public static Result index() {	  
         return ok(index.render("Privacy Matters"));
     }
+	
+	public static Result hello(){
+	    DynamicForm requestData = form().bindFromRequest();
+	    String dataController = (requestData.get("dataController"));
+	    return ok(dataController);
+	}
     
     public static Result registry(){
     	ArrayList<RegistryListItem> regList = getRegistry();

@@ -5,6 +5,8 @@
 # Home page
 GET     /                           			controllers.Application.index()
 
+GET		/search									controllers.Application.hello()
+
 # Registry
 GET		/registry								controllers.Application.registry()
 GET		/dataController/:registrationNumber		controllers.Application.dataController(registrationNumber:String)
