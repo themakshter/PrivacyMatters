@@ -1,0 +1,75 @@
+@(purposes : List[Purpose])
+
+<div class="page-header">
+	<h3>Purposes</h3>
+</div>
+<div class="panel-group" id="accordion">
+	@for(purpose <- purposes){
+		<div class="panel panel-default">
+			<div class="panel-heading clickable purpose" data-toggle="collapse"
+				data-parent="#accordion" data-target=#@Util.getUniqueString(purpose.getPurpose())>
+				<h3 class="panel-title purpose-title">
+					<a class="accordion-toggle">@purpose.getPurpose() <span
+						class="glyphicon glyphicon-plus pull-right"></span></a>
+				</h3>
+			</div>
+			<div id=@Util.getUniqueString(purpose.getPurpose()) class="panel-collapse collapse">
+				<div class="panel-body">
+					<fieldset>
+						<legend>General</legend>
+						<ul>
+							<li><b>Description</b> : @purpose.getDescription()</li>
+							<li><b>Further description</b> :
+								@purpose.getFurtherDescription()</li>
+							<li><b>Transfers</b> : @purpose.getTransfers()</li>
+						</ul>
+					</fieldset>
+
+					<div class="row">
+						<div class="col-xs-4 col-sm-4">
+							<div class="panel panel-info">
+								<div class="panel-heading">
+									<h3 class="panel-title">Data Classes <span class="badge pull-right">@purpose.getDataClasses().size()</span></h3>
+								</div>
+								<ul class="list-group">
+									@for(dataClass <- purpose.getDataClasses()){
+										<li class="list-group-item">@dataClass</li> 
+									}
+								</ul>
+							</div>
+						</div>
+
+						<div class="col-xs-4 col-sm-4">
+							<div class="panel panel-info">
+								<div class="panel-heading">
+									<h3 class="panel-title">Data Subjects <span class="badge pull-right">@purpose.getDataSubjects().size()</span></h3>
+								</div>
+								<ul class="list-group">
+									@for(subject <- purpose.getDataSubjects()){
+										<li class="list-group-item">@subject</li> 
+									}
+								</ul>
+
+							</div>
+						</div>
+	
+						<div class="col-xs-4 col-sm-4">
+							<div class="panel panel-info">
+								<div class="panel-heading">
+									<h3 class="panel-title">Data Disclosees <span class="badge pull-right">@purpose.getDataDisclosees().size()</h3>
+								</div>
+
+								<ul class="list-group">
+									@for(disclosee <- purpose.getDataDisclosees()){
+										<li class="list-group-item">@disclosee</li> 
+									}
+								</ul>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	}
+</div>

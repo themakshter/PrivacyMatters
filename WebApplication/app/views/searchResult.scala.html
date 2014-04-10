@@ -1,0 +1,17 @@
+@(controllers: List[RegistryListItem], query :String) 
+@main("Search Results") {
+	@if(controllers.size > 0){	
+		<script src="@routes.Assets.at("javascripts/search.js")" type="text/javascript"></script>
+		<div class="page-header">
+			<h3>Search results for "@query" (@controllers.size())</h3>
+		</div>
+		<div class="hidden" id="query">@query.toUpperCase()</div>
+		<ul id="searchResults">
+			@for(controller <- controllers){
+				<li><a href="../dataController/@controller.getRegistrationNumber()">@controller.getOrganisationName()</a></li>
+			}
+		</ul>
+	}else{
+		<h2>No data controllers found for "@query"</h2>
+	}
+}
