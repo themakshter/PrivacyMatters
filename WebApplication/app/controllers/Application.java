@@ -48,8 +48,23 @@ public class Application extends Controller {
 		}catch(Exception e){
 			
 		}
-		return ok(similar.render(regList, "Similar data controllers for "
-				+ type + " \"" + information + "\""));
+		String message ="";
+		switch(type){
+		case "dataClass":
+			message = "Controllers also collecting data class";
+			break;
+		case "sensitiveData":
+			message = "Controllers also collecting sensitive data class";
+			break;
+		case "dataSubject":
+			message = "Controllers also collecting from data subject";
+			break;
+		case "dataDisclosee":
+			message = "Controllers also sharing with data disclosee";
+			break;
+		}
+		
+		return ok(similar.render(regList, message + " \"" + information + "\""));
 	}
 	
 	
