@@ -72,10 +72,10 @@
 </div>
 <div class="container">
 	@if(dataController.getFormat().equals("new")){
-		@newFormat(dataController.getNewFormat()) 
+		@newFormat(dataController.getNewFormat(),dataController.getRegistrationNumber()) 
 	}else{
 		@if(dataController.getFormat().equals("old")){
-			@oldFormat(dataController.getOldFormat()) 
+			@oldFormat(dataController.getOldFormat(),dataController.getRegistrationNumber()) 
 		} 
 	}
 </div>

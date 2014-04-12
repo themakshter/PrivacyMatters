@@ -3,17 +3,19 @@
 # ~~~~
 
 # Home page
-GET     /                           			controllers.Application.index()
+GET     /                           									controllers.Application.index()
 
-GET		/search									controllers.Application.search()
+GET		/search															controllers.Application.search()
 
 # Registry
-GET		/registry								controllers.Application.registry()
-GET		/dataController/:registrationNumber		controllers.Application.dataController(registrationNumber:String)
+GET		/registry														controllers.Application.registry()
+GET		/dataController/:registrationNumber								controllers.Application.dataController(registrationNumber:String)
+GET 	/dataController/:registrationNumber/similar/:type/:information	controllers.Application.similar(registrationNumber:String,type:String,information:String)
+
 
 #JSON
-GET		/getRegistry							controllers.Application.registryJSON()
-GET		/getDataController/:registrationNumber	controllers.Application.dataControllerJSON(registrationNumber:String)
+GET		/getRegistry													controllers.Application.registryJSON()
+GET		/getDataController/:registrationNumber							controllers.Application.dataControllerJSON(registrationNumber:String)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

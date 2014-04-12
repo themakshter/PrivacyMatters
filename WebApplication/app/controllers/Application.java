@@ -20,6 +20,11 @@ public class Application extends Controller {
         return ok(index.render("Privacy Matters"));
     }
 	
+	public static Result similar(String registrationNumber,String type,String information){
+		return ok(registrationNumber + " " + type + " " + information);
+	}
+	
+	
 	public static Result search(){
 		ArrayList<RegistryListItem> regList = new ArrayList<RegistryListItem>();
 		DynamicForm requestData = form().bindFromRequest();
