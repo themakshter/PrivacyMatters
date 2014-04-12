@@ -2,6 +2,7 @@ package controllers;
 
 import java.util.ArrayList;
 import org.codehaus.jackson.JsonNode;
+import org.codehaus.jackson.map.ObjectMapper;
 
 import com.google.gson.*;
 
@@ -21,7 +22,34 @@ public class Application extends Controller {
     }
 	
 	public static Result similar(String registrationNumber,String type,String information){
-		return ok(registrationNumber + " " + type + " " + information);
+		information = information.replaceAll("_", " ");
+		ArrayList<RegistryListItem> regList = new ArrayList<RegistryListItem>();
+		try{
+			DBObject controller;
+			String json;
+			DB database = Util.connectToDB();
+			DBCollection registry = database.getCollection(type+"Stats");
+			BasicDBObject query = new BasicDBObject("type",information);
+			DBCursor cursor = registry.find(query);
+			while(cursor.hasNext()){
+				controller = cursor.next();
+				json = controller.toString();
+				JsonNode arrNode = new ObjectMapper().readTree(json).get("companies");
+				for(JsonNode node : arrNode){
+					String regNo = node.findPath("registrationNumber").getTextValue();
+					if(registrationNumber.equals(regNo)){
+						continue;
+					}
+	    			String name = node.findPath("organisationName").getTextValue();
+					regList.add(new RegistryListItem(regNo,name));
+				}
+			}
+			
+		}catch(Exception e){
+			
+		}
+		return ok(similar.render(regList, "Similar data controllers for "
+				+ type + " \"" + information + "\""));
 	}
 	
 	

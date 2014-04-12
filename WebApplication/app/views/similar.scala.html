@@ -1,0 +1,15 @@
+@(controllers: List[RegistryListItem],message:String) 
+@main("Simlar data controllers") {
+	@if(controllers.size > 0){	
+		<div class="page-header">
+			<h3>@message (@controllers.size())</h3>
+		</div>
+		<ul id="searchResults">
+			@for(controller <- controllers){
+				<li><a href="@routes.Application.dataController(controller.getRegistrationNumber())">@controller.getOrganisationName()</a></li>
+			}
+		</ul>
+	}else{
+		<h2>No similar data controllers found</h2>
+	}
+}
