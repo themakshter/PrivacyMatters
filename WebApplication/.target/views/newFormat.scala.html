@@ -122,7 +122,7 @@
 							
 							@for(dataClass <- newFormat.getDataClasses()){
 								<div class="hidden" id="dataClass-@Util.getUniqueString(dataClass)">@Values.getNumberOfControllers("dataClass",dataClass)</div>
-								<a href="#" class="hidden" id="link-@Util.getUniqueString(dataClass)">View controllers collecting this</a>
+								<a href="" class="hidden" id="dataClass-link-@Util.getUniqueString(dataClass)">View controllers collecting this</a>
 							}
 							
 							
@@ -132,7 +132,7 @@
 							
 							@for(sensitiveData <- newFormat.getSensitiveData()){
 								<div class="hidden" id="sensitiveData-@Util.getUniqueString(sensitiveData)">@Values.getNumberOfControllers("sensitiveData",sensitiveData)</div>
-								<a href="#" class="hidden" id="link-@Util.getUniqueString(sensitiveData)">View controllers collecting this</a>
+								<a href="#" class="hidden" id="sensitiveData-link-@Util.getUniqueString(sensitiveData)">View controllers collecting this</a>
 							}
 
 						</div>
@@ -144,7 +144,7 @@
 							
 							@for(dataSubject <- newFormat.getDataSubjects()){
 								<div class="hidden" id="dataSubject-@Util.getUniqueString(dataSubject)">@Values.getNumberOfControllers("dataSubject",dataSubject)</div>
-								<a href="#" class="hidden" id="link-@Util.getUniqueString(dataSubject)">View controllers collecting this</a>
+								<a href="#" class="hidden" id="dataSubject-link-@Util.getUniqueString(dataSubject)">View controllers collecting this</a>
 							}
 						</div>
 						<div class="col-xs-4 col-sm-4">
@@ -156,7 +156,7 @@
 	
 							@for(dataDisclosee <-newFormat.getDataDisclosees()){
 								<div class="hidden" id="dataDisclosee-@Util.getUniqueString(dataDisclosee)">@Values.getNumberOfControllers("dataDisclosee",dataDisclosee)</div>
-								<a href="#" class="hidden" id="link-@Util.getUniqueString(dataDisclosee)">View controllers collecting this</a>
+								<a href="#" class="hidden" id="dataDisclosee-link-@Util.getUniqueString(dataDisclosee)">View controllers collecting this</a>
 							}
 							
 						</div>
