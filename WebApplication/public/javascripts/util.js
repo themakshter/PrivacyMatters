@@ -37,14 +37,16 @@ $(document).ready(function(){
 	
 	$(".stat-object").click(
 			function(){
+				var purpose = $(this).parent().parent().parent().parent().parent().parent().get(0).id;
 				if($(this).hasClass('dataClass-item')){
-					makeItemChart("dataClass",this.id);
+					makeItemChart("dataClass",this.id,purpose);
 				}else if($(this).hasClass('sensitiveData-item')){
-					makeItemChart("sensitiveData",this.id);
+					purpose = $(this).parent().parent().parent().parent().parent().parent().parent().parent().get(0).id;
+					makeItemChart("sensitiveData",this.id,purpose);
 				}else if($(this).hasClass('dataSubject-item')){
-					makeItemChart("dataSubject",this.id);
+					makeItemChart("dataSubject",this.id,purpose);
 				}else if($(this).hasClass('dataDisclosee-item')){
-					makeItemChart("dataDisclosee",this.id);
+					makeItemChart("dataDisclosee",this.id,purpose);
 				}
 			});
 
@@ -101,34 +103,32 @@ var makePanelChart = function(element){
 	})
 }
 
-var makeItemChart = function(type,id){
+var makeItemChart = function(type,id,purpose){
 	var count = parseInt($("#count").text());
-	var number = parseInt($("#"+type+"-"+id).text());
+	var number = parseInt($("#"+purpose+"-"+type+"-"+id).text());
 	var item=$("#"+id).text();
 	var diff = count - number;
-	var link = $("#" + type + "-link-"+id).attr("href");
-	console.log(link);
+	var link = $("#"+purpose+"-" + type + "-link-"+id).attr("href");
 	var label1,label2;
 	label1="Controllers which collect";
 	label2="Controllers which do not";
 	var graph;
 	switch(type){
 	case "dataClass":
-		graph="left-graph";	
-		//var link=$("#lala").attr('href');
-		 $("#left-heading").empty().append("<h4>Popularity of Data Class ("+item+")</h4><p>This shows how many controllers collect this data class and how many do not</p><a href=\" "+link+"\">View controllers collecting this data class</a>");
+		graph=purpose+"-left-graph";	
+		$("#"+purpose+"-left-heading").empty().append("<h4>Popularity of Data Class ("+item+")</h4><p>This shows how many controllers collect this data class and how many do not</p><a href=\" "+link+"\">View controllers collecting this data class</a>");
 		 break;
 	case "sensitiveData":
-		graph="left-graph";
-		$("#left-heading").empty().append("<h4>Popularity of Sensitive Data Class ("+item+")</h4><p>This shows how many controllers collect this data class and how many do not</p><a href=\" "+link+"\">View controllers collecting this sensitive data class</a>");
+		graph=purpose+"-left-graph";
+		$("#"+purpose+"-left-heading").empty().append("<h4>Popularity of Sensitive Data Class ("+item+")</h4><p>This shows how many controllers collect this data class and how many do not</p><a href=\" "+link+"\">View controllers collecting this sensitive data class</a>");
 		break;
 	case "dataSubject":
-		graph="middle-graph";
-		$("#middle-heading").empty().append("<h4>Popularity of Sensitive Data Subject ("+item+")</h4><p>This shows how many controllers collect this information from this data subject and how many do not</p><a href=\" "+link+"\">View controllers collecting from this data subject</a>");
+		graph=purpose+"-middle-graph";
+		$("#"+purpose+"-middle-heading").empty().append("<h4>Popularity of Sensitive Data Subject ("+item+")</h4><p>This shows how many controllers collect this information from this data subject and how many do not</p><a href=\" "+link+"\">View controllers collecting from this data subject</a>");
 		break;
 	case "dataDisclosee":
-		graph="right-graph";
-		$("#right-heading").empty().append("<h4>Popularity of Data Disclosee ("+item+")</h4><p>This shows how many controllers share information with this data disclosee and how many do not</p><a href=\" "+link+"\">View controllers collecting sharing information with this disclosee</a>");
+		graph=purpose+"-right-graph";
+		$("#"+purpose+"-right-heading").empty().append("<h4>Popularity of Data Disclosee ("+item+")</h4><p>This shows how many controllers share information with this data disclosee and how many do not</p><a href=\" "+link+"\">View controllers collecting sharing information with this disclosee</a>");
 		label1="Controllers which share";
 		label2="Controllers which do not";
 		break;	 
