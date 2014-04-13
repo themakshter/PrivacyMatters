@@ -24,7 +24,53 @@
 							<li><b>Transfers</b> : @purpose.getTransfers()</li>
 						</ul>
 					</fieldset>
-
+										<div class="panel panel-info">
+						<div class="panel-heading">
+							<h4 class="panel-title">Statistics</h4>
+						</div>
+						<div class="panel-body statistics">
+					<div class="row">
+						<div class="col-xs-4 col-sm-4"><div class="text-center graph-heading" id="@Util.getUniqueString(purpose.getPurpose())-left-heading"><h4>Data Class Statistics</h4></div></div>
+						<div class="col-xs-4 col-sm-4"><div class="text-center graph-heading" id="@Util.getUniqueString(purpose.getPurpose())-middle-heading"><h4>Data Subject Statistics</h4></div></div>
+						<div class="col-xs-4 col-sm-4"><div class="text-center graph-heading" id="@Util.getUniqueString(purpose.getPurpose())-right-heading"><h4>Data Disclosee Statistics</h4></div></div>
+					</div>
+					<div class="row">
+						<div class="col-xs-4 col-sm-4"><div class="text-center graph-body" id="@Util.getUniqueString(purpose.getPurpose())-left-body">This section will show statistics about data classes and sensitive data classes. Click on list items and panel headings of the panel below.</div></div>
+						<div class="col-xs-4 col-sm-4"><div class="text-center graph-body" id="@Util.getUniqueString(purpose.getPurpose())-middle-body">This section will show statistics about data subjects. Click on list items and panel headings of the panel below.</div></div>
+						<div class="col-xs-4 col-sm-4"><div class="text-center graph-body"id="@Util.getUniqueString(purpose.getPurpose())-right-body">This section will show statistics about data disclosees. Click on list items and panel headings of the panel below.</div></div>
+					</div>
+					<div class="row">
+						<div class="col-xs-4 col-sm-4">
+							
+							<div class="graph" id="@Util.getUniqueString(purpose.getPurpose())-left-graph" ><h3 class="vertical-center">Chart will be displayed here</h3></div>
+							
+							@for(dataClass <- purpose.getDataClasses()){
+								<div class="hidden" id="general-dataClass-@Util.getUniqueString(dataClass)">@Values.getNumberOfControllers("dataClass",dataClass)</div>
+								<a href="./@regNo/similar/dataClass/@Util.replaceWithMark(dataClass)" class="hidden" id="general-dataClass-link-@Util.getUniqueString(dataClass)">View controllers collecting this</a>
+							}
+							
+						</div>
+						<div class="col-xs-4 col-sm-4">
+							<div class="graph" id="@Util.getUniqueString(purpose.getPurpose())-middle-graph" ><h3 class="vertical-center">Chart will be displayed here</h3></div>
+							
+							@for(dataSubject <- purpose.getDataSubjects()){
+								<div class="hidden" id="general-dataSubject-@Util.getUniqueString(dataSubject)">@Values.getNumberOfControllers("dataSubject",dataSubject)</div>
+								<a href="./@regNo/similar/dataSubject/@Util.replaceWithMark(dataSubject)" class="hidden" id="general-dataSubject-link-@Util.getUniqueString(dataSubject)">View controllers collecting this</a>
+							}
+						</div>
+						<div class="col-xs-4 col-sm-4">
+							<div class="graph" id="@Util.getUniqueString(purpose.getPurpose())-right-graph" ><h3 class="vertical-center">Chart will be displayed here</h3></div>
+							
+							@for(dataDisclosee <-purpose.getDataDisclosees()){
+								<div class="hidden" id="general-dataDisclosee-@Util.getUniqueString(dataDisclosee)">@Values.getNumberOfControllers("dataDisclosee",dataDisclosee)</div>
+								<a href="./@regNo/similar/dataDisclosee/@Util.replaceWithMark(dataDisclosee)" class="hidden" id="general-dataDisclosee-link-@Util.getUniqueString(dataDisclosee)">View controllers collecting this</a>
+							}
+							
+						</div>
+					</div>
+						</div>
+					</div>
+					<br>
 					<div class="row">
 						<div class="col-xs-4 col-sm-4">
 							<div class="panel panel-info">
