@@ -8,7 +8,7 @@
 	<div class="panel-group" id="accordion">
 		<div class="panel panel-default">
 			<div class="panel-heading purpose clickable" data-toggle="collapse"
-				data-parent="#accordion" data-target="#general">
+				data-parent="#accordion" data-target="#general" id="general_purpose">
 				<h3 class="panel-title purpose-title">
 					<a class="accordion-toggle">General Purposes<span
 						class="glyphicon glyphicon-plus pull-right"></span></a>
@@ -26,6 +26,75 @@
 						</div>
 					</div>
 					<br>
+					
+					<div class="panel panel-info">
+						<div class="panel-heading">
+							<h4 class="panel-title">Statistics</h4>
+						</div>
+						<div class="panel-body statistics">
+					<div class="row">
+						<div class="col-xs-4 col-sm-4"><div class="text-center graph-heading" id="general-left-heading"></div></div>
+						<div class="col-xs-4 col-sm-4"><div class="text-center graph-heading" id="general-middle-heading"></div></div>
+						<div class="col-xs-4 col-sm-4"><div class="text-center graph-heading" id="general-right-heading"></div></div>
+					</div>
+					<div class="row">
+						<div class="col-xs-4 col-sm-4"><div class="text-center graph-body" id="general-left-body"></div></div>
+						<div class="col-xs-4 col-sm-4"><div class="text-center graph-body" id="general-middle-body"></div></div>
+						<div class="col-xs-4 col-sm-4"><div class="text-center graph-body" id="general-right-body"></div></div>
+					</div>
+					<div class="row">
+						<div class="col-xs-4 col-sm-4">
+							
+							<div class="graph" id="general-left-graph" ></div>
+							
+							<div class="hidden" id="general-dataClasses-size">@newFormat.getDataClasses().size()</div>
+							<div class="hidden" id="general-dataClasses-median">@Values.getMedian("dataClass")</div>
+							<div class="hidden" id="general-dataClasses-natMed">@Values.getNatureOfWorkMedian("dataClass",newFormat.getNatureOfWork())</div>
+							
+							@for(dataClass <- newFormat.getDataClasses()){
+								<div class="hidden" id="general-dataClass-@Util.getUniqueString(dataClass)">@Values.getNumberOfControllers("dataClass",dataClass)</div>
+								<a href="./@regNo/similar/dataClass/@Util.replaceWithMark(dataClass)" class="hidden" id="general-dataClass-link-@Util.getUniqueString(dataClass)">View controllers collecting this</a>
+							}
+							
+							
+							<div class="hidden" id="general-sensitiveData-size">@newFormat.getSensitiveData().size()</div>
+							<div class="hidden" id="general-sensitiveData-median">@Values.getMedian("sensitiveData")</div>
+							<div class="hidden" id="general-sensitiveData-natMed">@Values.getNatureOfWorkMedian("sensitiveData",newFormat.getNatureOfWork())</div>
+							
+							@for(sensitiveData <- newFormat.getSensitiveData()){
+								<div class="hidden" id="general-sensitiveData-@Util.getUniqueString(sensitiveData)">@Values.getNumberOfControllers("sensitiveData",sensitiveData)</div>
+								<a href="./@regNo/similar/sensitiveData/@Util.replaceWithMark(sensitiveData)" class="hidden" id="general-sensitiveData-link-@Util.getUniqueString(sensitiveData)">View controllers collecting this</a>
+							}
+
+						</div>
+						<div class="col-xs-4 col-sm-4">
+							<div class="graph" id="general-middle-graph" ></div>
+							<div class="hidden" id="general-dataSubjects-size">@newFormat.getDataSubjects().size()</div>
+							<div class="hidden" id="general-dataSubjects-median">@Values.getMedian("dataSubject")</div>
+							<div class="hidden" id="general-dataSubjects-natMed">@Values.getNatureOfWorkMedian("dataSubject",newFormat.getNatureOfWork())</div>
+							
+							@for(dataSubject <- newFormat.getDataSubjects()){
+								<div class="hidden" id="general-dataSubject-@Util.getUniqueString(dataSubject)">@Values.getNumberOfControllers("dataSubject",dataSubject)</div>
+								<a href="./@regNo/similar/dataSubject/@Util.replaceWithMark(dataSubject)" class="hidden" id="general-dataSubject-link-@Util.getUniqueString(dataSubject)">View controllers collecting this</a>
+							}
+						</div>
+						<div class="col-xs-4 col-sm-4">
+							<div class="graph" id="general-right-graph" ></div>
+							
+							<div class="hidden" id="general-dataDisclosees-size">@newFormat.getDataDisclosees().size()</div>
+							<div class="hidden" id="general-dataDisclosees-median">@Values.getMedian("dataDisclosee")</div>
+							<div class="hidden" id="general-dataDisclosees-natMed">@Values.getNatureOfWorkMedian("dataDisclosee",newFormat.getNatureOfWork())</div>
+	
+							@for(dataDisclosee <-newFormat.getDataDisclosees()){
+								<div class="hidden" id="general-dataDisclosee-@Util.getUniqueString(dataDisclosee)">@Values.getNumberOfControllers("dataDisclosee",dataDisclosee)</div>
+								<a href="./@regNo/similar/dataDisclosee/@Util.replaceWithMark(dataDisclosee)" class="hidden" id="general-dataDisclosee-link-@Util.getUniqueString(dataDisclosee)">View controllers collecting this</a>
+							}
+							
+						</div>
+					</div>
+						</div>
+					</div>
+					<br>					
 					<div class="row">
 						<div class="col-xs-4 col-sm-4">
 							<div class="panel panel-info">
@@ -104,61 +173,6 @@
 								</ul>
 
 							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-xs-4 col-sm-4"><div class="text-center graph-heading" id="general-left-heading"></div></div>
-						<div class="col-xs-4 col-sm-4"><div class="text-center graph-heading" id="general-middle-heading"></div></div>
-						<div class="col-xs-4 col-sm-4"><div class="text-center graph-heading" id="general-right-heading"></div></div>
-					</div>
-					<div class="row">
-						<div class="col-xs-4 col-sm-4">
-							
-							<div class="graph" id="general-left-graph" ></div>
-							
-							<div class="hidden" id="general-dataClasses-size">@newFormat.getDataClasses().size()</div>
-							<div class="hidden" id="general-dataClasses-median">@Values.getMedian("dataClass")</div>
-							<div class="hidden" id="general-dataClasses-natMed">@Values.getNatureOfWorkMedian("dataClass",newFormat.getNatureOfWork())</div>
-							
-							@for(dataClass <- newFormat.getDataClasses()){
-								<div class="hidden" id="general-dataClass-@Util.getUniqueString(dataClass)">@Values.getNumberOfControllers("dataClass",dataClass)</div>
-								<a href="./@regNo/similar/dataClass/@Util.replaceWithMark(dataClass)" class="hidden" id="general-dataClass-link-@Util.getUniqueString(dataClass)">View controllers collecting this</a>
-							}
-							
-							
-							<div class="hidden" id="general-sensitiveData-size">@newFormat.getSensitiveData().size()</div>
-							<div class="hidden" id="general-sensitiveData-median">@Values.getMedian("sensitiveData")</div>
-							<div class="hidden" id="general-sensitiveData-natMed">@Values.getNatureOfWorkMedian("sensitiveData",newFormat.getNatureOfWork())</div>
-							
-							@for(sensitiveData <- newFormat.getSensitiveData()){
-								<div class="hidden" id="general-sensitiveData-@Util.getUniqueString(sensitiveData)">@Values.getNumberOfControllers("sensitiveData",sensitiveData)</div>
-								<a href="./@regNo/similar/sensitiveData/@Util.replaceWithMark(sensitiveData)" class="hidden" id="general-sensitiveData-link-@Util.getUniqueString(sensitiveData)">View controllers collecting this</a>
-							}
-
-						</div>
-						<div class="col-xs-4 col-sm-4">
-							<div class="graph" id="general-middle-graph" ></div>
-							<div class="hidden" id="general-dataSubjects-size">@newFormat.getDataSubjects().size()</div>
-							<div class="hidden" id="general-dataSubjects-median">@Values.getMedian("dataSubject")</div>
-							<div class="hidden" id="general-dataSubjects-natMed">@Values.getNatureOfWorkMedian("dataSubject",newFormat.getNatureOfWork())</div>
-							
-							@for(dataSubject <- newFormat.getDataSubjects()){
-								<div class="hidden" id="general-dataSubject-@Util.getUniqueString(dataSubject)">@Values.getNumberOfControllers("dataSubject",dataSubject)</div>
-								<a href="./@regNo/similar/dataSubject/@Util.replaceWithMark(dataSubject)" class="hidden" id="general-dataSubject-link-@Util.getUniqueString(dataSubject)">View controllers collecting this</a>
-							}
-						</div>
-						<div class="col-xs-4 col-sm-4">
-							<div class="graph" id="general-right-graph" ></div>
-							
-							<div class="hidden" id="general-dataDisclosees-size">@newFormat.getDataDisclosees().size()</div>
-							<div class="hidden" id="general-dataDisclosees-median">@Values.getMedian("dataDisclosee")</div>
-							<div class="hidden" id="general-dataDisclosees-natMed">@Values.getNatureOfWorkMedian("dataDisclosee",newFormat.getNatureOfWork())</div>
-	
-							@for(dataDisclosee <-newFormat.getDataDisclosees()){
-								<div class="hidden" id="general-dataDisclosee-@Util.getUniqueString(dataDisclosee)">@Values.getNumberOfControllers("dataDisclosee",dataDisclosee)</div>
-								<a href="./@regNo/similar/dataDisclosee/@Util.replaceWithMark(dataDisclosee)" class="hidden" id="general-dataDisclosee-link-@Util.getUniqueString(dataDisclosee)">View controllers collecting this</a>
-							}
-							
 						</div>
 					</div>
 					<button type="button" id="clear-graph" class="text-center btn btn-primary" onclick="clearAllCharts()">Clear charts</button>
