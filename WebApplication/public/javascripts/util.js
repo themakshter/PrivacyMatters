@@ -54,7 +54,7 @@ $(document).ready(function(){
 
 
 var makePanelChart = function(element){
-	var elementID = "#"+element;
+	var elementID = "#general-"+element;
 	var graph;
 	
 	var median = parseInt($(elementID+"-median").text());
@@ -67,23 +67,23 @@ var makePanelChart = function(element){
 	
 	switch(element){
 	case "dataClasses":
-		graph = "left-graph";
-		$("#left-heading").empty().append("<h4>Data Classes Count Comparison</h4><p>This compares the number of data classes of this data controller compared to the average amount and the average amount for this nature of work</p>");
+		graph = "general-left-graph";
+		$("#general-left-heading").empty().append("<h4>Data Classes Count Comparison</h4><p>This compares the number of data classes of this data controller compared to the average amount and the average amount for this nature of work</p>");
 		label1 = "This data controller";
 		break;
 	case "sensitiveData":
-		graph = "left-graph";
-		$("#left-heading").empty().append("<h4>Sensitive Data Count Comparison</h4><p>This compares the number of sensitive data classes of this data controller compared to the average amount and the average amount for this nature of work</p>");
+		graph = "general-left-graph";
+		$("#general-left-heading").empty().append("<h4>Sensitive Data Count Comparison</h4><p>This compares the number of sensitive data classes of this data controller compared to the average amount and the average amount for this nature of work</p>");
 		label1 = "This data controller";
 		break
 	case "dataSubjects":
-		graph="middle-graph";
-		$("#middle-heading").empty().append("<h4>Data Subjects Count Comparison</h4><p>This compares the number of data subjects of this data controller compared to the average amount and the average amount for this nature of work</p>");
+		graph="general-middle-graph";
+		$("#general-middle-heading").empty().append("<h4>Data Subjects Count Comparison</h4><p>This compares the number of data subjects of this data controller compared to the average amount and the average amount for this nature of work</p>");
 		label1 = "This data controller";
 		break;
 	case "dataDisclosees":
-		graph="right-graph";
-		$("#right-heading").empty().append("<h4>Data Disclosees Count Comparison</h4><p>This compares the number of data disclosees of this data controller compared to the average amount and the average amount for this nature of work</p>");
+		graph="general-right-graph";
+		$("#general-right-heading").empty().append("<h4>Data Disclosees Count Comparison</h4><p>This compares the number of data disclosees of this data controller compared to the average amount and the average amount for this nature of work</p>");
 		label1 = "This data controller";
 		break;
 	}
