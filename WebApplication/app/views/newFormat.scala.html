@@ -33,20 +33,19 @@
 						</div>
 						<div class="panel-body statistics">
 					<div class="row">
-						<div class="col-xs-4 col-sm-4"><div class="text-center graph-heading" id="general-left-heading"></div></div>
-						<div class="col-xs-4 col-sm-4"><div class="text-center graph-heading" id="general-middle-heading"></div></div>
-						<div class="col-xs-4 col-sm-4"><div class="text-center graph-heading" id="general-right-heading"></div></div>
+						<div class="col-xs-4 col-sm-4"><div class="text-center graph-heading" id="general-left-heading"><h4>Data Class Statistics</h4></div></div>
+						<div class="col-xs-4 col-sm-4"><div class="text-center graph-heading" id="general-middle-heading"><h4>Data Subject Statistics</h4></div></div>
+						<div class="col-xs-4 col-sm-4"><div class="text-center graph-heading" id="general-right-heading"><h4>Data Disclosee Statistics</h4></div></div>
 					</div>
 					<div class="row">
-						<div class="col-xs-4 col-sm-4"><div class="text-center graph-body" id="general-left-body"></div></div>
-						<div class="col-xs-4 col-sm-4"><div class="text-center graph-body" id="general-middle-body"></div></div>
-						<div class="col-xs-4 col-sm-4"><div class="text-center graph-body" id="general-right-body"></div></div>
+						<div class="col-xs-4 col-sm-4"><div class="text-center graph-body" id="general-left-body">This section will show statistics about data classes and sensitive data classes. Click on list items and panel headings of the panel below.</div></div>
+						<div class="col-xs-4 col-sm-4"><div class="text-center graph-body" id="general-middle-body">This section will show statistics about data subjects. Click on list items and panel headings of the panel below.</div></div>
+						<div class="col-xs-4 col-sm-4"><div class="text-center graph-body" id="general-right-body">This section will show statistics about data disclosees. Click on list items and panel headings of the panel below.</div></div>
 					</div>
 					<div class="row">
 						<div class="col-xs-4 col-sm-4">
 							
-							<div class="graph" id="general-left-graph" ></div>
-							
+							<div class="graph" id="general-left-graph" ><h3 class="vertical-center">Chart will be displayed here</h3></div>
 							<div class="hidden" id="general-dataClasses-size">@newFormat.getDataClasses().size()</div>
 							<div class="hidden" id="general-dataClasses-median">@Values.getMedian("dataClass")</div>
 							<div class="hidden" id="general-dataClasses-natMed">@Values.getNatureOfWorkMedian("dataClass",newFormat.getNatureOfWork())</div>
@@ -68,7 +67,7 @@
 
 						</div>
 						<div class="col-xs-4 col-sm-4">
-							<div class="graph" id="general-middle-graph" ></div>
+							<div class="graph" id="general-middle-graph" ><h3 class="vertical-center">Chart will be displayed here</h3></div>
 							<div class="hidden" id="general-dataSubjects-size">@newFormat.getDataSubjects().size()</div>
 							<div class="hidden" id="general-dataSubjects-median">@Values.getMedian("dataSubject")</div>
 							<div class="hidden" id="general-dataSubjects-natMed">@Values.getNatureOfWorkMedian("dataSubject",newFormat.getNatureOfWork())</div>
@@ -79,7 +78,7 @@
 							}
 						</div>
 						<div class="col-xs-4 col-sm-4">
-							<div class="graph" id="general-right-graph" ></div>
+							<div class="graph" id="general-right-graph" ><h3 class="vertical-center">Chart will be displayed here</h3></div>
 							
 							<div class="hidden" id="general-dataDisclosees-size">@newFormat.getDataDisclosees().size()</div>
 							<div class="hidden" id="general-dataDisclosees-median">@Values.getMedian("dataDisclosee")</div>
@@ -175,7 +174,6 @@
 							</div>
 						</div>
 					</div>
-					<button type="button" id="clear-graph" class="text-center btn btn-primary" onclick="clearAllCharts()">Clear charts</button>
 				</div>
 			</div>
 		</div>

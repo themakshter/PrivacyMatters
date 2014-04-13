@@ -104,7 +104,7 @@ var makePanelChart = function(element){
 		xkey:'y',
 		ykeys:['n','x','z'],
 		labels:[label1,label2,label3],
-		hideHover:'auto',
+		hideHover:'false',
 		redraw:true
 	})
 }
