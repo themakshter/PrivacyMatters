@@ -104,8 +104,7 @@ body {
 }
 
 .purpose-stat{
-	max-width:350px;
-	min-width:350px;
+	min-height:350px;	
 }
 
 .vertical-center{

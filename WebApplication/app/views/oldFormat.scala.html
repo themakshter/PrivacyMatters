@@ -17,11 +17,13 @@
 				<div class="panel-body">
 					<div class="row">
 						<div class="col-xs-6 col-sm-6">
-							<dl>
-							<dt>Purpose Description</dt><dd>@purpose.getDescription()</dd>
-							<dt>Transfer Policy</dt><dd>@purpose.getTransfers()</dd>
-							</dl>
-							<a class="clickable stat-object purpose-item">View Popularity of Purpose</a>
+							
+							<h3>Purpose Description</h3>
+							<p>@purpose.getDescription()</p>
+							
+							<h3>Transfer Policy</h3>
+							<p>@purpose.getTransfers()</p>
+							<a class="clickable stat-object purpose-item text-center">View Popularity of Purpose</a>
 						</div>
 						<div class="col-xs-6 col-sm-6 purpose-stat">
 							<div class="text-center graph-heading" id="@Util.getUniqueString(purpose.getPurpose())-purpose-heading"></div>
