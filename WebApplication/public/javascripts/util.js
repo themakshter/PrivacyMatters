@@ -66,7 +66,7 @@ var makePurposeChart = function(purposeId){
 	var item=$("#"+purposeId+"-title").text();
 	var graph = purposeId+"-purpose-graph";
 	var heading = purposeId+"-purpose-heading";
-	$("#"+heading).empty().append("<h4>Popularity of purpose("+item+")</h4><p class\"text-justif\">How many controllers collect data for this purpose and how many do not</p><a href=\" "+link+"\">View those collecting for this purpose</a>");
+	$("#"+heading).empty().append("<h4>Popularity of Purpose("+item+")</h4><p class\"text-justify\">How many controllers collect data for this purpose and how many do not</p><a href=\" "+link+"\">View those collecting for this purpose</a>");
 	var label1="Controllers which collect";
 	var label2="Controllers which do not";
 	clearPanel(graph);
