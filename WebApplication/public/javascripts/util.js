@@ -63,20 +63,22 @@ $(document).ready(function(){
 var makePurposeChart = function(purposeId){
 	var count = parseInt($("#count").text());
 	var number = parseInt($("#"+purposeId+"-purpose-number").text());
-	var diff = count - number;
+	var percentage = number/count * 100;
+	percentage = percentage.toFixed(2);
+	var diff = 100 - number;
 	var link = $("#"+purposeId+"-link-purpose").attr("href");
 	var item=$("#"+purposeId+"-title").text();
 	var graph = purposeId+"-purpose-graph";
 	var heading = purposeId+"-purpose-heading";
-	$("#"+heading).empty().append("<h4>Popularity of Purpose("+item+")</h4><p class\"text-justify\">How many controllers collect data for this purpose and how many do not</p><a href=\" "+link+"\">View those collecting for this purpose</a>");
-	var label1="Controllers which collect";
-	var label2="Controllers which do not";
+	$("#"+heading).empty().append("<h4>Popularity of Purpose("+item+")</h4><p class\"text-justify\">How many controllers collect data for this purpose and how many do not</p><a href=\" "+link+"\">View those collecting for this purpose("+(number-1)+")</a>");
+	var label1="Controllers which collect(%)";
+	var label2="Controllers which do not(%)";
 	clearPanel(graph);
 	
 	Morris.Donut({
 		  element: graph,
 		  data: [
-		    {label: label1, value: number},
+		    {label: label1, value: percentage},
 		    {label: label2, value: diff}
 		  ],
 		  redraw:true
