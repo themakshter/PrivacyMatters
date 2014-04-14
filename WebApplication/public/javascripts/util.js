@@ -63,9 +63,11 @@ $(document).ready(function(){
 var makePurposeChart = function(purposeId){
 	var count = parseInt($("#count").text());
 	var number = parseInt($("#"+purposeId+"-purpose-number").text());
-	var percentage = number/count * 100;
+	console.log(number);
+	console.log(count);
+	var percentage = (number/count) * 100;
 	percentage = percentage.toFixed(2);
-	var diff = 100 - number;
+	var diff = 100 - percentage;
 	var link = $("#"+purposeId+"-link-purpose").attr("href");
 	var item=$("#"+purposeId+"-title").text();
 	var graph = purposeId+"-purpose-graph";
@@ -83,8 +85,14 @@ var makePurposeChart = function(purposeId){
 		  ],
 		  redraw:true
 		});
+	
+	focusOn("#"+graph);
 };
 
+
+var focusOn = function(element){
+	$(window).scrollTop($(element).parent().parent().parent().parent().offset().top);
+};
 
 var makePanelChart = function(purpose,type){
 	var typeID = "#"+purpose+"-"+type;
@@ -96,24 +104,28 @@ var makePanelChart = function(purpose,type){
 	var label1 = "This data controller";
 	var label2 = "Overall Median";
 	var label3 = "Median for this "+label;
-	
+	var heading;
 	switch(type){
 	case "dataClasses":
 		graph = purpose+"-left-graph";
+		heading = "#"+purpose+"-left-heading";
 		$("#"+purpose+"-left-heading").empty().append("<h4>Data Classes Count Comparison</h4>");
 		$("#"+purpose+"-left-body").empty().append("<p class=\"text-justify\">This compares the number of data classes of this data controller compared to the average amount and the average amount for this "+label+"</p>");
 		break;
 	case "sensitiveData":
+		heading = "#"+purpose+"-left-heading";
 		graph = purpose+"-left-graph";
 		$("#"+purpose+"-left-heading").empty().append("<h4>Sensitive Data Count Comparison</h4>");
 		$("#"+purpose+"-left-body").empty().append("<p class=\"text-justify\">This compares the number of sensitive data classes of this data controller compared to the average amount and the average amount for this "+label+"</p>");
 		break
 	case "dataSubjects":
+		heading = "#"+purpose+"-middle-heading";
 		graph=purpose+"-middle-graph";
 		$("#"+purpose+"-middle-heading").empty().append("<h4>Data Subjects Count Comparison</h4>");
 		$("#"+purpose+"-middle-body").empty().append("<p class=\"text-justify\">This compares the number of data subjects of this data controller compared to the average amount and the average amount for this "+label+"</p>");
 		break;
 	case "dataDisclosees":
+		heading = "#"+purpose+"-right-heading";
 		graph=purpose+"-right-graph";
 		$("#"+purpose+"-right-heading").empty().append("<h4>Data Disclosees Count Comparison</h4>");
 		$("#"+purpose+"-right-body").empty().append("<p class=\"text-justify\">This compares the number of data disclosees of this data controller compared to the average amount and the average amount for this "+label+"</p>");
@@ -133,6 +145,7 @@ var makePanelChart = function(purpose,type){
 		hideHover:'true',
 		redraw:true
 	})
+	focusOn(heading);
 };
 
 var makeItemChart = function(type,id,purpose){
@@ -142,7 +155,7 @@ var makeItemChart = function(type,id,purpose){
 	var percentage = (number/count) * 100;
 	percentage = percentage.toFixed(2);
 	var diff = (100 - percentage).toFixed(2);
-	
+	var heading;
 	var link = $("#"+purpose+"-" + type + "-link-"+id).attr("href");
 	var label1,label2;
 	label1="Controllers which collect (%)";
@@ -150,21 +163,25 @@ var makeItemChart = function(type,id,purpose){
 	var graph;
 	switch(type){
 	case "dataClass":
+		heading = "#"+purpose+"-left-heading";
 		graph=purpose+"-left-graph";	
 		$("#"+purpose+"-left-heading").empty().append("<h4>Popularity of Data Class ("+item+")</h4>");
 		$("#"+purpose+"-left-body").empty().append("<p class=\"text-justify\">How many controllers collect this data class and how many do not</p><a href=\" "+link+"\">View those collecting this data class("+(number-1)+")</a>");
 		break;
 	case "sensitiveData":
+		heading = "#"+purpose+"-left-heading";
 		graph=purpose+"-left-graph";
 		$("#"+purpose+"-left-heading").empty().append("<h4>Popularity of Sensitive Data Class ("+item+")</h4>");
 		$("#"+purpose+"-left-body").empty().append("<p>How many controllers collect this sensitive data class and how many do not</p><a href=\" "+link+"\">View those collecting this sensitive data class("+(number-1)+")</a>");
 		break;
 	case "dataSubject":
+		heading = "#"+purpose+"-middle-heading";
 		graph=purpose+"-middle-graph";
 		$("#"+purpose+"-middle-heading").empty().append("<h4>Popularity of Data Subject ("+item+")</h4>");
 		$("#"+purpose+"-middle-body").empty().append("<p>How many controllers collect information from this data subject and how many do not</p><a href=\" "+link+"\">View those collecting from this data subject("+(number-1)+")</a>");
 		break;
 	case "dataDisclosee":
+		heading = "#"+purpose+"-right-heading";
 		graph=purpose+"-right-graph";
 		$("#"+purpose+"-right-heading").empty().append("<h4>Popularity of Data Disclosee ("+item+")</h4>");
 		$("#"+purpose+"-right-body").empty().append("<p>How many controllers share information with this data disclosee and how many do not</p><a href=\" "+link+"\">View those sharing information with this disclosee("+(number-1)+")</a>");
@@ -183,6 +200,7 @@ var makeItemChart = function(type,id,purpose){
 		  ],
 		  redraw:true
 		});
+		focusOn(heading);
 };
 
 
