@@ -128,7 +128,7 @@ var makePanelChart = function(purpose,type){
 		xkey:'y',
 		ykeys:['n','x','z'],
 		labels:[label1,label2,label3],
-		hideHover:'false',
+		hideHover:'true',
 		redraw:true
 	})
 };
