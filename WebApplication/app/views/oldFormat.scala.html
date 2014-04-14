@@ -33,6 +33,7 @@
 						</div>
 					</div>
 					<br>
+					<div class="hidden" id="specMed-label">purpose</div>
 					<div class="panel panel-info">
 						<div class="panel-heading">
 							<h4 class="panel-title">Statistics</h4>
@@ -53,6 +54,10 @@
 							
 							<div class="text-center graph" id="@Util.getUniqueString(purpose.getPurpose())-left-graph" ><h3 class="vertical-center">Chart will be displayed here</h3></div>
 							
+							<div class="hidden" id="@Util.getUniqueString(purpose.getPurpose())-dataClasses-size">@purpose.getDataClasses().size()</div>
+							<div class="hidden" id="@Util.getUniqueString(purpose.getPurpose())-dataClasses-median">@Values.getMedian("dataClass")</div>
+							<div class="hidden" id="@Util.getUniqueString(purpose.getPurpose())-dataClasses-specMed">@Values.getPurposeMedian("dataClass",purpose.getPurpose())</div>
+							
 							@for(dataClass <- purpose.getDataClasses()){
 								<div class="hidden" id="@Util.getUniqueString(purpose.getPurpose())-dataClass-@Util.getUniqueString(dataClass)">@Values.getNumberOfControllers("dataClass",dataClass)</div>
 								<a href="./@regNo/similar/dataClass/@Util.replaceWithMark(dataClass)" class="hidden" id="@Util.getUniqueString(purpose.getPurpose())-dataClass-link-@Util.getUniqueString(dataClass)">View controllers collecting this</a>
@@ -62,6 +67,10 @@
 						<div class="col-xs-4 col-sm-4">
 							<div class="text-center graph" id="@Util.getUniqueString(purpose.getPurpose())-middle-graph" ><h3 class="vertical-center">Chart will be displayed here</h3></div>
 							
+							<div class="hidden" id="@Util.getUniqueString(purpose.getPurpose())-dataSubjects-size">@purpose.getDataSubjects().size()</div>
+							<div class="hidden" id="@Util.getUniqueString(purpose.getPurpose())-dataSubjects-median">@Values.getMedian("dataSubject")</div>
+							<div class="hidden" id="@Util.getUniqueString(purpose.getPurpose())-dataSubjects-specMed">@Values.getPurposeMedian("dataSubject",purpose.getPurpose())</div>
+							
 							@for(dataSubject <- purpose.getDataSubjects()){
 								<div class="hidden" id="@Util.getUniqueString(purpose.getPurpose())-dataSubject-@Util.getUniqueString(dataSubject)">@Values.getNumberOfControllers("dataSubject",dataSubject)</div>
 								<a href="./@regNo/similar/dataSubject/@Util.replaceWithMark(dataSubject)" class="hidden" id="@Util.getUniqueString(purpose.getPurpose())-dataSubject-link-@Util.getUniqueString(dataSubject)">View controllers collecting this</a>
@@ -69,6 +78,10 @@
 						</div>
 						<div class="col-xs-4 col-sm-4">
 							<div class="text-center graph" id="@Util.getUniqueString(purpose.getPurpose())-right-graph" ><h3 class="vertical-center">Chart will be displayed here</h3></div>
+							
+							<div class="hidden" id="@Util.getUniqueString(purpose.getPurpose())-dataDisclosees-size">@purpose.getDataDisclosees().size()</div>
+							<div class="hidden" id="@Util.getUniqueString(purpose.getPurpose())-dataDisclosees-median">@Values.getMedian("dataDisclosee")</div>
+							<div class="hidden" id="@Util.getUniqueString(purpose.getPurpose())-dataDisclosees-specMed">@Values.getPurposeMedian("dataDisclosee",purpose.getPurpose())</div>
 							
 							@for(dataDisclosee <-purpose.getDataDisclosees()){
 								<div class="hidden" id="@Util.getUniqueString(purpose.getPurpose())-dataDisclosee-@Util.getUniqueString(dataDisclosee)">@Values.getNumberOfControllers("dataDisclosee",dataDisclosee)</div>
@@ -83,7 +96,7 @@
 					<div class="row">
 						<div class="col-xs-4 col-sm-4">
 							<div class="panel panel-info">
-								<div class="panel-heading">
+								<div class="panel-heading inner-panel clickable" id="dataClass-panel">
 									<h3 class="panel-title">Data Classes <span class="badge pull-right">@purpose.getDataClasses().size()</span></h3>
 								</div>
 								<ul class="list-group">
@@ -96,7 +109,7 @@
 
 						<div class="col-xs-4 col-sm-4">
 							<div class="panel panel-info">
-								<div class="panel-heading">
+								<div class="panel-heading inner-panel clickable" id="dataSubject-panel">
 									<h3 class="panel-title">Data Subjects <span class="badge pull-right">@purpose.getDataSubjects().size()</span></h3>
 								</div>
 								<ul class="list-group">
@@ -110,7 +123,7 @@
 	
 						<div class="col-xs-4 col-sm-4">
 							<div class="panel panel-info">
-								<div class="panel-heading">
+								<div class="panel-heading inner-panel clickable" id="dataDisclosee-panel">
 									<h3 class="panel-title">Data Disclosees <span class="badge pull-right">@purpose.getDataDisclosees().size()</h3>
 								</div>
 

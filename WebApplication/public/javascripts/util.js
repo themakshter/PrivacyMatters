@@ -19,30 +19,32 @@ $(document).ready(function(){
 	
 	$(".inner-panel").click(
 			function() {
+				var purpose = $(this).parent().parent().parent().parent().parent().attr('id');
 				var id= this.id;
 				switch(id){
 				case "dataClass-panel":
-					makePanelChart("dataClasses");
+					makePanelChart(purpose,"dataClasses");
 					break;
 				case "sensitiveData-panel":
-					makePanelChart("sensitiveData");
+					purpose = $(this).parent().parent().parent().parent().parent().parent().parent().attr('id');
+					makePanelChart(purpose,"sensitiveData");
 					break;
 				case "dataSubject-panel":
-					makePanelChart("dataSubjects");
+					makePanelChart(purpose,"dataSubjects");
 					break;
 				case "dataDisclosee-panel":
-					makePanelChart("dataDisclosees");
+					makePanelChart(purpose,"dataDisclosees");
 				
 				}
 			});
 	
 	$(".stat-object").click(
 			function(){
-				var purpose = $(this).parent().parent().parent().parent().parent().parent().get(0).id;
+				var purpose = $(this).parent().parent().parent().parent().parent().parent().attr('id');
 				if($(this).hasClass('dataClass-item')){
 					makeItemChart("dataClass",this.id,purpose);
 				}else if($(this).hasClass('sensitiveData-item')){
-					purpose = $(this).parent().parent().parent().parent().parent().parent().parent().parent().get(0).id;
+					purpose = $(this).parent().parent().parent().parent().parent().parent().parent().parent().attr('id');
 					makeItemChart("sensitiveData",this.id,purpose);
 				}else if($(this).hasClass('dataSubject-item')){
 					makeItemChart("dataSubject",this.id,purpose);
@@ -82,42 +84,37 @@ var makePurposeChart = function(purposeId){
 };
 
 
-var makePanelChart = function(element){
-	var elementID = "#general-"+element;
+var makePanelChart = function(purpose,type){
+	var typeID = "#"+purpose+"-"+type;
 	var graph;
-	
-	var median = parseInt($(elementID+"-median").text());
-	var size = parseInt($(elementID+"-size").text());
-	var natMed = parseInt($(elementID+"-natMed").text());
-	
-	var label1 = "(not set)";
+	var median = parseInt($(typeID+"-median").text());
+	var size = parseInt($(typeID+"-size").text());
+	var natMed = parseInt($(typeID+"-specMed").text());
+	var label = $("#specMed-label").text()
+	var label1 = "This data controller";
 	var label2 = "Overall Median";
-	var label3 = "Median for this nature of work";
+	var label3 = "Median for this "+label;
 	
-	switch(element){
+	switch(type){
 	case "dataClasses":
-		graph = "general-left-graph";
-		$("#general-left-heading").empty().append("<h4>Data Classes Count Comparison</h4>");
-		$("#general-left-body").empty().append("<p class=\"text-justify\">This compares the number of data classes of this data controller compared to the average amount and the average amount for this nature of work</p>");
-		label1 = "This data controller";
+		graph = purpose+"-left-graph";
+		$("#"+purpose+"-left-heading").empty().append("<h4>Data Classes Count Comparison</h4>");
+		$("#"+purpose+"-left-body").empty().append("<p class=\"text-justify\">This compares the number of data classes of this data controller compared to the average amount and the average amount for this "+label+"</p>");
 		break;
 	case "sensitiveData":
-		graph = "general-left-graph";
-		$("#general-left-heading").empty().append("<h4>Sensitive Data Count Comparison</h4>");
-		$("#general-left-body").empty().append("<p class=\"text-justify\">This compares the number of sensitive data classes of this data controller compared to the average amount and the average amount for this nature of work</p>");
-		label1 = "This data controller";
+		graph = purpose+"-left-graph";
+		$("#"+purpose+"-left-heading").empty().append("<h4>Sensitive Data Count Comparison</h4>");
+		$("#"+purpose+"-left-body").empty().append("<p class=\"text-justify\">This compares the number of sensitive data classes of this data controller compared to the average amount and the average amount for this "+label+"</p>");
 		break
 	case "dataSubjects":
-		graph="general-middle-graph";
-		$("#general-middle-heading").empty().append("<h4>Data Subjects Count Comparison</h4>");
-		$("#general-middle-body").empty().append("<p class=\"text-justify\">This compares the number of data subjects of this data controller compared to the average amount and the average amount for this nature of work</p>");
-		label1 = "This data controller";
+		graph=purpose+"-middle-graph";
+		$("#"+purpose+"-middle-heading").empty().append("<h4>Data Subjects Count Comparison</h4>");
+		$("#"+purpose+"-middle-body").empty().append("<p class=\"text-justify\">This compares the number of data subjects of this data controller compared to the average amount and the average amount for this "+label+"</p>");
 		break;
 	case "dataDisclosees":
-		graph="general-right-graph";
-		$("#general-right-heading").empty().append("<h4>Data Disclosees Count Comparison</h4>");
-		$("#general-right-body").empty().append("<p class=\"text-justify\">This compares the number of data disclosees of this data controller compared to the average amount and the average amount for this nature of work</p>");
-		label1 = "This data controller";
+		graph=purpose+"-right-graph";
+		$("#"+purpose+"-right-heading").empty().append("<h4>Data Disclosees Count Comparison</h4>");
+		$("#"+purpose+"-right-body").empty().append("<p class=\"text-justify\">This compares the number of data disclosees of this data controller compared to the average amount and the average amount for this "+label+"</p>");
 		break;
 	}
 	
@@ -192,6 +189,7 @@ var clearAllCharts = function(){
 };
 
 var clearPanel = function(panel){
+	$("#"+panel + " h3").remove();
 	$("#"+panel + " svg").remove();
 	$("#"+panel + " .morris-hover").remove();
 };

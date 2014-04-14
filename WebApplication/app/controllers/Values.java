@@ -2,6 +2,7 @@ package controllers;
 
 import java.net.UnknownHostException;
 
+import models.AdvancedStatisticObject;
 import models.GeneralStatistics;
 import models.NatureOfWorkObject;
 import models.StatisticObject;
@@ -54,6 +55,30 @@ public class Values extends Controller{
 				return nat.getMedianDataClasses();
 			case "sensitiveData":
 				return nat.getMedianSensitiveData();
+			case "dataSubject":
+				return nat.getMedianDataSubjects();
+			case "dataDisclosee":
+				return nat.getMedianDataDisclosees();
+			default:
+				return 0;
+			}
+		}catch(Exception e){
+			return 0;
+		}
+	}
+	
+	public static int getPurposeMedian(String type,String purpose){
+		try{
+			String json;
+			Gson gson = new Gson();
+			DBCollection collection = Util.connectToDB().getCollection("purposeStats");
+			BasicDBObject query = new BasicDBObject("type",purpose);
+			json = collection.find(query).next().toString();
+			AdvancedStatisticObject nat = gson.fromJson(json,
+					AdvancedStatisticObject.class);
+			switch (type) {
+			case "dataClass":
+				return nat.getMedianDataClasses();
 			case "dataSubject":
 				return nat.getMedianDataSubjects();
 			case "dataDisclosee":
