@@ -1,4 +1,4 @@
-@(purposes : List[Purpose],regNo : String)
+@(purposes : List[Purpose],regNo : String,newFormat : NewFormat)
 
 <div class="page-header">
 	<h3>Purposes</h3>
@@ -9,22 +9,29 @@
 			<div class="panel-heading clickable purpose" data-toggle="collapse"
 				data-parent="#accordion" data-target=#@Util.getUniqueString(purpose.getPurpose())>
 				<h3 class="panel-title purpose-title">
-					<a class="accordion-toggle">@purpose.getPurpose() <span
-						class="glyphicon glyphicon-plus pull-right"></span></a>
+					<a class="accordion-toggle" id="@Util.getUniqueString(purpose.getPurpose())-title">@purpose.getPurpose() <span
+						class="glyphicon glyphicon-plus pull-right" ></span></a>
 				</h3>
 			</div>
 			<div id=@Util.getUniqueString(purpose.getPurpose()) class="panel-collapse collapse">
 				<div class="panel-body">
-					<fieldset>
-						<legend>General</legend>
-						<ul>
-							<li><b>Description</b> : @purpose.getDescription()</li>
-							<li><b>Further description</b> :
-								@purpose.getFurtherDescription()</li>
-							<li><b>Transfers</b> : @purpose.getTransfers()</li>
-						</ul>
-					</fieldset>
-										<div class="panel panel-info">
+					<div class="row">
+						<div class="col-xs-6 col-sm-6">
+							<dl>
+							<dt>Purpose Description</dt><dd>@purpose.getDescription()</dd>
+							<dt>Transfer Policy</dt><dd>@purpose.getTransfers()</dd>
+							</dl>
+							<a class="clickable stat-object purpose-item">View Popularity of Purpose</a>
+						</div>
+						<div class="col-xs-6 col-sm-6 purpose-stat">
+							<div class="text-center graph-heading" id="@Util.getUniqueString(purpose.getPurpose())-purpose-heading"></div>
+							<div class="graph" id="@Util.getUniqueString(purpose.getPurpose)-purpose-graph"></div>
+							<div class="hidden" id="@Util.getUniqueString(purpose.getPurpose())-purpose-number">@Values.getNumberOfControllers("purpose",purpose.getPurpose())</div>
+							<a href="./@regNo/similar/purpose/@Util.replaceWithMark(purpose.getPurpose)" class="hidden" id="@Util.getUniqueString(purpose.getPurpose())-link-purpose">View controllers collecting for this purpose</a>
+						</div>
+					</div>
+					<br>
+					<div class="panel panel-info">
 						<div class="panel-heading">
 							<h4 class="panel-title">Statistics</h4>
 						</div>
@@ -42,28 +49,28 @@
 					<div class="row">
 						<div class="col-xs-4 col-sm-4">
 							
-							<div class="graph" id="@Util.getUniqueString(purpose.getPurpose())-left-graph" ><h3 class="vertical-center">Chart will be displayed here</h3></div>
+							<div class="text-center graph" id="@Util.getUniqueString(purpose.getPurpose())-left-graph" ><h3 class="vertical-center">Chart will be displayed here</h3></div>
 							
 							@for(dataClass <- purpose.getDataClasses()){
-								<div class="hidden" id="general-dataClass-@Util.getUniqueString(dataClass)">@Values.getNumberOfControllers("dataClass",dataClass)</div>
-								<a href="./@regNo/similar/dataClass/@Util.replaceWithMark(dataClass)" class="hidden" id="general-dataClass-link-@Util.getUniqueString(dataClass)">View controllers collecting this</a>
+								<div class="hidden" id="@Util.getUniqueString(purpose.getPurpose())-dataClass-@Util.getUniqueString(dataClass)">@Values.getNumberOfControllers("dataClass",dataClass)</div>
+								<a href="./@regNo/similar/dataClass/@Util.replaceWithMark(dataClass)" class="hidden" id="@Util.getUniqueString(purpose.getPurpose())-dataClass-link-@Util.getUniqueString(dataClass)">View controllers collecting this</a>
 							}
 							
 						</div>
 						<div class="col-xs-4 col-sm-4">
-							<div class="graph" id="@Util.getUniqueString(purpose.getPurpose())-middle-graph" ><h3 class="vertical-center">Chart will be displayed here</h3></div>
+							<div class="text-center graph" id="@Util.getUniqueString(purpose.getPurpose())-middle-graph" ><h3 class="vertical-center">Chart will be displayed here</h3></div>
 							
 							@for(dataSubject <- purpose.getDataSubjects()){
-								<div class="hidden" id="general-dataSubject-@Util.getUniqueString(dataSubject)">@Values.getNumberOfControllers("dataSubject",dataSubject)</div>
-								<a href="./@regNo/similar/dataSubject/@Util.replaceWithMark(dataSubject)" class="hidden" id="general-dataSubject-link-@Util.getUniqueString(dataSubject)">View controllers collecting this</a>
+								<div class="hidden" id="@Util.getUniqueString(purpose.getPurpose())-dataSubject-@Util.getUniqueString(dataSubject)">@Values.getNumberOfControllers("dataSubject",dataSubject)</div>
+								<a href="./@regNo/similar/dataSubject/@Util.replaceWithMark(dataSubject)" class="hidden" id="@Util.getUniqueString(purpose.getPurpose())-dataSubject-link-@Util.getUniqueString(dataSubject)">View controllers collecting this</a>
 							}
 						</div>
 						<div class="col-xs-4 col-sm-4">
-							<div class="graph" id="@Util.getUniqueString(purpose.getPurpose())-right-graph" ><h3 class="vertical-center">Chart will be displayed here</h3></div>
+							<div class="text-center graph" id="@Util.getUniqueString(purpose.getPurpose())-right-graph" ><h3 class="vertical-center">Chart will be displayed here</h3></div>
 							
 							@for(dataDisclosee <-purpose.getDataDisclosees()){
-								<div class="hidden" id="general-dataDisclosee-@Util.getUniqueString(dataDisclosee)">@Values.getNumberOfControllers("dataDisclosee",dataDisclosee)</div>
-								<a href="./@regNo/similar/dataDisclosee/@Util.replaceWithMark(dataDisclosee)" class="hidden" id="general-dataDisclosee-link-@Util.getUniqueString(dataDisclosee)">View controllers collecting this</a>
+								<div class="hidden" id="@Util.getUniqueString(purpose.getPurpose())-dataDisclosee-@Util.getUniqueString(dataDisclosee)">@Values.getNumberOfControllers("dataDisclosee",dataDisclosee)</div>
+								<a href="./@regNo/similar/dataDisclosee/@Util.replaceWithMark(dataDisclosee)" class="hidden" id="@Util.getUniqueString(purpose.getPurpose())-dataDisclosee-link-@Util.getUniqueString(dataDisclosee)">View controllers collecting this</a>
 							}
 							
 						</div>
@@ -112,50 +119,6 @@
 								</ul>
 
 							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-xs-4 col-sm-4"><div class="text-center graph-heading" id="@Util.getUniqueString(purpose.getPurpose())-left-heading"></div></div>
-						<div class="col-xs-4 col-sm-4"><div class="text-center graph-heading" id="@Util.getUniqueString(purpose.getPurpose())-middle-heading"></div></div>
-						<div class="col-xs-4 col-sm-4"><div class="text-center graph-heading" id="@Util.getUniqueString(purpose.getPurpose())-right-heading"></div></div>
-					</div>
-					<div class="row">
-						<div class="col-xs-4 col-sm-4">
-							
-							<div class="graph" id="@Util.getUniqueString(purpose.getPurpose())-left-graph" ></div>
-							
-							<div class="hidden" id="dataClasses-size">@purpose.getDataClasses().size()</div>
-							<div class="hidden" id="dataClasses-median">@Values.getMedian("dataClass")</div>
-							
-							@for(dataClass <- purpose.getDataClasses()){
-								<div class="hidden" id="@Util.getUniqueString(purpose.getPurpose())-dataClass-@Util.getUniqueString(dataClass)">@Values.getNumberOfControllers("dataClass",dataClass)</div>
-								<a href="./@regNo/similar/dataClass/@Util.replaceWithMark(dataClass)" class="hidden" id="@Util.getUniqueString(purpose.getPurpose())-dataClass-link-@Util.getUniqueString(dataClass)">View controllers collecting this</a>
-							}
-							
-							
-
-						</div>
-						<div class="col-xs-4 col-sm-4">
-							<div class="graph" id="@Util.getUniqueString(purpose.getPurpose())-middle-graph" ></div>
-							<div class="hidden" id="@Util.getUniqueString(purpose.getPurpose())-dataSubjects-size">@purpose.getDataSubjects().size()</div>
-							<div class="hidden" id="@Util.getUniqueString(purpose.getPurpose())-dataSubjects-median">@Values.getMedian("dataSubject")</div>
-							
-							@for(dataSubject <- purpose.getDataSubjects()){
-								<div class="hidden" id="@Util.getUniqueString(purpose.getPurpose())-dataSubject-@Util.getUniqueString(dataSubject)">@Values.getNumberOfControllers("dataSubject",dataSubject)</div>
-								<a href="./@regNo/similar/dataSubject/@Util.replaceWithMark(dataSubject)" class="hidden" id="@Util.getUniqueString(purpose.getPurpose())-dataSubject-link-@Util.getUniqueString(dataSubject)">View controllers collecting this</a>
-							}
-						</div>
-						<div class="col-xs-4 col-sm-4">
-							<div class="graph" id="@Util.getUniqueString(purpose.getPurpose())-right-graph" ></div>
-							
-							<div class="hidden" id="@Util.getUniqueString(purpose.getPurpose())-dataDisclosees-size">@purpose.getDataDisclosees().size()</div>
-							<div class="hidden" id="@Util.getUniqueString(purpose.getPurpose())-dataDisclosees-median">@Values.getMedian("dataDisclosee")</div>
-							
-							@for(dataDisclosee <-purpose.getDataDisclosees()){
-								<div class="hidden" id="@Util.getUniqueString(purpose.getPurpose())-dataDisclosee-@Util.getUniqueString(dataDisclosee)">@Values.getNumberOfControllers("dataDisclosee",dataDisclosee)</div>
-								<a href="./@regNo/similar/dataDisclosee/@Util.replaceWithMark(dataDisclosee)" class="hidden" id="@Util.getUniqueString(purpose.getPurpose())-dataDisclosee-link-@Util.getUniqueString(dataDisclosee)">View controllers collecting this</a>
-							}
-							
 						</div>
 					</div>
 					<div class="hidden" id="count">@Values.getNumberOfRecords()</div>

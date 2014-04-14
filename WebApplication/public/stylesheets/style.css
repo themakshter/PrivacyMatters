@@ -103,6 +103,11 @@ body {
 	width:35%;
 }
 
+.purpose-stat{
+	max-width:350px;
+	min-width:350px;
+}
+
 .vertical-center{
 	margin-top:32.5%;
 	text-align:center;

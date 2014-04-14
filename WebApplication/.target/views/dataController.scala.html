@@ -75,7 +75,7 @@
 		@newFormat(dataController.getNewFormat(),dataController.getRegistrationNumber()) 
 	}else{
 		@if(dataController.getFormat().equals("old")){
-			@oldFormat(dataController.getOldFormat(),dataController.getRegistrationNumber()) 
+			@oldFormat(dataController.getOldFormat(),dataController.getRegistrationNumber(),dataController.getNewFormat()) 
 		} 
 	}
 </div>

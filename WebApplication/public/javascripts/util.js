@@ -11,7 +11,6 @@ $(document).ready(function(){
 					$(this).find("span").removeClass("glyphicon-plus").addClass(
 							"glyphicon-minus");
 					var purposeId = $(this);
-					console.log(purposeId);
 				} else {
 					$(this).find("span").removeClass("glyphicon-minus").addClass(
 							"glyphicon-plus");
@@ -49,10 +48,38 @@ $(document).ready(function(){
 					makeItemChart("dataSubject",this.id,purpose);
 				}else if($(this).hasClass('dataDisclosee-item')){
 					makeItemChart("dataDisclosee",this.id,purpose);
+				}else if($(this).hasClass('purpose-item')){
+					var purposeId=$(this).parent().parent().parent().parent().attr('id');
+					makePurposeChart(purposeId);
 				}
 			});
 
 });
+
+
+
+var makePurposeChart = function(purposeId){
+	var count = parseInt($("#count").text());
+	var number = parseInt($("#"+purposeId+"-purpose-number").text());
+	var diff = count - number;
+	var link = $("#"+purposeId+"-link-purpose").attr("href");
+	var item=$("#"+purposeId+"-title").text();
+	var graph = purposeId+"-purpose-graph";
+	var heading = purposeId+"-purpose-heading";
+	$("#"+heading).empty().append("<h4>Popularity of purpose("+item+")</h4><p class\"text-justif\">How many controllers collect data for this purpose and how many do not</p><a href=\" "+link+"\">View those collecting for this purpose</a>");
+	var label1="Controllers which collect";
+	var label2="Controllers which do not";
+	clearPanel(graph);
+	
+	Morris.Donut({
+		  element: graph,
+		  data: [
+		    {label: label1, value: number},
+		    {label: label2, value: diff}
+		  ],
+		  redraw:true
+		});
+};
 
 
 var makePanelChart = function(element){
@@ -107,7 +134,7 @@ var makePanelChart = function(element){
 		hideHover:'false',
 		redraw:true
 	})
-}
+};
 
 var makeItemChart = function(type,id,purpose){
 	var count = parseInt($("#count").text());
@@ -154,7 +181,7 @@ var makeItemChart = function(type,id,purpose){
 		  ],
 		  redraw:true
 		});
-}
+};
 
 
 
@@ -162,10 +189,10 @@ var makeItemChart = function(type,id,purpose){
 var clearAllCharts = function(){
 	$(".graph svg").remove();
 	$(".graph-heading").empty();
-}
+};
 
 var clearPanel = function(panel){
 	$("#"+panel + " svg").remove();
 	$("#"+panel + " .morris-hover").remove();
-}
+};
 
