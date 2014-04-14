@@ -23,6 +23,7 @@ public class Application extends Controller {
 	
 	public static Result similar(String registrationNumber,String type,String information){
 		information = information.replaceAll("_", " ");
+		information = information.replaceAll("-","/");
 		ArrayList<RegistryListItem> regList = new ArrayList<RegistryListItem>();
 		try{
 			DBObject controller;

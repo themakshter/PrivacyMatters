@@ -26,6 +26,8 @@ public class Util {
 	}
 
 	public static String replaceWithMark(String st) {
-		return st.replaceAll(" ", "_");
+		st = st.replaceAll(" ", "_");
+		st = st.replaceAll("/", "-");
+		return st;
 	}
 }

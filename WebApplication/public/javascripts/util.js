@@ -137,34 +137,37 @@ var makeItemChart = function(type,id,purpose){
 	var count = parseInt($("#count").text());
 	var number = parseInt($("#"+purpose+"-"+type+"-"+id).text());
 	var item=$("#"+id).text();
-	var diff = count - number;
+	var percentage = (number/count) * 100;
+	percentage = percentage.toFixed(2);
+	var diff = (100 - percentage).toFixed(2);
+	
 	var link = $("#"+purpose+"-" + type + "-link-"+id).attr("href");
 	var label1,label2;
-	label1="Controllers which collect";
-	label2="Controllers which do not";
+	label1="Controllers which collect (%)";
+	label2="Controllers which do not (%)";
 	var graph;
 	switch(type){
 	case "dataClass":
 		graph=purpose+"-left-graph";	
 		$("#"+purpose+"-left-heading").empty().append("<h4>Popularity of Data Class ("+item+")</h4>");
-		$("#"+purpose+"-left-body").empty().append("<p class=\"text-justify\">How many controllers collect this data class and how many do not</p><a href=\" "+link+"\">View those collecting this data class</a>");
+		$("#"+purpose+"-left-body").empty().append("<p class=\"text-justify\">How many controllers collect this data class and how many do not</p><a href=\" "+link+"\">View those collecting this data class("+(number-1)+")</a>");
 		break;
 	case "sensitiveData":
 		graph=purpose+"-left-graph";
 		$("#"+purpose+"-left-heading").empty().append("<h4>Popularity of Sensitive Data Class ("+item+")</h4>");
-		$("#"+purpose+"-left-body").empty().append("<p>How many controllers collect this sensitive data class and how many do not</p><a href=\" "+link+"\">View those collecting this sensitive data class</a>");
+		$("#"+purpose+"-left-body").empty().append("<p>How many controllers collect this sensitive data class and how many do not</p><a href=\" "+link+"\">View those collecting this sensitive data class("+(number-1)+")</a>");
 		break;
 	case "dataSubject":
 		graph=purpose+"-middle-graph";
 		$("#"+purpose+"-middle-heading").empty().append("<h4>Popularity of Data Subject ("+item+")</h4>");
-		$("#"+purpose+"-middle-body").empty().append("<p>How many controllers collect information from this data subject and how many do not</p><a href=\" "+link+"\">View those collecting from this data subject</a>");
+		$("#"+purpose+"-middle-body").empty().append("<p>How many controllers collect information from this data subject and how many do not</p><a href=\" "+link+"\">View those collecting from this data subject("+(number-1)+")</a>");
 		break;
 	case "dataDisclosee":
 		graph=purpose+"-right-graph";
 		$("#"+purpose+"-right-heading").empty().append("<h4>Popularity of Data Disclosee ("+item+")</h4>");
-		$("#"+purpose+"-right-body").empty().append("<p>How many controllers share information with this data disclosee and how many do not</p><a href=\" "+link+"\">View those sharing information with this disclosee</a>");
-		label1="Controllers which share";
-		label2="Controllers which do not";
+		$("#"+purpose+"-right-body").empty().append("<p>How many controllers share information with this data disclosee and how many do not</p><a href=\" "+link+"\">View those sharing information with this disclosee("+(number-1)+")</a>");
+		label1="Controllers which share (%)";
+		label2="Controllers which do not (%)";
 		break;	 
 	}
 	
@@ -173,7 +176,7 @@ var makeItemChart = function(type,id,purpose){
 	Morris.Donut({
 		  element: graph,
 		  data: [
-		    {label: label1, value: number},
+		    {label: label1, value: percentage},
 		    {label: label2, value: diff}
 		  ],
 		  redraw:true
