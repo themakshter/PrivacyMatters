@@ -1,7 +1,5 @@
 package controllers;
 
-import java.net.UnknownHostException;
-
 import models.AdvancedStatisticObject;
 import models.GeneralStatistics;
 import models.NatureOfWorkObject;
@@ -15,11 +13,10 @@ import com.mongodb.DBCollection;
 import play.mvc.Controller;
 
 public class Values extends Controller{
-
+	private static DB database = Util.connectToDB();
 	public static int getMedian(String type) {
-		try {
 			String json;
-			DBCollection collection = Util.connectToDB().getCollection("generalStats");
+			DBCollection collection = database.getCollection("generalStats");
 			json = collection.find().next().toString();
 			Gson gson = new Gson();
 			GeneralStatistics generalStats = gson.fromJson(json,
@@ -36,16 +33,14 @@ public class Values extends Controller{
 			default:
 				return 0;
 			}
-		} catch (UnknownHostException e) {
-			return 0;
-		}
+		
 	}
 
 	public static int getNatureOfWorkMedian(String type,String natureOfWork){
 		try{
 			String json;
 			Gson gson = new Gson();
-			DBCollection collection = Util.connectToDB().getCollection("natureOfWorkStats");
+			DBCollection collection = database.getCollection("natureOfWorkStats");
 			BasicDBObject query = new BasicDBObject("type",natureOfWork);
 			json = collection.find(query).next().toString();
 			NatureOfWorkObject nat = gson.fromJson(json,
@@ -71,7 +66,7 @@ public class Values extends Controller{
 		try{
 			String json;
 			Gson gson = new Gson();
-			DBCollection collection = Util.connectToDB().getCollection("purposeStats");
+			DBCollection collection = database.getCollection("purposeStats");
 			BasicDBObject query = new BasicDBObject("type",purpose);
 			json = collection.find(query).next().toString();
 			AdvancedStatisticObject nat = gson.fromJson(json,
@@ -96,7 +91,7 @@ public class Values extends Controller{
 		 try{
 			 String json;
 			 Gson gson= new Gson();
-			 DBCollection collection= Util.connectToDB().getCollection(collectionName);
+			 DBCollection collection= database.getCollection(collectionName);
 			 BasicDBObject query = new BasicDBObject("type",queryString);
 			 json = collection.find(query).next().toString();
 			 StatisticObject statObject = gson.fromJson(json, StatisticObject.class);
@@ -108,7 +103,7 @@ public class Values extends Controller{
 	
 	public static int getNumberOfRecords(){
 		try{
-			DBCollection collection = Util.connectToDB().getCollection("registry");
+			DBCollection collection = database.getCollection("registry");
 			int count = (int) collection.count();
 			return (int) count;
 		}catch(Exception e){

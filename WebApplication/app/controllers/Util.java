@@ -9,12 +9,16 @@ import com.mongodb.MongoClientURI;
 public class Util {
 	private static MongoClient client;
 
-	public static DB connectToDB() throws UnknownHostException {
+	public static DB connectToDB(){
+		try{
 		MongoClientURI dbURI = new MongoClientURI(
 				"mongodb://admin:incorrect@ds033629.mongolab.com:33629/data_controllers");
 		client = new MongoClient(dbURI);
 		DB database = client.getDB(dbURI.getDatabase());
 		return database;
+		}catch(Exception ex){
+			return null;
+		}
 	}
 
 	public static void closeDB() {
