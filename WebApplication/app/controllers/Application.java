@@ -64,7 +64,7 @@ public class Application extends Controller {
 			message = "Controllers also sharing with data disclosee";
 			break;
 		case "purpose":
-			message = "Controllers also collecting information for this purpose";
+			message = "Controllers also collecting information for purpose";
 			break;
 		case "natureOfWork":
 			message = "Controllers of the same nature of work";
