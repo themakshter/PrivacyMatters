@@ -2,6 +2,11 @@ $(function() {
 	$(".pop-over").popover();
 });
 
+$(function(){
+	$(".tool-tip").tooltip();
+});
+
+
 $(document).ready(function(){
 	$(".purpose").click(
 			function() {

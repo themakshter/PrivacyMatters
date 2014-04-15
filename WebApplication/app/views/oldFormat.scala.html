@@ -45,9 +45,9 @@
 						<div class="col-xs-4 col-sm-4"><div class="text-center graph-heading" id="@Util.getUniqueString(purpose.getPurpose())-right-heading"><h4>Data Disclosee Statistics</h4></div></div>
 					</div>
 					<div class="row">
-						<div class="col-xs-4 col-sm-4"><div class="text-center graph-body" id="@Util.getUniqueString(purpose.getPurpose())-left-body">This section will show statistics about data classes and sensitive data classes. Click on list items and panel headings of the panel below.</div></div>
-						<div class="col-xs-4 col-sm-4"><div class="text-center graph-body" id="@Util.getUniqueString(purpose.getPurpose())-middle-body">This section will show statistics about data subjects. Click on list items and panel headings of the panel below.</div></div>
-						<div class="col-xs-4 col-sm-4"><div class="text-center graph-body"id="@Util.getUniqueString(purpose.getPurpose())-right-body">This section will show statistics about data disclosees. Click on list items and panel headings of the panel below.</div></div>
+						<div class="col-xs-4 col-sm-4"><div class="text-justify graph-body" id="@Util.getUniqueString(purpose.getPurpose())-left-body">This section will show information and statistics about data classes and sensitive data classes. Clicking on list items will show information on that specific item while panel headings will give an overview on that data type.</div></div>
+						<div class="col-xs-4 col-sm-4"><div class="text-justify graph-body" id="@Util.getUniqueString(purpose.getPurpose())-middle-body">This section will show information and statistics about data subjects. Clicking on list items will show information on that specific item while panel headings will give an overview on that data type.</div></div>
+						<div class="col-xs-4 col-sm-4"><div class="text-justify graph-body"id="@Util.getUniqueString(purpose.getPurpose())-right-body">This section will show information and statistics about data disclosees. Clicking on list items will show information on that specific item while panel headings will give an overview on that data type.</div></div>
 					</div>
 					<div class="row">
 						<div class="col-xs-4 col-sm-4">
@@ -97,7 +97,7 @@
 						<div class="col-xs-4 col-sm-4">
 							<div class="panel panel-info">
 								<div class="panel-heading inner-panel clickable" id="dataClass-panel">
-									<h3 class="panel-title">Data Classes <span class="badge pull-right">@purpose.getDataClasses().size()</span></h3>
+									<h3 class="panel-title">Data Classes  <a class ="tool-tip" data-toggle="tool-tip" data-placement="top" title="The information collected."><span class="glyphicon glyphicon-info-sign"></span></a> <span class="badge pull-right">@purpose.getDataClasses().size()</span></h3>
 								</div>
 								<ul class="list-group">
 									@for(dataClass <- purpose.getDataClasses()){
@@ -110,7 +110,7 @@
 						<div class="col-xs-4 col-sm-4">
 							<div class="panel panel-info">
 								<div class="panel-heading inner-panel clickable" id="dataSubject-panel">
-									<h3 class="panel-title">Data Subjects <span class="badge pull-right">@purpose.getDataSubjects().size()</span></h3>
+									<h3 class="panel-title">Data Subjects <a class ="tool-tip" data-toggle="tool-tip" data-placement="top" title="The people information is collected from."><span class="glyphicon glyphicon-info-sign"></span></a><span></span><span class="badge pull-right">@purpose.getDataSubjects().size()</span></h3>
 								</div>
 								<ul class="list-group">
 									@for(dataSubject <- purpose.getDataSubjects()){
@@ -124,7 +124,7 @@
 						<div class="col-xs-4 col-sm-4">
 							<div class="panel panel-info">
 								<div class="panel-heading inner-panel clickable" id="dataDisclosee-panel">
-									<h3 class="panel-title">Data Disclosees <span class="badge pull-right">@purpose.getDataDisclosees().size()</h3>
+									<h3 class="panel-title">Data Disclosees <a class ="tool-tip" data-toggle="tool-tip" data-placement="top" title="The people collected information is shared with."><span class="glyphicon glyphicon-info-sign"></span></a><span class="badge pull-right">@purpose.getDataDisclosees().size()</h3>
 								</div>
 
 								<ul class="list-group">

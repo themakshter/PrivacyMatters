@@ -63,6 +63,12 @@ public class Application extends Controller {
 		case "dataDisclosee":
 			message = "Controllers also sharing with data disclosee";
 			break;
+		case "purpose":
+			message = "Controllers also collecting information for this purpose";
+			break;
+		case "natureOfWork":
+			message = "Controllers of the same nature of work";
+			break;
 		}
 		
 		return ok(similar.render(regList, message + " \"" + information + "\""));

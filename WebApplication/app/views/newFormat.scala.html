@@ -38,9 +38,9 @@
 						<div class="col-xs-4 col-sm-4"><div class="text-center graph-heading" id="general-right-heading"><h4>Data Disclosee Statistics</h4></div></div>
 					</div>
 					<div class="row">
-						<div class="col-xs-4 col-sm-4"><div class="text-center graph-body" id="general-left-body">This section will show statistics about data classes and sensitive data classes. Click on list items and panel headings of the panel below.</div></div>
-						<div class="col-xs-4 col-sm-4"><div class="text-center graph-body" id="general-middle-body">This section will show statistics about data subjects. Click on list items and panel headings of the panel below.</div></div>
-						<div class="col-xs-4 col-sm-4"><div class="text-center graph-body" id="general-right-body">This section will show statistics about data disclosees. Click on list items and panel headings of the panel below.</div></div>
+						<div class="col-xs-4 col-sm-4"><div class="text-justify graph-body" id="general-left-body">This section will show information and statistics about data classes and sensitive data classes. Clicking on list items will show information on that specific item while panel headings will give an overview on that data type.</div></div>
+						<div class="col-xs-4 col-sm-4"><div class="text-justify graph-body" id="general-middle-body">This section will show information and statistics about data subjects. Clicking on list items will show information on that specific item while panel headings will give an overview on that data type.</div></div>
+						<div class="col-xs-4 col-sm-4"><div class="text-justify graph-body" id="general-right-body">This section will show information and statistics about data disclosees. Clicking on list items will show information on that specific item while panel headings will give an overview on that data type.</div></div>
 					</div>
 					<div class="row">
 						<div class="col-xs-4 col-sm-4">
@@ -98,7 +98,7 @@
 							<div class="panel panel-info">
 								<div class="inner-panel clickable panel-heading" id="dataClass-panel">
 									<h4 class="panel-title">
-										Data Classes <a class="pull-right pop-over"
+										Data Classes <a class ="tool-tip" data-toggle="tool-tip" data-placement="top" title="The information collected."><span class="glyphicon glyphicon-info-sign"></span></a><a class="pull-right pop-over"
 											data-toggle="popover" data-placement="left"
 											data-content="@Application.getNewFormatMedianStatistic("dataClass",newFormat)"><span
 											class="badge">@newFormat.getDataClasses.size()</span></a>
@@ -139,7 +139,7 @@
 							<div class="panel panel-info">
 								<div class="inner-panel clickable panel-heading" id="dataSubject-panel">
 									<h4 class="panel-title">
-										Data Subjects <a class="pull-right pop-over"
+										Data Subjects <a class ="tool-tip" data-toggle="tool-tip" data-placement="top" title="The people information is collected from."><span class="glyphicon glyphicon-info-sign"></span></a><a class="pull-right pop-over"
 											data-toggle="popover" data-placement="left"
 											data-content="@Application.getNewFormatMedianStatistic("dataSubject",newFormat)"><span
 											class="badge pull-right">@newFormat.getDataSubjects().size()</span></a>
@@ -157,7 +157,7 @@
 							<div class="panel panel-info">
 								<div class="inner-panel clickable panel-heading" id="dataDisclosee-panel">
 									<h4 class="panel-title">
-										Data Disclosees <a class="pull-right pop-over"
+										Data Disclosees <a class ="tool-tip" data-toggle="tool-tip" data-placement="top" title="The people collected information is shared with."><span class="glyphicon glyphicon-info-sign"></span></a><a class="pull-right pop-over"
 											data-toggle="popover" data-placement="left"
 											data-content="@Application.getNewFormatMedianStatistic("dataDisclosee",newFormat)"><span
 											class="badge pull-right">@newFormat.getDataDisclosees().size()</span></a>
