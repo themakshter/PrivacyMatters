@@ -395,7 +395,7 @@ public class RegistryParser extends DefaultHandler {
 			}
 
 			// Reasons/purpose for processing
-			if (list.get(index).toLowerCase()
+			else if (list.get(index).toLowerCase()
 					.contains("reasons/purposes for processing")) {
 				dataPurpose = "";
 				index += 1;
@@ -412,7 +412,7 @@ public class RegistryParser extends DefaultHandler {
 				}
 			}
 			// Type/classes of information processed
-			if (list.get(index).toLowerCase()
+			else if (list.get(index).toLowerCase()
 					.contains("classes of information processed")) {
 				boolean sensitive = false;
 				dataClass = "";
@@ -443,7 +443,7 @@ public class RegistryParser extends DefaultHandler {
 			}
 
 			// Who the information is processed about
-			if (list.get(index).contains("information is processed about")) {
+			else if (list.get(index).contains("information is processed about")) {
 				dataSubject = "";
 				index += 1;
 				if (headingsContain(list.get(index + 1), headings)) { // only
@@ -462,7 +462,7 @@ public class RegistryParser extends DefaultHandler {
 			}
 
 			// Who the information may be shared with
-			if (list.get(index).contains("information may be shared with")) {
+			else if (list.get(index).contains("information may be shared with")) {
 				dataDisclosee = "";
 				index += 1;
 				if (headingsContain(list.get(index + 1), headings)) {
@@ -479,32 +479,29 @@ public class RegistryParser extends DefaultHandler {
 						index++;
 					}
 				}
-			}
-
-			// other purposes
-			if (headingsContain(list.get(index), otherPurposes)
+			}// other purposes
+			else if (headingsContain(list.get(index), otherPurposes)
 					&& list.get(index).split(" ").length < 10) {
 				otherPurpose = new OtherPurpose();
 				otherPurpose.setPurpose(list.get(index));
 				index += 1;
 				String statement = "";
-				while (!headingsContain(list.get(index), headings)) {
+				while (!headingsContain(list.get(index), headings) || list.get(index).split(" ").length > 10) {
 					statement += list.get(index);
 					index++;
 				}
 				otherPurpose.setStatement(statement);
 				newFormat.addOtherPurpose(otherPurpose);
-			}
-
-			// Transfer
-			if (list.get(index).contains("Transfers")) {
+			}// Transfer
+			else if (list.get(index).contains("Transfers")) {
 				transfer = "";
 				index += 1;
 				transfer = list.get(index).toLowerCase();
 				newFormat.setTransfers(transfer);
+			}else{
+				index++;
 			}
 
-			index++;
 		}
 
 		dataController.setNewFormat(newFormat);
