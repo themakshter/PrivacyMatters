@@ -2,6 +2,8 @@ package parser;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -65,7 +67,8 @@ public class RegistryParser extends DefaultHandler {
 	public RegistryParser() throws IOException {
 		gson = new Gson();
 		out = new PrintWriter(new BufferedWriter(new FileWriter("files/other/Errors.txt")));
-		dbURI = new MongoClientURI("mongodb://admin:incorrect@ds033629.mongolab.com:33629/data_controllers");
+		String uri = new BufferedReader(new FileReader("files/other/connection.txt")).readLine();
+		dbURI = new MongoClientURI(uri);
 		client = new MongoClient(dbURI);
 		// client = new MongoClient("localhost",27017);
 		// database = client.getDB("dataControllers");

@@ -6,6 +6,11 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashSet;
 
+/**
+ * Class to contain all the information about a data controller
+ * @author Mohammad Ali
+ *
+ */
 public class DataController {
 	private String registrationNumber, organisationName, companiesHouseNumber,
 			postcode, country, foiFlag, exemptFlag, tradingName, ukContact,
@@ -13,9 +18,9 @@ public class DataController {
 	private Calendar startDate, endDate;
 	private ArrayList<String> address;
 
-	// new format
+	// new format - an object on its own
 	private NewFormat newFormat;
-	// old format
+	// old format - list of purpose objects
 	private ArrayList<Purpose> oldFormat;
 
 	public DataController() {
