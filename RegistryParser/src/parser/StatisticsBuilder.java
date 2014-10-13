@@ -2,11 +2,9 @@ package parser;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 
 import util.Util;
@@ -16,7 +14,6 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
-import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 import com.mongodb.util.JSON;
@@ -216,7 +213,7 @@ public class StatisticsBuilder {
 			dataDisclosees.add(newFormat.getDataDisclosees().size());
 			
 			// Other purposes
-			for (OtherPurpose purpose : newFormat.getOtherPurposes()) {
+			for (@SuppressWarnings("unused") OtherPurpose purpose : newFormat.getOtherPurposes()) {
 				//addToMap(dataPurposeMap, purpose.getPurpose());
 			}
 		}
