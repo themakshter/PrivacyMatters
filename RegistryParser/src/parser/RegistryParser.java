@@ -26,6 +26,11 @@ import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 import com.mongodb.util.JSON;
 
+/**
+ * 
+ * @author Mohammad Ali
+ *
+ */
 public class RegistryParser extends DefaultHandler {
 	// Writer for some counts
 	private PrintWriter out;
